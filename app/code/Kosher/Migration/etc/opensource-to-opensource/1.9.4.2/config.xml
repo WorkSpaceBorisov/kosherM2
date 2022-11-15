@@ -102,10 +102,10 @@
         </step>
     </steps>
     <source>
-        <database host="localhost" name="kosher" user="magento" password="magento"/>
+        <database host="localhost" name="kosher" user="m2_kosher4u_eu" password="IN2uXFYHM1U10VLF"/>
     </source>
     <destination>
-        <database host="localhost" name="kosherm2" user="magento" password="magento"/>
+        <database host="localhost" name="m2_kosher4u_eu" user="m2_kosher4u_eu" password="IN2uXFYHM1U10VLF"/>
     </destination>
     <options>
         <map_file>app/code/Kosher/Migration/etc/opensource-to-opensource/1.9.4.2/map.xml</map_file>
