@@ -70,6 +70,7 @@ return [
         'Magento_Downloadable' => 1,
         'Magento_CustomerGraphQl' => 1,
         'Magento_CustomerImportExport' => 1,
+        'Magento_DataMigrationTool' => 1,
         'Magento_Deploy' => 1,
         'Magento_Developer' => 1,
         'Magento_Dhl' => 1,
@@ -325,6 +326,7 @@ return [
         'Magento_Wishlist' => 1,
         'Magento_WishlistAnalytics' => 1,
         'Magento_WishlistGraphQl' => 1,
+        'Kosher_Migration' => 1,
         'PayPal_Braintree' => 1,
         'PayPal_BraintreeGraphQl' => 1,
         'Temando_ShippingRemover' => 1
