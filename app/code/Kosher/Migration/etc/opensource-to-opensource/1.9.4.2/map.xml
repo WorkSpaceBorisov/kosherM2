@@ -1469,22 +1469,13 @@
                 <field>sales_flat_order.pickup_pointofsale_id</field>
             </ignore>
             <ignore>
-                <field>sales_flat_order.</field>
-            </ignore>
-            <ignore>
                 <field>sales_flat_order.pickup_datetime</field>
-            </ignore>
-            <ignore>
-                <field>sales_flat_order.</field>
             </ignore>
             <ignore>
                 <field>sales_flat_order.pickup_day</field>
             </ignore>
             <ignore>
                 <field>sales_flat_order.pickup_hour</field>
-            </ignore>
-            <ignore>
-                <field>sales_flat_order.</field>
             </ignore>
             <ignore>
                 <field>sales_flat_order.assignation_warehouse</field>
