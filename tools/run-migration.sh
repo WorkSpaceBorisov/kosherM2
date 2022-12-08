@@ -3,6 +3,8 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+echo "${bold}Import clean M2 DB:${normal}"
+mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF kosher < /home/radion/Документы/Sites/kosherm2dump/cleardbm1.sql
 echo "${bold}Run prep scripts M1:${normal}"
 pv app/code/Kosher/Migration/query/cleanup-m1-db-for-dev.sql | mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF kosher
 echo "${bold}Import clean M2 DB:${normal}"
