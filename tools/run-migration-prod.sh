@@ -8,7 +8,7 @@ pv app/code/Kosher/Migration/query/cleanup-m1-db-for-dev.sql | mysql -um2_kosher
 echo "${bold}Import clean M2 DB:${normal}"
 mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF m2_kosher4u_eu < /root/www/m2.kosher4u.eu/cleardbm2.sql
 echo "${bold}• Clean Temp Dirs ${normal}" && rm -rf ./generated/* ./var/* ./pub/static/* &&
-echo "${bold}• Install packages ${normal}" && rm -rf ./vendor ./setup ./bin ./lib ./phpserver ./dev ./.docker && composer install -o &&
+echo "${bold}• Install packages ${normal}" && rm -rf ./vendor ./setup ./bin ./lib ./phpserver ./dev ./.docker && composer install clear-cache && composer install &&
 echo "${bold}• Revert etc/di.xml ${normal}" && git checkout -- app/etc/di.xml &&
 echo "${bold}Setup upgrade:${normal}"
 bin/magento setup:upgrade
@@ -24,5 +24,7 @@ echo "${bold}After Migration Script:${normal}"
 pv app/code/Kosher/Migration/query/after_migration_magento2.sql | mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF m2_kosher4u_eu
 echo "${bold}Setup upgrade:${normal}"
 php bin/magento setup:upgrade
+echo "${bold}Setup Di Compile:${normal}"
+bin/magento setup:di:compile
 echo "${bold}Reindex:${normal}"
 php bin/magento indexer:reindex  && echo "• done ✔"
