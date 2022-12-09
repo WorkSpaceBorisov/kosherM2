@@ -3,12 +3,12 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-echo "${bold}Import clean M2 DB:${normal}"
-mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF kosher < /home/radion/Документы/Sites/kosherm2dump/cleardbm1.sql
+echo "${bold}Import clean M1 DB:${normal}"
+pv /home/radion/Документы/Sites/kosherm2dump/cleardbm1.sql | mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF kosher
 echo "${bold}Run prep scripts M1:${normal}"
 pv app/code/Kosher/Migration/query/cleanup-m1-db-for-dev.sql | mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF kosher
 echo "${bold}Import clean M2 DB:${normal}"
-mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF m2_kosher4u_eu < /home/radion/Документы/Sites/kosherm2dump/cleardbm2.sql
+pv /home/radion/Документы/Sites/kosherm2dump/cleardbm2.sql |  mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF m2_kosher4u_eu
 echo "${bold}• Clean Temp Dirs ${normal}" && rm -rf ./generated/* ./var/* ./pub/static/* &&
 echo "${bold}• Install packages ${normal}" && rm -rf ./vendor ./setup ./bin ./lib ./phpserver ./dev ./.docker && composer clear-cache && composer install &&
 echo "${bold}• Revert etc/di.xml ${normal}" && git checkout -- app/etc/di.xml &&
