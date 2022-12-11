@@ -14,6 +14,9 @@
             </ignore>
             <!-- Start Custom Tabels from M1 project -->
             <ignore>
+                <document>upsap_error</document>
+            </ignore>
+            <ignore>
                 <document>widgento_login</document>
             </ignore>
             <ignore>
@@ -2869,6 +2872,9 @@
             </ignore>
             <ignore>
                 <field>sales_shipment_grid.updated_at</field>
+            </ignore>
+            <ignore>
+                <field>sales_order.shipping_description</field>
             </ignore>
             <ignore>
                 <field>sales_order.send_email</field>
