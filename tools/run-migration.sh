@@ -12,8 +12,7 @@ pv /home/radion/Документы/Sites/kosherm2dump/cleardbm2.sql | mysql -um2
 echo "${bold}• Clean Temp Dirs ${normal}" && rm -rf ./generated/* ./var/* ./pub/static/* &&
 echo "${bold}• Install packages ${normal}" && rm -rf ./vendor ./setup ./bin ./lib ./phpserver ./dev ./.docker && composer install -o &&
 echo "${bold}• Revert etc/di.xml ${normal}" && git checkout -- app/etc/di.xml &&
-echo "${bold}Setup upgrade:${normal}"
-bin/magento setup:upgrade
+echo "${bold}• Revert nginx.conf.sample ${normal}" && git checkout -- nginx.conf.sample &&
 echo "${bold}Remove existing lock files:${normal}"
 rm var/migration-tool-progress.lock || true
 rm var/migration.log || true
