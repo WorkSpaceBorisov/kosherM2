@@ -3,12 +3,14 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-echo "${bold}Import clean M1 DB:${normal}"
-pv /root/www/m2.kosher4u.eu/cleardbm1.sql | mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF kosher
+#echo "${bold}Import clean M1 DB:${normal}"
+#pv /root/www/m2.kosher4u.eu/cleardbm1.sql | mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF kosher
 echo "${bold}Run prep scripts M1:${normal}"
 pv app/code/Kosher/Migration/query/cleanup-m1-db-for-dev.sql | mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF kosher
 echo "${bold}Import clean M2 DB:${normal}"
 pv /root/www/m2.kosher4u.eu/cleardbm2.sql | mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF m2_kosher4u_eu
+echo "${bold}Run prep scripts M2:${normal}"
+pv app/code/Kosher/Migration/query/before_migration_magento2.sql | mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF m2_kosher4u_eu
 echo "${bold}• Clean Temp Dirs ${normal}" && rm -rf ./generated/* ./var/* ./pub/static/* &&
 echo "${bold}• Install packages ${normal}" && rm -rf ./vendor ./setup ./bin ./lib ./phpserver ./dev ./.docker && composer clear-cache && composer install &&
 echo "${bold}• Revert etc/di.xml ${normal}" && git checkout -- app/etc/di.xml &&
@@ -21,6 +23,8 @@ echo "${bold}Migrate settings:${normal}"
 bin/magento migrate:settings app/code/Kosher/Migration/etc/opensource-to-opensource/1.9.4.2/config.xml
 echo "${bold}Migrate data:${normal}"
 bin/magento migrate:data app/code/Kosher/Migration/etc/opensource-to-opensource/1.9.4.2/config.xml
+echo "${bold}Setup upgrade:${normal}"
+php bin/magento setup:upgrade
 echo "${bold}After Migration Script:${normal}"
 pv app/code/Kosher/Migration/query/after_migration_magento2.sql | mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF m2_kosher4u_eu
 echo "${bold}Setup upgrade:${normal}"
