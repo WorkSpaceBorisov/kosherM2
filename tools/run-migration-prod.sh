@@ -25,6 +25,8 @@ echo "${bold}Migrate data:${normal}"
 bin/magento migrate:data app/code/Kosher/Migration/etc/opensource-to-opensource/1.9.4.2/config.xml
 echo "${bold}Setup upgrade:${normal}"
 php bin/magento setup:upgrade
+echo "${bold}Reindex:${normal}"
+php bin/magento indexer:reindex
 echo "${bold}After Migration Script:${normal}"
 pv app/code/Kosher/Migration/query/after_migration_magento2.sql | mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF m2_kosher4u_eu
 echo "${bold}Setup upgrade:${normal}"
