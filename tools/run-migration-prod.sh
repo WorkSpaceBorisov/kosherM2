@@ -3,8 +3,8 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-#echo "${bold}Import clean M1 DB:${normal}"
-#pv /root/www/m2.kosher4u.eu/cleardbm1.sql | mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF kosher
+echo "${bold}Import clean M1 DB:${normal}"
+pv /root/www/m2.kosher4u.eu/cleardbm1.sql | mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF kosher
 echo "${bold}Run prep scripts M1:${normal}"
 pv app/code/Kosher/Migration/query/cleanup-m1-db-for-dev.sql | mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF kosher
 echo "${bold}Import clean M2 DB:${normal}"
