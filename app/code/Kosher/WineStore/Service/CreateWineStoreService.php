@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Kosher\WineStore\Service;
 
+use Kosher\WineStore\Query\CheckPesachStoreQuery;
+use Magento\Framework\App\Config\Storage\WriterInterface;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Store\Model\GroupFactory;
@@ -45,20 +47,20 @@ class CreateWineStoreService
     private WebsiteFactory $websiteFactory;
 
     /**
-     * @param Group $groupResourceModel
-     * @param GroupFactory $groupFactory
-     * @param Store $storeResourceModel
-     * @param StoreFactory $storeFactory
-     * @param Website $websiteResourceModel
-     * @param WebsiteFactory $websiteFactory
+     * @var CheckPesachStoreQuery
      */
+    private CheckPesachStoreQuery $pesachStoreQuery;
+    private WriterInterface $writer;
+
     public function __construct(
         Group $groupResourceModel,
         GroupFactory $groupFactory,
         Store $storeResourceModel,
         StoreFactory $storeFactory,
         Website $websiteResourceModel,
-        WebsiteFactory $websiteFactory
+        WebsiteFactory $websiteFactory,
+        CheckPesachStoreQuery $pesachStoreQuery,
+        WriterInterface $writer
     ) {
         $this->groupResourceModel = $groupResourceModel;
         $this->groupFactory = $groupFactory;
@@ -66,6 +68,8 @@ class CreateWineStoreService
         $this->storeFactory = $storeFactory;
         $this->websiteResourceModel = $websiteResourceModel;
         $this->websiteFactory = $websiteFactory;
+        $this->pesachStoreQuery = $pesachStoreQuery;
+        $this->writer = $writer;
     }
 
     /**
@@ -87,7 +91,7 @@ class CreateWineStoreService
         $store = $this->storeFactory->create();
         $store->load($attribute['store_code']);
 
-        if (!$store->getId()) {
+        if ($this->pesachStoreQuery->execute() && !$store->getId()) {
             /** @var \Magento\Store\Model\Website $website */
             $website = $this->websiteFactory->create();
             $website->load($attribute['website_code']);
@@ -108,6 +112,11 @@ class CreateWineStoreService
             $store->setGroupId($group->getId());
             $store->setData('is_active', $attribute['is_active']);
             $this->storeResourceModel->save($store);
+
+            $this->writer->save('web/unsecure/base_url', 'https://wine.m2.kosher4u.eu/', 'websites', $website->getId());
+            $this->writer->save('web/unsecure/base_link_url', 'https://wine.m2.kosher4u.eu/', 'websites', $website->getId());
+            $this->writer->save('web/secure/base_url', 'https://wine.m2.kosher4u.eu/', 'websites', $website->getId());
+            $this->writer->save('web/secure/base_link_url', 'https://wine.m2.kosher4u.eu/', 'websites', $website->getId());
             return true;
         }
     }
