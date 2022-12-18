@@ -84,7 +84,7 @@ class CreateWineStoreService
             'website_name' => 'Ariskosherwine Website',
             'group_name' => 'Ariskosherwine Store',
             'store_code' => 'ariskosherwine_store',
-            'store_name' => 'Ariskosherwine Store',
+            'store_name' => 'English',
             'is_active' => '1'
         ];
 

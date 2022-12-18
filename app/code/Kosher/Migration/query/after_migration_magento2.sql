@@ -1,6 +1,7 @@
 UPDATE core_config_data set value = 0 where path = 'catalog/frontend/list_allow_all';
 
 DELETE FROM `patch_list` where patch_name = 'Kosher\\WineStore\\Setup\\Patch\\Data\\CreateWineStoreDataPatch';
+DELETE FROM `patch_list` where patch_name = 'Kosher\\StoresConfiguration\\Setup\\Patch\\Data\\RemoveMailchimpAttributesDataPatch';
 
 INSERT INTO `core_config_data` (`config_id`, `scope`, `scope_id`, `path`, `value`, `updated_at`)
 VALUES (NULL, 'websites', 2, 'web/unsecure/base_url', 'https://pesach.m2.kosher4u.eu/', current_timestamp());
