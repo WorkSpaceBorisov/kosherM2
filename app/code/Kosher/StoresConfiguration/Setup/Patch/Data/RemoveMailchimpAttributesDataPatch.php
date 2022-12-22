@@ -3,11 +3,12 @@ declare(strict_types=1);
 
 namespace Kosher\StoresConfiguration\Setup\Patch\Data;
 
+use Magento\Customer\Api\CustomerMetadataManagementInterface;
 use Magento\Eav\Api\AttributeRepositoryInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\StateException;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
-use Magento\Customer\Api\CustomerMetadataManagementInterface;
+
 class RemoveMailchimpAttributesDataPatch implements DataPatchInterface
 {
     /**
@@ -34,7 +35,9 @@ class RemoveMailchimpAttributesDataPatch implements DataPatchInterface
         $entityTypeCode = CustomerMetadataManagementInterface::ENTITY_TYPE_CUSTOMER;
         $attributeCode = 'mailchimp_sync_delta';
         $attributeData = $this->attributeRepository->get($entityTypeCode, $attributeCode);
-        $this->attributeRepository->delete($attributeData);
+        if (!empty($attributeData)) {
+            $this->attributeRepository->delete($attributeData);
+        }
 
         return $this;
     }
