@@ -5,8 +5,6 @@ namespace Kosher\StoresConfiguration\Setup\Patch\Data;
 
 use Magento\Customer\Api\CustomerMetadataManagementInterface;
 use Magento\Eav\Api\AttributeRepositoryInterface;
-use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\Exception\StateException;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 
 class RemoveMailchimpAttributesDataPatch implements DataPatchInterface
@@ -27,16 +25,15 @@ class RemoveMailchimpAttributesDataPatch implements DataPatchInterface
 
     /**
      * @return RemoveMailchimpAttributesDataPatch|$this
-     * @throws NoSuchEntityException
-     * @throws StateException
      */
     public function apply(): RemoveMailchimpAttributesDataPatch|static
     {
         $entityTypeCode = CustomerMetadataManagementInterface::ENTITY_TYPE_CUSTOMER;
         $attributeCode = 'mailchimp_sync_delta';
-        $attributeData = $this->attributeRepository->get($entityTypeCode, $attributeCode);
-        if (!empty($attributeData)) {
+        try {
+            $attributeData = $this->attributeRepository->get($entityTypeCode, $attributeCode);
             $this->attributeRepository->delete($attributeData);
+        } catch (\Exception $exception) {
         }
 
         return $this;
