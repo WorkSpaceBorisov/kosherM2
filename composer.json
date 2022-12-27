@@ -20,7 +20,8 @@
         "magento/composer-dependency-version-audit-plugin": "~0.1",
         "magento/composer-root-update-plugin": "~2.0",
         "magento/data-migration-tool": "2.4.5",
-        "magento/product-community-edition": "2.4.5"
+        "magento/product-community-edition": "2.4.5",
+        "olegkoval/magento2-regenerate-url-rewrites": "^1.6"
     },
     "autoload": {
         "exclude-from-classmap": [
