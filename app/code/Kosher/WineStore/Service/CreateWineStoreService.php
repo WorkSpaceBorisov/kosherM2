@@ -102,6 +102,7 @@ class CreateWineStoreService
             $group->setWebsiteId($website->getWebsiteId());
             $group->setName($attribute['group_name']);
             $group->setCode($attribute['store_code']);
+            $group->setRootCategoryId(2);
             $this->groupResourceModel->save($group);
 
             $group = $this->groupFactory->create();
