@@ -64,6 +64,10 @@ class CheckProductsFormCsvInDbService
                 $this->arrayToSave[$sku]['store_view_code'] = 'ariskosherwine_store';
                 $this->arrayToSave[$sku]['website_id'] = $webSiteId;
                 $this->arrayToSave[$sku]['product_websites'] = 'ariskosherwine';
+                if ($productData['product_online'] != 1 && $productData['product_online'] != 2) {
+                    $this->arrayToSave[$sku]['product_online'] = 1;
+                }
+
                 if (empty($this->arrayToSave[$sku]['price'])) {
                     unset($this->arrayToSave[$sku]);
                 }
