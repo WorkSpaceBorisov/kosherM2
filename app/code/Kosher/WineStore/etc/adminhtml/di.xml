@@ -9,4 +9,8 @@
         <plugin name="add_suppliers_attribute_for_product_plugin"
                 type="Kosher\WineStore\Plugin\AddSuppliersAttributeForProductPlugin"/>
     </type>
+    <type name="Magento\ImportExport\Model\Import\Entity\AbstractEntity">
+        <plugin name="set_root_category_wine_store_plugin"
+                type="Kosher\WineStore\Plugin\SetRootCategoryWineStorePlugin"/>
+    </type>
 </config>
