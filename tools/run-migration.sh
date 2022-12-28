@@ -21,7 +21,7 @@ echo "${bold}Remove existing lock files:${normal}"
 rm var/migration-tool-progress.lock || true
 rm var/migration.log || true
 echo "${bold}Create Wine Image Product Folder:${normal}"
-mkdir var/import/images/product_images || true
+mkdir -p var/import/images/product_images || true
 echo "${bold}Move Wine Product Images to Folder:${normal}"
 mv import var/import/images/product_images
 echo "${bold}Starting migration:${normal}"
