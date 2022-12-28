@@ -52,7 +52,7 @@ class AdjustmentSourceProductFileFromTmpPlugin
         $this->checkProductsFormCsvInDbService->deleteProductUrlKey();
         $dataArray = $this->csvProductImportFileFromTmpService->execute($result);
         $dataArray = $this->checkProductsFormCsvInDbService->deleteExistSkus($dataArray);
-        $this->checkProductsFormCsvInDbService->execute($dataArray);
+//        $this->checkProductsFormCsvInDbService->execute($dataArray);
         $this->createNewCsvImportFileToSaveDbService->execute($result, $dataArray);
 
         return $result;
