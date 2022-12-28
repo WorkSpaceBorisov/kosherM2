@@ -39,6 +39,7 @@ class CheckProductsFormCsvInDbService
      */
     public function execute(array $arrayData): void
     {
+        ini_set('max_execution_time', '300');
         foreach ($arrayData as $sku => $productData) {
             if ($sku != 'header') {
                 try {
