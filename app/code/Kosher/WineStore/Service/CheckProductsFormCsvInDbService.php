@@ -35,11 +35,10 @@ class CheckProductsFormCsvInDbService
 
     /**
      * @param array $arrayData
-     * @return int
+     * @return void
      */
-    public function execute(array $arrayData): int
+    public function execute(array $arrayData): void
     {
-        $i = 0;
         foreach ($arrayData as $sku => $productData) {
             if ($sku != 'header') {
                 try {
@@ -48,8 +47,6 @@ class CheckProductsFormCsvInDbService
                 }
             }
         }
-
-        return $i;
     }
 
     /**
@@ -59,11 +56,12 @@ class CheckProductsFormCsvInDbService
     public function deleteExistSkus(array $arrayData): array
     {
         $this->arrayToSave = $arrayData;
+        $webSiteId = (int)$this->getWebSiteId();
         foreach ($arrayData as $sku => $productData) {
             if ($sku != 'header') {
                 $this->arrayToSave[$sku]['url_key'] = $productData['url_key'] . '-' . rand(0, 9999);
                 $this->arrayToSave[$sku]['store_view_code'] = 'ariskosherwine_store';
-                $this->arrayToSave[$sku]['website_id'] = (int)$this->getWebSiteId();
+                $this->arrayToSave[$sku]['website_id'] = $webSiteId;
                 $this->arrayToSave[$sku]['product_websites'] = 'ariskosherwine';
                 if (empty($this->arrayToSave[$sku]['price'])) {
                     unset($this->arrayToSave[$sku]);
