@@ -58,9 +58,10 @@ class CheckProductsFormCsvInDbService
     {
         $this->arrayToSave = $arrayData;
         $webSiteId = (int)$this->getWebSiteId();
+        $i = 1;
         foreach ($arrayData as $sku => $productData) {
             if ($sku != 'header') {
-                $this->arrayToSave[$sku]['url_key'] = $productData['url_key'] . '-' . rand(0, 9999);
+                $this->arrayToSave[$sku]['url_key'] = $productData['url_key'] . '-' . $i;
                 $this->arrayToSave[$sku]['store_view_code'] = 'ariskosherwine_store';
                 $this->arrayToSave[$sku]['website_id'] = $webSiteId;
                 $this->arrayToSave[$sku]['product_websites'] = 'ariskosherwine';
@@ -68,10 +69,12 @@ class CheckProductsFormCsvInDbService
                     $this->arrayToSave[$sku]['product_online'] = 2;
                 }
 
-                if (empty($this->arrayToSave[$sku]['price'])) {
+                if (empty($this->arrayToSave[$sku]['name'])) {
                     unset($this->arrayToSave[$sku]);
                 }
             }
+
+            $i++;
         }
 
         return $this->arrayToSave;

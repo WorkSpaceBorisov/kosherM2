@@ -3,23 +3,27 @@ declare(strict_types=1);
 
 namespace Kosher\WineStore\Plugin;
 
+use Kosher\WineStore\Service\SetAnchorFotWineCategoriesService;
 use Kosher\WineStore\Service\SetRootCategoryWineStoreService;
 use Magento\ImportExport\Model\Import\Entity\AbstractEntity;
 
 class SetRootCategoryWineStorePlugin
 {
     /**
-     * @var SetRootCategoryWineStoreService
+     * @var SetAnchorFotWineCategoriesService
      */
-    private SetRootCategoryWineStoreService $setRootCategoryWineStoreService;
+    private SetAnchorFotWineCategoriesService $setAnchorFotWineCategoriesService;
 
     /**
      * @param SetRootCategoryWineStoreService $setRootCategoryWineStoreService
+     * @param SetAnchorFotWineCategoriesService $setAnchorFotWineCategoriesService
      */
     public function __construct(
-        SetRootCategoryWineStoreService $setRootCategoryWineStoreService
+        SetRootCategoryWineStoreService $setRootCategoryWineStoreService,
+        SetAnchorFotWineCategoriesService $setAnchorFotWineCategoriesService
     ) {
         $this->setRootCategoryWineStoreService = $setRootCategoryWineStoreService;
+        $this->setAnchorFotWineCategoriesService = $setAnchorFotWineCategoriesService;
     }
     /**
      * @param AbstractEntity $subject
@@ -30,7 +34,8 @@ class SetRootCategoryWineStorePlugin
     {
         $behavior = $subject->getBehavior();
         if ($behavior != 'delete' && $behavior != 'replace') {
-            $this->setRootCategoryWineStoreService->execute();
+            $rootCategoryId = $this->setRootCategoryWineStoreService->execute();
+            $this->setAnchorFotWineCategoriesService->execute($rootCategoryId);
         }
         return $result;
     }

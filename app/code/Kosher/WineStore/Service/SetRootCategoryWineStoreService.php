@@ -25,14 +25,16 @@ class SetRootCategoryWineStoreService
     }
 
     /**
-     * @return void
+     * @return int
      */
-    public function execute(): void
+    public function execute(): int
     {
         $rootCategoryId = (int)$this->getRootCategoryId();
         if (!empty($rootCategoryId)) {
             $this->updateRootCategoryWine($rootCategoryId);
         }
+
+        return $rootCategoryId;
     }
 
     /**
