@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Kosher\WineStore\Setup\Patch\Data;
 
+use Kosher\WineStore\Service\ImportProduct\AddAttributeServiceService;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
-use Kosher\WineStore\Service\AddAttributeServiceService;
 
 class CreateAttributeSetWineDataPatch implements DataPatchInterface
 {

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Kosher\WineStore\Setup\Patch\Data;
 
-use Kosher\WineStore\Service\CreateWineStoreService;
+use Kosher\WineStore\Service\Store\CreateWineStoreService;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Setup\Patch\DataPatchInterface;

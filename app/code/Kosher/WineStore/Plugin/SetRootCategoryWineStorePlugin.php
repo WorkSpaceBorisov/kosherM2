@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Kosher\WineStore\Plugin;
 
-use Kosher\WineStore\Service\SetAnchorFotWineCategoriesService;
-use Kosher\WineStore\Service\SetRootCategoryWineStoreService;
+use Kosher\WineStore\Service\ImportProduct\SetAnchorFotWineCategoriesService;
+use Kosher\WineStore\Service\ImportProduct\SetRootCategoryWineStoreService;
 use Magento\ImportExport\Model\Import\Entity\AbstractEntity;
 
 class SetRootCategoryWineStorePlugin
