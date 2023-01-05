@@ -81,8 +81,8 @@ class CreateWineStoreService
     {
         $attribute = [
             'website_code' => 'ariskosherwine',
-            'website_name' => 'Ariskosherwine Website',
-            'group_name' => 'Ariskosherwine Store',
+            'website_name' => 'WINE',
+            'group_name' => 'WINE',
             'store_code' => 'ariskosherwine_store',
             'store_name' => 'English',
             'is_active' => '1'

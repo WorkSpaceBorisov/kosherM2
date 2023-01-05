@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace Kosher\WineStore\Plugin;
 
 use Exception;
+use Kosher\WineStore\Service\ImportCustomer\DeleteEmptyAttributeFromCsvService;
 use Kosher\WineStore\Service\ImportProduct\CheckProductsFormCsvInDbService;
 use Kosher\WineStore\Service\ImportProduct\ReadCsvProductImportFileFromTmpService;
 use Kosher\WineStore\Service\Store\CreateNewCsvImportFileToSaveDbService;
 use Magento\ImportExport\Model\Import;
-use Kosher\WineStore\Service\ImportCustomer\DeleteEmptyAttributeFromCsvService;
 
 class AdjustmentSourceProductFileFromTmpPlugin
 {
@@ -64,11 +64,11 @@ class AdjustmentSourceProductFileFromTmpPlugin
             $dataArray = $this->checkProductsFormCsvInDbService->deleteExistSkus($dataArray);
             $this->createNewCsvImportFileToSaveDbService->execute($result, $dataArray);
         }
-//        if ($subject->getData('entity') == 'customer') {
-//            $dataArray = $this->csvProductImportFileFromTmpService->execute($result);
-//            $dataArray = $this->deleteEmptyAttributeFromCsvService->execute($dataArray);
-//            $this->createNewCsvImportFileToSaveDbService->execute($result, $dataArray);
-//        }
+        if ($subject->getData('entity') == 'customer') {
+            $dataArray = $this->csvProductImportFileFromTmpService->execute($result);
+            $dataArray = $this->deleteEmptyAttributeFromCsvService->execute($dataArray);
+            $this->createNewCsvImportFileToSaveDbService->execute($result, $dataArray);
+        }
 
         return $result;
     }

@@ -24,15 +24,30 @@ class DeleteEmptyAttributeFromCsvService
 
     private array $csvData = [];
 
-    public function execute(array $data)
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function execute(array $data): array
     {
         $this->csvData = $data;
-//        foreach ($data as $email => $customerData) {
-//                foreach ($this->forDelete as $item){
-//                    unset($this->csvData[$email][$item]);
-//                }
-//
-//        }
+        foreach ($data as $email => $customerData) {
+            if ($email != 'header') {
+                $this->csvData[$email]['_store'] = 'default';
+            }
+
+            foreach ($this->forDelete as $item) {
+                if ($email != 'header') {
+                    unset($this->csvData[$email][$item]);
+                }
+
+                if ($email == 'header') {
+                    $headerKey = array_search($item, $this->csvData[$email]);
+                    unset($this->csvData[$email][$headerKey]);
+                }
+            }
+        }
+
         return $this->csvData;
     }
 }
