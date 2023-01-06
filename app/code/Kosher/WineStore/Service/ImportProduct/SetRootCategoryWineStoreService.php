@@ -60,7 +60,7 @@ class SetRootCategoryWineStoreService
             ->update(
                 $this->resourceConnection->getTableName('store_group'),
                 ['root_category_id' => $rootCategoryId],
-                ['name = ?' => 'Ariskosherwine Store']
+                ['name = ?' => 'WINE']
             );
     }
 }
