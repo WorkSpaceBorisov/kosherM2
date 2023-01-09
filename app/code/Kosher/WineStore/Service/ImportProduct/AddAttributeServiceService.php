@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Kosher\WineStore\Service;
+namespace Kosher\WineStore\Service\ImportProduct;
 
 use Magento\Catalog\Setup\CategorySetupFactory;
 use Magento\Eav\Model\Entity\Attribute\SetFactory as AttributeSetFactory;

@@ -4,9 +4,10 @@ declare(strict_types=1);
 namespace Kosher\WineStore\Plugin;
 
 use Exception;
-use Kosher\WineStore\Service\CheckProductsFormCsvInDbService;
-use Kosher\WineStore\Service\CreateNewCsvImportFileToSaveDbService;
-use Kosher\WineStore\Service\ReadCsvProductImportFileFromTmpService;
+use Kosher\WineStore\Service\ImportCustomer\DeleteEmptyAttributeFromCsvService;
+use Kosher\WineStore\Service\ImportProduct\CheckProductsFormCsvInDbService;
+use Kosher\WineStore\Service\ImportProduct\ReadCsvProductImportFileFromTmpService;
+use Kosher\WineStore\Service\Store\CreateNewCsvImportFileToSaveDbService;
 use Magento\ImportExport\Model\Import;
 
 class AdjustmentSourceProductFileFromTmpPlugin
@@ -27,18 +28,26 @@ class AdjustmentSourceProductFileFromTmpPlugin
     private CreateNewCsvImportFileToSaveDbService $createNewCsvImportFileToSaveDbService;
 
     /**
+     * @var DeleteEmptyAttributeFromCsvService
+     */
+    private DeleteEmptyAttributeFromCsvService $deleteEmptyAttributeFromCsvService;
+
+    /**
      * @param ReadCsvProductImportFileFromTmpService $csvProductImportFileFromTmpService
      * @param CheckProductsFormCsvInDbService $checkProductsFormCsvInDbService
      * @param CreateNewCsvImportFileToSaveDbService $createNewCsvImportFileToSaveDbService
+     * @param DeleteEmptyAttributeFromCsvService $deleteEmptyAttributeFromCsvService
      */
     public function __construct(
         ReadCsvProductImportFileFromTmpService $csvProductImportFileFromTmpService,
         CheckProductsFormCsvInDbService $checkProductsFormCsvInDbService,
-        CreateNewCsvImportFileToSaveDbService $createNewCsvImportFileToSaveDbService
+        CreateNewCsvImportFileToSaveDbService $createNewCsvImportFileToSaveDbService,
+        DeleteEmptyAttributeFromCsvService $deleteEmptyAttributeFromCsvService
     ) {
         $this->csvProductImportFileFromTmpService = $csvProductImportFileFromTmpService;
         $this->checkProductsFormCsvInDbService = $checkProductsFormCsvInDbService;
         $this->createNewCsvImportFileToSaveDbService = $createNewCsvImportFileToSaveDbService;
+        $this->deleteEmptyAttributeFromCsvService = $deleteEmptyAttributeFromCsvService;
     }
 
     /**
@@ -49,10 +58,17 @@ class AdjustmentSourceProductFileFromTmpPlugin
      */
     public function afterUploadSource(Import $subject, string $result): string
     {
-        $this->checkProductsFormCsvInDbService->deleteProductUrlKey();
-        $dataArray = $this->csvProductImportFileFromTmpService->execute($result);
-        $dataArray = $this->checkProductsFormCsvInDbService->deleteExistSkus($dataArray);
-        $this->createNewCsvImportFileToSaveDbService->execute($result, $dataArray);
+        if ($subject->getData('entity') == 'catalog_product') {
+            $this->checkProductsFormCsvInDbService->deleteProductUrlKey();
+            $dataArray = $this->csvProductImportFileFromTmpService->execute($result);
+            $dataArray = $this->checkProductsFormCsvInDbService->deleteExistSkus($dataArray);
+            $this->createNewCsvImportFileToSaveDbService->execute($result, $dataArray);
+        }
+        if ($subject->getData('entity') == 'customer') {
+            $dataArray = $this->csvProductImportFileFromTmpService->execute($result);
+            $dataArray = $this->deleteEmptyAttributeFromCsvService->execute($dataArray);
+            $this->createNewCsvImportFileToSaveDbService->execute($result, $dataArray);
+        }
 
         return $result;
     }

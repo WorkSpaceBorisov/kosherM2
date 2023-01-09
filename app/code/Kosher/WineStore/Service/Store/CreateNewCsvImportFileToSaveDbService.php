@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Kosher\WineStore\Service;
+namespace Kosher\WineStore\Service\Store;
 
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\File\Csv;

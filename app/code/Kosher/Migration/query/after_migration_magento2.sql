@@ -1,5 +1,8 @@
 UPDATE core_config_data set value = 0 where path = 'catalog/frontend/list_allow_all';
 
+UPDATE store_group set name = 'KOSHER4U' where name = 'Main Website Store';
+UPDATE store_website set name = 'KOSHER4U' where name = 'Main Website';
+
 DELETE FROM `patch_list` where patch_name = 'Kosher\\WineStore\\Setup\\Patch\\Data\\CreateWineStoreDataPatch';
 DELETE FROM `patch_list` where patch_name = 'Kosher\\StoresConfiguration\\Setup\\Patch\\Data\\RemoveMailchimpAttributesDataPatch';
 

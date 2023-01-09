@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Kosher\WineStore\Service;
+namespace Kosher\WineStore\Service\ImportProduct;
 
 use Magento\Framework\App\ResourceConnection;
 
@@ -60,7 +60,7 @@ class SetRootCategoryWineStoreService
             ->update(
                 $this->resourceConnection->getTableName('store_group'),
                 ['root_category_id' => $rootCategoryId],
-                ['name = ?' => 'Ariskosherwine Store']
+                ['name = ?' => 'WINE']
             );
     }
 }

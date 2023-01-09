@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Kosher\WineStore\Service;
+namespace Kosher\WineStore\Service\Store;
 
 use Kosher\WineStore\Query\CheckPesachStoreQuery;
 use Magento\Framework\App\Config\Storage\WriterInterface;
@@ -81,8 +81,8 @@ class CreateWineStoreService
     {
         $attribute = [
             'website_code' => 'ariskosherwine',
-            'website_name' => 'Ariskosherwine Website',
-            'group_name' => 'Ariskosherwine Store',
+            'website_name' => 'WINE',
+            'group_name' => 'WINE',
             'store_code' => 'ariskosherwine_store',
             'store_name' => 'English',
             'is_active' => '1'
