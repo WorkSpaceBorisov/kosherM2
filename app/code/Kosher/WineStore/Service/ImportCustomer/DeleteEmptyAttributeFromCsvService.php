@@ -33,7 +33,7 @@ class DeleteEmptyAttributeFromCsvService
         $this->csvData = $data;
         foreach ($data as $email => $customerData) {
             if ($email != 'header') {
-                $this->csvData[$email]['_store'] = 'default';
+                $this->csvData[$email]['_store'] = 'ariskosherwine_store';
             }
 
             foreach ($this->forDelete as $item) {
