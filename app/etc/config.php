@@ -326,6 +326,8 @@ return [
         'Magento_Wishlist' => 1,
         'Magento_WishlistAnalytics' => 1,
         'Magento_WishlistGraphQl' => 1,
+        'Aitoc_Core' => 1,
+        'Aitoc_OrdersExportImport' => 1,
         'Kosher_Migration' => 1,
         'Kosher_StoresConfiguration' => 1,
         'Kosher_WineStore' => 1,

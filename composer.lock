@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "206113deb2e8714f1b9a19c255e0383e",
+    "content-hash": "4dee2a9af65a4874d1701cf6cc960d3e",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -50,6 +50,53 @@
                 "source": "https://github.com/2tvenom/CBOREncode/tree/1.0.2"
             },
             "time": "2020-10-27T07:22:41+00:00"
+        },
+        {
+            "name": "aitoc/core",
+            "version": "1.0.16",
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.aitoc.com/community/packages/core_1.0.16.zip"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Aitoc\\Core\\": ""
+                }
+            },
+            "license": [
+                "Commercial"
+            ],
+            "description": "Core extension by Aitoc"
+        },
+        {
+            "name": "aitoc/orders-export-import",
+            "version": "2.0.11",
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.aitoc.com/community/packages/orders-export-import_2.0.11.zip"
+            },
+            "require": {
+                "aitoc/core": ">=1.0.16",
+                "ext-dom": "*",
+                "ext-json": "*"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Aitoc\\OrdersExportImport\\": ""
+                }
+            },
+            "license": [
+                "Commercial"
+            ],
+            "description": "Orders Export and Import"
         },
         {
             "name": "astock/stock-api-libphp",

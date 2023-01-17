@@ -29,3 +29,6 @@ delete from core_config_data where path = 'design/watermark/thumbnail_image' AND
 delete from core_config_data where path = 'design/watermark/thumbnail_imageOpacity' AND scope = 'default' AND scope_id = 0;
 delete from core_config_data where path = 'design/watermark/image_image' AND scope = 'default' AND scope_id = 0;
 delete from core_config_data where path = 'design/watermark/image_size' AND scope = 'default' AND scope_id = 0;
+
+insert into `core_config_data` (`config_id`, `scope`, `scope_id`, `path`, `value`, `updated_at`)
+VALUES (NULL, 'default', 0, 'aitoie/general/bulk_count', '10000', current_timestamp());
