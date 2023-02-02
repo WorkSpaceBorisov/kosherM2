@@ -2011,6 +2011,15 @@
     <destination>
         <document_rules>
             <ignore>
+                <document>aitoc_export</document>
+            </ignore>
+            <ignore>
+                <document>aitoc_export_profile</document>
+            </ignore>
+            <ignore>
+                <document>aitoc_import</document>
+            </ignore>
+            <ignore>
                 <document>customer_entity</document>
             </ignore>
             <ignore>
@@ -2753,6 +2762,9 @@
                 <field>quote_address_item.store_id</field>
                 <handler class="\Migration\Handler\QuoteMultiAddressStoreId" />
             </transform>
+            <ignore>
+                <field>adminnotification_inbox.aitoc_notification</field>
+            </ignore>
             <ignore>
                 <field>quote_address_item.store_id</field>
             </ignore>

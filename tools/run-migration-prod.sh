@@ -15,6 +15,8 @@ echo "${bold}• Clean Temp Dirs ${normal}" && rm -rf ./generated/* ./var/* ./pu
 echo "${bold}• Install packages ${normal}" && rm -rf ./vendor ./setup ./bin ./lib ./phpserver ./dev ./.docker && composer clear-cache && composer install &&
 echo "${bold}• Revert etc/di.xml ${normal}" && git checkout -- app/etc/di.xml &&
 echo "${bold}• Revert nginx.conf.sample ${normal}" && git checkout -- nginx.conf.sample &&
+echo "${bold}Create var/tmp folder:${normal}"
+mkdir -p var/tmp
 echo "${bold}Setup upgrade:${normal}"
 php bin/magento setup:upgrade
 echo "${bold}Remove existing lock files:${normal}"
