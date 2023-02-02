@@ -22,8 +22,6 @@ php bin/magento setup:upgrade
 echo "${bold}Remove existing lock files:${normal}"
 rm var/migration-tool-progress.lock || true
 rm var/migration.log || true
-echo "${bold}Move Wine Product Images to Folder:${normal}"
-mv import var
 echo "${bold}Starting migration:${normal}"
 echo "${bold}Migrate settings:${normal}"
 bin/magento migrate:settings app/code/Kosher/Migration/etc/opensource-to-opensource/1.9.4.2/config.xml
