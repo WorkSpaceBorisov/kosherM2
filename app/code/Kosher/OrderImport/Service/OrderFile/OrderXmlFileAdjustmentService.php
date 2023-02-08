@@ -173,8 +173,8 @@ class OrderXmlFileAdjustmentService
             }
 
             if ($key == 'items') {
-                $this->lastOrderInvoiceItemId++;
                 foreach ($invoice['item'] as $number => $itemInvoice) {
+                    $this->lastOrderInvoiceItemId++;
                     if (is_array($itemInvoice)) {
                         $sku = $itemInvoice['sku'];
                         $this->completeOrders[$orderKey]['invoices']['invoice'][$key]['item'][$number]['entity_id'] = $this->lastOrderInvoiceItemId;
@@ -235,8 +235,8 @@ class OrderXmlFileAdjustmentService
 
         $orderShipment = $order['shipments']['shipment'];
         $this->lastOrderShipmentId++;
-        $this->lastOrderShipmentItemId++;
         foreach ($orderShipment as $key => $shipment) {
+            $this->lastOrderShipmentItemId++;
             if ($key == 'fields') {
                 $this->completeOrders[$orderKey]['shipments']['shipment'][$key]['entity_id'] = $this->lastOrderShipmentId;
                 $this->completeOrders[$orderKey]['shipments']['shipment'][$key]['order_id'] = $this->lastOrderId;
@@ -287,6 +287,7 @@ class OrderXmlFileAdjustmentService
     {
         $orderItems = $order['items']['item'];
         foreach ($orderItems as $key => $item) {
+            $this->lastOrderItemId++;
             if (is_array($item)) {
                 $this->completeOrders[$orderKey]['items']['item'][$key]['item_id'] = $this->lastOrderItemId;
                 $this->completeOrders[$orderKey]['items']['item'][$key]['order_id'] = $this->lastOrderId;

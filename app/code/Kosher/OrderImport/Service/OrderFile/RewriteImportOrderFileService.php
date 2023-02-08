@@ -6,6 +6,7 @@ namespace Kosher\OrderImport\Service\OrderFile;
 use Aitoc\OrdersExportImport\Model\Processor\Container\Xml;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Filesystem\Driver\File as Files;
+use Aitoc\OrdersExportImport\Model\Processor\Converter;
 
 class RewriteImportOrderFileService extends Xml
 {
@@ -16,12 +17,21 @@ class RewriteImportOrderFileService extends Xml
     private Files $files;
 
     /**
+     * @var Converter
+     */
+    private Converter $converter;
+
+
+    /**
      * @param Files $files
+     * @param Converter $converter
      */
     public function __construct(
-        Files $files
+        Files $files,
+        Converter $converter
     ) {
         $this->files = $files;
+        $this->converter = $converter;
     }
 
     /**
@@ -38,6 +48,7 @@ class RewriteImportOrderFileService extends Xml
         $this->mainNode = 'records';
         $this->addFileBeginning();
         foreach ($orderImportData as $item) {
+            $item = $this->converter->apply($item);
             $this->append($item);
         }
     }
