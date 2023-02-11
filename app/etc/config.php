@@ -328,6 +328,7 @@ return [
         'Magento_WishlistGraphQl' => 1,
         'Aitoc_Core' => 1,
         'Aitoc_OrdersExportImport' => 1,
+        'Kosher_ConvertProductCsvM1File' => 1,
         'Kosher_Migration' => 1,
         'Kosher_OrderImport' => 1,
         'Kosher_StoresConfiguration' => 1,
