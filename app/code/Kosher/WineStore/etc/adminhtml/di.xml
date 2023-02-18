@@ -4,6 +4,8 @@
     <type name="Magento\ImportExport\Model\Import">
         <plugin name="adjustment_source_product_file_from_tmp_plugin"
                 type="Kosher\WineStore\Plugin\AdjustmentSourceProductFileFromTmpPlugin"/>
+        <plugin name="assign_alco_product_kosher_to_wine_store_plugin"
+                type="Kosher\WineStore\Plugin\AssignAlcoProductKosherToWineStorePlugin"/>
     </type>
     <type name="Magento\CatalogImportExport\Model\Import\Product\Type\AbstractType">
         <plugin name="add_suppliers_attribute_for_product_plugin"
