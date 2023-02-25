@@ -3,40 +3,40 @@ declare(strict_types=1);
 
 namespace Kosher\ProductAttributeSetExportImport\Controller\Adminhtml\Export;
 
+use Kosher\ProductAttributeSetExportImport\Service\AttributeSet\ExportAttributeSetToCsvService;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\View\Result\PageFactory;
-use Kosher\ProductAttributeSetExportImport\Service\AttributeSet\ExportAttributeSetToCsvService;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\Exception\FileSystemException;
 
 class Index extends Action
 {
     /**
-     * @var PageFactory
+     * @var ExportAttributeSetToCsvService
      */
-    private PageFactory $resultPageFactory;
     private ExportAttributeSetToCsvService $attributeSetToCsvService;
-
-    /**
-     * @param Context $context
-     * @param PageFactory $resultPageFactory
-     */
-    public function __construct(
-        Context $context,
-        PageFactory $resultPageFactory,
-        ExportAttributeSetToCsvService $attributeSetToCsvService
-    ) {
-        parent::__construct($context);
-        $this->resultPageFactory = $resultPageFactory;
-        $this->attributeSetToCsvService = $attributeSetToCsvService;
-    }
 
     const ADMIN_RESOURCE = 'Kosher_ProductAttributeSetExportImport::export';
 
+    /**
+     * @param Context $context
+     * @param ExportAttributeSetToCsvService $attributeSetToCsvService
+     */
+    public function __construct(
+        Context $context,
+        ExportAttributeSetToCsvService $attributeSetToCsvService
+    ) {
+        parent::__construct($context);
+        $this->attributeSetToCsvService = $attributeSetToCsvService;
+    }
+
+    /**
+     * @return ResponseInterface|ResultInterface|void
+     * @throws FileSystemException
+     */
     public function execute()
     {
         $this->attributeSetToCsvService->execute();
-//        $resultPage = $this->resultPageFactory->create();
-//
-//        return $resultPage;
     }
 }

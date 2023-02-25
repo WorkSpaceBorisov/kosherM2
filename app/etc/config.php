@@ -331,6 +331,7 @@ return [
         'Kosher_ConvertProductCsvM1File' => 1,
         'Kosher_Migration' => 1,
         'Kosher_OrderImport' => 1,
+        'Kosher_ProductAttributeSetExportImport' => 1,
         'Kosher_StoresConfiguration' => 1,
         'Kosher_WineStore' => 1,
         'OlegKoval_RegenerateUrlRewrites' => 1,
