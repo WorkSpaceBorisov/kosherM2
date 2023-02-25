@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Kosher\ProductAttributeSetExportImport\Service\AttributeSet;
 
-use Magento\Catalog\Model\Product as ProductEntityType;
 use Magento\Framework\App\ResourceConnection;
 
 class CheckExistAttributeService

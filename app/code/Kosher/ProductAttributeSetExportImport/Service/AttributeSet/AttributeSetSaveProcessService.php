@@ -3,95 +3,98 @@ declare(strict_types=1);
 
 namespace Kosher\ProductAttributeSetExportImport\Service\AttributeSet;
 
-use Magento\Eav\Api\Data\AttributeInterface;
-use Magento\Eav\Api\Data\AttributeInterfaceFactory;
-use Magento\Eav\Model\ResourceModel\Entity\Attribute;
-use Magento\Framework\Api\DataObjectHelper;
+use Magento\Catalog\Model\ResourceModel\Eav\Attribute;
+use Magento\Catalog\Setup\CategorySetup;
 
 class AttributeSetSaveProcessService
 {
-    private string $attributeGroupName = '';
-    private string $attributeSetName = '';
     private int $attributeId;
-    private int $attributeGroupId;
-    private int $attributeSetId;
+
+    /**
+     * @var AttributeCsvFileReadService
+     */
     private AttributeCsvFileReadService $attributeCsvFileReadService;
+
+    /**
+     * @var CheckExistAttributeService
+     */
     private CheckExistAttributeService $checkExistAttributeService;
-    private DataObjectHelper $dataObjectHelper;
-    private AttributeInterfaceFactory $attributeInterfaceFactory;
+
+    /**
+     * @var CategorySetup
+     */
+    private CategorySetup $installer;
+
+    /**
+     * @var Attribute
+     */
     private Attribute $attribute;
-    private GetAttributeSetIdService $getAttributeSetIdService;
-    private CheckExistGroupByAttributeSetIdService $checkExistGroupByAttributeSetIdService;
-    private AssignAttributeSetToGroupService $assignAttributeSetToGroupService;
-    private SaveEavEntityAttributeDataService $saveEavEntityAttributeDataService;
-    private SaveCatalogEavAttributeService $saveCatalogEavAttributeService;
+
+    /**
+     * @var SaveAttributeOptionsService
+     */
     private SaveAttributeOptionsService $saveAttributeOptionsService;
 
+    /**
+     * @param AttributeCsvFileReadService $attributeCsvFileReadService
+     * @param CheckExistAttributeService $checkExistAttributeService
+     * @param CategorySetup $installer
+     * @param Attribute $attribute
+     * @param SaveAttributeOptionsService $saveAttributeOptionsService
+     */
     public function __construct(
         AttributeCsvFileReadService $attributeCsvFileReadService,
         CheckExistAttributeService $checkExistAttributeService,
-        DataObjectHelper $dataObjectHelper,
-        AttributeInterfaceFactory $attributeInterfaceFactory,
+        CategorySetup $installer,
         Attribute $attribute,
-        GetAttributeSetIdService $getAttributeSetIdService,
-        CheckExistGroupByAttributeSetIdService $checkExistGroupByAttributeSetIdService,
-        AssignAttributeSetToGroupService $assignAttributeSetToGroupService,
-        SaveEavEntityAttributeDataService $saveEavEntityAttributeDataService,
-        SaveCatalogEavAttributeService $saveCatalogEavAttributeService,
         SaveAttributeOptionsService $saveAttributeOptionsService
     ) {
         $this->attributeCsvFileReadService = $attributeCsvFileReadService;
         $this->checkExistAttributeService = $checkExistAttributeService;
-        $this->dataObjectHelper = $dataObjectHelper;
-        $this->attributeInterfaceFactory = $attributeInterfaceFactory;
+        $this->installer = $installer;
         $this->attribute = $attribute;
-        $this->getAttributeSetIdService = $getAttributeSetIdService;
-        $this->checkExistGroupByAttributeSetIdService = $checkExistGroupByAttributeSetIdService;
-        $this->assignAttributeSetToGroupService = $assignAttributeSetToGroupService;
-        $this->saveEavEntityAttributeDataService = $saveEavEntityAttributeDataService;
-        $this->saveCatalogEavAttributeService = $saveCatalogEavAttributeService;
         $this->saveAttributeOptionsService = $saveAttributeOptionsService;
     }
 
-    public function execute()
+    /**
+     * @return void
+     * @throws \Exception
+     */
+    public function execute(): void
     {
         $attributeData = $this->attributeCsvFileReadService->execute();
+        $i = 1;
         foreach ($attributeData as $attributeCode => $attributeData) {
             if ($attributeCode != 'header') {
                 $attributeIdStatus = $this->checkExistAttributeService->execute($attributeCode);
-                $this->attributeId = $attributeIdStatus ?: $this->saveNewAttribute($attributeData);
-
-                if ($this->attributeSetName != $attributeData['attribute_set_name']) {
-                    $this->attributeSetName = $attributeData['attribute_set_name'];
-                    $this->attributeSetId = $this->getAttributeSetIdService->execute($this->attributeSetName);
-                }
-                if ($this->attributeGroupName != $attributeData['attribute_group_name']) {
-                    $this->attributeGroupName = $attributeData['attribute_group_name'];
-                    $attributeGroupCheck = $this->checkExistGroupByAttributeSetIdService->execute('Product Details', $this->attributeSetId);
-                    $this->attributeGroupId = $attributeGroupCheck ?: $this->assignAttributeSetToGroupService->execute('Product Details', $this->attributeSetId);
-                }
-
-                if (!$attributeIdStatus) {
-                    $this->saveEavEntityAttributeDataService->execute($this->attributeSetId, $this->attributeGroupId, $this->attributeId);
-                    $this->saveAttributeOptionsService->execute($attributeCode, $attributeData['attribute_options']);
+                if ($attributeIdStatus == false) {
+                    $attribute = $this->saveNewAttribute($attributeData, $i);
+                    $this->attributeId = (int)$attribute->getId();
+                    $this->saveAttributeOptionsService->execute($attribute, $this->attributeId, $attributeData['attribute_options']);
                 }
             }
+
+            $i++;
         }
     }
 
-    private function saveNewAttribute(array $attributeData)
+    /**
+     * @param array $attributeData
+     * @param int $i
+     * @return Attribute
+     * @throws \Exception
+     */
+    private function saveNewAttribute(array $attributeData, int $i): Attribute
     {
-        /** @var AttributeInterface $eavAttribute */
-        $eavAttribute = $this->attributeInterfaceFactory->create();
-        $this->dataObjectHelper->populateWithArray(
-            $eavAttribute,
-            $attributeData,
-            AttributeInterface::class
+        $attributeData['sort_order'] = (int)$attributeData['sort_order'] * 10 + $i;
+        $this->attribute->setData(
+            $attributeData
         );
 
-        $this->attribute->save($eavAttribute);
-        $this->saveCatalogEavAttributeService->execute($attributeData);
+        $this->attribute->save();
 
-        return (int)$eavAttribute->getAttributeId();
+        $this->installer->addAttributeToGroup('catalog_product', $attributeData['attribute_set_name'], 'Product Details', $this->attribute->getId());
+
+        return $this->attribute;
     }
 }
