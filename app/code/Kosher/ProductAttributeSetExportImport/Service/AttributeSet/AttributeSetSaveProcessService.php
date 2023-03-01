@@ -36,24 +36,32 @@ class AttributeSetSaveProcessService
     private SaveAttributeOptionsService $saveAttributeOptionsService;
 
     /**
+     * @var SaveOptionsToExistAttributeService
+     */
+    private SaveOptionsToExistAttributeService $saveOptionsToExistAttributeService;
+
+    /**
      * @param AttributeCsvFileReadService $attributeCsvFileReadService
      * @param CheckExistAttributeService $checkExistAttributeService
      * @param CategorySetup $installer
      * @param Attribute $attribute
      * @param SaveAttributeOptionsService $saveAttributeOptionsService
+     * @param SaveOptionsToExistAttributeService $saveOptionsToExistAttributeService
      */
     public function __construct(
         AttributeCsvFileReadService $attributeCsvFileReadService,
         CheckExistAttributeService $checkExistAttributeService,
         CategorySetup $installer,
         Attribute $attribute,
-        SaveAttributeOptionsService $saveAttributeOptionsService
+        SaveAttributeOptionsService $saveAttributeOptionsService,
+        SaveOptionsToExistAttributeService $saveOptionsToExistAttributeService
     ) {
         $this->attributeCsvFileReadService = $attributeCsvFileReadService;
         $this->checkExistAttributeService = $checkExistAttributeService;
         $this->installer = $installer;
         $this->attribute = $attribute;
         $this->saveAttributeOptionsService = $saveAttributeOptionsService;
+        $this->saveOptionsToExistAttributeService = $saveOptionsToExistAttributeService;
     }
 
     /**
@@ -71,6 +79,8 @@ class AttributeSetSaveProcessService
                     $attribute = $this->saveNewAttribute($attributeData, $i);
                     $this->attributeId = (int)$attribute->getId();
                     $this->saveAttributeOptionsService->execute($attribute, $this->attributeId, $attributeData['attribute_options']);
+                } else {
+                    $this->saveOptionsToExistAttributeService->execute($attributeCode, $attributeData, $attributeIdStatus);
                 }
             }
 
@@ -86,7 +96,6 @@ class AttributeSetSaveProcessService
      */
     private function saveNewAttribute(array $attributeData, int $i): Attribute
     {
-        $attributeData['sort_order'] = (int)$attributeData['sort_order'] * 10 + $i;
         $this->attribute->setData(
             $attributeData
         );
