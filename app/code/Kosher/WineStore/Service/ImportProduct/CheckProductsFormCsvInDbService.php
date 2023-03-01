@@ -3,18 +3,12 @@ declare(strict_types=1);
 
 namespace Kosher\WineStore\Service\ImportProduct;
 
-use Exception;
-use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\App\ResourceConnection;
 
 class CheckProductsFormCsvInDbService
 {
     private const TARGET_TABLE_NAME = 'store_website';
     private array $arrayToSave = [];
-    /**
-     * @var ProductRepositoryInterface
-     */
-    private ProductRepositoryInterface $productRepository;
 
     /**
      * @var ResourceConnection
@@ -22,32 +16,12 @@ class CheckProductsFormCsvInDbService
     private ResourceConnection $resourceConnection;
 
     /**
-     * @param ProductRepositoryInterface $productRepository
      * @param ResourceConnection $resourceConnection
      */
     public function __construct(
-        ProductRepositoryInterface $productRepository,
         ResourceConnection $resourceConnection
     ) {
-        $this->productRepository = $productRepository;
         $this->resourceConnection = $resourceConnection;
-    }
-
-    /**
-     * @param array $arrayData
-     * @return void
-     */
-    public function execute(array $arrayData): void
-    {
-        ini_set('max_execution_time', '300');
-        foreach ($arrayData as $sku => $productData) {
-            if ($sku != 'header') {
-                try {
-                    $this->productRepository->deleteById($sku);
-                } catch (Exception $exception) {
-                }
-            }
-        }
     }
 
     /**

@@ -37,9 +37,7 @@ class ReadCsvProductImportFileFromTmpService
             } else {
                 $dataKey = $data[0];
                 $res = array_combine($result['header'], $data);
-                if (!empty($res['name'])) {
-                    $result[$dataKey] = $res;
-                }
+                $result[$dataKey] = $res;
             }
         }
 

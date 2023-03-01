@@ -67,9 +67,9 @@ class SaveAttributeOptionsService
         foreach ($options as $option) {
             if (!empty($option['value']) && !empty($option['label'])) {
                 if ($attribute->getSource()->getOptionId($option['label']) == null) {
-                    $this->option->setValue($option['value']);
+                    $this->option->setValue((string)$option['value']);
                     $this->attributeOptionLabel->setStoreId(0);
-                    $this->attributeOptionLabel->setLabel($option['label']);
+                    $this->attributeOptionLabel->setLabel((string)$option['label']);
                     $this->option->setLabel($this->attributeOptionLabel->getLabel());
                     $this->option->setStoreLabels([$this->attributeOptionLabel]);
                     $this->option->setSortOrder(0);
