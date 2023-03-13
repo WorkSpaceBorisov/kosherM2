@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4dee2a9af65a4874d1701cf6cc960d3e",
+    "content-hash": "1aa3155e2f0d824a846eaf17d4794ef9",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -97,6 +97,31 @@
                 "Commercial"
             ],
             "description": "Orders Export and Import"
+        },
+        {
+            "name": "aitoc/smtp",
+            "version": "1.0.4",
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.aitoc.com/community/packages/smtp_1.0.4.zip"
+            },
+            "require": {
+                "aitoc/core": ">=1.0.16",
+                "ext-dom": "*"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Aitoc\\Smtp\\": ""
+                }
+            },
+            "license": [
+                "Commercial"
+            ],
+            "description": "SMTP"
         },
         {
             "name": "astock/stock-api-libphp",

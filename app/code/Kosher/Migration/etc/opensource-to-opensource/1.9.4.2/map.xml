@@ -2011,6 +2011,9 @@
     <destination>
         <document_rules>
             <ignore>
+                <document>aitoc_smtp_log</document>
+            </ignore>
+            <ignore>
                 <document>aitoc_export</document>
             </ignore>
             <ignore>
