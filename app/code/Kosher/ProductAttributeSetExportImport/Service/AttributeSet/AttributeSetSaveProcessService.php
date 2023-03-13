@@ -102,7 +102,15 @@ class AttributeSetSaveProcessService
 
         $this->attribute->save();
 
-        $this->installer->addAttributeToGroup('catalog_product', $attributeData['attribute_set_name'], 'Product Details', $this->attribute->getId());
+        $sortOrderAttribute = (int)$attributeData['sort_order'];
+        $sortOrderAttribute = $sortOrderAttribute + 1;
+        $this->installer->addAttributeToGroup(
+            'catalog_product',
+            $attributeData['attribute_set_name'],
+            'Product Details',
+            $this->attribute->getId(),
+            $sortOrderAttribute
+        );
 
         return $this->attribute;
     }

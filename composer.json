@@ -18,6 +18,7 @@
     "version": "2.4.5",
     "require": {
         "aitoc/orders-export-import": "^2.0",
+        "aitoc/smtp": "^1.0",
         "magento/composer-dependency-version-audit-plugin": "~0.1",
         "magento/composer-root-update-plugin": "~2.0",
         "magento/data-migration-tool": "2.4.5",
