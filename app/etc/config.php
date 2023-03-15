@@ -329,6 +329,7 @@ return [
         'Aitoc_Core' => 1,
         'Aitoc_OrdersExportImport' => 1,
         'Aitoc_Smtp' => 1,
+        'FME_QuickView' => 1,
         'Kosher_ConvertProductCsvM1File' => 1,
         'Kosher_Migration' => 1,
         'Kosher_OrderImport' => 1,

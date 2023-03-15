@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1aa3155e2f0d824a846eaf17d4794ef9",
+    "content-hash": "5957c34ba59636546f3264e6fca8bd8b",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -1782,6 +1782,29 @@
                 "source": "https://github.com/fgrosse/PHPASN1/tree/v2.4.0"
             },
             "time": "2021-12-11T12:41:06+00:00"
+        },
+        {
+            "name": "fme/quick-view",
+            "version": "1.0.6",
+            "dist": {
+                "type": "zip",
+                "url": "artifact/zips/quick-view.zip",
+                "shasum": "ae0f21975529276c4c84fc124d25f9410b306809"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "FME\\QuickView\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "Product Quick View"
         },
         {
             "name": "google/recaptcha",

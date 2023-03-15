@@ -35,17 +35,21 @@ class EditProductCsvFileService
 
     /**
      * @param string $filePath
+     * @param int $checkSingColumn
      * @return void
      * @throws FileSystemException
      */
-    public function execute(string $filePath): void
+    public function execute(string $filePath, int $checkSingColumn): void
     {
         $this->getCsvData($filePath);
         $this->categoriesAdjustment();
-        $this->countCategoryHeaderColumns();
-        $this->prepareCategoryFieldData();
-        $this->prepareHeader();
-        $this->file->deleteFile($filePath);
+        if ($checkSingColumn == 0) {
+            $this->countCategoryHeaderColumns();
+            $this->prepareCategoryFieldData();
+            $this->prepareHeader();
+            $this->file->deleteFile($filePath);
+        }
+
         $data = array_values($this->arrayData);
         $this->csv
             ->setEnclosure('"')
