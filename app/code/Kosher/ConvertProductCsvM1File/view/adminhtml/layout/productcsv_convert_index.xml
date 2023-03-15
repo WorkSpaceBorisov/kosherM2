@@ -3,6 +3,7 @@
     <body>
         <referenceContainer name="content">
             <uiComponent name="productcsv_convert_form"/>
+            <block class="Magento\Backend\Block\Template" template="Kosher_ConvertProductCsvM1File::loader.phtml" name="delete.loader.after.click.button"/>
         </referenceContainer>
     </body>
 </page>

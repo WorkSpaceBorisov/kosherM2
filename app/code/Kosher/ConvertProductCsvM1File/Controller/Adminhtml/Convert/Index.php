@@ -5,6 +5,9 @@ namespace Kosher\ConvertProductCsvM1File\Controller\Adminhtml\Convert;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
 class Index extends Action
@@ -28,9 +31,13 @@ class Index extends Action
 
     const ADMIN_RESOURCE = 'Kosher_ConvertProductCsvM1File::convert';
 
+    /**
+     * @return ResponseInterface|ResultInterface|Page
+     */
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
+        $resultPage->setActiveMenu('Kosher_ConvertProductCsvM1File::convert');
         $resultPage->getConfig()->getTitle()->prepend(__('Edit Product CSV file From M1'));
 
         return $resultPage;

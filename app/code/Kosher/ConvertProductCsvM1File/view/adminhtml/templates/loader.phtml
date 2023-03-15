@@ -1,0 +1,11 @@
+<script>
+    let button = document.querySelector("#save");
+    button.addEventListener("click", (e) => {
+        setTimeout(removing, 10);
+    });
+
+    function removing() {
+        let loader = document.querySelector(".loading-mask");
+        loader.remove();
+    }
+</script>
