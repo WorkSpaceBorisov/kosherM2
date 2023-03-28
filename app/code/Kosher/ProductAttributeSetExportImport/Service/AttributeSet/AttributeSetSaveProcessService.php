@@ -5,10 +5,10 @@ namespace Kosher\ProductAttributeSetExportImport\Service\AttributeSet;
 
 use Magento\Catalog\Model\ResourceModel\Eav\Attribute;
 use Magento\Catalog\Setup\CategorySetup;
+use Magento\Framework\Serialize\Serializer\Json;
 
 class AttributeSetSaveProcessService
 {
-    private int $attributeId;
 
     /**
      * @var AttributeCsvFileReadService
@@ -41,12 +41,18 @@ class AttributeSetSaveProcessService
     private SaveOptionsToExistAttributeService $saveOptionsToExistAttributeService;
 
     /**
+     * @var Json
+     */
+    private Json $json;
+
+    /**
      * @param AttributeCsvFileReadService $attributeCsvFileReadService
      * @param CheckExistAttributeService $checkExistAttributeService
      * @param CategorySetup $installer
      * @param Attribute $attribute
      * @param SaveAttributeOptionsService $saveAttributeOptionsService
      * @param SaveOptionsToExistAttributeService $saveOptionsToExistAttributeService
+     * @param Json $json
      */
     public function __construct(
         AttributeCsvFileReadService $attributeCsvFileReadService,
@@ -54,7 +60,8 @@ class AttributeSetSaveProcessService
         CategorySetup $installer,
         Attribute $attribute,
         SaveAttributeOptionsService $saveAttributeOptionsService,
-        SaveOptionsToExistAttributeService $saveOptionsToExistAttributeService
+        SaveOptionsToExistAttributeService $saveOptionsToExistAttributeService,
+        Json $json
     ) {
         $this->attributeCsvFileReadService = $attributeCsvFileReadService;
         $this->checkExistAttributeService = $checkExistAttributeService;
@@ -62,6 +69,7 @@ class AttributeSetSaveProcessService
         $this->attribute = $attribute;
         $this->saveAttributeOptionsService = $saveAttributeOptionsService;
         $this->saveOptionsToExistAttributeService = $saveOptionsToExistAttributeService;
+        $this->json = $json;
     }
 
     /**
@@ -77,9 +85,13 @@ class AttributeSetSaveProcessService
                 $attributeIdStatus = $this->checkExistAttributeService->execute($attributeCode);
                 if ($attributeIdStatus == false) {
                     $attribute = $this->saveNewAttribute($attributeData, $i);
-                    $this->attributeId = (int)$attribute->getId();
-                    $this->saveAttributeOptionsService->execute($attribute, $this->attributeId, $attributeData['attribute_options']);
+                    $attributeId = (int)$attribute->getId();
+                    $this->saveAttributeOptionsService->execute($attribute, $attributeId, $attributeData['attribute_options']);
                 } else {
+                    $attributeSetNameArray = $this->attributeSetNameToArray($attributeData['attribute_set_name']);
+                    foreach ($attributeSetNameArray as $attributeSet) {
+                        $this->addAttributetoGroup($attributeIdStatus, $attributeSet);
+                    }
                     $this->saveOptionsToExistAttributeService->execute($attributeCode, $attributeData, $attributeIdStatus);
                 }
             }
@@ -104,14 +116,38 @@ class AttributeSetSaveProcessService
 
         $sortOrderAttribute = (int)$attributeData['sort_order'];
         $sortOrderAttribute = $sortOrderAttribute + 1;
-        $this->installer->addAttributeToGroup(
-            'catalog_product',
-            $attributeData['attribute_set_name'],
-            'Product Details',
-            $this->attribute->getId(),
-            $sortOrderAttribute
-        );
+        $attributeSetNameArray = $this->attributeSetNameToArray($attributeData['attribute_set_name']);
+        $attributeId = $this->attribute->getId();
+        foreach ($attributeSetNameArray as $attributeSet) {
+            $this->addAttributetoGroup($attributeId, $attributeSet, $sortOrderAttribute);
+        }
 
         return $this->attribute;
+    }
+
+    /**
+     * @param int $attributeId
+     * @param string $attributeSetName
+     * @param int|null $sortOrderAttribute
+     * @return void
+     */
+    private function addAttributetoGroup(int $attributeId, string $attributeSetName, int $sortOrderAttribute = null): void
+    {
+        $this->installer->addAttributeToGroup(
+            'catalog_product',
+            $attributeSetName,
+            'Product Details',
+            $attributeId,
+            $sortOrderAttribute
+        );
+    }
+
+    /**
+     * @param string $jsonData
+     * @return array
+     */
+    private function attributeSetNameToArray(string $jsonData): array
+    {
+        return $this->json->unserialize($jsonData);
     }
 }

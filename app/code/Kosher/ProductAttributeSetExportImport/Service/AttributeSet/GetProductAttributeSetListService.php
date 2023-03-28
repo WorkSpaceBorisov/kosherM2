@@ -17,6 +17,7 @@ class GetProductAttributeSetListService
     private array $groupListData = [];
     private array $attributeList = [];
     private array $dataToCsv = [];
+    private array $attributeSetNames = [];
     /**
      * @var AttributeSetRepositoryInterface
      */
@@ -79,7 +80,7 @@ class GetProductAttributeSetListService
                 $this->dataToCsv[$attributeCode] = $productAttribute->getData();
                 $attributeSetId = $productAttribute->getData('attribute_set_id');
                 $attributeSetName = $this->attributeSetList[$attributeSetId]->getAttributeSetName();
-                $this->dataToCsv[$attributeCode]['attribute_set_name'] = $attributeSetName;
+                $this->attributeSetNames[$attributeCode][] = $attributeSetName;
                 $this->dataToCsv[$attributeCode]['attribute_group_name'] = $items->getAttributeGroupName();
                 $this->dataToCsv[$attributeCode]['attribute_group_code'] = $items->getAttributeGroupCode();
                 unset($this->dataToCsv[$attributeCode]['attribute_set_id']);
@@ -93,9 +94,23 @@ class GetProductAttributeSetListService
                 }
             }
         }
+
+        foreach ($this->attributeSetNames as $code => $data) {
+            $this->dataToCsv[$code]['attribute_set_name'] = $this->convertListAttributeSetToJson($data);
+        }
+
         $this->dataToCsv['header'] = array_keys(reset($this->dataToCsv));
 
         return array_reverse($this->dataToCsv);
+    }
+
+    /**
+     * @param array $data
+     * @return string
+     */
+    private function convertListAttributeSetToJson(array $data): string
+    {
+        return $this->json->serialize($data);
     }
 
     /**
