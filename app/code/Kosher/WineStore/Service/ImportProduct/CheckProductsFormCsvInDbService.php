@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace Kosher\WineStore\Service\ImportProduct;
 
+use Kosher\WineStore\Query\GetWineWebSiteIdQuery;
 use Magento\Framework\App\ResourceConnection;
 
 class CheckProductsFormCsvInDbService
 {
-    private const TARGET_TABLE_NAME = 'store_website';
     private array $arrayToSave = [];
 
     /**
@@ -16,12 +16,20 @@ class CheckProductsFormCsvInDbService
     private ResourceConnection $resourceConnection;
 
     /**
+     * @var GetWineWebSiteIdQuery
+     */
+    private GetWineWebSiteIdQuery $getWineWebSiteIdQuery;
+
+    /**
      * @param ResourceConnection $resourceConnection
+     * @param GetWineWebSiteIdQuery $getWineWebSiteIdQuery
      */
     public function __construct(
-        ResourceConnection $resourceConnection
+        ResourceConnection $resourceConnection,
+        GetWineWebSiteIdQuery $getWineWebSiteIdQuery
     ) {
         $this->resourceConnection = $resourceConnection;
+        $this->getWineWebSiteIdQuery = $getWineWebSiteIdQuery;
     }
 
     /**
@@ -31,7 +39,7 @@ class CheckProductsFormCsvInDbService
     public function deleteExistSkus(array $arrayData): array
     {
         $this->arrayToSave = $arrayData;
-        $webSiteId = (int)$this->getWebSiteId();
+        $webSiteId = (int)$this->getWineWebSiteIdQuery->execute();
         $i = 1;
         foreach ($arrayData as $sku => $productData) {
             if ($sku != 'header') {
@@ -70,18 +78,5 @@ class CheckProductsFormCsvInDbService
                 $this->resourceConnection->getTableName('url_rewrite'),
                 ['entity_type = ?' => 'category']
             );
-    }
-
-    /**
-     * @return string
-     */
-    private function getWebSiteId(): string
-    {
-        $connection = $this->resourceConnection->getConnection();
-        $select = $connection->select();
-
-        $select->from(self::TARGET_TABLE_NAME)->where('code' . ' = ?', 'ariskosherwine');
-
-        return $connection->fetchOne($select);
     }
 }
