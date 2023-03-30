@@ -9,6 +9,7 @@ use Kosher\WineStore\Service\ImportProduct\CheckProductsFormCsvInDbService;
 use Kosher\WineStore\Service\ImportProduct\ReadCsvProductImportFileFromTmpService;
 use Kosher\WineStore\Service\Store\CreateNewCsvImportFileToSaveDbService;
 use Magento\ImportExport\Model\Import;
+use Kosher\WineStore\Service\ImportCustomerAddress\ReadCsvCustomerAddressService;
 
 class AdjustmentSourceProductFileFromTmpPlugin
 {
@@ -33,21 +34,29 @@ class AdjustmentSourceProductFileFromTmpPlugin
     private DeleteEmptyAttributeFromCsvService $deleteEmptyAttributeFromCsvService;
 
     /**
+     * @var ReadCsvCustomerAddressService
+     */
+    private ReadCsvCustomerAddressService $csvCustomerAddressService;
+
+    /**
      * @param ReadCsvProductImportFileFromTmpService $csvProductImportFileFromTmpService
      * @param CheckProductsFormCsvInDbService $checkProductsFormCsvInDbService
      * @param CreateNewCsvImportFileToSaveDbService $createNewCsvImportFileToSaveDbService
      * @param DeleteEmptyAttributeFromCsvService $deleteEmptyAttributeFromCsvService
+     * @param ReadCsvCustomerAddressService $csvCustomerAddressService
      */
     public function __construct(
         ReadCsvProductImportFileFromTmpService $csvProductImportFileFromTmpService,
         CheckProductsFormCsvInDbService $checkProductsFormCsvInDbService,
         CreateNewCsvImportFileToSaveDbService $createNewCsvImportFileToSaveDbService,
-        DeleteEmptyAttributeFromCsvService $deleteEmptyAttributeFromCsvService
+        DeleteEmptyAttributeFromCsvService $deleteEmptyAttributeFromCsvService,
+        ReadCsvCustomerAddressService $csvCustomerAddressService
     ) {
         $this->csvProductImportFileFromTmpService = $csvProductImportFileFromTmpService;
         $this->checkProductsFormCsvInDbService = $checkProductsFormCsvInDbService;
         $this->createNewCsvImportFileToSaveDbService = $createNewCsvImportFileToSaveDbService;
         $this->deleteEmptyAttributeFromCsvService = $deleteEmptyAttributeFromCsvService;
+        $this->csvCustomerAddressService = $csvCustomerAddressService;
     }
 
     /**
@@ -67,6 +76,11 @@ class AdjustmentSourceProductFileFromTmpPlugin
         if ($subject->getData('entity') == 'customer') {
             $dataArray = $this->csvProductImportFileFromTmpService->execute($result);
             $dataArray = $this->deleteEmptyAttributeFromCsvService->execute($dataArray);
+            $this->createNewCsvImportFileToSaveDbService->execute($result, $dataArray);
+        }
+
+        if ($subject->getData('entity') == 'customer_address') {
+            $dataArray = $this->csvCustomerAddressService->execute($result);
             $this->createNewCsvImportFileToSaveDbService->execute($result, $dataArray);
         }
 
