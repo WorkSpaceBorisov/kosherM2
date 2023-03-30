@@ -3,33 +3,8 @@ declare(strict_types=1);
 
 namespace Kosher\WineStore\Service\ImportCustomer;
 
-use Kosher\WineStore\Query\GetWineWebSiteIdQuery;
-use Kosher\WineStore\Query\GetWineStoreIdQuery;
-
 class DeleteEmptyAttributeFromCsvService
 {
-    /**
-     * @var GetWineWebSiteIdQuery
-     */
-    private GetWineWebSiteIdQuery $getWineWebSiteIdQuery;
-
-    /**
-     * @var GetWineStoreIdQuery
-     */
-    private GetWineStoreIdQuery $getWineStoreIdQuery;
-
-    /**
-     * @param GetWineWebSiteIdQuery $getWineWebSiteIdQuery
-     * @param GetWineStoreIdQuery $getWineStoreIdQuery
-     */
-    public function __construct(
-        GetWineWebSiteIdQuery $getWineWebSiteIdQuery,
-        GetWineStoreIdQuery $getWineStoreIdQuery
-    ) {
-        $this->getWineWebSiteIdQuery = $getWineWebSiteIdQuery;
-        $this->getWineStoreIdQuery = $getWineStoreIdQuery;
-    }
-
     private array $forDelete =
         [
             "is_builder_account",
@@ -56,14 +31,9 @@ class DeleteEmptyAttributeFromCsvService
     public function execute(array $data): array
     {
         $this->csvData = $data;
-        $wineWebSiteId = $this->getWineWebSiteIdQuery->execute();
-        $wineStoreId = $this->getWineStoreIdQuery->execute();
         foreach ($data as $email => $customerData) {
             if ($email != 'header') {
                 $this->csvData[$email]['_store'] = 'ariskosherwine_store';
-                $this->csvData[$email]['_website'] = 'ariskosherwine';
-                $this->csvData[$email]['website_id'] = $wineWebSiteId;
-                $this->csvData[$email]['store_id'] = $wineStoreId;
             }
 
             foreach ($this->forDelete as $item) {
