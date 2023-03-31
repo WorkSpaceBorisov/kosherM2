@@ -88,7 +88,7 @@ class AttributeSetSaveProcessService
                     $attributeId = (int)$attribute->getId();
                     $this->saveAttributeOptionsService->execute($attribute, $attributeId, $attributeData['attribute_options']);
                 } else {
-                    $attributeSetNameArray = $this->attributeSetNameToArray($attributeData['attribute_set_name']);
+                    $attributeSetNameArray = $this->attributeSetNameToArray($attributeData['attribute_set_name'], $attributeData['attribute_code']);
                     foreach ($attributeSetNameArray as $attributeSet) {
                         $this->addAttributetoGroup($attributeIdStatus, $attributeSet);
                     }
@@ -102,11 +102,10 @@ class AttributeSetSaveProcessService
 
     /**
      * @param array $attributeData
-     * @param int $i
      * @return Attribute
      * @throws \Exception
      */
-    private function saveNewAttribute(array $attributeData, int $i): Attribute
+    private function saveNewAttribute(array $attributeData): Attribute
     {
         $this->attribute->setData(
             $attributeData
@@ -116,8 +115,9 @@ class AttributeSetSaveProcessService
 
         $sortOrderAttribute = (int)$attributeData['sort_order'];
         $sortOrderAttribute = $sortOrderAttribute + 1;
-        $attributeSetNameArray = $this->attributeSetNameToArray($attributeData['attribute_set_name']);
-        $attributeId = $this->attribute->getId();
+        $attributeSetNameArray = $this->attributeSetNameToArray($attributeData['attribute_set_name'], $attributeData['attribute_code']);
+
+        $attributeId = (int)$this->attribute->getId();
         foreach ($attributeSetNameArray as $attributeSet) {
             $this->addAttributetoGroup($attributeId, $attributeSet, $sortOrderAttribute);
         }
@@ -144,10 +144,18 @@ class AttributeSetSaveProcessService
 
     /**
      * @param string $jsonData
+     * @param string $attributeCode
      * @return array
      */
-    private function attributeSetNameToArray(string $jsonData): array
+    private function attributeSetNameToArray(string $jsonData, string $attributeCode): array
     {
-        return $this->json->unserialize($jsonData);
+        $attributeSetName = $this->json->unserialize($jsonData);
+
+        if ($attributeCode == 'manufacturer') {
+            $attributeSetName[] = 'Whisky';
+            $attributeSetName[] = 'Spirit';
+        }
+
+        return $attributeSetName;
     }
 }
