@@ -1,6 +1,6 @@
 <?php
 
-namespace Kosher\ConvertProductCsvM1File\Model\Import;
+namespace Kosher\WineStore\Model\Import;
 
 use Kosher\WineStore\Query\GetWineStoreIdQuery;
 use Kosher\WineStore\Query\GetWineWebSiteIdQuery;

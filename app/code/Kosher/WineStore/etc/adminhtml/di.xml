@@ -15,4 +15,6 @@
         <plugin name="set_root_category_wine_store_plugin"
                 type="Kosher\WineStore\Plugin\SetRootCategoryWineStorePlugin"/>
     </type>
+    <preference for="Magento\CustomerImportExport\Model\Import\Customer"
+                type="Kosher\WineStore\Model\Import\Customer"/>
 </config>
