@@ -33,10 +33,18 @@ delete from core_config_data where path = 'design/watermark/image_size' AND scop
 insert into `core_config_data` (`config_id`, `scope`, `scope_id`, `path`, `value`, `updated_at`)
 VALUES (NULL, 'default', 0, 'aitoie/general/bulk_count', '10000', current_timestamp());
 
+insert into `core_config_data`
+SET config_id  = NULL,
+    scope      = "websites",
+    scope_id   = (select store_id from store where code = "default"),
+    path       = "design/theme/theme_id",
+    value      = (select theme_id from theme where code = "Kosher/default"),
+    updated_at = current_timestamp();
+
 update design_config_grid_flat
 set theme_theme_id = (select theme_id
                       from theme
                       where code = "Kosher/default")
 where store_website_id = (select website_id
                           from store_website
-                          where code = "ariskosherwine");
+                          where code = "base");
