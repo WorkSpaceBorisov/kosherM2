@@ -34,7 +34,7 @@ class ReadCsvProductImportFileFromTmpService
         foreach ($csvData as $row => $data) {
             if ($row == 0) {
                 $result['header'] = $data;
-            } else {
+            } elseif (!empty($data[4])) {
                 $dataKey = $data[0];
                 $res = array_combine($result['header'], $data);
                 $result[$dataKey] = $res;
