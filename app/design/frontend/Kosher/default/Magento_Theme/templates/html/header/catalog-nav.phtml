@@ -1,0 +1,92 @@
+<?php $navList = [
+    "bakery" => "Bakery",
+    "fresh" => "Fresh",
+    "groceries" => "Groceries",
+    "household" => "Household",
+    "snacks" => "Snacks",
+    "wine" => "Wine",
+    "health" => "Health",
+    "judaica" => "Judaica",
+];
+?>
+
+<div data-block="catalogNav" class="catalog-nav">
+    <button type="button" class="action primary" data-trigger="catalogNavTrigger">
+        <span class="action__content">
+            <i class="icon icon-widget"></i>
+        <span>Catalog</span>
+        </span>
+    </button>
+</div>
+<div class="block catalog-nav-block"
+     data-mage-init='{
+        "dropdownDialog": {
+            "appendTo": "[data-block=catalogNav]",
+            "triggerTarget":"[data-trigger=catalogNavTrigger]",
+            "triggerEvent": "mouseenter",
+            "closeOnMouseLeave": true,
+            "closeOnEscape": true,
+            "triggerClass":"active",
+            "parentClass":"active",
+            "buttons": []
+        }
+     }'>
+    <div class="catalog-nav-block__content">
+        <ul
+            class="catalog-nav__list"
+            data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": true, "multipleCollapsible": false}}'
+        >
+            <?php foreach ($navList as $key => $value) { ?>
+            <li class="catalog-nav__item">
+                <div class="catalog-nav__label" data-role="collapsible">
+                    <img src="<?= $block->getViewFileUrl('images/catalog/catalog-'.$key.'.svg'); ?>" alt="">
+                    <span><? echo $value ?></span>
+                    <i class="icon icon-arrow-down"></i>
+                </div>
+                <ul class="catalog-nav__list" data-role="content">
+                    <li class="catalog-nav__item" data-mage-init='{"collapsible":{"openedState": "active"}}'>
+                        <div class="catalog-nav__label" data-role="title">
+                            <span>Other baked goods</span> <i class="icon icon-arrow-down"></i>
+                        </div>
+                        <ul class="catalog-nav__list catalog-nav__list--sub" data-role="content">
+                            <li class="catalog-nav__item">
+                                <!--  .active class and <span/> wrapper for current active category -->
+                                <span class="catalog-nav__link active">
+                                    Bread
+                                </span>
+                            </li>
+                            <li class="catalog-nav__item">
+                                <a href="#" class="catalog-nav__link" title="">
+                                    Challah
+                                </a>
+                            </li>
+                            <li class="catalog-nav__item">
+                                <a href="#" class="catalog-nav__link" title="">
+                                    Danishes
+                                </a>
+                            </li>
+                            <li class="catalog-nav__item">
+                                <a href="#" class="catalog-nav__link" title="">
+                                    Rolls & Bagels
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="catalog-nav__item" data-mage-init='{"collapsible":{"openedState": "active"}}'>
+                        <div class="catalog-nav__label" data-role="title">
+                            <span>Sub category</span> <i class="icon icon-arrow-down"></i>
+                        </div>
+                        <ul class="catalog-nav__list  catalog-nav__list--sub" data-role="content">
+                            <li class="catalog-nav__item">
+                                <a href="#" class="catalog-nav__link" title="">
+                                    Sub item
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <?php } ?>
+        </ul>
+    </div>
+</div>

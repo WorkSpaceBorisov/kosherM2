@@ -1,0 +1,22 @@
+<div class="header__content">
+    <div class="header__left">
+        <?php echo $this->getChildHtml("catalog-nav"); ?>
+        <?php echo $this->getChildHtml("logo"); ?>
+    </div>
+    <div class="header__center">
+        <?php echo $this->getChildHtml("topsearch"); ?>
+        <?php echo $this->getChildHtml("store_language"); ?>
+    </div>
+    <div class="header__right">
+        <a
+            href="<?= $block->getUrl('customer/account/login'); ?>"
+            class="action secondary"
+        >
+        <span class="action__content">
+            <i class="icon icon-account"></i>
+            <span class="action__label"><?= __('Sign in') ?></span>
+        </span>
+        </a>
+        <?php echo $this->getChildHtml("minicart"); ?>
+    </div>
+</div>

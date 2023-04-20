@@ -1,0 +1,33 @@
+& when (@media-common = true) {
+    .action.primary, .action.secondary {
+        min-height: 56px;
+
+        .action__content {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon {
+            font-size: 1.4em;
+        }
+    }
+
+    .action.secondary {
+        color: @theme__color__primary;
+        font-size: @button__font-size;
+        background-color: @theme__color__primary-light;
+        border: 1px solid @theme__color__primary-light;
+        padding: @button__padding;
+        border-radius: @button__border-radius;
+        text-decoration: none;
+
+        &:hover {
+            background-color: @theme__color__primary-light-alt;
+        }
+    }
+
+    a.action.primary, a.action.secondary {
+        display: flex;
+    }
+}

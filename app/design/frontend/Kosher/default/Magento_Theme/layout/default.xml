@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<page
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+>
+    <body>
+        <!-- Header -->
+        <referenceContainer name="header.container" htmlClass="header">
+            <block class="Magento\Framework\View\Element\Template" name="custom_header" as="custom_header" template="Magento_Theme::html/header.phtml" before="-">
+                <block class="Magento\Framework\View\Element\Template"
+                       name="catalog-nav"
+                       template="Magento_Theme::html/header/catalog-nav.phtml"
+                />
+            </block>
+        </referenceContainer>
+        <referenceContainer name="header.panel.wrapper" remove="true" />
+        <referenceContainer name="header.panel" remove="true"/>
+        <referenceBlock name="logo">
+            <arguments>
+                <argument name="logo_width" xsi:type="number">184</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="advanced-search-link" remove="true"/>
+
+        <move element="logo" as="logo" destination="custom_header"/>
+        <move element="top.search" as="topsearch" destination="custom_header"/>
+        <move element="minicart" as="minicart" destination="custom_header"/>
+        <move element="store_language" as="store_language" destination="custom_header" />
+    </body>
+</page>

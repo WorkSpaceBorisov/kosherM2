@@ -1,0 +1,193 @@
+<?php
+
+use Magento\Framework\App\Action\Action;
+
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @var $block \Magento\Catalog\Block\Product\ListProduct
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+?>
+<?php
+$_productCollection = $block->getLoadedProductCollection();
+/** @var \Magento\Catalog\Helper\Output $_helper */
+$_helper = $block->getData('outputHelper');
+?>
+<?php if (!$_productCollection->count()): ?>
+    <div class="message info empty">
+        <div><?= $escaper->escapeHtml(__('We can\'t find products matching the selection.')) ?></div>
+    </div>
+<?php else: ?>
+    <?= $block->getToolbarHtml() ?>
+    <?= $block->getAdditionalHtml() ?>
+    <?php
+    if ($block->getMode() === 'grid') {
+        $viewMode = 'grid';
+        $imageDisplayArea = 'category_page_grid';
+        $showDescription = false;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+    } else {
+        $viewMode = 'list';
+        $imageDisplayArea = 'category_page_list';
+        $showDescription = true;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::FULL_VIEW;
+    }
+    ?>
+    <div class="products-grid-wrapper">
+        <ol class="products-grid <?php if ($viewMode === 'list') echo 'products-grid--' . $viewMode; ?>">
+            <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
+            <?php foreach ($_productCollection as $_product): ?>
+                <li
+                    class="product-card <?php if ($viewMode === 'list') echo 'product-card--' . $viewMode; ?>"
+                    data-product-id="<?= /* @noEscape */
+                    $_product->getId() ?>"
+                >
+                    <div class="product-card__preview js-open-quick-view">
+                        <!-- Add .block-product-type--red for "sale" and .block-product-type--green for "new"-->
+                        <div class="product-card__type block-product-type block-product-type--red">
+                            Sale
+                        </div>
+                        <div class="product-card__mode">
+                            <img src="<?= $block->getViewFileUrl('images/product/mode/mode-bio-full.svg'); ?>"
+                                 class="product-card__mode-el" lazy="true" alt=""/>
+                            <img src="<?= $block->getViewFileUrl('images/product/mode/mode-gf-full.svg'); ?>"
+                                 class="product-card__mode-el" lazy="true" alt=""/>
+                            <!--<img src="<?php /*= $block->getViewFileUrl('images/product/mode/mode-sf-full.svg'); */ ?>" class="product-card__mode-el" lazy="true" alt=""/>-->
+                        </div>
+                        <img src="<?= $block->getViewFileUrl('images/stubs/products/product-1.png'); ?>"
+                             class="product-card__preview-el" lazy="true" alt=""/>
+                    </div>
+                    <div class="product-card__details">
+                        <div class="product-card__info js-open-quick-view">
+                            <strong class="product-card__name">
+                                Lorem ipsum dolor sit amet consectetur
+                            </strong>
+                            <div class="product-card__subhead">
+                                Subhead
+                            </div>
+                        </div>
+                        <div class="product-card__link">
+                            <a href="#" class="product-card__link-el" title="">
+                                <i class="icon icon-home"></i>
+                                <span>Just Bagel</span>
+                            </a>
+                        </div>
+                        <!-- Add .block-price--discount if price has discount -->
+                        <div class="product-card__price block-price block-price--discount">
+                            <div class="block-price__price">
+                                <span class="block-price__prev">
+                                    €150
+                                </span>
+                                <span class="block-price__current">
+                                    <i class="icon icon-currency"></i>
+                                    100
+                                </span>
+                            </div>
+                            <div class="block-price__weight">/100g</div>
+                        </div>
+                        <div class="product-card__action">
+                            <?php if ($_product->isSaleable()): ?>
+                                <?php $postParams = $block->getAddToCartPostParams($_product); ?>
+                                <form data-role="tocart-form"
+                                      data-product-sku="<?= $escaper->escapeHtml($_product->getSku()) ?>"
+                                      action="<?= $escaper->escapeUrl($postParams['action']) ?>"
+                                      data-mage-init='{"catalogAddToCart": {}}'
+                                      method="post">
+                                    <?php $options = $block->getData('viewModel')->getOptionsData($_product); ?>
+                                    <?php foreach ($options as $optionItem): ?>
+                                        <input type="hidden"
+                                               name="<?= $escaper->escapeHtml($optionItem['name']) ?>"
+                                               value="<?= $escaper->escapeHtml($optionItem['value']) ?>">
+                                    <?php endforeach; ?>
+                                    <input type="hidden"
+                                           name="product"
+                                           value="<?= /* @noEscape */
+                                           $postParams['data']['product'] ?>">
+                                    <input type="hidden"
+                                           name="<?= /* @noEscape */
+                                           Action::PARAM_NAME_URL_ENCODED ?>"
+                                           value="<?=
+                                           /* @noEscape */
+                                           $postParams['data'][Action::PARAM_NAME_URL_ENCODED]
+                                           ?>">
+                                    <?= $block->getBlockHtml('formkey') ?>
+                                    <button type="submit"
+                                            title="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
+                                            class="action tocart primary"
+                                            disabled>
+                                        <i class="icon icon-basket"></i>
+                                    </button>
+                                </form>
+                            <?php else: ?>
+                                <?php if ($_product->isAvailable()): ?>
+                                    <div class="stock available">
+                                        <span><?= $escaper->escapeHtml(__('In stock')) ?></span>
+                                    </div>
+                                <?php else: ?>
+                                    <div class="stock unavailable">
+                                        <span><?= $escaper->escapeHtml(__('Out of stock')) ?></span>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+    </div>
+    <?= $block->getChildBlock('toolbar')->setIsBottom(true)->toHtml() ?>
+    <?php // phpcs:ignore Magento2.Legacy.PhtmlTemplate ?>
+
+    <div id="modal-product-quick-view">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis dolor est exercitationem expedita fugit itaque laboriosam maiores natus sint vero. Aut, dolore, dolores harum id in iure, numquam obcaecati officiis porro praesentium qui quibusdam quo quod reprehenderit rerum tenetur velit voluptates voluptatum. Aspernatur at corporis, culpa dicta quam quia voluptate? Dicta dolorem in laborum neque nihil quas reiciendis reprehenderit saepe totam vero? Aliquam architecto, cumque debitis facilis fugiat harum iusto labore maiores provident quas quis recusandae tempora voluptatibus? Amet assumenda distinctio eum explicabo fugiat necessitatibus numquam quasi recusandae rem voluptatem! Ad asperiores est eveniet hic ipsa ipsam laboriosam magnam minus natus necessitatibus obcaecati odit praesentium quaerat qui quis quo ratione recusandae repellendus sit sunt, totam voluptate voluptatum. Commodi eaque ex impedit iure obcaecati provident quod similique vel voluptate voluptates. Ab accusantium aliquid architecto assumenda beatae corporis cumque cupiditate deserunt, expedita id iure iusto molestiae nemo non nostrum numquam omnis optio quia quidem quod rem sint tenetur totam, unde ut! Accusamus eos labore magni provident quam. Enim ipsum minus perferendis quisquam quos? A animi at consectetur excepturi laboriosam laudantium magni natus possimus quisquam recusandae, similique tempore vel voluptate? Atque consectetur cupiditate distinctio dolore enim explicabo fuga, in iure laborum magni mollitia, necessitatibus nobis nulla placeat, provident temporibus tenetur voluptas! Dignissimos est numquam sed sunt unde? Fuga, harum itaque natus non placeat quaerat quod quos sint sit ullam. Aperiam assumenda autem blanditiis culpa cum ea eos eveniet facere fugiat harum iure, labore non nulla, officia quaerat quas quidem soluta sunt. Consectetur delectus earum incidunt ipsam obcaecati possimus repellat ullam. Blanditiis esse est et incidunt ipsam iste, minima neque nobis qui repellat saepe tempora veritatis voluptatibus! Adipisci aut consequuntur cum deleniti doloremque dolores earum eius esse ex exercitationem, ipsum laborum laudantium molestiae nobis nulla odit pariatur praesentium provident quidem quo recusandae repudiandae sunt, temporibus unde, ut vero voluptas. A amet, animi asperiores aut cum delectus dignissimos doloremque eum facere fuga illo inventore iste itaque magni minima molestiae mollitia nemo placeat quibusdam quis quisquam, rem repellat sint, velit vitae voluptates voluptatum! Architecto consequatur consequuntur debitis deleniti deserunt dolor dolorem ea eos esse, est exercitationem fuga illo illum in, labore laboriosam magni molestias nam nostrum pariatur placeat quasi quisquam quod quos ratione repellendus reprehenderit repudiandae saepe similique sunt suscipit tempora tempore totam ullam vel voluptas voluptates? A ab ad asperiores assumenda autem consectetur cum dicta dolor ex facere, fugiat fugit libero minima necessitatibus odio optio porro quaerat quidem quos reiciendis repellendus sed sequi similique veritatis voluptatum! Accusamus aliquam aliquid assumenda consequatur dicta eligendi esse et ipsum iusto laudantium modi numquam optio porro quas quia quisquam repellendus repudiandae, sint, suscipit tempore unde voluptatem voluptates. Ab aliquid assumenda blanditiis consequatur cupiditate, dolorem doloremque et illo incidunt ipsam laudantium minima molestiae mollitia natus non quam quasi quisquam ratione rem saepe sequi suscipit ut veritatis voluptas voluptate voluptatem voluptatum. Adipisci amet at debitis distinctio, dolorem eius fugit harum labore magnam maiores neque nisi nobis quas qui quis, ratione reprehenderit soluta tempore temporibus ullam unde voluptate, voluptatum. A aliquid animi asperiores consequatur cupiditate delectus dicta, doloribus, ducimus earum eligendi enim eum explicabo illum ipsam maiores mollitia neque nisi numquam odit perspiciatis porro, quam quia quos repellendus saepe temporibus tenetur veritatis. A ad aperiam, aspernatur consectetur eius, eligendi eos esse est ex, exercitationem facere hic id iste itaque laborum libero magnam minus mollitia nisi nulla officia officiis placeat quibusdam quos reiciendis repellendus saepe sed sit vel voluptatibus. Ab alias deleniti est nesciunt quaerat. A amet aut, corporis debitis dolorem eaque eius eos eveniet fuga fugiat ipsa laboriosam maiores nam non officia officiis perspiciatis possimus praesentium quod repellendus rerum sunt tempora, voluptate! Impedit minima nemo placeat quas quasi similique vitae. Consectetur corporis cupiditate eligendi enim eos itaque magnam molestias! A ab aliquam animi asperiores beatae culpa cumque cupiditate dicta distinctio dolores dolorum est ex hic illum iste, iusto minus molestias nam nemo omnis praesentium qui quia quidem ratione repellendus rerum sed soluta sunt tempore ut vel velit veniam voluptatibus? Dicta, dignissimos, placeat. Accusamus accusantium alias aliquid autem earum et explicabo laborum modi nam natus, nobis, provident? A ab accusantium amet debitis doloribus ipsum iste mollitia, nesciunt nihil possimus quia, repellendus sunt veniam voluptates voluptatum. Ab blanditiis consectetur cum doloremque doloribus ducimus est hic illo, in mollitia nobis nostrum, odit sint soluta tempore veniam voluptas? Consequuntur delectus dolor dolore eius ex, iure iusto laborum libero mollitia numquam pariatur perspiciatis, tempora tenetur vel veniam? A animi aspernatur cupiditate deleniti deserunt, dignissimos eius esse explicabo facere minus, mollitia nihil repudiandae similique sint voluptatem? Ab amet et quidem voluptas voluptates. Accusamus commodi culpa delectus ex ipsam magnam officiis optio reiciendis tempora vitae! Accusamus adipisci architecto at dolor doloribus dolorum eaque error esse explicabo harum hic id illo nam non, nulla obcaecati odit omnis optio pariatur perferendis perspiciatis placeat praesentium provident quaerat, qui ratione rem repellendus rerum ut voluptatibus. Ab commodi dolorum et iure maiores nam nobis quo repellat rerum soluta. Adipisci asperiores aspernatur corporis cupiditate dicta dignissimos distinctio dolorem dolorum ducimus enim error eveniet excepturi modi nisi non nulla perspiciatis, provident reprehenderit tenetur vero! Accusamus animi cumque deleniti dicta distinctio dolorum eius, error illo in ipsa ipsam labore laudantium maiores neque perferendis quod ratione rem repellat sapiente sequi suscipit tempora ullam. Aliquid aspernatur atque beatae consequatur cum doloremque eligendi eveniet explicabo, incidunt laboriosam maiores modi nemo nisi non nostrum quos sunt tempora vero voluptates voluptatibus. Aut earum, eum iure iusto laboriosam numquam reiciendis rem? Aperiam at autem delectus dolor, eveniet fugit harum laborum laudantium neque nesciunt non nostrum numquam odit pariatur quae, quaerat quas saepe sint sit, voluptatibus. Accusantium at, atque consequatur cupiditate deleniti ex, facere fuga fugiat ipsam maxime numquam optio pariatur perferendis qui ratione recusandae reiciendis repudiandae, rerum sequi sit. A blanditiis id natus officiis repellat similique sit ullam velit. Aliquid animi aspernatur culpa cum doloremque dolorum earum fuga hic, ipsa, iusto labore minus natus necessitatibus obcaecati odio odit omnis porro quia quis ratione reiciendis repellendus sequi sunt vero voluptatem voluptates voluptatibus voluptatum. Aperiam consequatur expedita laudantium molestiae recusandae, rerum saepe sint ullam voluptates.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis dolor est exercitationem expedita fugit itaque laboriosam maiores natus sint vero. Aut, dolore, dolores harum id in iure, numquam obcaecati officiis porro praesentium qui quibusdam quo quod reprehenderit rerum tenetur velit voluptates voluptatum. Aspernatur at corporis, culpa dicta quam quia voluptate? Dicta dolorem in laborum neque nihil quas reiciendis reprehenderit saepe totam vero? Aliquam architecto, cumque debitis facilis fugiat harum iusto labore maiores provident quas quis recusandae tempora voluptatibus? Amet assumenda distinctio eum explicabo fugiat necessitatibus numquam quasi recusandae rem voluptatem! Ad asperiores est eveniet hic ipsa ipsam laboriosam magnam minus natus necessitatibus obcaecati odit praesentium quaerat qui quis quo ratione recusandae repellendus sit sunt, totam voluptate voluptatum. Commodi eaque ex impedit iure obcaecati provident quod similique vel voluptate voluptates. Ab accusantium aliquid architecto assumenda beatae corporis cumque cupiditate deserunt, expedita id iure iusto molestiae nemo non nostrum numquam omnis optio quia quidem quod rem sint tenetur totam, unde ut! Accusamus eos labore magni provident quam. Enim ipsum minus perferendis quisquam quos? A animi at consectetur excepturi laboriosam laudantium magni natus possimus quisquam recusandae, similique tempore vel voluptate? Atque consectetur cupiditate distinctio dolore enim explicabo fuga, in iure laborum magni mollitia, necessitatibus nobis nulla placeat, provident temporibus tenetur voluptas! Dignissimos est numquam sed sunt unde? Fuga, harum itaque natus non placeat quaerat quod quos sint sit ullam. Aperiam assumenda autem blanditiis culpa cum ea eos eveniet facere fugiat harum iure, labore non nulla, officia quaerat quas quidem soluta sunt. Consectetur delectus earum incidunt ipsam obcaecati possimus repellat ullam. Blanditiis esse est et incidunt ipsam iste, minima neque nobis qui repellat saepe tempora veritatis voluptatibus! Adipisci aut consequuntur cum deleniti doloremque dolores earum eius esse ex exercitationem, ipsum laborum laudantium molestiae nobis nulla odit pariatur praesentium provident quidem quo recusandae repudiandae sunt, temporibus unde, ut vero voluptas. A amet, animi asperiores aut cum delectus dignissimos doloremque eum facere fuga illo inventore iste itaque magni minima molestiae mollitia nemo placeat quibusdam quis quisquam, rem repellat sint, velit vitae voluptates voluptatum! Architecto consequatur consequuntur debitis deleniti deserunt dolor dolorem ea eos esse, est exercitationem fuga illo illum in, labore laboriosam magni molestias nam nostrum pariatur placeat quasi quisquam quod quos ratione repellendus reprehenderit repudiandae saepe similique sunt suscipit tempora tempore totam ullam vel voluptas voluptates? A ab ad asperiores assumenda autem consectetur cum dicta dolor ex facere, fugiat fugit libero minima necessitatibus odio optio porro quaerat quidem quos reiciendis repellendus sed sequi similique veritatis voluptatum! Accusamus aliquam aliquid assumenda consequatur dicta eligendi esse et ipsum iusto laudantium modi numquam optio porro quas quia quisquam repellendus repudiandae, sint, suscipit tempore unde voluptatem voluptates. Ab aliquid assumenda blanditiis consequatur cupiditate, dolorem doloremque et illo incidunt ipsam laudantium minima molestiae mollitia natus non quam quasi quisquam ratione rem saepe sequi suscipit ut veritatis voluptas voluptate voluptatem voluptatum. Adipisci amet at debitis distinctio, dolorem eius fugit harum labore magnam maiores neque nisi nobis quas qui quis, ratione reprehenderit soluta tempore temporibus ullam unde voluptate, voluptatum. A aliquid animi asperiores consequatur cupiditate delectus dicta, doloribus, ducimus earum eligendi enim eum explicabo illum ipsam maiores mollitia neque nisi numquam odit perspiciatis porro, quam quia quos repellendus saepe temporibus tenetur veritatis. A ad aperiam, aspernatur consectetur eius, eligendi eos esse est ex, exercitationem facere hic id iste itaque laborum libero magnam minus mollitia nisi nulla officia officiis placeat quibusdam quos reiciendis repellendus saepe sed sit vel voluptatibus. Ab alias deleniti est nesciunt quaerat. A amet aut, corporis debitis dolorem eaque eius eos eveniet fuga fugiat ipsa laboriosam maiores nam non officia officiis perspiciatis possimus praesentium quod repellendus rerum sunt tempora, voluptate! Impedit minima nemo placeat quas quasi similique vitae. Consectetur corporis cupiditate eligendi enim eos itaque magnam molestias! A ab aliquam animi asperiores beatae culpa cumque cupiditate dicta distinctio dolores dolorum est ex hic illum iste, iusto minus molestias nam nemo omnis praesentium qui quia quidem ratione repellendus rerum sed soluta sunt tempore ut vel velit veniam voluptatibus? Dicta, dignissimos, placeat. Accusamus accusantium alias aliquid autem earum et explicabo laborum modi nam natus, nobis, provident? A ab accusantium amet debitis doloribus ipsum iste mollitia, nesciunt nihil possimus quia, repellendus sunt veniam voluptates voluptatum. Ab blanditiis consectetur cum doloremque doloribus ducimus est hic illo, in mollitia nobis nostrum, odit sint soluta tempore veniam voluptas? Consequuntur delectus dolor dolore eius ex, iure iusto laborum libero mollitia numquam pariatur perspiciatis, tempora tenetur vel veniam? A animi aspernatur cupiditate deleniti deserunt, dignissimos eius esse explicabo facere minus, mollitia nihil repudiandae similique sint voluptatem? Ab amet et quidem voluptas voluptates. Accusamus commodi culpa delectus ex ipsam magnam officiis optio reiciendis tempora vitae! Accusamus adipisci architecto at dolor doloribus dolorum eaque error esse explicabo harum hic id illo nam non, nulla obcaecati odit omnis optio pariatur perferendis perspiciatis placeat praesentium provident quaerat, qui ratione rem repellendus rerum ut voluptatibus. Ab commodi dolorum et iure maiores nam nobis quo repellat rerum soluta. Adipisci asperiores aspernatur corporis cupiditate dicta dignissimos distinctio dolorem dolorum ducimus enim error eveniet excepturi modi nisi non nulla perspiciatis, provident reprehenderit tenetur vero! Accusamus animi cumque deleniti dicta distinctio dolorum eius, error illo in ipsa ipsam labore laudantium maiores neque perferendis quod ratione rem repellat sapiente sequi suscipit tempora ullam. Aliquid aspernatur atque beatae consequatur cum doloremque eligendi eveniet explicabo, incidunt laboriosam maiores modi nemo nisi non nostrum quos sunt tempora vero voluptates voluptatibus. Aut earum, eum iure iusto laboriosam numquam reiciendis rem? Aperiam at autem delectus dolor, eveniet fugit harum laborum laudantium neque nesciunt non nostrum numquam odit pariatur quae, quaerat quas saepe sint sit, voluptatibus. Accusantium at, atque consequatur cupiditate deleniti ex, facere fuga fugiat ipsam maxime numquam optio pariatur perferendis qui ratione recusandae reiciendis repudiandae, rerum sequi sit. A blanditiis id natus officiis repellat similique sit ullam velit. Aliquid animi aspernatur culpa cum doloremque dolorum earum fuga hic, ipsa, iusto labore minus natus necessitatibus obcaecati odio odit omnis porro quia quis ratione reiciendis repellendus sequi sunt vero voluptatem voluptates voluptatibus voluptatum. Aperiam consequatur expedita laudantium molestiae recusandae, rerum saepe sint ullam voluptates.
+    </div>
+    <script>
+        require(
+            [
+                'jquery',
+                'Magento_Ui/js/modal/modal',
+                'text!Magento_Ui/templates/modal/modal-product-quick-view.html'
+            ],
+            function (
+                $,
+                modal,
+                productQuickViewTemplate
+            ) {
+                const modalOptions = {
+                    type: 'popup',
+                    popupTpl: productQuickViewTemplate,
+                    modalClass: 'modal-product-quick-view',
+                    responsive: true,
+                    innerScroll: false,
+                    clickableOverlay: true,
+                };
+                const $modal = $('#modal-product-quick-view');
+                const quickViewModal = modal(modalOptions, $modal);
+
+                const modalOverlay = $modal.closest('.modal-product-quick-view');
+                modalOverlay.on('click', function (e) {
+                    if (e.target !== e.currentTarget) return false;
+
+                    $modal.modal('closeModal');
+                });
+
+                $('.js-open-quick-view').on('click', function (e) {
+                    // Clear template and enable preloader
+                    $modal.modal('openModal');
+
+                    const $product = $(e.target).closest('.product-card');
+                    const productId = $product.data('product-id');
+                    console.log('productId: ', productId);
+                    // Load product
+                    // Render product info
+
+                    // Disable preloader
+                });
+            });
+    </script>
+<?php endif; ?>
