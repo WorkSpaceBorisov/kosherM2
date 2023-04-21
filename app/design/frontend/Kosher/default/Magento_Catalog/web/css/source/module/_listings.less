@@ -78,11 +78,6 @@
             padding: 24px 24px 0 0;
         }
 
-        &__mode-el {
-            display: block;
-            width: 58px;
-        }
-
         &__details {
             padding: 8px 24px 24px;
             display: grid;
@@ -136,8 +131,8 @@
         position: relative;
         display: inline-flex;
         .lib-font-size(24px);
-        .lib-line-height(34);
-        margin-top: 0.75em;
+        .lib-line-height(34px);
+
 
         &__price {
             display: inline-flex;
@@ -161,9 +156,16 @@
         }
 
         &--discount {
+            margin-top: 0.75em;
+
             .block-price__current {
                 color: @theme__color__secondary;
             }
+        }
+
+        &--lg {
+            .lib-font-size(32px);
+            .lib-line-height(40px);
         }
     }
 
@@ -183,6 +185,17 @@
 
         &--green {
             background-color: @color-mint;
+        }
+    }
+
+    .block-product-mode {
+        &__el {
+            display: block;
+           height: 22px;
+
+            &--lg {
+                height: 40px;
+            }
         }
     }
 }

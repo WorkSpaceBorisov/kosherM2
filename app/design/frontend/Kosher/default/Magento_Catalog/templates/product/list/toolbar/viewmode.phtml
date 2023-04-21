@@ -21,7 +21,7 @@
                     <strong title="<?= $block->escapeHtmlAttr($_label) ?>"
                             class="modes-mode active mode-<?= $block->escapeHtmlAttr(strtolower($_code)) ?>"
                             data-value="<?= $block->escapeHtmlAttr(strtolower($_code)) ?>">
-                        <span><?= $block->escapeHtml($_label) ?></span>
+                        <i class="icon icon-<?= $block->escapeHtmlAttr(strtolower($_code)) ?>"></i>
                     </strong>
                 <?php else :?>
                     <a class="modes-mode mode-<?= $block->escapeHtmlAttr(strtolower($_code)) ?>"
@@ -31,7 +31,7 @@
                        data-value="<?= $block->escapeHtmlAttr(strtolower($_code)) ?>"
                        id="mode-<?= $block->escapeHtmlAttr(strtolower($_code)) ?>"
                        aria-labelledby="modes-label mode-<?= $block->escapeHtmlAttr(strtolower($_code)) ?>">
-                        <span><?= $block->escapeHtml($_label) ?></span>
+                        <i class="icon icon-<?= $block->escapeHtmlAttr(strtolower($_code)) ?>"></i>
                     </a>
                 <?php endif; ?>
             <?php endforeach; ?>

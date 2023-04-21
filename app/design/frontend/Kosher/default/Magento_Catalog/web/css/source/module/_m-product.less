@@ -1,0 +1,126 @@
+& when (@media-common = true) {
+    .m-product {
+        &__title {
+            .lib-font-size(48);
+            .lib-line-height(58);
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+
+        &__link {
+            color: inherit;
+
+            &:visited {
+                color: inherit;
+            }
+        }
+
+        &__preview {
+            flex: none;
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 50%;
+            border-radius: inherit;
+        }
+
+        &__preview-el {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+            z-index: 1;
+        }
+
+        &__type {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            user-select: none;
+        }
+
+        &__mode {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 2;
+            user-select: none;
+            padding: 32px 16px 0 0;
+        }
+
+        &__details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 48px 32px;
+        }
+
+        &__info-item {
+            .lib-font-size(18);
+            .lib-line-height(30);
+            font-weight: 600;
+        }
+
+        &__info-label {
+            color: #949494;
+        }
+
+        &__hr {
+            width: 100%;
+            border-color: #C9C9C9;
+            margin: 0;
+        }
+
+        &__description {
+            .lib-font-size(18);
+            .lib-line-height(30);
+        }
+
+        &__description-label {
+            font-weight: 700;
+        }
+
+        &__meta {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 24px;
+        }
+
+        &__meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            .lib-font-size(16);
+            .lib-line-height(24);
+
+            .icon {
+                .lib-font-size(24);
+                line-height: 1;
+            }
+        }
+
+        &__actions {
+            display: flex;
+            align-items: self-end;
+            justify-content: space-between;
+        }
+    }
+}
+
+//Desktop
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .m-product {
+        display: flex;
+
+        &__preview {
+            width: 46%;
+        }
+    }
+}

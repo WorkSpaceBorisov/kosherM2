@@ -95,7 +95,13 @@
         pointer-events: initial;
 
         .modal-inner-wrap {
-            position: static;
+            position: relative;
+        }
+
+        .modal-content {
+            padding-right: 0;
+            padding-left: 0;
+            padding-bottom: 0;
         }
     }
 
@@ -203,6 +209,12 @@
                 .lib-css(border-top, @modal-title__border);
                 text-align: right;
             }
+        }
+    }
+
+    .modal-product-quick-view {
+        .modal-inner-wrap {
+            max-width: 1000px;
         }
     }
 }

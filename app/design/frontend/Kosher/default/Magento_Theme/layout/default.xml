@@ -6,7 +6,13 @@
     <body>
         <!-- Header -->
         <referenceContainer name="header.container" htmlClass="header">
-            <block class="Magento\Framework\View\Element\Template" name="custom_header" as="custom_header" template="Magento_Theme::html/header.phtml" before="-">
+            <block
+                class="Magento\Framework\View\Element\Template"
+                name="custom_header"
+                as="custom_header"
+                template="Magento_Theme::/html/header.phtml"
+                before="-"
+            >
                 <block class="Magento\Framework\View\Element\Template"
                        name="catalog-nav"
                        template="Magento_Theme::html/header/catalog-nav.phtml"
