@@ -6,6 +6,7 @@ namespace Kosher\ProductAttributeSetExportImport\Service\AttributeSet;
 use Exception;
 use Magento\Catalog\Api\AttributeSetRepositoryInterface;
 use Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory as ProductAttributeCollection;
+use Magento\Eav\Model\Entity\Attribute\Group;
 use Magento\Eav\Model\ResourceModel\Entity\Attribute\Group\Collection;
 use Magento\Eav\Model\ResourceModel\Entity\Attribute\Group\CollectionFactory as GroupCollection;
 use Magento\Framework\Api\SearchCriteriaBuilder;
@@ -14,8 +15,6 @@ use Magento\Framework\Serialize\Serializer\Json;
 class GetProductAttributeSetListService
 {
     private array $attributeSetList = [];
-    private array $groupListData = [];
-    private array $attributeList = [];
     private array $dataToCsv = [];
     private array $attributeSetNames = [];
     /**
@@ -71,11 +70,11 @@ class GetProductAttributeSetListService
     public function execute(): array
     {
         $this->listAttributeSet();
-        $this->groupListData = $this->getAttributeGroup(array_keys($this->attributeSetList))->getItems();
-        foreach ($this->groupListData as $key => $items) {
+        $groupListData = $this->getAttributeGroup(array_keys($this->attributeSetList))->getItems();
+        foreach ($groupListData as $key => $items) {
+            /** @var Group $items */
             $productAttributeList = $this->getProductAttributeCollection($key);
-            foreach ($productAttributeList as $attributeId => $productAttribute) {
-                $this->attributeList[$attributeId] = $productAttribute;
+            foreach ($productAttributeList as $productAttribute) {
                 $attributeCode = $productAttribute->getAttributeCode();
                 $this->dataToCsv[$attributeCode] = $productAttribute->getData();
                 $attributeSetId = $productAttribute->getData('attribute_set_id');
@@ -90,7 +89,7 @@ class GetProductAttributeSetListService
                 try {
                     $attributeOptionsValue = $productAttribute->getSource()->getAllOptions();
                     $this->convertAttributeOptionsToJson($attributeOptionsValue, $attributeCode);
-                } catch (Exception $e) {
+                } catch (Exception) {
                 }
             }
         }
@@ -151,10 +150,21 @@ class GetProductAttributeSetListService
      */
     private function getAttributeGroup(array $attributeSetIds): Collection
     {
-        return  $this->groupCollection->create()
-            ->addFieldToFilter('attribute_group_name', 'General')
+        $conditionGeneral = 'General';
+        $conditionProductDetails = 'Product Details';
+        $collection = $this->groupCollection->create()
+            ->addFieldToFilter('attribute_group_name', $conditionGeneral)
             ->addFieldToFilter('attribute_set_id', ['in' => $attributeSetIds])
             ->load();
+
+        if (empty($collection->getItems())) {
+            $collection = $this->groupCollection->create()
+                ->addFieldToFilter('attribute_group_name', $conditionProductDetails)
+                ->addFieldToFilter('attribute_set_id', ['in' => $attributeSetIds])
+                ->load();
+        }
+
+        return $collection;
     }
 
     /**
