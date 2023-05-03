@@ -1,0 +1,158 @@
+.translate(@x, @y) {
+    -moz-transform: translateX(@x) translateY(@y);
+    -webkit-transform: translateX(@x) translateY(@y);
+    -o-transform: translateX(@x) translateY(@y);
+    -ms-transform: translateX(@x) translateY(@y);
+    transform: translateX(@x) translateY(@y);
+}
+
+.size(@x, @y: @x) {
+    width: @x;
+    height: @y;
+}
+
+.to-middle() {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// Placeholder
+//
+// .placeholder({
+//    .rem(12);
+//    color: #687278;
+// });
+//
+
+.placeholder(@rules) {
+    &::-webkit-input-placeholder {
+        @rules();
+    }
+    &::-moz-placeholder {
+        @rules();
+    }
+
+    &:-ms-input-placeholder {
+        @rules();
+    }
+    &:-moz-placeholder {
+        @rules();
+    }
+}
+
+// Triangle .triangle(direction,width,height,color);
+//
+// .triangle(top, 7px, 7px, #333);
+//
+
+.triangle-base() {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    -moz-transform: scale(.9999);
+}
+
+.triangle(@direction: top, @sizeH: 5px, @sizeV: 5px, @color: #000) when (@direction = top) {
+    .triangle-base();
+    border-width: 0 @sizeV @sizeH @sizeV;
+    border-color: transparent transparent @color transparent;
+}
+
+.triangle(@direction, @sizeH: 5px, @sizeV: 5px, @color: #000) when (@direction = bottom) {
+    .triangle-base();
+    border-width: @sizeV @sizeH 0 @sizeV;
+    border-color: @color transparent transparent transparent;
+}
+
+.triangle(@direction, @sizeH: 5px, @sizeV: 5px, @color: #000) when (@direction = left) {
+    .triangle-base();
+    border-width: @sizeV @sizeH @sizeV 0;
+    border-color: transparent @color transparent transparent;
+}
+
+.triangle(@direction, @sizeH: 5px, @sizeV: 5px, @color: #000) when (@direction = right) {
+    .triangle-base();
+    border-width: @sizeV 0 @sizeV @sizeH;
+    border-color: transparent transparent transparent @color;
+}
+
+.triangle(@direction, @sizeH: 5px, @sizeV: 5px, @color: #000) when (@direction = topright) {
+    .triangle-base();
+    border-width: 0 @sizeH @sizeV 0;
+    border-color: transparent @color transparent transparent;
+}
+
+.triangle(@direction, @sizeH: 5px, @sizeV: 5px, @color: #000) when (@direction = bottomright) {
+    .triangle-base();
+    border-width: 0 0 @sizeH @sizeV;
+    border-color: transparent transparent @color transparent;
+}
+
+.triangle(@direction, @sizeH: 5px, @sizeV: 5px, @color: #000) when (@direction = bottomleft) {
+    .triangle-base();
+    border-width: @sizeH 0 0 @sizeV;
+    border-color: transparent transparent transparent @color;
+}
+
+.triangle(@direction, @sizeH: 5px, @sizeV: 5px, @color: #000) when (@direction = topleft) {
+    .triangle-base();
+    border-width: @sizeH @sizeV 0 0;
+    border-color: @color transparent transparent transparent;
+}
+
+// Custom font mixin based on .lib-font-face
+//
+//.custom-font-face(
+//    @family-name: 'pt-sans',
+//    @font-display: swap,
+//    @font-path: '@{baseDir}fonts/PTSans-Web-Regular',
+//    @font-weight: normal,
+//    @font-style: normal
+//);
+
+.custom-font-face(
+    @family-name,
+    @font-display: swap,
+    @font-path,
+    @font-weight: normal,
+    @font-style: normal
+) {
+    @font-face {
+        font-family: @family-name;
+        font-display: @font-display;
+        src: url('@{font-path}.woff2') format('woff2'),
+        url('@{font-path}.woff') format('woff'),
+        url('@{font-path}.ttf') format('truetype');
+        font-weight: @font-weight;
+        font-style: @font-style;
+    }
+}
+
+// For icomoon
+
+//.my-icon{
+//    display: inline-block;
+//    line-height: 1;
+//    &:before{
+//        .icomoon('\e8cc', 28, #ff0000);
+//    }
+//}
+
+.icomoon(@icon, @size: 24, @color: @kos-color__02) {
+    font-family: 'icomoon';
+    content: @icon;
+    color: @color;
+    font-size: @size + 0px;
+    speak: none;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+}
+
+

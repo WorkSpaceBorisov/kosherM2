@@ -1,0 +1,83 @@
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .form {
+        .field {
+            &.choice {
+                input[type='radio'],
+                input[type='checkbox'] {
+                    position: absolute;
+                    visibility: hidden;
+
+                    & + .label {
+                        cursor: pointer;
+                        padding-left: 32px;
+                        position: relative;
+                    }
+                }
+
+                input[type='radio'] {
+                    & + .label:before {
+                        border-radius: 50%;
+                        content: '';
+                        height: 18px;
+                        left: 0;
+                        position: absolute;
+                        top: 0;
+                        width: 18px;
+                    }
+
+                    & + .label:after {
+                        border-radius: 50%;
+                        content: '';
+                        height: 10px;
+                        left: 4px;
+                        opacity: 0;
+                        position: absolute;
+                        top: 4px;
+                        width: 10px;
+                    }
+
+                    &:checked + .label:before {
+                    }
+
+                    &:checked + .label:after {
+                        opacity: 1;
+                        transform: scale(1);
+                    }
+                }
+
+                input[type='checkbox'] {
+                    & + .label:before {
+                        background-color: rgba(54, 110, 172, .15);
+                        border-radius: 3px;
+                        content: '';
+                        height: 19px;
+                        left: 0;
+                        position: absolute;
+                        top: 0;
+                        width: 20px;
+                    }
+
+                    & + .label:after {
+                        content: '';
+                        height: 17px;
+                        left: 5px;
+                        opacity: 0;
+                        position: absolute;
+                        top: -3px;
+                        transform: translateY(-5px);
+                        width: 17px;
+                    }
+
+                    &:checked + .label:after {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+            }
+        }
+    }
+}
