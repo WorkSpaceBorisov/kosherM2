@@ -1,0 +1,14 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+<!--        <css src="css/critical.css" />-->
+    </head>
+    <body>
+        <!-- Header -->
+<!--        <referenceBlock name="header" remove="true"/>-->
+<!--        <referenceBlock name="logo" remove="true"/>-->
+<!--        <referenceBlock name="footer" remove="true"/>-->
+<!--        <referenceContainer name="main.content" remove="true"/>-->
+
+
+    </body>
+</page>
