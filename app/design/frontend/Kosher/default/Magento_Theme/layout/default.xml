@@ -1,5 +1,31 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
 
+        <!-- REMOVE -->
+        <referenceBlock name="header.panel.wrapper" remove="true"/>
+        <referenceBlock name="catalog.compare.link" remove="true"/>
+
+        <!-- MOVE -->
+        <move element="top.search" destination="header.search.container"/>
+        <move element="minicart" destination="header.right.container" after="top.links"/>
+
+        <referenceContainer name="header.container">
+            <referenceContainer name="header-wrapper">
+                <container name="catalog.button.container" htmlTag="div" htmlClass="catalog-button-container" before="logo">
+                    <block class="Magento\Framework\View\Element\Template" name="catalog.button"
+                           template="Magento_Theme::html/header/catalog-button.phtml"/>
+                </container>
+
+                <container name="header.search.container" htmlTag="div" htmlClass="header-search-container" after="logo"/>
+
+                <container name="header.right.container" htmlTag="div" htmlClass="header-right-container" after="-">
+                    <block class="Magento\Framework\View\Element\Template" name="search.button"
+                           template="Magento_Theme::html/header/search-button.phtml"/>
+                    <block class="Magento\Framework\View\Element\Template" name="account.button"
+                           template="Magento_Theme::html/header/account-button.phtml"/>
+                </container>
+            </referenceContainer>
+        </referenceContainer>
+
     </body>
 </page>

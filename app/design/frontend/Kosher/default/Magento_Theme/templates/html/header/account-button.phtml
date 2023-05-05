@@ -1,0 +1,24 @@
+<div class="header-login-block">
+    <!-- -->
+    <a href="<?php echo $block->getBaseUrl(); ?>/customer/account/login/" class="login-button">
+        <span><?= __('Login') ?></span>
+    </a>
+    <!-- -->
+    <div class="account-button"><span><?= __('account') ?></span></div>
+    <div class="ko-customer-menu" data-target="dropdown" aria-hidden="false">
+        <ul>
+            <li>
+                <a href="<?php echo $block->getBaseUrl(); ?>/customer/account/" id="idi3GyRLlJ"><?= __('My Account') ?></a></li>
+            <li class="link authorization-link" data-label="or">
+                <a href="<?php echo $block->getBaseUrl(); ?>/customer/account/logout/"><?= __('Sign Out') ?></a>
+            </li>
+        </ul>
+    </div>
+
+    <!--    --><?php //if ($this->_customerSession->isLoggedIn()): ?>
+    <!--    // Customer is logged in-->
+    <!--    --><?php //else: ?>
+    <!--    // Customer is not logged in-->
+    <!--    --><?php //endif; ?>
+</div>
+
