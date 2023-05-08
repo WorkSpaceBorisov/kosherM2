@@ -3,6 +3,120 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
+
+    .page-footer {
+        background: @kos-color__14;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .footer.content {
+    }
+
+    .footer-container {
+        display: flex;
+        flex-direction: column-reverse;
+        margin-bottom: 20px;
+    }
+
+    .footer-info {
+        display: flex;
+        flex-grow: 1;
+
+    }
+
+    .footer-links1 {
+        width: 34.7%;
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+
+    .footer-links2 {
+        width: 29%;
+        flex-grow: 0;
+        flex-shrink: 0;
+
+    }
+
+    .footer-contacts {
+    }
+
+    .newsletter-footer-block {
+        max-width: 500px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .footer-socials {
+
+        &:not(.mobile) {
+            display: none;
+        }
+    }
+
+    .copyright-footer-block {
+        display: flex;
+        justify-content: space-between;
+    }
+
+}
+
+//
+//  Desktop min to mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .page-footer {
+        background: @kos-color__14;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .footer.content {
+        border: 1px dashed green;
+    }
+
+    .footer-container {
+        border: 1px dotted blue;
+        flex-direction: row;
+        margin-bottom: 10px;
+    }
+    .footer-info {
+        border: 1px solid red;
+        flex-grow: 1;
+    }
+    .footer-links1 {
+        border: 1px solid blue;
+        width: 34.7%;
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+    .footer-links2 {
+        border: 1px solid blue;
+        width: 29%;
+        flex-grow: 0;
+        flex-shrink: 0;
+
+    }
+    .footer-contacts {
+        border: 1px solid blue;
+    }
+    .newsletter-footer-block {
+        border: 1px solid red;
+    }
+
+    .copyright-footer-block {
+        display: block;
+    }
+
+    .footer-socials {
+        &.mobile {
+            display: none;
+        }
+        &:not(.mobile) {
+            display: block;
+        }
+    }
 }
 
 //

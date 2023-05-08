@@ -4,10 +4,13 @@
         <!-- REMOVE -->
         <referenceBlock name="header.panel.wrapper" remove="true"/>
         <referenceBlock name="catalog.compare.link" remove="true"/>
+        <referenceBlock name="footer_links" remove="true"/>
 
         <!-- MOVE -->
         <move element="top.search" destination="header.search.container"/>
         <move element="minicart" destination="header.right.container" after="top.links"/>
+        <move element="copyright" destination="copyright.footer.block" before="-"/>
+        <move element="form.subscribe" destination="newsletter.footer.block" before="-"/>
 
         <referenceContainer name="header.container">
             <referenceContainer name="header-wrapper">
@@ -25,6 +28,75 @@
                            template="Magento_Theme::html/header/account-button.phtml"/>
                 </container>
             </referenceContainer>
+        </referenceContainer>
+
+        <referenceContainer name="footer-container">
+            <referenceContainer name="footer">
+
+                <container name="footer.container" htmlTag="div" htmlClass="footer-container" before="-">
+                    <container name="footer.info" htmlTag="div" htmlClass="footer-info" before="-">
+                        <container name="footer.links1" htmlTag="div" htmlClass="footer-links1">
+                            <block class="Magento\Framework\View\Element\Text" name="text.blank1" before="-">
+                                <arguments>
+                                    <argument name="text" xsi:type="string">
+                                        <![CDATA[Links1 Ipsum is simply dummy text of the printing and typesetting industry.]]>
+                                    </argument>
+                                </arguments>
+                            </block>
+                        </container>
+                        <container name="footer.links2" htmlTag="div" htmlClass="footer-links2">
+                            <block class="Magento\Framework\View\Element\Text" name="text.blank2" before="-">
+                                <arguments>
+                                    <argument name="text" xsi:type="string">
+                                        <![CDATA[Links2 Ipsum is simply dummy text of the printing and typesetting industry.]]>
+                                    </argument>
+                                </arguments>
+                            </block>
+                        </container>
+                        <container name="footer.contacts" htmlTag="div" htmlClass="footer-contacts">
+                            <block class="Magento\Framework\View\Element\Text" name="text.blank3" before="-">
+                                <arguments>
+                                    <argument name="text" xsi:type="string">
+                                        <![CDATA[Contacts Ipsum is simply dummy text of the printing and typesetting industry.]]>
+                                    </argument>
+                                </arguments>
+                            </block>
+                        </container>
+                    </container>
+
+                    <container name="newsletter.footer.block" htmlTag="div" htmlClass="newsletter-footer-block" after="-">
+                        <container name="fotter.socials" htmlTag="div" htmlClass="footer-socials" after="-">
+                            <block class="Magento\Framework\View\Element\Text" name="text.blankwww2" after="-">
+                                <arguments>
+                                    <argument name="text" xsi:type="string">
+                                        <![CDATA[Socials here]]>
+                                    </argument>
+                                </arguments>
+                            </block>
+                        </container>
+                    </container>
+                </container>
+
+                <container name="copyright.footer.block" htmlTag="div" htmlClass="copyright-footer-block" after="-">
+
+
+                    <container name="footer.social.mobile" htmlTag="div" htmlClass="footer-socials mobile" after="-">
+                        <block class="Magento\Framework\View\Element\Text" name="text.blankww" after="-">
+                            <arguments>
+                                <argument name="text" xsi:type="string">
+                                    <![CDATA[Socials here]]>
+                                </argument>
+                            </arguments>
+                        </block>
+                    </container>
+                </container>
+
+            </referenceContainer>
+
+        </referenceContainer>
+
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Theme\Block\Html\Footer" name="global.scripts" template="Magento_Theme::global-scripts.phtml"/>
         </referenceContainer>
 
     </body>

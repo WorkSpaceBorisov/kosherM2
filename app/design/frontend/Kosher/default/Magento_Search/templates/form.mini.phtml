@@ -40,7 +40,7 @@ $quickSearchUrl = $allowedSuggestion ? $escaper->escapeUrl($helper->getSuggestUr
                        type="text"
                        name="<?= $escaper->escapeHtmlAttr($helper->getQueryParamName()) ?>"
                        value="<?= /* @noEscape */ $helper->getEscapedQueryText() ?>"
-                       placeholder="<?= $escaper->escapeHtmlAttr(__('Search entire store here...')) ?>"
+                       placeholder="<?= $escaper->escapeHtmlAttr(__('Search')) ?>"
                        class="input-text"
                        maxlength="<?= $escaper->escapeHtmlAttr($helper->getMaxQueryLength()) ?>"
                        role="combobox"

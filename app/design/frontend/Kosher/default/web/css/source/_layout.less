@@ -17,8 +17,28 @@
         margin-left: auto;
         margin-right: auto;
         max-width: 100%;
-        padding-left: 32px;
-        padding-right: 32px;
+        padding-left: 20px;
+        padding-right: 20px;
         width: auto;
+    }
+}
+
+//
+//  Desktop min to mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .navigation,
+    .breadcrumbs,
+    .page-header
+    .header.panel,
+    .header.content,
+    .footer.content,
+    .page-wrapper > .widget,
+    .page-wrapper > .page-bottom,
+    .block.category.event, .top-container,
+    .page-main {
+        padding-left: 1.66%;
+        padding-right: 1.66%;
     }
 }
