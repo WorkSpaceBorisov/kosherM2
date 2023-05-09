@@ -7,68 +7,97 @@
 //  Common
 //  _____________________________________________
 
+
 & when (@media-common = true) {
 
     //  Newsletter subscription
     .block.newsletter {
-        margin-bottom: 20px;
+        margin-bottom: 35px;
+        width: 100%;
+
+        h4 {
+            .main-footer-font();
+            margin: 0 0 8px 0;
+        }
+
+        .content {
+            position: relative;
+
+            #newsletter-error {
+                .lib-font-size(12);
+                color: @kos-color__03;
+                left: 0;
+                line-height: 1.2;
+                position: absolute;
+                top: 100%;
+            }
+        }
 
         .form.subscribe {
-            display: table;
+            align-items: flex-start;
+            display: flex;
+            justify-content: space-between;
             width: 100%;
         }
 
-        .fieldset {
-            display: table-cell;
-            margin: 0;
-            padding: 0;
-            vertical-align: top;
-        }
-
         .field {
-            margin: 0;
+            flex-grow: 1;
+            padding-right: 0;
 
             .control {
-                .lib-icon-font(
-                @icon-envelope,
-                @_icon-font-size: 16px,
-                @_icon-font-line-height: 32px,
-                @_icon-font-color: @form-element-input-placeholder__color,
-                @_icon-font-margin: 0 0 0 8px
-                );
-
-                &:before {
-                    position: absolute;
-                }
-
                 display: block;
             }
         }
 
-        input {
-            margin-right: 35px;
-            padding: 0 0 0 35px; // Reset some default Safari padding values.
-        }
-
-        .title {
+        .label {
             display: none;
         }
 
-        .label {
-            &:extend(.abs-visually-hidden all);
-        }
+        input {
+            .lib-font-size(16);
+            background: @kos-color__30;
+            border-radius: 4px 0 0 4px;
+            border: 1px solid @kos-color__29;
+            border-right-width: 0;
+            height: 40px;
+            letter-spacing: 0.02em;
+            padding: 5px 16px;
+            width: 100%;
 
-        .actions {
-            display: table-cell;
-            vertical-align: top;
-            width: 1%;
+            .placeholder({
+                .lib-font-size(16);
+                color: @kos-color__22;
+                letter-spacing: 0.02em;
+            });
+
+            &:focus {
+                background: @kos-color__01;
+            }
+
+            &.mage-error{
+                border-color: @kos-color__03;
+            }
         }
 
         .action.subscribe {
-            border-bottom-left-radius: 0;
-            border-top-left-radius: 0;
-            margin-left: -1px;
-            white-space: nowrap;
+            .size(102, 40);
+            .lib-font-size(14);
+            background: @button-bg;
+            border-radius: 0 4px 4px 0;
+            color: @kos-color__01;
+            font-weight: 600;
+
+            &:hover {
+                background: @button-hover-bg;
+                border: 2px solid @button-bg;
+                border-left-width: 0;
+                color: @button-bg;
+            }
+
+            &:active {
+                background: @button-active-bg;
+            }
+
         }
     }
 }
@@ -79,39 +108,37 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .block.newsletter {
-        max-width: 44%;
-        width: max-content;
-
-        .field.newsletter {
-            max-width: 220px;
+        .field {
+            padding-right: 16px;
         }
-        
-        .form.subscribe {
-            > .field,
-            > .actions {
-                float: left;
+
+        input {
+            border-radius: 4px;
+            border-right-width: 1px;
+            height: 56px;
+        }
+
+        .action.subscribe {
+            .size(102, 56);
+            border-radius: 8px;
+
+            &:hover {
+                border: 2px solid @button-bg;
+                border-left-width: 2px;
             }
         }
     }
 }
 
 //
-//  Mobile
+//  Middle 640
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    .block {
-        &.newsletter {
-            input {
-                font-size: 12px;
-                padding-left: 30px;
-            }
-
-            .field {
-                .control:before {
-                    font-size: 13px;
-                }
-            }
-        }
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+    .block.newsletter {
+        margin-bottom: 30px;
     }
 }
+
+
+

@@ -35,42 +35,34 @@
 
                 <container name="footer.container" htmlTag="div" htmlClass="footer-container" before="-">
                     <container name="footer.info" htmlTag="div" htmlClass="footer-info" before="-">
-                        <container name="footer.links1" htmlTag="div" htmlClass="footer-links1">
-                            <block class="Magento\Framework\View\Element\Text" name="text.blank1" before="-">
+                        <container name="footer.links1" htmlTag="div" htmlClass="footer-links footer-links1">
+                            <block class="Magento\Cms\Block\Block" name="footer-links1">
                                 <arguments>
-                                    <argument name="text" xsi:type="string">
-                                        <![CDATA[Links1 Ipsum is simply dummy text of the printing and typesetting industry.]]>
-                                    </argument>
+                                    <argument name="block_id" xsi:type="string">footer-links1</argument>
                                 </arguments>
                             </block>
                         </container>
-                        <container name="footer.links2" htmlTag="div" htmlClass="footer-links2">
-                            <block class="Magento\Framework\View\Element\Text" name="text.blank2" before="-">
+                        <container name="footer.links2" htmlTag="div" htmlClass="footer-links footer-links2">
+                            <block class="Magento\Cms\Block\Block" name="footer-links2">
                                 <arguments>
-                                    <argument name="text" xsi:type="string">
-                                        <![CDATA[Links2 Ipsum is simply dummy text of the printing and typesetting industry.]]>
-                                    </argument>
+                                    <argument name="block_id" xsi:type="string">footer-links2</argument>
                                 </arguments>
                             </block>
                         </container>
-                        <container name="footer.contacts" htmlTag="div" htmlClass="footer-contacts">
-                            <block class="Magento\Framework\View\Element\Text" name="text.blank3" before="-">
+                        <container name="footer.contacts" htmlTag="div" htmlClass="footer-links footer-contacts">
+                            <block class="Magento\Cms\Block\Block" name="footer-contacts">
                                 <arguments>
-                                    <argument name="text" xsi:type="string">
-                                        <![CDATA[Contacts Ipsum is simply dummy text of the printing and typesetting industry.]]>
-                                    </argument>
+                                    <argument name="block_id" xsi:type="string">footer-contacts</argument>
                                 </arguments>
                             </block>
                         </container>
                     </container>
 
                     <container name="newsletter.footer.block" htmlTag="div" htmlClass="newsletter-footer-block" after="-">
-                        <container name="fotter.socials" htmlTag="div" htmlClass="footer-socials" after="-">
-                            <block class="Magento\Framework\View\Element\Text" name="text.blankwww2" after="-">
+                        <container name="footer.socials" htmlTag="div" htmlClass="footer-socials" after="-">
+                            <block class="Magento\Cms\Block\Block" name="footer-socials">
                                 <arguments>
-                                    <argument name="text" xsi:type="string">
-                                        <![CDATA[Socials here]]>
-                                    </argument>
+                                    <argument name="block_id" xsi:type="string">footer-socials</argument>
                                 </arguments>
                             </block>
                         </container>
@@ -78,19 +70,14 @@
                 </container>
 
                 <container name="copyright.footer.block" htmlTag="div" htmlClass="copyright-footer-block" after="-">
-
-
                     <container name="footer.social.mobile" htmlTag="div" htmlClass="footer-socials mobile" after="-">
-                        <block class="Magento\Framework\View\Element\Text" name="text.blankww" after="-">
+                        <block class="Magento\Cms\Block\Block" name="footer-socials-mobile">
                             <arguments>
-                                <argument name="text" xsi:type="string">
-                                    <![CDATA[Socials here]]>
-                                </argument>
+                                <argument name="block_id" xsi:type="string">footer-socials</argument>
                             </arguments>
                         </block>
                     </container>
                 </container>
-
             </referenceContainer>
 
         </referenceContainer>

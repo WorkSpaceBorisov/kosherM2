@@ -7,7 +7,7 @@
 /** @var \Magento\Newsletter\Block\Subscribe $block */
 ?>
 <div class="block newsletter">
-    <div class="title"><strong><?= $block->escapeHtml(__('Newsletter')) ?></strong></div>
+    <h4><?= $block->escapeHtml(__('Subscribe To Newsletter')) ?></h4>
     <div class="content">
         <form class="form subscribe"
             novalidate
@@ -16,18 +16,11 @@
             data-mage-init='{"validation": {"errorClass": "mage-error"}}'
             id="newsletter-validate-detail">
             <div class="field newsletter">
-                <div class="control">
-                    <label for="newsletter">
-                        <span class="label">
-                            <?= $block->escapeHtml(__('Sign Up for Our Newsletter:')) ?>
-                        </span>
-                        <input name="email" type="email" id="newsletter"
-                               placeholder="<?= $block->escapeHtml(__('Enter your email address')) ?>"
-                               data-mage-init='{"mage/trim-input":{}}'
-                               data-validate="{required:true, 'validate-email':true}"
-                        />
-                    </label>
-                </div>
+                <input name="email" type="email" id="newsletter"
+                       placeholder="<?= $block->escapeHtml(__('Email')) ?>"
+                       data-mage-init='{"mage/trim-input":{}}'
+                       data-validate="{required:true, 'validate-email':true}"
+                />
             </div>
             <div class="actions">
                 <button class="action subscribe primary"
