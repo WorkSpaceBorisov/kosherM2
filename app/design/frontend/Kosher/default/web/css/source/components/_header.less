@@ -4,6 +4,457 @@
 
 & when (@media-common = true) {
 
+    body {
+        .header {
+            &.content {
+                align-items: center;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+                border: 1px solid @kos-color__15;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                margin-bottom: 20px;
+                padding-bottom: 11px;
+                padding-top: 9px;
+                position: relative;
+
+                &:before,
+                &:after {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .catalog-button-container {
+        margin-right: 16px;
+        order: 1;
+    }
+
+    .catalog-button {
+        .size(40);
+        align-items: center;
+        background: transparent;
+        position: relative;
+
+        &:before {
+            .icomoon(@icon-hamburger, 19px, @kos-color__20);
+            .to-center();
+        }
+
+        span {
+            display: none;
+        }
+    }
+
+    .logo {
+        display: block;
+        order: 2;
+        width: 140px;
+
+        img {
+            display: block;
+        }
+    }
+
+    .mobile-button() {
+        .size(36);
+        display: block;
+        margin-left: 1px;
+        margin-right: 0;
+        position: relative;
+
+        &:before {
+            .icomoon(@icon-cart-new, 21px, @kos-color__20);
+            .to-center();
+            position: absolute;
+            z-index: 10;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        span {
+            display: none;
+        }
+    }
+
+    .header {
+        .search-button {
+            .mobile-button();
+
+            &:before {
+                content: @icon-leans2;
+            }
+        }
+
+        .minicart-wrapper .action.showcart {
+            .mobile-button();
+
+            &:before {
+
+            }
+
+            .text {
+                display: none;
+            }
+
+            &:after {
+                content: none;
+            }
+
+        }
+    }
+
+    .header-search-container {
+        display: none;
+        background: darken(@kos-color__13, 2%);
+        border-top: 1px solid @kos-color__16;
+        border-bottom: 1px solid @kos-color__16;
+        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.10);
+        flex-grow: 1;
+        left: 0;
+        order: 4;
+        padding: 10px 15px 9px;
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        z-index: 90;
+    }
+
+    .header-right-container {
+        align-items: center;
+        display: flex;
+        justify-content: flex-end;
+        margin-left: auto;
+        order: 3;
+        position: relative;
+    }
+
+    .header-login-block {
+        position: relative;
+        margin-right: 0;
+
+        .login-button {
+            .mobile-button();
+
+            &:before {
+                content: @icon-account;
+            }
+        }
+
+        .account-button {
+            .mobile-button();
+
+            &:before {
+                .icomoon(@icon-acc-orders, 18px, @kos-color__19);
+                .to-center();
+            }
+
+            span {
+                display: none;
+            }
+        }
+
+        .ko-customer-menu {
+            background: @kos-color__01;
+            border: 1px solid @kos-color__16;
+            box-shadow: 0 3px 3px rgba(0, 0, 0, .15);
+            display: none;
+            //display: block;
+            left: auto;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            z-index: 100;
+
+            @arr-size: 8px;
+
+            &:before {
+                .triangle(top, @arr-size, @arr-size, @kos-color__01);
+                position: absolute;
+                right: 9px;
+                top: -@arr-size + 1px;
+                width: 0;
+                z-index: 99;
+            }
+
+            &:after {
+                .triangle(top, @arr-size, @arr-size, @kos-color__18);
+                position: absolute;
+                right: 9px;
+                top: -@arr-size;
+                width: 0;
+                z-index: 98;
+            }
+        }
+
+        ul {
+            .lib-list-reset-styles();
+            min-width: 175px;
+
+            li {
+                padding: 0;
+                margin: 0;
+            }
+
+            a {
+                color: @kos-color__20;
+                display: block;
+                font-weight: 500;
+                padding: 9px 12px;
+
+                &:hover {
+                    background: @kos-color__27;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop min to mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    body {
+        .header {
+            &.content {
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+                flex-wrap: nowrap;
+                margin-bottom: 20px;
+                padding-bottom: 6px;
+                padding-top: 6px;
+            }
+        }
+    }
+
+    .catalog-button-container {
+        margin-right: 2.6%;
+    }
+
+    .catalog-button {
+        .size(126px, 48px);
+        align-items: center;
+        background: @button-bg;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        padding-left: 1px;
+
+        &:before {
+            .icomoon(@icon-quads, 19px, @kos-color__01);
+            margin-right: 10px;
+            position: static;
+            transform: none;
+        }
+
+        span {
+            .lib-font-size(16);
+            color: @kos-color__01;
+            display: block;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        &:hover {
+            background: @button-hover-bg;
+            border: 2px solid @button-bg;
+            cursor: pointer;
+
+            &:before,
+            span {
+                color: @button-bg;
+            }
+        }
+
+        &:active {
+            background: @button-active-bg;
+        }
+    }
+
+    .logo {
+        width: 180px;
+    }
+
+    .desktop-header-icon(@icon, @size: 22px) {
+        align-items: center;
+        background: @kos-color__27;
+        border-radius: 8px;
+        color: @kos-color__04;
+        display: flex;
+        height: 56px;
+        justify-content: center;
+
+        &:before {
+            .icomoon(@icon, @size, @kos-color__04);
+            position: static;
+            transform: none;
+        }
+
+        & > span:not(.counter) {
+            .lib-font-size(16);
+            color: @kos-color__04;
+            display: block;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        &:hover {
+            background: @kos-color__04;
+            color: @kos-color__01;
+            cursor: pointer;
+            text-decoration: none;
+
+            &:before {
+                color: @kos-color__01;
+            }
+
+            & > span:not(.counter) {
+                color: @kos-color__01;
+            }
+        }
+
+    }
+
+    .header {
+        .search-button {
+            display: none;
+        }
+
+        .minicart-wrapper .action.showcart {
+            .desktop-header-icon(@icon-cart-new);
+            width: 99px;
+
+            .text {
+                display: block;
+            }
+
+            &.active {
+                background: @kos-color__04;
+                color: @kos-color__01;
+
+                &:before {
+                    color: @kos-color__01;
+                }
+
+                & > span:not(.counter) {
+                    color: @kos-color__01;
+                }
+            }
+
+        }
+    }
+
+    .header-search-container {
+        background: transparent;
+        border-bottom: 0;
+        border-top: 0;
+        box-shadow: none;
+        display: block;
+        order: 3;
+        padding: 0 4vw;
+        position: static;
+        width: unset;
+    }
+
+    .header-right-container {
+        order: 4;
+    }
+
+    .header-login-block {
+        position: relative;
+        margin-right: 1.25vw;
+
+        .login-button {
+            .desktop-header-icon(@icon-login);
+            width: 112px;
+        }
+
+        .account-button {
+            .size(76, 56);
+            border-radius: 8px;
+            margin-right: .52vw;
+
+            &:before {
+                .icomoon(@icon-acc-orders, 18px, @kos-color__19);
+            }
+
+            &:hover {
+                cursor: pointer;
+                background: @kos-color__04;
+
+                &:before {
+                    color: @kos-color__01;
+                }
+            }
+        }
+
+        &.active {
+            .account-button {
+                background: @kos-color__04;
+
+                &:before {
+                    color: @kos-color__01;
+                }
+            }
+        }
+
+        .ko-customer-menu {
+            background: @kos-color__01;
+            border: 1px solid @kos-color__16;
+            box-shadow: 0 3px 3px rgba(0, 0, 0, .15);
+            display: none;
+            left: auto;
+            right: 0;
+            margin: 2px 0 0 0;
+            padding: 0;
+            position: absolute;
+            top: 100%;
+            z-index: 100;
+
+            @arr-size: 8px;
+
+            &:before {
+                .triangle(top, @arr-size, @arr-size, @kos-color__01);
+                position: absolute;
+                right: 9px;
+                top: -@arr-size + 1px;
+                width: 0;
+                z-index: 99;
+            }
+
+            &:after {
+                .triangle(top, @arr-size, @arr-size, @kos-color__18);
+                position: absolute;
+                right: 9px;
+                top: -@arr-size;
+                width: 0;
+                z-index: 98;
+            }
+        }
+
+        ul {
+            .lib-list-reset-styles();
+            min-width: 175px;
+
+            a {
+                color: @kos-color__20;
+                display: block;
+                font-weight: 500;
+                padding: 9px 12px;
+
+                &:hover {
+                    background: @kos-color__27;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
 }
 
 //

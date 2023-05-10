@@ -1,0 +1,258 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@autocomplete__background-color: @color-white;
+@autocomplete__border: 1px solid @form-element-input__border-color;
+@autocomplete-item__border: 1px solid @color-gray90;
+@autocomplete-item__hover__color: @color-gray91;
+@autocomplete-item-amount__color: @color-gray60;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    .block-search {
+        max-width: unset;
+        position: relative;
+        margin: 0 auto;
+        width: 100%;
+
+
+        input[type=text] {
+            .lib-font-size(16);
+            background: #f9f9f9;
+            border: 1px solid @kos-color__02;
+            border-radius: 4px;
+            height: 40px;
+            line-height: 1;
+            letter-spacing: 0.01em;
+            padding: 4px 15px 0 15px;
+            width: 100%;
+
+            .placeholder({
+                .lib-font-size(16);
+                color: @kos-color__18;
+                font-weight: 500;
+            });
+        }
+
+        .nested {
+            display: none;
+        }
+
+        .action.search {
+            .size(30);
+            background: transparent;
+            border: 0;
+            right: 7px;
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+            z-index: 20;
+
+            &[disabled] {
+                opacity: 1;
+            }
+
+            &:after {
+                .icomoon(@icon-lens, 18px, @kos-color__19);
+                .to-center();
+                z-index: 1;
+            }
+
+            span {
+                display: none;
+            }
+
+            &:hover {
+                cursor: pointer;
+
+                &:after {
+                    color: @kos-color__21;
+                }
+            }
+
+            &:active {
+                &:after {
+                    color: @kos-color__03;
+                }
+            }
+        }
+
+    }
+
+    .search-autocomplete {
+        display: none;
+        border: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: 100;
+        &:extend(.abs-add-box-sizing all);
+
+        ul {
+            .lib-list-reset-styles();
+
+            &:not(:empty) {
+                .lib-css(background, @autocomplete__background-color);
+                .lib-css(border, @autocomplete__border);
+                border-top: 0;
+            }
+
+            li {
+                .lib-css(border-top, @autocomplete-item__border);
+                cursor: pointer;
+                margin: 0;
+                padding: @indent__xs @indent__xl @indent__xs @indent__s;
+                position: relative;
+                text-align: left;
+                white-space: normal;
+
+                &:first-child {
+                    border-top: none;
+                }
+
+                &:hover,
+                &.selected {
+                    .lib-css(background, @autocomplete-item__hover__color);
+                }
+
+                .amount {
+                    .lib-css(color, @autocomplete-item-amount__color);
+                    position: absolute;
+                    right: 7px;
+                    top: @indent__xs;
+                }
+            }
+        }
+    }
+
+    .form.search.advanced {
+        .fields.range {
+            .field {
+                &:first-child {
+                    position: relative;
+
+                    .control {
+                        padding-right: 25px;
+
+                        &:after {
+                            content: ' \2013 ';
+                            display: inline-block;
+                            position: absolute;
+                            right: 0;
+                            text-align: center;
+                            top: 6px;
+                            width: 25px;
+                        }
+                    }
+                }
+
+                &:last-child {
+                    position: relative;
+
+                    div.mage-error {
+                        left: 0;
+                        position: absolute;
+                        top: 32px;
+                    }
+                }
+
+                &.with-addon {
+                    .control {
+                        padding-right: 45px;
+                    }
+                }
+
+                &.date {
+                    &:extend(.abs-field-date all);
+                }
+            }
+        }
+
+        .group.price {
+            .addon {
+                .addafter {
+                    background: none;
+                    border: 0;
+                    padding-top: 6px;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                }
+            }
+        }
+    }
+
+    .search-terms {
+        &:extend(.abs-reset-list all);
+        line-height: 2em;
+
+        > li {
+            display: inline-block;
+            margin-right: @indent__s;
+        }
+    }
+
+    .search.found {
+        margin-bottom: @indent__s;
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .block-search {
+        max-width: 800px;
+
+        input[type=text] {
+            .lib-font-size(16);
+            background: @custom-form-input-bg;
+            border: 0;
+            border-radius: 8px 8px 0 0;
+            border-bottom: 1px solid @kos-color__19;
+            height: 48px;
+            padding: 4px 30px 0 45px;
+
+            .placeholder({
+                .lib-font-size(16);
+                color: @kos-color__17;
+            });
+        }
+
+        .action.search {
+            .size(30);
+            background: transparent;
+            left: 13px;
+            top: 50%;
+            transform: translate(0, -50%);
+
+            &:after {
+                .icomoon(@icon-lens, 18px, @kos-color__19);
+                .to-center();
+                z-index: 1;
+            }
+
+            &:hover {
+                &:after {
+                    color: @kos-color__21;
+                }
+            }
+
+            &:active {
+                &:after {
+                    color: @kos-color__03;
+                }
+            }
+        }
+    }
+}
