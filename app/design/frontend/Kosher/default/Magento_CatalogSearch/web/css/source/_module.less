@@ -20,7 +20,7 @@
 & when (@media-common = true) {
 
     .block-search {
-        max-width: 800px;
+        max-width: unset;
         position: relative;
         margin: 0 auto;
         width: 100%;
@@ -28,20 +28,19 @@
 
         input[type=text] {
             .lib-font-size(16);
-            background: @custom-form-input-bg;
-            border: 0;
-            border-radius: 8px 8px 0 0;
-            border-bottom: 1px solid @kos-color__19;
-            height: 48px;
+            background: #f9f9f9;
+            border: 1px solid @kos-color__02;
+            border-radius: 4px;
+            height: 40px;
             line-height: 1;
             letter-spacing: 0.01em;
-            padding: 4px 30px 0 45px;
+            padding: 4px 15px 0 15px;
             width: 100%;
 
             .placeholder({
                 .lib-font-size(16);
-                color: @kos-color__17;
-                font-weight: 400;
+                color: @kos-color__18;
+                font-weight: 500;
             });
         }
 
@@ -49,20 +48,17 @@
             display: none;
         }
 
-        .actions {
-        }
-
         .action.search {
             .size(30);
             background: transparent;
             border: 0;
-            left: 13px;
+            right: 7px;
             position: absolute;
             top: 50%;
             transform: translate(0, -50%);
             z-index: 20;
 
-            &[disabled]{
+            &[disabled] {
                 opacity: 1;
             }
 
@@ -76,15 +72,16 @@
                 display: none;
             }
 
-            &:hover{
+            &:hover {
                 cursor: pointer;
-                &:after{
+
+                &:after {
                     color: @kos-color__21;
                 }
             }
 
-            &:active{
-                &:after{
+            &:active {
+                &:after {
                     color: @kos-color__03;
                 }
             }
@@ -214,5 +211,48 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .block-search {
+        max-width: 800px;
 
+        input[type=text] {
+            .lib-font-size(16);
+            background: @custom-form-input-bg;
+            border: 0;
+            border-radius: 8px 8px 0 0;
+            border-bottom: 1px solid @kos-color__19;
+            height: 48px;
+            padding: 4px 30px 0 45px;
+
+            .placeholder({
+                .lib-font-size(16);
+                color: @kos-color__17;
+            });
+        }
+
+        .action.search {
+            .size(30);
+            background: transparent;
+            left: 13px;
+            top: 50%;
+            transform: translate(0, -50%);
+
+            &:after {
+                .icomoon(@icon-lens, 18px, @kos-color__19);
+                .to-center();
+                z-index: 1;
+            }
+
+            &:hover {
+                &:after {
+                    color: @kos-color__21;
+                }
+            }
+
+            &:active {
+                &:after {
+                    color: @kos-color__03;
+                }
+            }
+        }
+    }
 }

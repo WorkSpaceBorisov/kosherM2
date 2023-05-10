@@ -9,11 +9,14 @@
             &.content {
                 align-items: center;
                 box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+                border: 1px solid @kos-color__15;
                 display: flex;
+                flex-wrap: wrap;
                 justify-content: space-between;
                 margin-bottom: 20px;
-                padding-bottom: 6px;
-                padding-top: 6px;
+                padding-bottom: 11px;
+                padding-top: 9px;
+                position: relative;
 
                 &:before,
                 &:after {
@@ -24,83 +27,106 @@
     }
 
     .catalog-button-container {
-        margin-right: 2.6%;
+        margin-right: 16px;
         order: 1;
     }
 
     .catalog-button {
-        .size(48);
+        .size(40);
         align-items: center;
         background: transparent;
-        border: 1px solid @kos-color__21;
+        position: relative;
 
         &:before {
-            .icomoon(@icon-quads, 19px, @kos-color__01);
-            margin-right: 10px;
+            .icomoon(@icon-hamburger, 19px, @kos-color__20);
+            .to-center();
         }
 
         span {
             display: none;
-        }
-
-        &:hover {
-            background: @button-hover-bg;
-            border: 2px solid @button-bg;
-            cursor: pointer;
-
-            &:before,
-            span {
-                color: @button-bg;
-            }
         }
     }
 
     .logo {
         display: block;
         order: 2;
-        width: 180px;
+        width: 140px;
 
         img {
             display: block;
         }
     }
 
+    .mobile-button() {
+        .size(36);
+        display: block;
+        margin-left: 1px;
+        margin-right: 0;
+        position: relative;
+
+        &:before {
+            .icomoon(@icon-cart-new, 21px, @kos-color__20);
+            .to-center();
+            position: absolute;
+            z-index: 10;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        span {
+            display: none;
+        }
+    }
+
     .header {
         .search-button {
-            display: block;
+            .mobile-button();
+
+            &:before {
+                content: @icon-leans2;
+            }
         }
 
         .minicart-wrapper .action.showcart {
-            width: 99px;
+            .mobile-button();
+
+            &:before {
+
+            }
+
+            .text {
+                display: none;
+            }
 
             &:after {
                 content: none;
             }
 
-            &.active{
-                background: @kos-color__04;
-                color: @kos-color__01;
-
-                &:before {
-                    color: @kos-color__01;
-                }
-
-                & > span:not(.counter) {
-                    color: @kos-color__01;
-                }
-            }
         }
     }
 
     .header-search-container {
+        display: none;
+        background: darken(@kos-color__13, 2%);
+        border-top: 1px solid @kos-color__16;
+        border-bottom: 1px solid @kos-color__16;
+        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.10);
         flex-grow: 1;
+        left: 0;
         order: 4;
-        padding: 0 4vw;
+        padding: 10px 15px 9px;
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        z-index: 90;
     }
 
     .header-right-container {
         align-items: center;
         display: flex;
+        justify-content: flex-end;
         margin-left: auto;
         order: 3;
         position: relative;
@@ -108,18 +134,18 @@
 
     .header-login-block {
         position: relative;
-        margin-right: 1.25vw;
+        margin-right: 0;
 
         .login-button {
-            width: 112px;
+            .mobile-button();
+
+            &:before {
+                content: @icon-account;
+            }
         }
 
         .account-button {
-            .size(56);
-            border-radius: 8px;
-            display: block;
-            margin-right: 0;
-            position: relative;
+            .mobile-button();
 
             &:before {
                 .icomoon(@icon-acc-orders, 18px, @kos-color__19);
@@ -198,6 +224,7 @@
         .header {
             &.content {
                 box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+                flex-wrap: nowrap;
                 margin-bottom: 20px;
                 padding-bottom: 6px;
                 padding-top: 6px;
@@ -221,6 +248,8 @@
         &:before {
             .icomoon(@icon-quads, 19px, @kos-color__01);
             margin-right: 10px;
+            position: static;
+            transform: none;
         }
 
         span {
@@ -262,11 +291,14 @@
 
         &:before {
             .icomoon(@icon, @size, @kos-color__04);
+            position: static;
+            transform: none;
         }
 
         & > span:not(.counter) {
             .lib-font-size(16);
             color: @kos-color__04;
+            display: block;
             font-weight: 600;
             margin-left: 10px;
         }
@@ -297,7 +329,11 @@
             .desktop-header-icon(@icon-cart-new);
             width: 99px;
 
-            &.active{
+            .text {
+                display: block;
+            }
+
+            &.active {
                 background: @kos-color__04;
                 color: @kos-color__01;
 
@@ -313,10 +349,16 @@
         }
     }
 
-
     .header-search-container {
+        background: transparent;
+        border-bottom: 0;
+        border-top: 0;
+        box-shadow: none;
+        display: block;
         order: 3;
         padding: 0 4vw;
+        position: static;
+        width: unset;
     }
 
     .header-right-container {
@@ -341,20 +383,21 @@
                 .icomoon(@icon-acc-orders, 18px, @kos-color__19);
             }
 
-            &:hover{
+            &:hover {
                 cursor: pointer;
                 background: @kos-color__04;
 
-                &:before{
+                &:before {
                     color: @kos-color__01;
                 }
             }
         }
 
-        &.active{
+        &.active {
             .account-button {
                 background: @kos-color__04;
-                &:before{
+
+                &:before {
                     color: @kos-color__01;
                 }
             }
@@ -365,7 +408,6 @@
             border: 1px solid @kos-color__16;
             box-shadow: 0 3px 3px rgba(0, 0, 0, .15);
             display: none;
-            //display: block;
             left: auto;
             right: 0;
             margin: 2px 0 0 0;
