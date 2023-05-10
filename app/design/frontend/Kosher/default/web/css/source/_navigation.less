@@ -1,0 +1,60 @@
+// Main menu
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .kosher-main-menu {
+        padding: 0 35px;
+        margin-bottom: 30px;
+        max-width: 600px;
+        width: 100%;
+        ul {
+            .lib-list-reset-styles();
+        }
+
+        .level0 {
+            .level-top {
+                display: block;
+                border: 1px solid red;
+                background: #eee;
+                padding: 5px 10px;
+                font-weight: 600;
+
+                & > li {
+                    border: 1px solid blue;
+                }
+            }
+
+        }
+
+        .submenu {
+            //display: none;
+            border: 1px solid green;
+            padding: 10px;
+
+            & > li {
+                border: 1px dotted green;
+                padding: 5px;
+                margin: 1px;
+            }
+
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+}
