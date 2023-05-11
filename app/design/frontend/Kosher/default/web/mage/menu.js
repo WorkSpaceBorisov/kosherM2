@@ -4,15 +4,10 @@
  */
 
 define([
-    'jquery',
-    'mage/translate'
+    'jquery'
 ], function ($) {
     'use strict';
-
     let btn = $('#catalog_button');
     let menu = $('#kosher_main_menu');
-
     btn.on('click', () => menu.slideToggle(300, 'swing'));
-
-
 });

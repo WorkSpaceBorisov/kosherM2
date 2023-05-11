@@ -31,13 +31,13 @@ define([
             let autoClose = this.options.autoClose;
 
             if (!this.options.autoClose) elem.addClass('noautoclose');
-            trigger.css('transition', speed + 'ms');
+            elem.find(trigger).css('transition', speed + 'ms');
 
             if (opened) {
                 elem.find(triggerClass).eq(opened - 1).addClass('active').next(contentClass).slideDown(speed).addClass('opened');
             }
 
-            trigger.off().on('click', function (e) {
+            elem.find(trigger).off().on('click', function (e) {
                 e.preventDefault();
 
                 if ($(this).hasClass('active')) {

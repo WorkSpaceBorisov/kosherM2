@@ -21,14 +21,8 @@ $_menuHtml = $block->getHtml('level-top', 'submenu', $columnsLimit)
 </ul>
 
 <script>
-    const topCatagories = document.querySelectorAll('.level0.category-item > a.level-top');
 
-    for (let item of topCatagories) {
-        let icon = document.createElement('div');
-        icon.classList.add('category-icon');
-        icon.innerHTML = '<img src="/static/frontend/Kosher/default/en_US/images/categories/groceries.svg">';
-        item.prepend(icon);
-    }
+
 
     // topCatagories[1].classList.add('opened');
 </script>

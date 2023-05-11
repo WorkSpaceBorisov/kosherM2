@@ -56,14 +56,16 @@ define([
     // Close on click out
 
     $(window).click(() => {
+        let menu = $('#kosher_main_menu');
         //Hide if visible
         $('.mobile-view .header-search-container').fadeOut(500);
+        if(menu.css('display') === 'block') menu.slideUp(300, 'swing');
     });
 
 
     // No close
 
-    $('.page-header').on('click', (e) => {
+    $('.page-header, #kosher_main_menu').on('click', (e) => {
         e.stopPropagation()
     })
 
