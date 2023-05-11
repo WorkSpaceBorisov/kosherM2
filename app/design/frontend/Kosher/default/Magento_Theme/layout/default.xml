@@ -5,6 +5,7 @@
         <referenceBlock name="header.panel.wrapper" remove="true"/>
         <referenceBlock name="catalog.compare.link" remove="true"/>
         <referenceBlock name="footer_links" remove="true"/>
+        <referenceBlock name="navigation.sections" remove="true"/>
 
         <!-- MOVE -->
         <move element="top.search" destination="header.search.container"/>
@@ -28,6 +29,15 @@
                            template="Magento_Theme::html/header/account-button.phtml"/>
                 </container>
             </referenceContainer>
+            <container name="main.menu" htmlTag="div" htmlClass="kosher-main-menu" htmlId="kosher_main_menu" after="-">
+                <block class="Magento\Theme\Block\Html\Topmenu" name="catalog.topnav" template="Magento_Theme::html/topmenu.phtml" ttl="3600"/>
+            </container>
+        </referenceContainer>
+
+        <referenceContainer name="page.bottom.container">
+            <container name="horizonlal.menu.container" htmlTag="div" htmlClass="kosher-horizontal-menu" after="-">
+                <block class="Magento\Theme\Block\Html\Topmenu" name="horizonlal.menu" template="Magento_Theme::html/topmenu.phtml" ttl="3600"/>
+            </container>
         </referenceContainer>
 
         <referenceContainer name="footer-container">

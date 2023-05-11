@@ -27,7 +27,7 @@ define([
     const login = $('.header-login-block');
 
     $('.header-right-container .search-button').on('click', () => {
-        search.slideToggle(0);
+        search.fadeToggle(200);
         if (login.hasClass('active') && search.css('display') === 'block') {
             login.removeClass('active');
             $('.ko-customer-menu').removeAttr('style');
@@ -43,12 +43,30 @@ define([
     mediaCheck({
         media: breakPoint,
         entry: () => {
-            // Mobile mode
+            // Mobile mode\
+            $('body').addClass('mobile-view');
         },
         exit: () => {
             // Desktop mode
             desktopCleaup();
+            $('body').removeClass('mobile-view');
         }
     });
+
+    // Close on click out
+
+    $(window).click(() => {
+        let menu = $('#kosher_main_menu');
+        //Hide if visible
+        $('.mobile-view .header-search-container').fadeOut(500);
+        if(menu.css('display') === 'block') menu.slideUp(300, 'swing');
+    });
+
+
+    // No close
+
+    $('.page-header, #kosher_main_menu').on('click', (e) => {
+        e.stopPropagation()
+    })
 
 });
