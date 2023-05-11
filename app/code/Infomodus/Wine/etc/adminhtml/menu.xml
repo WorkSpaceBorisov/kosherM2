@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Infomodus_Wine::wine" title="Infomodus Wine" module="Infomodus_Wine" sortOrder="16"
+             resource="Infomodus_Wine::wine"/>
+
+        <add id="Infomodus_Wine::wine_attributes" title="Export" module="Infomodus_Wine" sortOrder="100"
+             parent="Infomodus_Wine::wine" resource="Infomodus_Wine::wine_attributes"/>
+
+        <add id="Infomodus_Wine::wine_attributes_grid" title="Attributes" module="Infomodus_Wine" sortOrder="100"
+             action="infomodus_wine/wine/attributes" parent="Infomodus_Wine::wine_attributes"
+             resource="Infomodus_Wine::wine_attributes_view"/>
+
+        <add id="Infomodus_Wine::wine_attributesets_grid" title="Attribute Sets" module="Infomodus_Wine" sortOrder="200"
+             action="infomodus_wine/wine/attributeSets" parent="Infomodus_Wine::wine_attributes"
+             resource="Infomodus_Wine::wine_attributes_view"/>
+
+        <add id="Infomodus_Wine::wine_attributegroups_grid" title="Attribute Groups" module="Infomodus_Wine" sortOrder="300"
+             action="infomodus_wine/wine/attributeGroups" parent="Infomodus_Wine::wine_attributes"
+             resource="Infomodus_Wine::wine_attributes_view"/>
+
+        <add id="Infomodus_Wine::wine_categories_grid" title="Categories" module="Infomodus_Wine" sortOrder="400"
+             action="infomodus_wine/wine/categories" parent="Infomodus_Wine::wine_attributes"
+             resource="Infomodus_Wine::wine_attributes_view"/>
+    </menu>
+</config>

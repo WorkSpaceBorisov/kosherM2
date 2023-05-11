@@ -1,0 +1,21 @@
+{
+  "name": "infomodus/wine",
+  "description": "Migrate from Wine",
+  "config": {
+    "sort-packages": true
+  },
+  "require": {
+    "magento/framework": "*",
+    "magento/data-migration-tool": "*"
+  },
+  "type": "magento2-module",
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Infomodus\\Wine\\": ""
+    }
+  },
+  "version": "1.0.0"
+}
