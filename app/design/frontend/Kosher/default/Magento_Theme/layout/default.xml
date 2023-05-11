@@ -29,7 +29,7 @@
                            template="Magento_Theme::html/header/account-button.phtml"/>
                 </container>
             </referenceContainer>
-            <container name="main.menu" htmlTag="div" htmlClass="kosher-main-menu" after="-">
+            <container name="main.menu" htmlTag="div" htmlClass="kosher-main-menu" htmlId="kosher_main_menu" after="-">
             <block class="Magento\Theme\Block\Html\Topmenu" name="catalog.topnav" template="Magento_Theme::html/topmenu.phtml" ttl="3600" />
             </container>
         </referenceContainer>

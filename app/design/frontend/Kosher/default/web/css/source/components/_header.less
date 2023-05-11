@@ -9,7 +9,7 @@
             &.content {
                 align-items: center;
                 box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-                border: 1px solid @kos-color__15;
+                border: 1px solid @kosher-color__15;
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: space-between;
@@ -38,7 +38,7 @@
         position: relative;
 
         &:before {
-            .icomoon(@icon-hamburger, 19px, @kos-color__20);
+            .icomoon(@icon-hamburger, 19px, @kosher-color__20);
             .to-center();
         }
 
@@ -65,7 +65,7 @@
         position: relative;
 
         &:before {
-            .icomoon(@icon-cart-new, 21px, @kos-color__20);
+            .icomoon(@icon-cart-new, 21px, @kosher-color__20);
             .to-center();
             position: absolute;
             z-index: 10;
@@ -109,9 +109,9 @@
 
     .header-search-container {
         display: none;
-        background: darken(@kos-color__13, 2%);
-        border-top: 1px solid @kos-color__16;
-        border-bottom: 1px solid @kos-color__16;
+        background: darken(@kosher-color__13, 2%);
+        border-top: 1px solid @kosher-color__16;
+        border-bottom: 1px solid @kosher-color__16;
         box-shadow: 0 3px 3px rgba(0, 0, 0, 0.10);
         flex-grow: 1;
         left: 0;
@@ -148,7 +148,7 @@
             .mobile-button();
 
             &:before {
-                .icomoon(@icon-acc-orders, 18px, @kos-color__19);
+                .icomoon(@icon-acc-orders, 18px, @kosher-color__19);
                 .to-center();
             }
 
@@ -158,8 +158,8 @@
         }
 
         .ko-customer-menu {
-            background: @kos-color__01;
-            border: 1px solid @kos-color__16;
+            background: @kosher-color__01;
+            border: 1px solid @kosher-color__16;
             box-shadow: 0 3px 3px rgba(0, 0, 0, .15);
             display: none;
             //display: block;
@@ -173,7 +173,7 @@
             @arr-size: 8px;
 
             &:before {
-                .triangle(top, @arr-size, @arr-size, @kos-color__01);
+                .triangle(top, @arr-size, @arr-size, @kosher-color__01);
                 position: absolute;
                 right: 9px;
                 top: -@arr-size + 1px;
@@ -182,7 +182,7 @@
             }
 
             &:after {
-                .triangle(top, @arr-size, @arr-size, @kos-color__18);
+                .triangle(top, @arr-size, @arr-size, @kosher-color__18);
                 position: absolute;
                 right: 9px;
                 top: -@arr-size;
@@ -201,13 +201,13 @@
             }
 
             a {
-                color: @kos-color__20;
+                color: @kosher-color__20;
                 display: block;
                 font-weight: 500;
                 padding: 9px 12px;
 
                 &:hover {
-                    background: @kos-color__27;
+                    background: @kosher-color__27;
                     text-decoration: none;
                 }
             }
@@ -247,7 +247,7 @@
         padding-left: 1px;
 
         &:before {
-            .icomoon(@icon-quads, 19px, @kos-color__01);
+            .icomoon(@icon-quads, 19px, @kosher-color__01);
             margin-right: 10px;
             position: static;
             transform: none;
@@ -255,7 +255,7 @@
 
         span {
             .lib-font-size(16);
-            color: @kos-color__01;
+            color: @kosher-color__01;
             display: block;
             font-weight: 600;
             line-height: 1;
@@ -283,39 +283,39 @@
 
     .desktop-header-icon(@icon, @size: 22px) {
         align-items: center;
-        background: @kos-color__27;
+        background: @kosher-color__27;
         border-radius: 8px;
-        color: @kos-color__04;
+        color: @kosher-color__04;
         display: flex;
         height: 56px;
         justify-content: center;
 
         &:before {
-            .icomoon(@icon, @size, @kos-color__04);
+            .icomoon(@icon, @size, @kosher-color__04);
             position: static;
             transform: none;
         }
 
         & > span:not(.counter) {
             .lib-font-size(16);
-            color: @kos-color__04;
+            color: @kosher-color__04;
             display: block;
             font-weight: 600;
             margin-left: 10px;
         }
 
         &:hover {
-            background: @kos-color__04;
-            color: @kos-color__01;
+            background: @kosher-color__04;
+            color: @kosher-color__01;
             cursor: pointer;
             text-decoration: none;
 
             &:before {
-                color: @kos-color__01;
+                color: @kosher-color__01;
             }
 
             & > span:not(.counter) {
-                color: @kos-color__01;
+                color: @kosher-color__01;
             }
         }
 
@@ -335,15 +335,15 @@
             }
 
             &.active {
-                background: @kos-color__04;
-                color: @kos-color__01;
+                background: @kosher-color__04;
+                color: @kosher-color__01;
 
                 &:before {
-                    color: @kos-color__01;
+                    color: @kosher-color__01;
                 }
 
                 & > span:not(.counter) {
-                    color: @kos-color__01;
+                    color: @kosher-color__01;
                 }
             }
 
@@ -381,32 +381,32 @@
             margin-right: .52vw;
 
             &:before {
-                .icomoon(@icon-acc-orders, 18px, @kos-color__19);
+                .icomoon(@icon-acc-orders, 18px, @kosher-color__19);
             }
 
             &:hover {
                 cursor: pointer;
-                background: @kos-color__04;
+                background: @kosher-color__04;
 
                 &:before {
-                    color: @kos-color__01;
+                    color: @kosher-color__01;
                 }
             }
         }
 
         &.active {
             .account-button {
-                background: @kos-color__04;
+                background: @kosher-color__04;
 
                 &:before {
-                    color: @kos-color__01;
+                    color: @kosher-color__01;
                 }
             }
         }
 
         .ko-customer-menu {
-            background: @kos-color__01;
-            border: 1px solid @kos-color__16;
+            background: @kosher-color__01;
+            border: 1px solid @kosher-color__16;
             box-shadow: 0 3px 3px rgba(0, 0, 0, .15);
             display: none;
             left: auto;
@@ -420,7 +420,7 @@
             @arr-size: 8px;
 
             &:before {
-                .triangle(top, @arr-size, @arr-size, @kos-color__01);
+                .triangle(top, @arr-size, @arr-size, @kosher-color__01);
                 position: absolute;
                 right: 9px;
                 top: -@arr-size + 1px;
@@ -429,7 +429,7 @@
             }
 
             &:after {
-                .triangle(top, @arr-size, @arr-size, @kos-color__18);
+                .triangle(top, @arr-size, @arr-size, @kosher-color__18);
                 position: absolute;
                 right: 9px;
                 top: -@arr-size;
@@ -443,13 +443,13 @@
             min-width: 175px;
 
             a {
-                color: @kos-color__20;
+                color: @kosher-color__20;
                 display: block;
                 font-weight: 500;
                 padding: 9px 12px;
 
                 &:hover {
-                    background: @kos-color__27;
+                    background: @kosher-color__27;
                     text-decoration: none;
                 }
             }
