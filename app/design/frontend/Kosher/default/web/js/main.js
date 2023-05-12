@@ -59,7 +59,7 @@ define([
         let menu = $('#kosher_main_menu');
         //Hide if visible
         $('.mobile-view .header-search-container').fadeOut(500);
-        if(menu.css('display') === 'block') menu.slideUp(300, 'swing');
+        if (menu.css('display') === 'block') menu.slideUp(300, 'swing');
     });
 
 
@@ -67,6 +67,17 @@ define([
 
     $('.page-header, #kosher_main_menu').on('click', (e) => {
         e.stopPropagation()
-    })
+    });
+
+    // Filters on/off
+
+    document.querySelector('#hide_filters').addEventListener('click', () => {
+        document.body.classList.remove('filters-on');
+    });
+    document.querySelector('#show_filters').addEventListener('click', () => {
+        document.body.classList.add('filters-on');
+    });
+
+
 
 });
