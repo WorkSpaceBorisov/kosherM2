@@ -38,8 +38,8 @@
             border-radius: 3px;
         }
         .sorter-action {
-            position: relative;
-            top: -2px;
+            //position: relative;
+            //top: -2px;
         }
         &-amount {
             left: 0;
@@ -51,7 +51,7 @@
             vertical-align: middle;
 
             .products.wrapper ~ .toolbar & {
-                display: none;
+                //display: none;
             }
         }
 
@@ -65,7 +65,7 @@
             .lib-css(background-color, @toolbar-background);
 
             .pages {
-                display: none;
+                //display: none;
 
                 .products.wrapper ~ & {
                     display: block;
@@ -79,7 +79,7 @@
     }
 
     .sorter {
-        float: right;
+        //float: right;
 
         .page-products & {
             position: absolute;
@@ -105,6 +105,7 @@
             @_icon-font-color-hover: @header-icons-color-hover
             );
             .lib-icon-text-hide();
+            border: 1px solid red;
 
             &.sort-desc:before {
                 content: @icon-arrow-down;
@@ -113,7 +114,7 @@
     }
 
     .modes {
-        display: none;
+        //display: none;
     }
 
     .limiter {
@@ -127,11 +128,11 @@
         }
 
         .page-products .toolbar & {
-            display: none;
+            //display: none;
         }
 
         .control {
-            display: inline-block;
+            //display: inline-block;
         }
     }
 }
@@ -157,25 +158,19 @@
 
     .toolbar-amount {
         display: block;
-        float: left;
+        //float: left;
         position: static;
     }
 
     .toolbar {
         .products.wrapper ~ & .pages {
-            float: left;
+            //float: left;
             margin-bottom: 0;
         }
     }
 
     .modes {
         display: inline-block;
-        float: left;
-        margin-right: @indent__base;
-
-        .products.wrapper ~ .toolbar & {
-            display: none;
-        }
     }
 
     .modes-label {
@@ -249,6 +244,6 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
     .sorter-options {
-        margin: 0 2px;
+        //margin: 0 2px;
     }
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <!-- REMOVE -->
+    <referenceBlock name="category.product.addto" remove="true"/>
+    <referenceBlock name="rss.link" remove="true"/>
+    <referenceBlock name="sidebar.additional" remove="true"/>
+    <referenceBlock name="category.product.addto" remove="true"/>
+    <!-- Pagination    -->
+<!--    <referenceBlock name="product_list_toolbar_pager" remove="true"/>-->
+
+    <!-- MOVE -->
+<!--    <referenceBlock element="sidebar.main" remove="true"/>-->
+
+    <body>
+
+        <referenceContainer name="content">
+<!--            <referenceBlock name="product_list_toolbar" template="Magento_Catalog::product/list/toolbar-bottom.phtml" />-->
+        </referenceContainer>
+
+    </body>
+</page>
