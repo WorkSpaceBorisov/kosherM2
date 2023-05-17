@@ -1,20 +1,28 @@
 <?xml version="1.0"?>
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <head></head>
 
     <!-- REMOVE -->
     <referenceBlock name="category.product.addto" remove="true"/>
     <referenceBlock name="rss.link" remove="true"/>
     <referenceBlock name="sidebar.additional" remove="true"/>
     <referenceBlock name="category.product.addto" remove="true"/>
+
     <!-- Pagination    -->
 <!--    <referenceBlock name="product_list_toolbar_pager" remove="true"/>-->
 
     <!-- MOVE -->
-<!--    <referenceBlock element="sidebar.main" remove="true"/>-->
+    <move element="page.main.title" destination="main" before="-"/>
 
     <body>
 
         <referenceContainer name="content">
+            <referenceContainer name="columns">
+                <container name="plp.filters.col" htmlTag="div" htmlClass="plp-filters-col" before="-">
+                    <block class="Magento\Framework\View\Element\Template" name="plp-filters" template="Magento_Catalog::filters/plp-filters.phtml" />
+                </container>
+            </referenceContainer>
 <!--            <referenceBlock name="product_list_toolbar" template="Magento_Catalog::product/list/toolbar-bottom.phtml" />-->
         </referenceContainer>
 

@@ -71,13 +71,18 @@ define([
 
     // Filters on/off
 
-    document.querySelector('#hide_filters').addEventListener('click', () => {
-        document.body.classList.remove('filters-on');
-    });
-    document.querySelector('#show_filters').addEventListener('click', () => {
-        document.body.classList.add('filters-on');
-    });
+    if(document.body.classList.contains('catalog-category-view')) {
+        document.querySelector('#show_filters_button').addEventListener('click', () => document.body.classList.add('filters-on'));
+        document.querySelector('#hide_filters_button').addEventListener('click', () => document.body.classList.remove('filters-on'));
+    }
 
+    // Add to cart category button slide
+
+    if ($('body').hasClass('page-products') || $('body').hasClass('cms-index-index')) {
+        $('.add-to-calc__button').on('click', (e) => $(e.target).closest('.calc-cell-container').addClass('show-calc'));
+    }
+
+    console.log($('body').hasClass('cms-index-index'));
 
 
 });

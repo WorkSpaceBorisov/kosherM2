@@ -72,6 +72,7 @@ $_helper = $block->getData('outputHelper');
                             $position = 'left:' . $productImage->getWidth() . 'px;' . 'top:' . $productImage->getHeight() . 'px;';
                         }
                         ?>
+
                         <?php // Product Image ?>
                         <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
                            class="product photo product-item-photo"
@@ -102,14 +103,16 @@ $_helper = $block->getData('outputHelper');
 
                                 <div class="product-item-actions">
                                     <?php if ($_product->isSaleable()): ?>
-                                        <div class="calc-cell calculator">
-                                            <div class="custom-qty-btn btn-minus"><span>-</span></div>
-                                            <input type="text" value="1" class="input-text qty custom"
-                                                   data-mage-init='{"js/widgets/custom-plus-minus.widget":{"buttons": false, "limit": 100}}'>
-                                            <div class="custom-qty-btn btn-plus"><span>+</span></div>
-                                        </div>
-                                        <div class="add-to-calc calc-cell">
-                                            <button class="add-to-calc__button"><span>Add to</span></button>
+                                        <div class="calc-cell-container">
+                                            <div class="calc-cell calculator">
+                                                <div class="custom-qty-btn btn-minus"><span>-</span></div>
+                                                <input type="text" value="1" class="input-text qty custom"
+                                                       data-mage-init='{"js/widgets/custom-plus-minus.widget":{"buttons": false, "limit": 10000}}'>
+                                                <div class="custom-qty-btn btn-plus"><span>+</span></div>
+                                            </div>
+                                            <div class="add-to-calc calc-cell">
+                                                <button class="add-to-calc__button"><span>Add to</span></button>
+                                            </div>
                                         </div>
                                     <?php else: ?>
                                         <?php if ($_product->isAvailable()): ?>
