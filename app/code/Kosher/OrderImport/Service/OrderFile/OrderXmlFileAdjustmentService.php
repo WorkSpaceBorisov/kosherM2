@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace Kosher\OrderImport\Service\OrderFile;
 
+use Kosher\WineStore\Query\GetWineStoreIdQuery;
 use Magento\Framework\App\ResourceConnection;
+use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Xml\Parser;
 
 class OrderXmlFileAdjustmentService
@@ -38,23 +40,32 @@ class OrderXmlFileAdjustmentService
     private RewriteImportOrderFileService $rewriteImportOrderFileService;
 
     /**
+     * @var GetWineStoreIdQuery
+     */
+    private GetWineStoreIdQuery $getWineStoreIdQuery;
+
+    /**
      * @param Parser $parser
      * @param ResourceConnection $resourceConnection
      * @param RewriteImportOrderFileService $rewriteImportOrderFileService
+     * @param GetWineStoreIdQuery $getWineStoreIdQuery
      */
     public function __construct(
         Parser $parser,
         ResourceConnection $resourceConnection,
-        RewriteImportOrderFileService $rewriteImportOrderFileService
+        RewriteImportOrderFileService $rewriteImportOrderFileService,
+        GetWineStoreIdQuery $getWineStoreIdQuery
     ) {
         $this->parser = $parser;
         $this->resourceConnection = $resourceConnection;
         $this->rewriteImportOrderFileService = $rewriteImportOrderFileService;
+        $this->getWineStoreIdQuery = $getWineStoreIdQuery;
     }
 
     /**
      * @param array $dataFile
      * @return void
+     * @throws FileSystemException
      */
     public function execute(array $dataFile): void
     {
@@ -101,6 +112,7 @@ class OrderXmlFileAdjustmentService
         foreach ($this->completeOrders as $key => $order) {
             $this->lastOrderId += $i;
             $this->completeOrders[$key]['fields']['entity_id'] = $this->lastOrderId;
+            $this->completeOrders[$key]['fields']['store_id'] = (int)$this->getWineStoreIdQuery->execute();
             if (!empty($order['fields']['customer_id'])) {
                 $customerMail = $order['fields']['customer_email'];
                 $this->customerId = $this->getCustomerId($customerMail);
