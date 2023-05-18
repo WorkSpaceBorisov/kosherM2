@@ -40,10 +40,12 @@ define([
 
 
             if(+val === self.options.minimal){
-                qty.closest('.show-calc').removeClass('show-calc').find('.disabled').removeClass('disabled');
+                setTimeout(() => {
+                    qty.closest('.show-calc').removeClass('show-calc').find('.disabled').removeClass('disabled');
+                }, 300)
                 setTimeout(() => {
                     qty.val(1);
-                }, 500);
+                }, 1000);
             }
 
         },

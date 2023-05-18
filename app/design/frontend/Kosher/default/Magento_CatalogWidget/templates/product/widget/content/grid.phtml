@@ -26,7 +26,8 @@ use Magento\Framework\App\Action\Action;
     $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
     $description = false;
     ?>
-    <div class="block widget block-products-list <?= /* @noEscape */ $mode ?>">
+    <div class="block widget block-products-list <?= /* @noEscape */
+    $mode ?>">
         <div class="marker">widget-product-grid</div>
         <!--  widget-product-grid 44    -->
         <?php if ($block->getTitle()): ?>
@@ -35,25 +36,37 @@ use Magento\Framework\App\Action\Action;
             </div>
         <?php endif ?>
         <div class="block-content">
-            <?= /* @noEscape */ '<!-- ' . $image . '-->' ?>
-            <div class="products-<?= /* @noEscape */ $mode ?> <?= /* @noEscape */ $mode ?>">
-                <ol class="product-items <?= /* @noEscape */ $type ?>">
+            <?= /* @noEscape */
+            '<!-- ' . $image . '-->' ?>
+            <div class="products-<?= /* @noEscape */
+            $mode ?> <?= /* @noEscape */
+            $mode ?>">
+                <ol class="product-items <?= /* @noEscape */
+                $type ?>">
                     <?php $iterator = 1; ?>
                     <?php foreach ($items as $_item): ?>
-                        <?= /* @noEscape */ ($iterator++ == 1) ? '<li class="product-item">' : '</li><li class="product-item">' ?>
+                        <?= /* @noEscape */
+                        ($iterator++ == 1) ? '<li class="product-item">' : '</li><li class="product-item">' ?>
                         <div class="product-item-info">
 
                             <!-- Label left -->
 
-                            <div class="product-item__label-left sale">
-                                <span><?= $block->escapeHtml(__('Sale')) ?></span>
+                            <div class="product-item__label-left-container">
+                                <div class="product-item__label-left sale">
+                                    <span><?= $block->escapeHtml(__('Sale')) ?></span>
+                                </div>
+                                <div class="product-item__label-left new">
+                                    <span><?= $block->escapeHtml(__('New')) ?></span>
+                                </div>
                             </div>
 
                             <!-- Photo -->
+                            <div class="product-item-photo-outer">
+                                <a href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>" class="product-item-photo">
+                                    <?= $block->getImage($_item, $image)->toHtml() ?>
+                                </a>
+                            </div>
 
-                            <a href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>" class="product-item-photo">
-                                <?= $block->getImage($_item, $image)->toHtml() ?>
-                            </a>
                             <div class="product-item-details">
                                 <strong class="product-item-name">
                                     <a title="<?= $block->escapeHtml($_item->getName()) ?>"
@@ -67,11 +80,11 @@ use Magento\Framework\App\Action\Action;
                                     <?= $block->getReviewsSummaryHtml($_item, $templateType) ?>
                                 <?php endif; ?>
 
-                                <div class="fin-block">
+                                <div class="category-link">
+                                    <a href="#" class="category-link__href"><span>Just Bagel</span></a>
+                                </div>
 
-                                    <div class="category-link">
-                                        <a href="#" class="category-link__href"><span>Just Bagel</span></a>
-                                    </div>
+                                <div class="fin-block">
 
                                     <div class="price-here">
                                         <?= $block->getProductPriceHtml($_item, $type) ?>
@@ -86,7 +99,7 @@ use Magento\Framework\App\Action\Action;
                                                         <div class="calc-cell calculator">
                                                             <div class="custom-qty-btn btn-minus"><span>-</span></div>
                                                             <input type="text" value="1" class="input-text qty custom"
-                                                                   data-mage-init='{"js/widgets/custom-plus-minus.widget":{"buttons": false, "limit": 1000}}'>
+                                                                   data-mage-init='{"custom.plusMinus":{"buttons": false, "limit": 1000}}'>
                                                             <div class="custom-qty-btn btn-plus"><span>+</span></div>
                                                         </div>
                                                         <div class="add-to-calc calc-cell">
@@ -113,13 +126,15 @@ use Magento\Framework\App\Action\Action;
             </div>
         </div>
     </div>
-    <?php if($block->getBlockHtml('formkey')): ?>
-    <script type="text/x-magento-init">
+    <?php if ($block->getBlockHtml('formkey')): ?>
+        <script type="text/x-magento-init">
     {
         ".block.widget [data-role=tocart-form]": {
             "Magento_Catalog/js/validate-product": {}
         }
     }
-    </script>
-    <?php endif;?>
-<?php endif;?>
+
+
+        </script>
+    <?php endif; ?>
+<?php endif; ?>

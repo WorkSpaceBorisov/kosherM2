@@ -7,10 +7,6 @@
 
 & when (@media-common = true) {
 
-    .toolbar-panel {
-        //display: none;
-    }
-
     .sidebar {
         &.sidebar-main {
             display: none;
@@ -24,7 +20,7 @@
             width: 100%;
         }
 
-        .column.main{
+        .column.main {
             flex-grow: 1;
         }
 
@@ -60,19 +56,21 @@
             .plp-filters-col {
                 width: calc(@filter-width + @filters-margin-right);
             }
-            .filter-button{
+
+            .filter-button {
                 display: none;
             }
-            .toolbar-products{
+
+            .toolbar-products {
                 justify-content: flex-end;
             }
-            .center-cell{
+
+            .center-cell {
                 left: 0;
                 transform: translate(0, 0);
             }
         }
     }
-
 }
 
 //

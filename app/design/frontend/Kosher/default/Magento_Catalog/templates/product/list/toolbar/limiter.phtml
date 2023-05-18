@@ -17,7 +17,7 @@
         <span><?= $block->escapeHtml(__('Show')) ?></span>
     </label>
     <div class="control">
-        <select id="limiter" data-role="limiter" class="limiter-options">
+        <select id="limiter" data-role="limiter" class="limiter-options" name="limiter-options">
             <?php foreach ($block->getAvailableLimit() as $_key => $_limit):?>
                 <option value="<?= $block->escapeHtmlAttr($_key) ?>"
                     <?php if ($block->isLimitCurrent($_key)):?>
@@ -30,3 +30,12 @@
     </div>
     <span class="limiter-text"><?= $block->escapeHtml(__('per page')) ?></span>
 </div>
+
+<script type="text/x-magento-init">
+    {
+        "#limiter": {
+            "custom.select": {
+            }
+        }
+    }
+</script>

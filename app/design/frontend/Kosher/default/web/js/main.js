@@ -82,7 +82,4 @@ define([
         $('.add-to-calc__button').on('click', (e) => $(e.target).closest('.calc-cell-container').addClass('show-calc'));
     }
 
-    console.log($('body').hasClass('cms-index-index'));
-
-
 });

@@ -15,6 +15,19 @@
 @pager-action__hover__background: darken(@toolbar-element-background, 7%);
 @pager__font-weight: @font-weight__bold;
 
+@sorter-width: 165px;
+@limiter-width: 100px;
+
+.select-arrow-down(@size: 24px) {
+    background: @kosher-color__01 url('@{baseDir}images/forms/select-arrow-down-01.svg') no-repeat 100% 50%;
+    background-size: @size auto;
+}
+
+.select-arrow-up(@size: 24px) {
+    background: @kosher-color__01 url('@{baseDir}images/forms/select-arrow-up-01.svg') no-repeat 100% 50%;
+    background-size: @size auto;
+}
+
 //
 //  Common
 //  _____________________________________________
@@ -48,8 +61,6 @@
             background: @kosher-color__27;
             border: 2px solid @kosher-color__04;
         }
-
-
     }
 
     .toolbar-products {
@@ -59,6 +70,7 @@
         height: 56px;
         margin-bottom: 20px;
         position: relative;
+        z-index: 11;
 
         .center-cell {
             align-items: center;
@@ -90,8 +102,8 @@
         }
 
         select {
-            background: url('@{baseDir}images/forms/select-arrow-01.svg') no-repeat 100% 50%;
-            background-size: 24px auto;
+            .select-arrow-down();
+            border: 1px solid @kosher-color__15;
             border-radius: 8px;
             color: @kosher-color__02;
             height: 56px;
@@ -129,7 +141,7 @@
         .sorter-action {
             .size(25, 32);
             display: block;
-            margin-left: 15px;
+            margin-left: 8px;
             position: relative;
 
             &:before {
@@ -171,8 +183,8 @@
                 cursor: default;
             }
 
-            &:not(.active){
-                &:hover{
+            &:not(.active) {
+                &:hover {
                     border: 1px solid @kosher-color__26;
                     cursor: pointer;
                 }
@@ -199,22 +211,107 @@
         }
     }
 
+    .toolbar-amount{
+        .lib-font-size(14);
+        color: @kosher-color__19;
+        line-height: 1;
+        margin-bottom: 0;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+
+    // Custom select
+
+    .toolbar-sorter .custom-select-wrapper {
+        width: @sorter-width;
+    }
+
+    .field.limiter .custom-select-wrapper {
+        width: @limiter-width;
+    }
+
+    .toolbar-products .custom-select-wrapper {
+        position: relative;
+
+        select {
+            position: absolute;
+            z-index: -1;
+            margin-bottom: 10px;
+        }
+
+        .custom-select-title {
+            .select-arrow-down();
+            .lib-font-size(16);
+            border-radius: 8px;
+            border: 1px solid @kosher-color__15;
+            color: @kosher-color__02;
+            height: 56px;
+            padding: 16px;
+            width: 100%;
+
+            &.active {
+                .select-arrow-up();
+                border-color: @kosher-color__18;
+                border-radius: 8px 8px 0 0;
+            }
+
+            &.disabled {
+                opacity: .5;
+                pointer-events: none;
+                border: 1px solid #999;
+            }
+
+            &:hover {
+                cursor: pointer;
+                border-color: @kosher-color__18;
+            }
+        }
+
+        .custom-select-list {
+            .lib-font-size(16);
+            background: @kosher-color__01;
+            border: 1px solid @kosher-color__18;
+            border-top: 0;
+            //border-radius: 0 0 8px 8px;
+            display: none;
+            left: 0;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            top: 100%;
+            width: 100%;
+            z-index: 200;
+
+            &.show-options-list {
+                display: block;
+            }
+
+            li {
+                margin: 0;
+                padding: 15px 15px;
+                background: @kosher-color__01;
+                line-height: 1;
+                white-space: nowrap;
+
+                &:hover {
+                    background: darken(@kosher-color__01, 5%);
+                    cursor: pointer;
+                }
+
+                &.hidden-option {
+                    display: none;
+                }
+            }
+        }
+    }
+
 }
 
 //
-//  Desktop
-//  _____________________________________________
-
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
-
-}
-
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-
-}
-
-//
-//  Mobile
+//  Middle 640
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {

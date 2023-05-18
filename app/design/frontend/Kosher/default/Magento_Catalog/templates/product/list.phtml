@@ -62,8 +62,13 @@ $_helper = $block->getData('outputHelper');
 
                         <!-- Label left -->
 
-                        <div class="product-item__label-left sale">
-                            <span><?= $block->escapeHtml(__('Sale')) ?></span>
+                        <div class="product-item__label-left-container">
+                            <div class="product-item__label-left sale">
+                                <span><?= $block->escapeHtml(__('Sale')) ?></span>
+                            </div>
+                            <div class="product-item__label-left new">
+                                <span><?= $block->escapeHtml(__('New')) ?></span>
+                            </div>
                         </div>
 
                         <?php
@@ -74,11 +79,13 @@ $_helper = $block->getData('outputHelper');
                         ?>
 
                         <?php // Product Image ?>
-                        <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
-                           class="product photo product-item-photo"
-                           tabindex="-1">
-                            <?= $productImage->toHtml() ?>
-                        </a>
+                        <div class="product-item-photo-outer">
+                            <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
+                               class="product photo product-item-photo"
+                               tabindex="-1">
+                                <?= $productImage->toHtml() ?>
+                            </a>
+                        </div>
                         <div class="product details product-item-details">
                             <?php $_productNameStripped = $block->stripTags($_product->getName(), null, true); ?>
                             <strong class="product name product-item-name">
@@ -90,12 +97,11 @@ $_helper = $block->getData('outputHelper');
                             </strong>
                             <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
 
+                            <div class="category-link">
+                                <a href="#" class="category-link__href"><span>Just Bagel</span></a>
+                            </div>
+
                             <div class="fin-block">
-
-                                <div class="category-link">
-                                    <a href="#" class="category-link__href"><span>Just Bagel</span></a>
-                                </div>
-
                                 <div class="price-here">
                                     <?= $block->getProductPrice($_product) ?>
                                     <span class="price-here__weight">/<span>100g</span></span>
@@ -107,7 +113,7 @@ $_helper = $block->getData('outputHelper');
                                             <div class="calc-cell calculator">
                                                 <div class="custom-qty-btn btn-minus"><span>-</span></div>
                                                 <input type="text" value="1" class="input-text qty custom"
-                                                       data-mage-init='{"js/widgets/custom-plus-minus.widget":{"buttons": false, "limit": 10000}}'>
+                                                       data-mage-init='{"custom.plusMinus":{"buttons": false, "limit": 10000}}'>
                                                 <div class="custom-qty-btn btn-plus"><span>+</span></div>
                                             </div>
                                             <div class="add-to-calc calc-cell">
@@ -149,6 +155,8 @@ $_helper = $block->getData('outputHelper');
             }
         }
     }
+
+
 
     </script>
 <?php endif; ?>
