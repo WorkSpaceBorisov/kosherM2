@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace Kosher\WineStore\Query;
 
 use Magento\Framework\App\ResourceConnection;
+
 class GetWineStoreIdQuery
 {
-
     private const TARGET_TABLE_NAME = 'store';
     private const CHECK_FIELD = 'code';
     private const CHECK_STORE_CODE = 'ariskosherwine_store';
