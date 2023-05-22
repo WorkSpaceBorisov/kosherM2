@@ -60,7 +60,7 @@ $_helper = $block->getData('outputHelper');
                          data-container="product-<?= /* @noEscape */
                          $viewMode ?>">
 
-                        <!-- Label left -->
+                        <!-- Labels left -->
 
                         <div class="product-item__label-left-container">
                             <div class="product-item__label-left sale">
@@ -148,15 +148,15 @@ $_helper = $block->getData('outputHelper');
     <?= $block->getChildBlock('toolbar')->setIsBottom(true)->toHtml() ?>
     <?php // phpcs:ignore Magento2.Legacy.PhtmlTemplate ?>
     <script type="text/x-magento-init">
-    {
-        "[data-role=tocart-form], .form.map.checkout": {
-            "catalogAddToCart": {
-                "product_sku": "<?= $escaper->escapeJs($_product->getSku()) ?>"
+        {
+            "[data-role=tocart-form], .form.map.checkout": {
+                "catalogAddToCart": {
+                    "product_sku": "<?= $escaper->escapeJs($_product->getSku()) ?>"
+                }
+            },
+            "*": {
+                "js/category-scripts": {}
             }
         }
-    }
-
-
-
     </script>
 <?php endif; ?>

@@ -1,29 +1,33 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
 
-    <head></head>
-
     <!-- REMOVE -->
     <referenceBlock name="category.product.addto" remove="true"/>
     <referenceBlock name="rss.link" remove="true"/>
     <referenceBlock name="sidebar.additional" remove="true"/>
     <referenceBlock name="category.product.addto" remove="true"/>
 
-    <!-- Pagination    -->
-<!--    <referenceBlock name="product_list_toolbar_pager" remove="true"/>-->
 
     <!-- MOVE -->
-    <move element="page.main.title" destination="main" before="-"/>
+    <move element="category.body" destination="page.wrapper" after="header.container"/>
+    <move element="breadcrumbs" destination="main" before="-"/>
+    <move element="page.main.title" destination="main" after="breadcrumbs"/>
+    <move element="list.total" destination="main" after="page.main.title"/>
 
     <body>
 
-        <referenceContainer name="content">
-            <referenceContainer name="columns">
-                <container name="plp.filters.col" htmlTag="div" htmlClass="plp-filters-col" before="-">
-                    <block class="Magento\Framework\View\Element\Template" name="plp-filters" template="Magento_Catalog::filters/plp-filters.phtml" />
-                </container>
+        <block class="Magento\Framework\View\Element\Template" name="list.total" template="Magento_Catalog::product/list/total-products.phtml" after="page.main.title"/>
+
+        <container name="category.body" htmlTag="section" htmlClass="category-body" after="header.container" />
+
+        <referenceContainer name="main">
+            <referenceContainer name="content">
+                <referenceContainer name="columns">
+                    <container name="plp.filters.col" htmlTag="div" htmlClass="plp-filters-col" before="-">
+                        <block class="Magento\Framework\View\Element\Template" name="plp-filters" template="Magento_Catalog::filters/plp-filters.phtml"/>
+                    </container>
+                </referenceContainer>
             </referenceContainer>
-<!--            <referenceBlock name="product_list_toolbar" template="Magento_Catalog::product/list/toolbar-bottom.phtml" />-->
         </referenceContainer>
 
     </body>

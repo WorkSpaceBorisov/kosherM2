@@ -43,7 +43,7 @@ define([
     mediaCheck({
         media: breakPoint,
         entry: () => {
-            // Mobile mode\
+            // Mobile mode
             $('body').addClass('mobile-view');
         },
         exit: () => {
@@ -53,28 +53,11 @@ define([
         }
     });
 
-    // Close on click out
-
-    $(window).click(() => {
-        let menu = $('#kosher_main_menu');
-        //Hide if visible
-        $('.mobile-view .header-search-container').fadeOut(500);
-        if (menu.css('display') === 'block') menu.slideUp(300, 'swing');
-    });
-
-
     // No close
 
     $('.page-header, #kosher_main_menu').on('click', (e) => {
         e.stopPropagation()
     });
-
-    // Filters on/off
-
-    if(document.body.classList.contains('catalog-category-view')) {
-        document.querySelector('#show_filters_button').addEventListener('click', () => document.body.classList.add('filters-on'));
-        document.querySelector('#hide_filters_button').addEventListener('click', () => document.body.classList.remove('filters-on'));
-    }
 
     // Add to cart category button slide
 

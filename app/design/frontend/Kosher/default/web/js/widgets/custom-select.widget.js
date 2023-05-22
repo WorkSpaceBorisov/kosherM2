@@ -17,7 +17,6 @@ define([
             $(this.element).find('option:selected').attr('selected', 'selected');
             this._build();
             this._disabled();
-            console.log('autoHide', this.options.autoHide);
         },
 
         _build: function () {
@@ -102,7 +101,6 @@ define([
             // Close popup if click outside and not title
 
             if (self.options.autoHide === 1) {
-                console.log('Autoclose = 1');
                 $('body').off().on('click', function (e) {
                     let popup = $('.custom-select-list');
                     if (!e.target.closest('.custom-select-wrapper') && popup.hasClass('show-options-list')) {

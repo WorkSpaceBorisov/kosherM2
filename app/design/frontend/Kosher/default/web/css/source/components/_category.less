@@ -2,11 +2,7 @@
 //  Common - Category main
 //  _____________________________________________
 
-@filter-width: 294px;
-@filters-margin-right: 48px;
-
 & when (@media-common = true) {
-
     .sidebar {
         &.sidebar-main {
             display: none;
@@ -15,61 +11,27 @@
 
     .catalog-category-view {
 
+        .page-main {
+            position: relative;
+        }
+
         .columns {
+            align-items: stretch;
             display: flex;
+            height: 100%;
+            position: relative;
             width: 100%;
         }
 
         .column.main {
             flex-grow: 1;
-        }
 
-        .plp-filters-col {
-            display: flex;
-            justify-content: flex-end;
-            flex-grow: 0;
-            flex-shrink: 0;
-            overflow-y: hidden;
-            transition: width @filters-transition;
-            width: 0;
-        }
-
-        .plp-filters {
-            margin-right: @filters-margin-right;
-            position: relative;
-            width: 294px;
-
-            img {
-                max-width: unset;
-                width: @filter-width;
+            .breadcrumbs {
+                padding-left: 0;
+                padding-right: 0;
             }
         }
 
-        .hide-filters-button {
-            position: absolute;
-            top: 9px;
-            right: 7px;
-            z-index: 20;
-        }
-
-        &.filters-on {
-            .plp-filters-col {
-                width: calc(@filter-width + @filters-margin-right);
-            }
-
-            .filter-button {
-                display: none;
-            }
-
-            .toolbar-products {
-                justify-content: flex-end;
-            }
-
-            .center-cell {
-                left: 0;
-                transform: translate(0, 0);
-            }
-        }
     }
 }
 
@@ -78,7 +40,13 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .catalog-category-view {
+        .header.content {
+            margin-bottom: 28px;
+        }
 
+
+    }
 
 }
 

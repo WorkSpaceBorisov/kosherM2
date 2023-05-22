@@ -40,12 +40,15 @@ define([
 
 
             if(+val === self.options.minimal){
+                let container = qty.closest(".calc-cell-container");
                 setTimeout(() => {
                     qty.closest('.show-calc').removeClass('show-calc').find('.disabled').removeClass('disabled');
+                    container.addClass('no-hover');
                 }, 300)
                 setTimeout(() => {
                     qty.val(1);
-                }, 1000);
+                    container.removeClass('no-hover');
+                }, 2000);
             }
 
         },

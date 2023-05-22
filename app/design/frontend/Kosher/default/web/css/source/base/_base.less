@@ -3,7 +3,7 @@
         box-sizing: border-box;
     }
 
-    html,
+    html:not(.not100),
     body {
         height: 100%; // Stretch screen area for sticky footer
     }
@@ -17,11 +17,27 @@
 
         .page-main,
         .page-main-full-width {
+            background: @kosher-color__12;
             flex-grow: 1;
         }
     }
 
     .marker {
         display: none;
+    }
+
+    .kosher-overlay {
+        display: none;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 200;
+
+        .kosher-overlay-inner {
+            .size(100%);
+            background: rgba(0, 0, 0, .2);
+        }
     }
 }

@@ -1,12 +1,20 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+    </head>
     <body>
 
         <!-- REMOVE -->
         <referenceBlock name="page.main.title" remove="true"/>
 
+        <referenceContainer name="page.bottom.container">
+            <container name="horizonlal.menu.container" htmlTag="div" htmlClass="kosher-horizontal-menu" after="-">
+                <block class="Magento\Theme\Block\Html\Topmenu" name="horizonlal.menu" template="Magento_Theme::html/topmenu.phtml" ttl="3600"/>
+            </container>
+        </referenceContainer>
+
         <referenceContainer name="before.body.end">
-            <block class="Magento\Theme\Block\Html\Footer" name="home.scripts" template="Magento_Theme::home-scripts.phtml" />
+            <block class="Magento\Theme\Block\Html\Footer" name="home.scripts" template="Magento_Theme::home-scripts.phtml"/>
         </referenceContainer>
 
     </body>

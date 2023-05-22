@@ -3,8 +3,9 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
-
     .products.wrapper + .toolbar-panel {
+        margin-bottom: 70px;
+
         .toolbar-products {
             justify-content: center;
         }
@@ -17,7 +18,7 @@
         justify-content: flex-start;
 
         .item {
-            .size(30, 18);
+            .size(20, 18);
             .lib-font-size(14);
             display: block;
             font-weight: 600;
@@ -87,11 +88,25 @@
                     }
                 }
             }
-
         }
-
     }
 
+    .toolbar-panel {
+        //display: none;
+    }
+}
+
+//
+//  Tablet
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    body {
+
+        .products.wrapper + .toolbar-panel {
+            margin-bottom: 30px;
+        }
+    }
 }
 
 //
@@ -100,8 +115,19 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
     body {
+
+        .products.wrapper + .toolbar-panel {
+            margin-bottom: 20px;
+        }
+
         .toolbar-amount {
             display: none;
+        }
+
+        .items.pages-items {
+            .item {
+                width: 24px;
+            }
         }
     }
 }
