@@ -8,8 +8,9 @@
     }
 
     .kosher-horizontal-menu {
-        margin-bottom: 5px;
+        margin-bottom: 20px;
         overflow: hidden;
+        padding: 0 2px;
         width: 100%;
 
         & > ul {
@@ -22,6 +23,7 @@
             flex-grow: 1;
             flex-basis: 180px;
             min-width: 180px;
+            margin-bottom: 0;
 
             @border-color: @kosher-color__15;
 
@@ -74,11 +76,12 @@
                 width: 100%;
             }
         }
+
     }
 }
 
 //
-//  Desktop min to mobile
+//  Desktop before tablet
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {

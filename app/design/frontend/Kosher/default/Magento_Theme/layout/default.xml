@@ -34,6 +34,8 @@
             </container>
         </referenceContainer>
 
+        <referenceContainer name="main" htmlTag="section" htmlClass="column main kosher-main" />
+
         <referenceContainer name="footer-container">
             <referenceContainer name="footer">
 

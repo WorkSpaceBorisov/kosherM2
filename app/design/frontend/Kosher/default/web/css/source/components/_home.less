@@ -1,0 +1,69 @@
+//
+//  Common - Home main
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .cms-index-index {
+        .header.content {
+            margin-bottom: 0;
+        }
+
+        #maincontent {
+            margin-bottom: 40px;
+        }
+    }
+
+    .home-main {
+        .block-title {
+            .lib-font-size(24);
+            font-weight: 700;
+            text-align: center;
+            margin: 40px auto 20px;
+        }
+    }
+
+    .home-interactive {
+        border-radius: 8px;
+        padding: 25px 26px 30px; // 16 +10 bacause -10 for slider
+        background: rgba(230, 230, 230, 0.6);;
+
+        &.special {
+        }
+
+        &.sale {
+        }
+
+        &.new {
+        }
+
+        .block-content {
+            padding: 0 2px;
+        }
+    }
+
+    .widget-product-grid {
+        margin-left: -10px;
+        margin-right: -10px;
+
+        .product-item-info {
+            margin: 0 8px;
+        }
+
+        body &.slick-slider.slick-initialized {
+            overflow: unset;
+        }
+    }
+}
+
+//
+//  Desktop before tablet
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .cms-index-index {
+        #maincontent {
+        }
+    }
+}
+
+

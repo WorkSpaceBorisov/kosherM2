@@ -6,12 +6,114 @@
 
         <!-- REMOVE -->
         <referenceBlock name="page.main.title" remove="true"/>
+        <referenceBlock name="main" remove="true"/>
 
-        <referenceContainer name="page.bottom.container">
-            <container name="horizonlal.menu.container" htmlTag="div" htmlClass="kosher-horizontal-menu" after="-">
-                <block class="Magento\Theme\Block\Html\Topmenu" name="horizonlal.menu" template="Magento_Theme::html/topmenu.phtml" ttl="3600"/>
+        <!-- MOVE -->
+        <move element="home.content" destination="columns"/>
+
+        <!-- Main content block -->
+        <container name="home.content" htmlTag="section" htmlClass="column main home-main">
+
+            <container name="main.home.slider" htmlTag="section" htmlClass="main-home-slider" before="-">
+                <container name="home.titdfle" htmlTag="div" htmlClass="block-title">
+                    <block class="Magento\Framework\View\Element\Text" name="text.blacccccnk" before="-">
+                        <arguments>
+                            <argument name="text" xsi:type="string">
+                                <![CDATA[Main slider]]>
+                            </argument>
+                        </arguments>
+                    </block>
+                </container>
             </container>
-        </referenceContainer>
+
+            <container name="home.updates.block" htmlTag="section" htmlClass="home-updates-block">
+                <container name="home.title" htmlTag="div" htmlClass="block-title">
+                    <block class="Magento\Framework\View\Element\Text" name="text.bldfasssssnk" before="-">
+                        <arguments>
+                            <argument name="text" xsi:type="string">
+                                <![CDATA[Home Updates]]>
+                            </argument>
+                        </arguments>
+                    </block>
+                </container>
+            </container>
+
+            <container name="main.home.adv.block1" htmlTag="section" htmlClass="home-adv-block">
+                <container name="home.titled" htmlTag="div" htmlClass="block-title">
+                    <block class="Magento\Framework\View\Element\Text" name="text.blasssssnk" before="-">
+                        <arguments>
+                            <argument name="text" xsi:type="string">
+                                <![CDATA[Holidays Special Dial]]>
+                            </argument>
+                        </arguments>
+                    </block>
+                </container>
+                <container name="home.interactive1" htmlTag="div" htmlClass="home-interactive special" after="-">
+                    <container name="horizonlal.menu.container1" htmlTag="div" htmlClass="kosher-horizontal-menu" before="-">
+                        <block class="Magento\Theme\Block\Html\Topmenu" name="horizonlal.menu1" template="Magento_Theme::html/topmenu.phtml"
+                               ttl="3600"/>
+                    </container>
+                    <container name="home.products.slider.01" htmlTag="div" htmlClass="home-products-slider" after="-">
+                        <block class="Magento\Cms\Block\Block" name="products.slider.01">
+                            <arguments>
+                                <argument name="block_id" xsi:type="string">slider-holidays-special-dial</argument>
+                            </arguments>
+                        </block>
+                    </container>
+                </container>
+            </container>
+
+            <container name="main.home.adv.block2" htmlTag="section" htmlClass="home-adv-block">
+                <container name="home.titleds" htmlTag="div" htmlClass="block-title">
+                    <block class="Magento\Framework\View\Element\Text" name="text.blasccccssssnk" before="-">
+                        <arguments>
+                            <argument name="text" xsi:type="string">
+                                <![CDATA[Products On Sale]]>
+                            </argument>
+                        </arguments>
+                    </block>
+                </container>
+                <container name="home.interactive2" htmlTag="div" htmlClass="home-interactive sale" after="-">
+                    <container name="horizonlal.menu.container2" htmlTag="div" htmlClass="kosher-horizontal-menu" before="-">
+                        <block class="Magento\Theme\Block\Html\Topmenu" name="horizontal.menu2" template="Magento_Theme::html/topmenu.phtml"
+                               ttl="3600"/>
+                    </container>
+                    <container name="home.products.slider.02" htmlTag="div" htmlClass="home-products-slider" after="-">
+                        <block class="Magento\Cms\Block\Block" name="slider.products.02">
+                            <arguments>
+                                <argument name="block_id" xsi:type="string">slider-products-on-sale</argument>
+                            </arguments>
+                        </block>
+                    </container>
+                </container>
+            </container>
+
+            <container name="main.home.adv.block3" htmlTag="section" htmlClass="home-adv-block">
+                <container name="home.titledff" htmlTag="div" htmlClass="block-title">
+                    <block class="Magento\Framework\View\Element\Text" name="text.blasddssasssnk" before="-">
+                        <arguments>
+                            <argument name="text" xsi:type="string">
+                                <![CDATA[New Products]]>
+                            </argument>
+                        </arguments>
+                    </block>
+                </container>
+                <container name="home.interactive3" htmlTag="div" htmlClass="home-interactive new" after="-">
+                    <container name="horizonlal.menu.container3" htmlTag="div" htmlClass="kosher-horizontal-menu" before="-">
+                        <block class="Magento\Theme\Block\Html\Topmenu" name="horizonlal.menu3" template="Magento_Theme::html/topmenu.phtml"
+                               ttl="3600"/>
+                    </container>
+                    <container name="home.products.slider.03" htmlTag="div" htmlClass="home-products-slider" after="-">
+                        <block class="Magento\Cms\Block\Block" name="slider.products.03">
+                            <arguments>
+                                <argument name="block_id" xsi:type="string">slider-new-products</argument>
+                            </arguments>
+                        </block>
+                    </container>
+                </container>
+            </container>
+
+        </container>
 
         <referenceContainer name="before.body.end">
             <block class="Magento\Theme\Block\Html\Footer" name="home.scripts" template="Magento_Theme::home-scripts.phtml"/>
