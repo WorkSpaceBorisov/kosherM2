@@ -1,11 +1,10 @@
 define([
-    'jquery',
-    'matchMedia'
-], function ($, mediaCheck) {
+    'jquery'
+], function ($) {
 
     'use strict';
 
-    console.log('Catalog button');
+    // console.log('Catalog button');
 
     // Close on click out
 

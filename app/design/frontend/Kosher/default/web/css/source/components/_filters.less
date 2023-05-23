@@ -35,8 +35,8 @@
 
         .hide-filters-button {
             position: absolute;
-            right: 7px;
-            top: 9px;
+            right: 12px;
+            top: 10px;
             z-index: 20;
         }
 
@@ -61,9 +61,10 @@
 
     .catalog-category-view.slide-filters {
         .plp-filters-col {
+            box-shadow: 2px 2px 6px 0 rgba(0,0,0,0.4);
             left: -400px;
             position: absolute;
-            top: -76px;
+            top: -82px;
             transition: left @filters-transition;
             width: @filter-width;
             z-index: 300;
@@ -78,7 +79,7 @@
             position: relative;
 
             .plp-filters-col {
-                left: -15px;
+                left: -20px;
             }
 
             .kosher-overlay {
@@ -100,12 +101,12 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .catalog-category-view.slide-filters {
         .plp-filters-col {
-            top: -90px;
+            top: -98px;
         }
 
         &.filters-on {
             .plp-filters-col {
-                margin-left: -2%;
+                left: -2.5%;
             }
         }
     }
@@ -116,5 +117,25 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+    body.catalog-category-view.slide-filters {
+        &.filters-on {
+            .plp-filters-col {
+                left: -15px;
+            }
+        }
+    }
+}
 
+//
+//  Mobile 480
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs2) {
+    body.catalog-category-view.slide-filters {
+        &.filters-on {
+            .plp-filters-col {
+                left: -10px;
+            }
+        }
+    }
 }

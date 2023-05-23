@@ -10,12 +10,12 @@
 
             &.content {
                 align-items: center;
-                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
                 border: 1px solid @kosher-color__15;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: space-between;
                 height: 62px;
+                justify-content: space-between;
                 margin-bottom: 20px;
                 padding-bottom: 11px;
                 padding-top: 9px;
@@ -107,11 +107,11 @@
     }
 
     .header-search-container {
-        display: none;
         background: darken(@kosher-color__13, 2%);
-        border-top: 1px solid @kosher-color__16;
         border-bottom: 1px solid @kosher-color__16;
+        border-top: 1px solid @kosher-color__16;
         box-shadow: 0 3px 3px rgba(0, 0, 0, 0.10);
+        display: none;
         flex-grow: 1;
         left: 0;
         order: 4;
@@ -119,7 +119,7 @@
         position: absolute;
         top: 100%;
         width: 100%;
-        z-index: 90;
+        z-index: 80;
     }
 
     .header-right-container {
@@ -161,12 +161,11 @@
             border: 1px solid @kosher-color__16;
             box-shadow: 0 3px 3px rgba(0, 0, 0, .15);
             display: none;
-            //display: block;
             left: auto;
-            right: 0;
             margin: 0;
             padding: 0;
             position: absolute;
+            right: 0;
             z-index: 100;
 
             @arr-size: 8px;
@@ -318,7 +317,6 @@
                 color: @kosher-color__01;
             }
         }
-
     }
 
     .header {
@@ -367,8 +365,8 @@
     }
 
     .header-login-block {
-        position: relative;
         margin-right: 1.25vw;
+        position: relative;
 
         .login-button {
             .desktop-header-icon(@icon-login);
@@ -385,8 +383,8 @@
             }
 
             &:hover {
-                cursor: pointer;
                 background: @kosher-color__04;
+                cursor: pointer;
 
                 &:before {
                     color: @kosher-color__01;
@@ -405,71 +403,7 @@
         }
 
         .ko-customer-menu {
-            background: @kosher-color__01;
-            border: 1px solid @kosher-color__16;
-            box-shadow: 0 3px 3px rgba(0, 0, 0, .15);
-            display: none;
-            left: auto;
-            right: 0;
             margin: 2px 0 0 0;
-            padding: 0;
-            position: absolute;
-            top: 100%;
-            z-index: 100;
-
-            @arr-size: 8px;
-
-            &:before {
-                .triangle(top, @arr-size, @arr-size, @kosher-color__01);
-                position: absolute;
-                right: 9px;
-                top: -@arr-size + 1px;
-                width: 0;
-                z-index: 99;
-            }
-
-            &:after {
-                .triangle(top, @arr-size, @arr-size, @kosher-color__18);
-                position: absolute;
-                right: 9px;
-                top: -@arr-size;
-                width: 0;
-                z-index: 98;
-            }
-        }
-
-        ul {
-            .lib-list-reset-styles();
-            min-width: 175px;
-
-            a {
-                color: @kosher-color__20;
-                display: block;
-                font-weight: 500;
-                padding: 9px 12px;
-
-                &:hover {
-                    background: @kosher-color__27;
-                    text-decoration: none;
-                }
-            }
-        }
+         }
     }
-
-}
-
-//
-//  Middle 640
-//  _____________________________________________
-
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
-
-}
-
-//
-//  Mobile 480
-//  _____________________________________________
-//
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs2) {
-
 }
