@@ -43,7 +43,7 @@ define([
                         }
                     },
                     {
-                        breakpoint: 700,
+                        breakpoint: 780,
                         settings: {
                             slidesToShow: 1,
                             slidesToScroll: 1,

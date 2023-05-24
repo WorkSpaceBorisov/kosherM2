@@ -10,7 +10,8 @@ var config = {
             'custom.select': 'js/widgets/custom-select.widget',
             'slick': "js/vendors/slick/slick.min",
             'scrollbar': "js/vendors/malihu/jquery.mCustomScrollbar.min",
-            'hor.categories': "js/widgets/hor-categories.widget"
+            // 'hor.categories': "js/widgets/hor-categories.widget",
+            'home.categories': "js/widgets/home-categories.widget"
         }
     },
 
@@ -22,7 +23,8 @@ var config = {
         'custom.select': 'js/widgets/custom-select.widget',
         'slick': "js/vendors/slick/slick.min",
         'scrollbar': "js/vendors/malihu/jquery.mCustomScrollbar.min",
-        'hor.categories': "js/widgets/hor-categories.widget"
+        // 'hor.categories': "js/widgets/hor-categories.widget",
+        'home.categories': "js/widgets/home-categories.widget"
     },
 
     shim: {

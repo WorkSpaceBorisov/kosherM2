@@ -32,12 +32,14 @@ define([
         _slider: function () {
 
             $(this.element).not('.slick-initialized').slick({
-                arrows: false,
+                arrows: true,
                 dots: false,
-                infinite: true,
+                infinite: false,
                 speed: 500,
                 slidesToShow: 6,
                 slidesToScroll: 6,
+                prevArrow: 'menu-prev-arrow',
+                nextArrow: 'menu-next-arrow',
 
                 responsive: [
                     {

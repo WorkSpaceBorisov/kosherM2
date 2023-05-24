@@ -44,7 +44,7 @@ define([
                 setTimeout(() => {
                     qty.closest('.show-calc').removeClass('show-calc').find('.disabled').removeClass('disabled');
                     container.addClass('no-hover');
-                }, 300)
+                }, 700)
                 setTimeout(() => {
                     qty.val(1);
                     container.removeClass('no-hover');
@@ -82,80 +82,3 @@ define([
 
     return $.custom.plusMinus;
 });
-
-
-// .box-tocart.custom{
-//     margin-bottom: 15px;
-//
-// .field.qty{
-//         display: flex;
-//         justify-content: flex-start;
-//         width: unset;
-//     }
-// }
-// .input-text.qty.custom{
-//     width: 100px;
-//     margin-left: 5px;
-//     margin-right: 5px;
-// }
-// .custom-qty-btn{
-//     background: #eee;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     width: 40px;
-//     height: 40px;
-//     border-radius: 6px;
-//     border: 1px solid #bbb;
-//     flex-grow: 0;
-//     flex-shrink: 0;
-// & > span{
-//     .lib-font-size(20);
-//         display: block;
-//         font-weight: 700;
-//         line-height: 1;
-//         text-align: center;
-//     }
-//
-// &:hover{
-//         cursor: pointer;
-//     }
-//
-// }
-///////////////////////////////////////////////////////////////////////////////////////////////////
-// <div class="box-tocart custom">
-//     <div class="field qty">
-//     <input type="text" id="custom_qty" value="1" class="input-text qty custom">
-//     </div>
-//     </div>
-//     <div class="box-tocart custom">
-//     <div class="field qty">
-//     <div class="custom-qty-btn btn-minus"><span>-</span></div>
-// <input type="text" id="custom_qty2" value="1" class="input-text qty custom">
-//     <div class="custom-qty-btn btn-plus"><span>+</span></div>
-// </div>
-// </div>
-// <div class="box-tocart custom">
-//     <div class="field qty">
-//     <div class="custom-qty-btn btn-minus"><span>-</span></div>
-// <input type="text" id="custom_qty3" value="1" class="input-text qty custom"
-// data-mage-init='{"Magento_Theme/js/widgets/plus-minus.widget":{"buttons": false, "limit": 3}}'>
-//     <div class="custom-qty-btn btn-plus"><span>+</span></div>
-// </div>
-// </div>
-///////////////////////////////////////////////////////////////////////////////////////////////////
-// <script type="text/x-magento-init">
-//     {
-//         "#custom_qty": {
-//             "Magento_Theme/js/widgets/plus-minus.widget": {
-//                 "limit": 5
-//             }
-//         },
-//         "#custom_qty2": {
-//             "Magento_Theme/js/widgets/plus-minus.widget": {
-//                 "limit": 5,
-//                 "buttons": false
-//             }
-//         }
-//     }
-// </script>

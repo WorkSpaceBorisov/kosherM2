@@ -329,7 +329,7 @@
     }
 
     .mCSB_scrollTools .mCSB_buttonDown, .mCSB_scrollTools .mCSB_buttonLeft, .mCSB_scrollTools .mCSB_buttonRight, .mCSB_scrollTools .mCSB_buttonUp {
-        background-image: url(mCSB_buttons.png);
+        background-image: url('@{baseDir}images/scroller/mCSB_buttons.png');
         background-repeat: no-repeat;
         opacity: .4;
         filter: "alpha(opacity=40)";
@@ -1299,4 +1299,41 @@
         background-color: #fff;
         background-color: rgba(255, 255, 255, .9)
     }
+    
+    // Kosher-1
+
+    .mCS-kosher-1.mCSB_scrollTools .mCSB_draggerRail {
+        background-color: #000;
+        background-color: rgba(0, 0, 0, .15)
+    }
+
+    .mCS-kosher-1.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+        background-color: #000;
+        background-color: rgba(0, 0, 0, .75)
+    }
+
+    .mCS-kosher-1.mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar {
+        background-color: rgba(0, 0, 0, .85)
+    }
+
+    .mCS-kosher-1.mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar, .mCS-kosher-1.mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar {
+        background-color: rgba(0, 0, 0, .9)
+    }
+
+    .mCS-kosher-1.mCSB_scrollTools .mCSB_buttonUp {
+        background-position: -80px 0
+    }
+
+    .mCS-kosher-1.mCSB_scrollTools .mCSB_buttonDown {
+        background-position: -80px -20px
+    }
+
+    .mCS-kosher-1.mCSB_scrollTools .mCSB_buttonLeft {
+        background-position: -80px -40px
+    }
+
+    .mCS-kosher-1.mCSB_scrollTools .mCSB_buttonRight {
+        background-position: -80px -56px
+    }
+    
 }

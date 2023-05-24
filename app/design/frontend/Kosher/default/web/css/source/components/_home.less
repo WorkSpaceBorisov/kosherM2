@@ -22,28 +22,105 @@
         }
     }
 
-    .home-interactive {
+    .home-adv-block {
         border-radius: 8px;
-        padding: 25px 26px 30px; // 16 +10 bacause -10 for slider
-        background: rgba(230, 230, 230, 0.6);;
+        margin-bottom: 48px;
 
         &.special {
+            background: url('@{baseDir}images/home/specials-bg-02.jpg') no-repeat 50% 0;
+            background-size: 100% auto;
         }
 
         &.sale {
+            background: url('@{baseDir}images/home/sale-bg-02.jpg') no-repeat center 0;
+            background-size: 100% auto;
         }
 
         &.new {
+            background: url('@{baseDir}images/home/new-bg-02.jpg') no-repeat center 0;
+            background-size: 100% auto;
         }
+
+    }
+
+    .home-adv-block__container {
+        height: 500px;
+        position: relative;
+    }
+
+    .home-adv-block__container-inner {
+        .to-center();
+        position: absolute;
+        left: 50%;
+        top: 55%;
+        width: 100%;
+        z-index: 10;
+    }
+
+
+    .home-adv-block__title {
+        .lib-font-size(96);
+        font-weight: 700;
+        color: @kosher-color__01;
+        letter-spacing: -0.015em;
+        margin-bottom: 28px;
+        text-align: center;
+    }
+
+    .home-adv-block__button {
+        .lib-font-size(20);
+        background: @kosher-color__03;
+        border: 2px solid @kosher-color__03;
+        border-radius: 8px;
+        color: @kosher-color__01;
+        display: block;
+        font-weight: 700;
+        line-height: 1;
+        margin: 0 auto;
+        padding: 18px 20px;
+        text-align: center;
+        width: 200px;
+
+        &:hover{
+            background: @kosher-color__27;
+            color: @kosher-color__03;
+            text-decoration: none;
+        }
+    }
+
+    .home-interactive {
+        border-radius: 8px;
+        background: rgb(238, 238, 238);
+        background: linear-gradient(0deg, rgba(238, 238, 238, 1) 0%, rgba(238, 238, 238, 1) 65%, rgba(238, 238, 238, .4) 100%);
+        padding: 22px 26px 30px; // 16 +10 bacause -10 for slider
+        position: relative;
 
         .block-content {
             padding: 0 2px;
         }
     }
 
+    .home-interactive__blur {
+        .size(100%);
+        backdrop-filter: blur(30px);
+        border-radius: 8px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        z-index: 1;
+    }
+
     .widget-product-grid {
         margin-left: -10px;
         margin-right: -10px;
+        opacity: 0;
+        position: relative;
+        transition: opacity .2s;
+        z-index: 2;
+
+        &.slick-initialized {
+            opacity: 1;
+        }
 
         .product-item-info {
             margin: 0 8px;
@@ -54,6 +131,7 @@
         }
     }
 }
+
 
 //
 //  Desktop before tablet

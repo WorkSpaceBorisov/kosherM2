@@ -38,15 +38,15 @@
                 </container>
             </container>
 
-            <container name="main.home.adv.block1" htmlTag="section" htmlClass="home-adv-block">
-                <container name="home.titled" htmlTag="div" htmlClass="block-title">
-                    <block class="Magento\Framework\View\Element\Text" name="text.blasssssnk" before="-">
-                        <arguments>
-                            <argument name="text" xsi:type="string">
-                                <![CDATA[Holidays Special Dial]]>
-                            </argument>
-                        </arguments>
-                    </block>
+            <container name="main.home.adv.block1" htmlTag="section" htmlClass="home-adv-block special">
+                <container name="home.title.special.container" htmlTag="div" htmlClass="home-adv-block__container">
+                    <container name="home.title.special.container.inner1" htmlTag="div" htmlClass="home-adv-block__container-inner">
+                        <block class="Magento\Cms\Block\Block" name="holidays-special-dial-title">
+                            <arguments>
+                                <argument name="block_id" xsi:type="string">holidays-special-dial-title</argument>
+                            </arguments>
+                        </block>
+                    </container>
                 </container>
                 <container name="home.interactive1" htmlTag="div" htmlClass="home-interactive special" after="-">
                     <container name="horizonlal.menu.container1" htmlTag="div" htmlClass="kosher-horizontal-menu" before="-">
@@ -60,18 +60,61 @@
                             </arguments>
                         </block>
                     </container>
+                    <container name="home.interactive1.blur.area" htmlTag="div" htmlClass="home-interactive__blur">
+                        <block class="Magento\Framework\View\Element\Text" name="cbzxb" before="-">
+                            <arguments>
+                                <argument name="text" xsi:type="string">
+                                    <![CDATA[&nbsp;]]>
+                                </argument>
+                            </arguments>
+                        </block>
+                    </container>
                 </container>
             </container>
 
-            <container name="main.home.adv.block2" htmlTag="section" htmlClass="home-adv-block">
-                <container name="home.titleds" htmlTag="div" htmlClass="block-title">
-                    <block class="Magento\Framework\View\Element\Text" name="text.blasccccssssnk" before="-">
-                        <arguments>
-                            <argument name="text" xsi:type="string">
-                                <![CDATA[Products On Sale]]>
-                            </argument>
-                        </arguments>
-                    </block>
+            <container name="main.home.adv.block3" htmlTag="section" htmlClass="home-adv-block new">
+                <container name="home.titled.container.new" htmlTag="div" htmlClass="home-adv-block__container">
+                    <container name="home.title.new.container.inner3" htmlTag="div" htmlClass="home-adv-block__container-inner">
+                        <block class="Magento\Cms\Block\Block" name="new-products-title">
+                            <arguments>
+                                <argument name="block_id" xsi:type="string">new-products-title</argument>
+                            </arguments>
+                        </block>
+                    </container>
+                </container>
+                <container name="home.interactive3" htmlTag="div" htmlClass="home-interactive new" after="-">
+                    <container name="horizonlal.menu.container3" htmlTag="div" htmlClass="kosher-horizontal-menu" before="-">
+                        <block class="Magento\Theme\Block\Html\Topmenu" name="horizonlal.menu3" template="Magento_Theme::html/topmenu.phtml"
+                               ttl="3600"/>
+                    </container>
+                    <container name="home.products.slider.03" htmlTag="div" htmlClass="home-products-slider" after="-">
+                        <block class="Magento\Cms\Block\Block" name="slider.products.03">
+                            <arguments>
+                                <argument name="block_id" xsi:type="string">slider-new-products</argument>
+                            </arguments>
+                        </block>
+                    </container>
+                    <container name="home.interactive3.blur.area" htmlTag="div" htmlClass="home-interactive__blur">
+                        <block class="Magento\Framework\View\Element\Text" name="cbzxb" before="-">
+                            <arguments>
+                                <argument name="text" xsi:type="string">
+                                    <![CDATA[&nbsp;]]>
+                                </argument>
+                            </arguments>
+                        </block>
+                    </container>
+                </container>
+            </container>
+
+            <container name="main.home.adv.block2" htmlTag="section" htmlClass="home-adv-block sale">
+                <container name="home.title.container.sale" htmlTag="div" htmlClass="home-adv-block__container">
+                    <container name="home.title.sale.container.inner2" htmlTag="div" htmlClass="home-adv-block__container-inner">
+                        <block class="Magento\Cms\Block\Block" name="products-on-sale-title">
+                            <arguments>
+                                <argument name="block_id" xsi:type="string">products-on-sale-title</argument>
+                            </arguments>
+                        </block>
+                    </container>
                 </container>
                 <container name="home.interactive2" htmlTag="div" htmlClass="home-interactive sale" after="-">
                     <container name="horizonlal.menu.container2" htmlTag="div" htmlClass="kosher-horizontal-menu" before="-">
@@ -85,28 +128,12 @@
                             </arguments>
                         </block>
                     </container>
-                </container>
-            </container>
-
-            <container name="main.home.adv.block3" htmlTag="section" htmlClass="home-adv-block">
-                <container name="home.titledff" htmlTag="div" htmlClass="block-title">
-                    <block class="Magento\Framework\View\Element\Text" name="text.blasddssasssnk" before="-">
-                        <arguments>
-                            <argument name="text" xsi:type="string">
-                                <![CDATA[New Products]]>
-                            </argument>
-                        </arguments>
-                    </block>
-                </container>
-                <container name="home.interactive3" htmlTag="div" htmlClass="home-interactive new" after="-">
-                    <container name="horizonlal.menu.container3" htmlTag="div" htmlClass="kosher-horizontal-menu" before="-">
-                        <block class="Magento\Theme\Block\Html\Topmenu" name="horizonlal.menu3" template="Magento_Theme::html/topmenu.phtml"
-                               ttl="3600"/>
-                    </container>
-                    <container name="home.products.slider.03" htmlTag="div" htmlClass="home-products-slider" after="-">
-                        <block class="Magento\Cms\Block\Block" name="slider.products.03">
+                    <container name="home.interactive2.blur.area" htmlTag="div" htmlClass="home-interactive__blur">
+                        <block class="Magento\Framework\View\Element\Text" name="cbzxb" before="-">
                             <arguments>
-                                <argument name="block_id" xsi:type="string">slider-new-products</argument>
+                                <argument name="text" xsi:type="string">
+                                    <![CDATA[&nbsp;]]>
+                                </argument>
                             </arguments>
                         </block>
                     </container>
