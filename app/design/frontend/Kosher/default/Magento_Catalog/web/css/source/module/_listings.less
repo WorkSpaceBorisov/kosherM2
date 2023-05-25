@@ -30,11 +30,12 @@
 
     //  Product Lists common
 
-    .catalog-category-view{
-        .page-title{
+    .catalog-category-view {
+        .page-title {
             margin-bottom: 10px;
         }
-        .products-total{
+
+        .products-total {
             .lib-font-size(14);
             color: @kosher-color__21;
             margin-bottom: 48px;
@@ -770,8 +771,8 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__l) {
-    .catalog-category-view{
-        .products-total{
+    .catalog-category-view {
+        .products-total {
             margin-bottom: 20px;
         }
     }
@@ -893,11 +894,11 @@
             padding-right: 15px;
         }
 
-        .page-title{
+        .page-title {
             margin-bottom: 6px;
         }
 
-        .products-total{
+        .products-total {
             margin-bottom: 15px;
         }
     }
@@ -1056,5 +1057,52 @@
             padding-left: 10px;
             padding-right: 10px;
         }
+
     }
+
+    body {
+        .products-grid {
+            .product-items {
+                .product-item-info {
+                    padding: 25px 15px 20px;
+                }
+
+                .price-box {
+                    span[data-price-type=finalPrice] {
+                        .lib-font-size(20);
+                    }
+                }
+
+                @calc-cell-width: 130px;
+                @product-item-actions-cell-height: 50px;
+
+                .product-item-actions {
+                    width: @calc-cell-width;
+                    height: @product-item-actions-cell-height;
+
+                    .calc-cell-container {
+                        width: @calc-cell-width * 2;
+
+                        &.show-calc {
+                            left: @calc-cell-width;
+                        }
+                    }
+
+                    .calc-cell {
+                        width: @calc-cell-width;
+                    }
+
+                    .calculator {
+
+                        .custom-qty-btn {
+                            .size(42, 100%);
+                        }
+                    }
+                }
+
+
+            }
+        }
+    }
+
 }

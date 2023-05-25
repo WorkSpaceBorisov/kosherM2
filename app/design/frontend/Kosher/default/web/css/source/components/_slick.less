@@ -14,16 +14,22 @@
 
                 &.slick-dotted {
                     .slick-list {
-                        margin-bottom: 23px;
+                        margin-bottom: 0;
                     }
 
                     .slick-dots {
-                        margin-left: 25px;
-                        margin-right: 25px;
-                        padding-left: 0;
-                        padding-top: 10px;
+                        background: rgba(0, 0, 0, .1);
+                        border-radius: 14px;
+                        border: 1px dotted @kosher-color__18;
+                        bottom: 15px;
+                        left: 50%;
+                        margin: 0;
+                        padding: 7px;
+                        position: absolute;
                         text-align: center;
+                        transform: translate(-50%, 0);
                         width: auto;
+                        z-index: 15;
                     }
 
                     .slick-arrow {
@@ -76,8 +82,8 @@
             }
 
             .slick-next {
-                padding: 1px 0 0 2px;
                 right: -15px;
+                padding: 1px 0 0 2px;
 
                 &:before {
                     .icomoon(@icon-arrow-forward, 18px, @kosher-color__34);
@@ -100,22 +106,25 @@
         }
 
         .slick-slider .slick-dots {
+            display: flex;
+
             li {
-                display: inline-block;
-                height: 6px;
-                margin: 0 4px;
+                .size(14);
+                align-items: center;
+                display: flex;
+                justify-content: center;
+                margin: 0 2px;
                 padding: 0;
-                width: 6px;
             }
 
             li button {
+                .size(8);
+                background: @kosher-color__15;
                 border: none;
                 border-radius: 50%;
-                height: 100%;
-                opacity: .48;
+                box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.2);
                 padding: 0;
                 text-indent: -10000px;
-                width: 100%;
             }
 
             li button:hover {
@@ -123,7 +132,7 @@
             }
 
             li.slick-active button {
-                opacity: 1;
+                background: @kosher-color__01;
             }
 
             button:not(:active):focus {

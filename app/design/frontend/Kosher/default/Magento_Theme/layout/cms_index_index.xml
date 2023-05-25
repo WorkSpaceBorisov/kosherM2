@@ -14,28 +14,20 @@
         <!-- Main content block -->
         <container name="home.content" htmlTag="section" htmlClass="column main home-main">
 
-            <container name="main.home.slider" htmlTag="section" htmlClass="main-home-slider" before="-">
-                <container name="home.titdfle" htmlTag="div" htmlClass="block-title">
-                    <block class="Magento\Framework\View\Element\Text" name="text.blacccccnk" before="-">
-                        <arguments>
-                            <argument name="text" xsi:type="string">
-                                <![CDATA[Main slider]]>
-                            </argument>
-                        </arguments>
-                    </block>
-                </container>
+            <container name="main.home.slider" htmlTag="section" htmlClass="home-main-slider" before="-">
+                <block class="Magento\Cms\Block\Block" name="home-main-slider">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">home-main-slider</argument>
+                    </arguments>
+                </block>
             </container>
 
-            <container name="home.updates.block" htmlTag="section" htmlClass="home-updates-block">
-                <container name="home.title" htmlTag="div" htmlClass="block-title">
-                    <block class="Magento\Framework\View\Element\Text" name="text.bldfasssssnk" before="-">
-                        <arguments>
-                            <argument name="text" xsi:type="string">
-                                <![CDATA[Home Updates]]>
-                            </argument>
-                        </arguments>
-                    </block>
-                </container>
+            <container name="home.updates.container" htmlTag="section" htmlClass="home-updates">
+                <block class="Magento\Cms\Block\Block" name="home-upadates">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">home-upadates</argument>
+                    </arguments>
+                </block>
             </container>
 
             <container name="main.home.adv.block1" htmlTag="section" htmlClass="home-adv-block special">
