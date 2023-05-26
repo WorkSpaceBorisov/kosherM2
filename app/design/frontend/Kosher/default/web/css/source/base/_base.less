@@ -3,18 +3,105 @@
         box-sizing: border-box;
     }
 
-    html,
+    html:not(.not100),
     body {
         height: 100%; // Stretch screen area for sticky footer
     }
 
-    .page-wrapper{
+    .page-wrapper {
+        align-items: space-between;
+        background: @kosher-color__12;
         display: flex;
         flex-direction: column;
-        align-items: space-between;
         height: 100%;
-        .page-main{
+
+        .page-main,
+        .page-main-full-width {
+            background: @kosher-color__12;
             flex-grow: 1;
         }
+    }
+
+    .marker {
+        display: none;
+    }
+
+    .kosher-overlay {
+        display: none;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 200;
+
+        .kosher-overlay-inner {
+            .size(100%);
+            background: rgba(0, 0, 0, .2);
+        }
+    }
+
+    // Breadcrumbs
+
+    .breadcrumbs {
+        margin-bottom: 30px;
+
+        .items {
+            .lib-list-reset-styles();
+            align-items: center;
+            display: flex;
+        }
+
+        .item {
+            align-items: center;
+            display: flex;
+            line-height: 1;
+            margin-bottom: 0;
+
+            &:after {
+                .icomoon(@icon-arrow-right-small, 8px, @kosher-color__17);
+                margin: 1px 9px 0 9px;
+            }
+
+            &:last-child {
+                &:after {
+                    display: none;
+                }
+            }
+
+            a {
+                .lib-font-size(14);
+                color: @kosher-color__19;
+                font-weight: 400;
+                display: block;
+                line-height: inherit;
+
+                &:hover {
+                    color: @kosher-color__02;
+                }
+            }
+
+            &.home {
+                a {
+                    .size(14);
+                    position: relative;
+                    text-indent: -1000px;
+
+                    &:after{
+                        .icomoon(@icon-home, 14px, @kosher-color__19);
+                        .to-center();
+                        text-indent: 0;
+                    }
+                }
+            }
+
+            strong {
+                font-weight: 400;
+            }
+        }
+    }
+
+    .quick_view_div{
+        display: none;
     }
 }
