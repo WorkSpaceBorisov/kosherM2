@@ -12,6 +12,8 @@
             }
         }
     }
+
+
 </script>
 
 <script>
@@ -33,4 +35,20 @@
         icon.innerHTML = '<img src="/static/frontend/Kosher/default/en_US/images/categories/groceries.svg">';
         item.prepend(icon);
     }
+
+    let storeCreditBtn = document.querySelector('.page-wrapper > .store-credit__container');
+
+    let storeCreditActive = () => {
+        setTimeout(() => {
+            storeCreditBtn.classList.add('active')
+        }, 1000)
+    };
+
+    storeCreditBtn.addEventListener('click', function () {
+        sessionStorage.setItem('hideStoreCreditBtn', true);
+        this.classList.remove('active');
+    });
+    
+    !sessionStorage.getItem('hideStoreCreditBtn') ? storeCreditActive() : null;
+
 </script>

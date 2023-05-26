@@ -7,7 +7,7 @@ define([
 
     'use strict';
 
-    console.log('home.categoriesScroller');
+    // console.log('home.categoriesScroller');
 
 
     $.widget('home.categoriesScroller', {

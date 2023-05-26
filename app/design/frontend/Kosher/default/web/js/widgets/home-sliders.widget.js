@@ -6,7 +6,7 @@ define([
 
     'use strict';
     
-    console.log('home.productSlider');
+    // console.log('home.productSlider');
 
 
     $.widget('home.productSlider', {

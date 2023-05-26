@@ -23,6 +23,8 @@
                 <container name="header.search.container" htmlTag="div" htmlClass="header-search-container" after="logo"/>
 
                 <container name="header.right.container" htmlTag="div" htmlClass="header-right-container" after="-">
+                    <block class="Magento\Framework\View\Element\Template" name="store.credit.in.header"
+                           template="Magento_Theme::html/store-credit.phtml"/>
                     <block class="Magento\Framework\View\Element\Template" name="search.button"
                            template="Magento_Theme::html/header/search-button.phtml"/>
                     <block class="Magento\Framework\View\Element\Template" name="account.button"
@@ -89,7 +91,6 @@
         </referenceContainer>
 
         <referenceContainer name="before.body.end">
-            <block class="Magento\Theme\Block\Html\Footer" name="global.scripts" template="Magento_Theme::global-scripts.phtml"/>
             <!-- Kosher4U ovrelay -->
             <container name="kosher.overlay" htmlTag="div" htmlClass="kosher-overlay" htmlId="kosher_overlay" after="-">
                 <container name="kosher.overlay.inner" htmlTag="div" htmlClass="kosher-overlay-inner" after="-">
@@ -102,6 +103,9 @@
                     </block>
                 </container>
             </container>
+            <block class="Magento\Framework\View\Element\Template" name="store.credit.floating"
+                   template="Magento_Theme::html/store-credit.phtml"/>
+            <block class="Magento\Theme\Block\Html\Footer" name="global.scripts" template="Magento_Theme::global-scripts.phtml"/>
         </referenceContainer>
 
     </body>

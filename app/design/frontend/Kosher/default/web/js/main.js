@@ -21,6 +21,15 @@ define([
         }
     });
 
+    // Close account on cart click
+
+    document.querySelector('.header-login-block').addEventListener('click', () => {
+        document.querySelector('.minicart-wrapper').classList.remove('active');
+        document.querySelector('.action.showcart').classList.remove('active');
+        document.querySelector('.minicart-wrapper [role="dialog"]').style.display = 'none';
+
+    });
+
     // Show/hide mobile search
 
     const search = $('.header-search-container');

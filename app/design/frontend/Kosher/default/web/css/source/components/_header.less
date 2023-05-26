@@ -102,7 +102,6 @@
             &:after {
                 content: none;
             }
-
         }
     }
 
@@ -129,6 +128,74 @@
         margin-left: auto;
         order: 3;
         position: relative;
+
+        .store-credit__container {
+            display: none;
+        }
+    }
+
+    .page-wrapper {
+        & > .store-credit__container {
+            background: @kosher-color__27;
+            border-radius: 8px;
+            border: 1px solid @kosher-color__04;
+            bottom: -100px;
+            color: @kosher-color__04;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            padding: 20px 40px 20px 22px;
+            pointer-events: none;
+            position: fixed;
+            right: 5px;
+            transition: opacity 1s, bottom .5s;
+            z-index: 40;
+
+            &.active {
+                bottom: 10px;
+                opacity: 1;
+                pointer-events: unset;
+            }
+
+            &:hover{
+                cursor: pointer;
+            }
+
+            * {
+                line-height: 1;
+            }
+
+            .store-credit__title {
+                .lib-font-size(16);
+                font-weight: 500;
+                padding-bottom: 10px;
+            }
+
+            .store-credit__price {
+                .lib-font-size(18);
+                font-weight: 700;
+            }
+
+            .store-credit__close {
+                .size(20);
+                background: rgba(255, 255, 255, 1);
+                border-radius: 50%;
+                pointer-events: none;
+                position: absolute;
+                right: 3px;
+                top: 3px;
+
+                &:before{
+                    .icomoon(@icon-clear-field, 20, @kosher-color__03);
+                    .to-center();
+                    position: absolute;
+                }
+
+                span {
+                    display: none;
+                }
+            }
+        }
     }
 
     .header-login-block {
@@ -146,6 +213,14 @@
         .account-button {
             .mobile-button();
 
+            &.desktop {
+                display: none;
+            }
+
+            &.mobile {
+                display: block;
+            }
+
             &:before {
                 .icomoon(@icon-acc-orders, 18px, @kosher-color__19);
                 .to-center();
@@ -159,16 +234,17 @@
         .ko-customer-menu {
             background: @kosher-color__01;
             border: 1px solid @kosher-color__16;
-            box-shadow: 0 3px 3px rgba(0, 0, 0, .15);
+            border-radius: 8px;
+            box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, .45);
             display: none;
             left: auto;
-            margin: 0;
+            margin: 7px 0 0 0;
             padding: 0;
             position: absolute;
-            right: 0;
+            right: -2px;
             z-index: 100;
 
-            @arr-size: 8px;
+            @arr-size: 10px;
 
             &:before {
                 .triangle(top, @arr-size, @arr-size, @kosher-color__01);
@@ -191,11 +267,18 @@
 
         ul {
             .lib-list-reset-styles();
-            min-width: 175px;
+            min-width: 200px;
+            padding: 8px 0;
 
             li {
-                padding: 0;
+                border-bottom: 1px solid @kosher-color__14;
                 margin: 0;
+                padding: 0;
+
+                &:last-child {
+                    border-bottom: 0;
+                }
+
             }
 
             a {
@@ -203,13 +286,14 @@
                 display: block;
                 font-weight: 500;
                 padding: 9px 12px;
+                text-align: center;
 
                 &:hover {
-                    background: @kosher-color__27;
-                    text-decoration: none;
+                    text-decoration: underline;
                 }
             }
         }
+
     }
 }
 
@@ -344,7 +428,6 @@
                     color: @kosher-color__01;
                 }
             }
-
         }
     }
 
@@ -360,12 +443,52 @@
         width: unset;
     }
 
+    .page-wrapper > .store-credit__container {
+        display: none;
+    }
+
     .header-right-container {
         order: 4;
+
+        .store-credit__container {
+            display: flex;
+        }
+    }
+
+    .store-credit__container {
+        align-items: flex-start;
+        background: @kosher-color__27;
+        border-radius: 8px;
+        border: 0;
+        color: @kosher-color__04;
+        flex-direction: column;
+        height: 56px;
+        justify-content: center;
+        margin-right: 10px;
+        padding: 5px 20px 5px 20px;
+
+        * {
+            line-height: 1;
+        }
+
+        .store-credit__close {
+            display: none;
+        }
+    }
+
+    .store-credit__title {
+        font-weight: 500;
+        margin-bottom: 6px;
+        white-space: nowrap;
+    }
+
+    .store-credit__price {
+        .lib-font-size(16);
+        font-weight: 600;
     }
 
     .header-login-block {
-        margin-right: 1.25vw;
+        margin-right: 10px;
         position: relative;
 
         .login-button {
@@ -374,12 +497,34 @@
         }
 
         .account-button {
-            .size(76, 56);
-            border-radius: 8px;
-            margin-right: .52vw;
+            width: unset;
+
+            &.mobile {
+                display: none;
+            }
+
+            &.desktop {
+                .desktop-header-icon(@icon-arrow-down-small, 7px);
+                display: flex;
+                flex-direction: row-reverse;
+                padding: 5px 18px 5px 20px;
+
+                &:before {
+                    margin-top: 1px;
+                }
+
+                & > span:not(.counter) {
+                    font-weight: 500;
+                    margin-left: 0;
+                    margin-right: 9px;
+                    white-space: nowrap;
+                }
+
+            }
 
             &:before {
                 .icomoon(@icon-acc-orders, 18px, @kosher-color__19);
+                margin-right: 0;
             }
 
             &:hover {
@@ -393,17 +538,47 @@
         }
 
         &.active {
-            .account-button {
+            .account-button.desktop {
                 background: @kosher-color__04;
+                color: @kosher-color__01;
+
+                & > span {
+                    color: @kosher-color__01;
+                }
 
                 &:before {
                     color: @kosher-color__01;
+                    content: @icon-arrow-up-small;
+                    margin-top: 2px;
                 }
             }
         }
 
         .ko-customer-menu {
-            margin: 2px 0 0 0;
-         }
+            left: 50%;
+            margin: 12px 0 0 0;
+            transform: translate(-50%, 0);
+            right: auto;
+
+            &:before,
+            &:after {
+                left: 50%;
+                right: auto;
+                transform: translate(-50%, 0);
+            }
+        }
+    }
+}
+
+//
+//  Desktop 1440 max
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__l) {
+    body {
+        .header-search-container {
+            padding-left: 30px;
+            padding-right: 15px;
+        }
     }
 }
