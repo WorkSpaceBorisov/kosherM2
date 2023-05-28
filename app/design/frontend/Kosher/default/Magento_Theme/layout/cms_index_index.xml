@@ -6,13 +6,9 @@
 
         <!-- REMOVE -->
         <referenceBlock name="page.main.title" remove="true"/>
-        <referenceBlock name="main" remove="true"/>
-
-        <!-- MOVE -->
-        <move element="home.content" destination="columns"/>
 
         <!-- Main content block -->
-        <container name="home.content" htmlTag="section" htmlClass="column main home-main">
+        <referenceContainer name="content" htmlTag="section" htmlClass="column main home-main">
 
             <container name="main.home.slider" htmlTag="section" htmlClass="home-main-slider" before="-">
                 <block class="Magento\Cms\Block\Block" name="home-main-slider">
@@ -132,7 +128,7 @@
                 </container>
             </container>
 
-        </container>
+        </referenceContainer>
 
         <referenceContainer name="before.body.end">
             <block class="Magento\Theme\Block\Html\Footer" name="home.scripts" template="Magento_Theme::home-scripts.phtml"/>
