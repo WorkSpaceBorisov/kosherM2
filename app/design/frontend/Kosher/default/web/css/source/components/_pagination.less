@@ -1,0 +1,126 @@
+//
+//  Common - Pagination
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .products.wrapper + .toolbar-panel {
+        margin-bottom: 70px;
+
+        .toolbar-products {
+            justify-content: center;
+        }
+    }
+
+    .items.pages-items {
+        .lib-list-reset-styles();
+        align-items: center;
+        display: flex;
+        justify-content: flex-start;
+
+        .item {
+            .size(20, 18);
+            .lib-font-size(14);
+            display: block;
+            font-weight: 600;
+            line-height: 1;
+            margin: 0 13px;
+
+            * {
+                line-height: inherit;
+            }
+
+            &.current {
+                strong {
+                    display: block;
+                    color: @kosher-color__04;
+                }
+            }
+
+            .page {
+                .size(100%);
+                color: @kosher-color__17;
+                display: block;
+                padding-top: 2px;
+                text-align: center;
+
+                &:hover {
+                    color: @kosher-color__05;
+                    text-decoration: none;
+                }
+            }
+
+            &.pages-item-previous,
+            &.pages-item-next {
+                span {
+                    display: none;
+                }
+
+                a {
+                    .size(100%);
+                    display: block;
+                    position: relative;
+
+                    &:before {
+                        .to-center();
+                    }
+
+                    &:hover {
+                        &:before {
+                            color: @kosher-color__05;
+                        }
+                    }
+                }
+            }
+
+            &.pages-item-previous {
+                a {
+                    &:before {
+                        .icomoon(@icon-arrow-back, 18px, @kosher-color__17);
+                    }
+                }
+            }
+
+            &.pages-item-next {
+                a {
+                    &:before {
+                        .icomoon(@icon-arrow-forward, 18px, @kosher-color__17);
+                    }
+                }
+            }
+        }
+    }
+}
+//
+//  Tablet
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    body {
+        .products.wrapper + .toolbar-panel {
+            margin-bottom: 30px;
+        }
+    }
+}
+
+//
+//  Middle 640
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+    body {
+
+        .products.wrapper + .toolbar-panel {
+            margin-bottom: 20px;
+        }
+
+        .toolbar-amount {
+            display: none;
+        }
+
+        .items.pages-items {
+            .item {
+                width: 24px;
+            }
+        }
+    }
+}

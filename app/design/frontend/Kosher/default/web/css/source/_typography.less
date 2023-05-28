@@ -1,6 +1,7 @@
 //
 //  Common
 //  _____________________________________________
+@import (reference) 'variables/_colors.less';
 
 & when (@media-common = true) {
     //
@@ -102,6 +103,19 @@
         @font-style: normal,
         @font-display: swap
     );
+
+    //Headings
+
+    h1, h2, h3, h4, h5, h6 {
+        color: @kosher-color__19;
+        font-weight: 700;
+        letter-spacing:  0.0025em;
+        margin-top: 0;
+    }
+
+    h1 {
+        .lib-font-size(28);
+    }
 }
 
 //
@@ -113,7 +127,9 @@
     //  Headings
     //  _____________________________________________
 
+
     h1 {
+        .lib-font-size(32);
     }
 
     h2 {
@@ -131,3 +147,14 @@
     h6 {
     }
 }
+
+//
+//  Mobile 480
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs2) {
+    h1 {
+        .lib-font-size(24);
+    }
+}
+
