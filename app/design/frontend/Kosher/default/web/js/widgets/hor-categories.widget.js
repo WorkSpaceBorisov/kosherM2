@@ -7,8 +7,7 @@ define([
 
     'use strict';
     
-    console.log('hor.categories');
-
+    // console.log('hor.categories');
 
     $.widget('hor.categories', {
         options: {
@@ -69,10 +68,7 @@ define([
                     }
                 ]
             });
-
-
         }
-
     });
 
     return $.hor.categories;
