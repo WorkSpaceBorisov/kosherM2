@@ -1,0 +1,103 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<div class="block-title">
+    <strong>
+        <span class="text" translate="'My Cart'"></span>
+        <span
+            class="qty empty"
+            text="getCartParam('summary_count')"
+            data-bind="css: { empty: !!getCartParam('summary_count') == false },
+                       attr: { title: $t('Items in Cart') }">
+        </span>
+    </strong>
+</div>
+
+<div class="block-content" data-bind="css: { 'empty-cart' : !getCartParam('summary_count') }">
+
+    <button type="button"
+            id="btn-minicart-close"
+            class="action close"
+            data-action="close"
+            data-bind="
+                attr: {
+                    title: $t('Close')
+                },
+                click: closeMinicart()
+            ">
+        <span translate="'Close'"></span>
+    </button>
+
+    <if args="getCartParam('summary_count')">
+
+        <div class="minicart-header">
+            <h3 class="minicart-header__title">
+                <span translate="'Cart'"></span>
+                <a href="#" class="minicart-header-delete" id="#minicart-header-delete"  translate="'All delete'"></a>
+            </h3>
+            <div class="items-total">
+                <span translate="'Products of'"></span>
+                <span class="count" text="getCartParam('summary_count').toLocaleString(window.LOCALE)"></span>
+                <span class="weight">
+                    <span translate="'Weight'"></span>,
+                    <span class="kg">kg 1.6</span>
+                </span>
+            </div>
+        </div>
+
+        <strong class="subtitle" translate="'Recently added item(s)'"></strong>
+        <div data-action="scroll" class="minicart-items-wrapper">
+            <ol id="mini-cart" class="minicart-items" data-bind="foreach: { data: getCartItems(), as: 'item' }">
+                <each args="$parent.getRegion($parent.getItemRenderer(item.product_type))"
+                      render="{name: getTemplate(), data: item, afterRender: function() {$parents[1].initSidebar()}}"></each>
+            </ol>
+        </div>
+
+        <div class="minicart-footer">
+            <each args="getRegion('subtotalContainer')" render=""></each>
+            <each args="getRegion('extraInfo')" render=""></each>
+
+            <div class="actions" if="getCartParam('possible_onepage_checkout')">
+                <div class="primary">
+                    <button
+                        id="top-cart-btn-checkout"
+                        type="button"
+                        class="action checkout"
+                        data-action="close"
+                        data-bind="
+                            attr: {
+                                title: $t('Pay')
+                            },
+                            click: closeMinicart()
+                        "
+                        translate="'Pay'">
+                    </button>
+                    <div data-bind="html: getCartParamUnsanitizedHtml('extra_actions')"></div>
+                </div>
+            </div>
+
+        </div>
+    </if>
+
+    <ifnot args="getCartParam('summary_count')">
+        <div class="empty-cart-content">
+
+            <h4 class="subtitle empty"><span translate="'You Have Not Made A Purchase Yet'"></span></h4>
+
+            <div class="actions">
+                <a class="minicart-continue-shopping-button" href="/"><span translate="'Continue Shopping'"></span></a>
+            </div>
+
+        </div>
+    </ifnot>
+
+    <div id="minicart-widgets" class="minicart-widgets" if="regionHasElements('promotion')">
+        <each args="getRegion('promotion')" render=""></each>
+    </div>
+
+</div>
+<each args="getRegion('sign-in-popup')" render=""></each>
+
