@@ -5,7 +5,7 @@ define([
 
     'use strict';
 
-    console.log('app/design/frontend/Kosher/default/web/js/category-scripts.js');
+    // console.log('app/design/frontend/Kosher/default/web/js/category-scripts.js');
 
     const html = document.querySelector('html')
     const body = document.body;

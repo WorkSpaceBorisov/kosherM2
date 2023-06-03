@@ -106,10 +106,15 @@
         text-align: center;
         width: @width;
 
-        &:hover {
+        &:hover,
+        &:hover:visited {
             background: @kosher-color__27;
             color: @kosher-color__03;
             text-decoration: none;
+        }
+
+        &:visited{
+            color: @kosher-color__01;
         }
 
         @media only screen and (max-width: 1440px) {

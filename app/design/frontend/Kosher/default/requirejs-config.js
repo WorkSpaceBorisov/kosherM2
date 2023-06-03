@@ -2,16 +2,16 @@
 
 var config = {
     map: {
-        "*": {
+        '*': {
             'main': 'js/main',
             'custon.dropdown': 'js/widgets/custom-dropdown.widget',
             'custom.plusMinus': 'js/widgets/custom-plus-minus.widget',
             'custom.accordion': 'js/widgets/custom-accordion.widget',
             'custom.select': 'js/widgets/custom-select.widget',
-            'slick': "js/vendors/slick/slick.min",
-            'scrollbar': "js/vendors/malihu/jquery.mCustomScrollbar.min",
-            // 'hor.categories': "js/widgets/hor-categories.widget",
-            'home.categories': "js/widgets/home-categories.widget"
+            'slick': 'js/vendors/slick/slick.min',
+            'scrollbar': 'js/vendors/malihu/jquery.mCustomScrollbar.min',
+            'home.categories': 'js/widgets/home-categories.widget',
+            'pdp.popup': 'js/widgets/pdp-popup.widget'
         }
     },
 
@@ -21,10 +21,10 @@ var config = {
         'custom.plusMinus': 'js/widgets/custom-plus-minus.widget',
         'custom.accordion': 'js/widgets/custom-accordion.widget',
         'custom.select': 'js/widgets/custom-select.widget',
-        'slick': "js/vendors/slick/slick.min",
-        'scrollbar': "js/vendors/malihu/jquery.mCustomScrollbar.min",
-        // 'hor.categories': "js/widgets/hor-categories.widget",
-        'home.categories': "js/widgets/home-categories.widget"
+        'slick': 'js/vendors/slick/slick.min',
+        'scrollbar': 'js/vendors/malihu/jquery.mCustomScrollbar.min',
+        'home.categories': 'js/widgets/home-categories.widget',
+        'pdp.popup': 'js/widgetspdp-popup.widget'
     },
 
     shim: {
