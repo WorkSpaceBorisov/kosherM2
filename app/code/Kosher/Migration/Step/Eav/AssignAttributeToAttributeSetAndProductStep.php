@@ -164,7 +164,7 @@ class AssignAttributeToAttributeSetAndProductStep implements StageInterface
      */
     private function saveDataToDestinationTable(string $table, array $data): void
     {
-        $this->destination->getAdapter()->insertRecords(
+        $this->destination->getAdapter()->updateChangedRecords(
             $this->destination->addDocumentPrefix($table),
             $data
         );
