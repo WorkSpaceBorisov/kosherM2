@@ -1,4 +1,4 @@
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
 
         <!-- REMOVE -->
@@ -23,6 +23,8 @@
                 <container name="header.search.container" htmlTag="div" htmlClass="header-search-container" after="logo"/>
 
                 <container name="header.right.container" htmlTag="div" htmlClass="header-right-container" after="-">
+                    <block class="Magento\Framework\View\Element\Template" name="store.credit.in.header"
+                           template="Magento_Theme::html/store-credit.phtml"/>
                     <block class="Magento\Framework\View\Element\Template" name="search.button"
                            template="Magento_Theme::html/header/search-button.phtml"/>
                     <block class="Magento\Framework\View\Element\Template" name="account.button"
@@ -34,11 +36,7 @@
             </container>
         </referenceContainer>
 
-        <referenceContainer name="page.bottom.container">
-            <container name="horizonlal.menu.container" htmlTag="div" htmlClass="kosher-horizontal-menu" after="-">
-                <block class="Magento\Theme\Block\Html\Topmenu" name="horizonlal.menu" template="Magento_Theme::html/topmenu.phtml" ttl="3600"/>
-            </container>
-        </referenceContainer>
+        <referenceContainer name="main" htmlTag="section" htmlClass="column main kosher-main" />
 
         <referenceContainer name="footer-container">
             <referenceContainer name="footer">
@@ -93,6 +91,20 @@
         </referenceContainer>
 
         <referenceContainer name="before.body.end">
+            <!-- Kosher4U ovrelay -->
+            <container name="kosher.overlay" htmlTag="div" htmlClass="kosher-overlay" htmlId="kosher_overlay" after="-">
+                <container name="kosher.overlay.inner" htmlTag="div" htmlClass="kosher-overlay-inner" after="-">
+                    <block class="Magento\Framework\View\Element\Text" name="text.blank" before="-">
+                        <arguments>
+                            <argument name="text" xsi:type="string">
+                                <![CDATA[&nbsp;]]>
+                            </argument>
+                        </arguments>
+                    </block>
+                </container>
+            </container>
+            <block class="Magento\Framework\View\Element\Template" name="store.credit.floating"
+                   template="Magento_Theme::html/store-credit.phtml"/>
             <block class="Magento\Theme\Block\Html\Footer" name="global.scripts" template="Magento_Theme::global-scripts.phtml"/>
         </referenceContainer>
 
