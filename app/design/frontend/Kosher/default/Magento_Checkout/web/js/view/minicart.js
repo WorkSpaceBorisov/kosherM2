@@ -11,8 +11,9 @@ define([
     'underscore',
     'sidebar',
     'mage/translate',
-    'mage/dropdown'
-], function (Component, customerData, $, ko, _) {
+    'mage/dropdown',
+    'scrollbar'
+], function (Component, customerData, $, ko, _, scrollbar) {
     'use strict';
 
     var sidebarInitialized = false,
@@ -25,6 +26,20 @@ define([
      * @return {Boolean}
      */
     function initSidebar() {
+
+        $('.minicart-items-wrapper .block-content').mCustomScrollbar({
+            axis: 'y',
+            theme: 'popup',
+            scrollbarPosition: 'outside',
+            mouseWheel: {
+                enable: true,
+                axis: 'y'
+            },
+            scrollButtons: {
+                enable: false
+            }
+        });
+
         if (miniCart.data('mageSidebar')) {
             miniCart.sidebar('update');
         }
@@ -66,7 +81,10 @@ define([
             },
             'item': {
                 'qty': ':input.cart-item-qty',
-                'button': ':button.update-cart-item'
+                'button': ':button.update-cart-item',
+                'input': '.input.cart-item-qty',
+                'plus': '.custom-qty-btn.btn-plus',
+                'minus': '.custom-qty-btn.btn-minus'
             },
             'confirmMessage': $.mage.__('Are you sure you would like to remove this item from the shopping cart?')
         });

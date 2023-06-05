@@ -24,7 +24,7 @@ var config = {
         'slick': 'js/vendors/slick/slick.min',
         'scrollbar': 'js/vendors/malihu/jquery.mCustomScrollbar.min',
         'home.categories': 'js/widgets/home-categories.widget',
-        'pdp.popup': 'js/widgetspdp-popup.widget'
+        'pdp.popup': 'js/widgets/pdp-popup.widget'
     },
 
     shim: {

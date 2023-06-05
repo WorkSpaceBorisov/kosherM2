@@ -91,6 +91,27 @@ define([
                 self._removeItem($(event.currentTarget));
             };
 
+            // Increase qty value
+
+            events['click ' + this.options.item.plus] = function (event) {
+                event.stopPropagation();
+                let input = $(event.currentTarget).closest('.details-qty').find('.cart-item-qty');
+                let val = input.val();
+                // console.log('Plus', input, val);
+                input.val(++val).change()
+
+            };
+
+            // Decrease qty value
+
+            events['click ' + this.options.item.minus] = function (event) {
+                event.stopPropagation();
+                let input = $(event.currentTarget).closest('.details-qty').find('.cart-item-qty');
+                let val = input.val();
+                // console.log('Plus', input, val);
+                input.val(--val).change()
+            };
+
             /**
              * @param {jQuery.Event} event
              */
@@ -102,7 +123,21 @@ define([
              * @param {jQuery.Event} event
              */
             events['change ' + this.options.item.qty] = function (event) {
+                // console.log('change', this.options.item.qty);
+                // let input = $(event.target).closest('.details-qty').find('.cart-item-qty');
+                // let minus = $(event.target).closest('.details-qty').find('.btn-minus');
+                // let val = input.val();
+                console.log('Changing');
                 self._showItemButton($(event.target));
+
+                // if(val == 1) {
+                //     console.log('Minusss', minus);
+                //     minus.addClass('disabled');
+                //     $(event.target).closest('.details-qty').addClass('munus')
+                //     return;
+                // }
+                // minus.removeClass('disabled');
+
             };
 
             /**
@@ -130,14 +165,17 @@ define([
          */
         _showItemButton: function (elem) {
             var itemId = elem.data('cart-item'),
-                itemQty = elem.data('item-qty');
+                itemQty = elem.data('item-qty'),
+                button = 'button#update-cart-item-' + itemId,
+                self = this;
+
+            // console.log('show btn', elem, itemId, 'button#update-cart-item-' + itemId, button);
 
             if (this._isValidQty(itemQty, elem.val())) {
-                $('#update-cart-item-' + itemId).show('fade', 300);
-            } else if (elem.val() == 0) { //eslint-disable-line eqeqeq
-                this._hideItemButton(elem);
-            } else {
-                this._hideItemButton(elem);
+                // show if valid
+                // console.log('_isValidQty');
+                // $('#update-cart-item-' + itemId).show('fade', 300);
+                self._updateItemQty($(button));
             }
         },
 
@@ -148,6 +186,7 @@ define([
          * @private
          */
         _isValidQty: function (origin, changed) {
+            console.log('_isValidQty');
             return origin != changed && //eslint-disable-line eqeqeq
                 changed.length > 0 &&
                 changed - 0 == changed && //eslint-disable-line eqeqeq
@@ -161,6 +200,8 @@ define([
         _validateQty: function (elem) {
             var itemQty = elem.data('item-qty');
 
+            console.log('_validateQty');
+
             if (!this._isValidQty(itemQty, elem.val())) {
                 elem.val(itemQty);
             }
@@ -172,7 +213,6 @@ define([
          */
         _hideItemButton: function (elem) {
             var itemId = elem.data('cart-item');
-
             $('#update-cart-item-' + itemId).hide('fade', 300);
         },
 
@@ -181,7 +221,11 @@ define([
          * @private
          */
         _updateItemQty: function (elem) {
+            // console.log('Elem::::', elem);
             var itemId = elem.data('cart-item');
+
+            // console.log('_updateItemQty', $('#cart-item-' + itemId + '-qty').val());
+            // console.log('_updateItemQty');
 
             this._ajax(this.options.url.update, {
                 'item_id': itemId,
@@ -204,6 +248,7 @@ define([
                     window.location.reload(false);
                 }
             }
+
             this._hideItemButton(elem);
         },
 
@@ -263,7 +308,11 @@ define([
          * @param {Object} elem - element that initiated the event
          * @param {Function} callback - callback method to execute after AJAX success
          */
+
         _ajax: function (url, data, elem, callback) {
+
+            let self = this;
+
             $.extend(data, {
                 'form_key': $.mage.cookies.get('form_key')
             });
