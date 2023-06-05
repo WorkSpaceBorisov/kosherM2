@@ -10,8 +10,7 @@ var config = {
             'custom.select': 'js/widgets/custom-select.widget',
             'slick': 'js/vendors/slick/slick.min',
             'scrollbar': 'js/vendors/malihu/jquery.mCustomScrollbar.min',
-            'home.categories': 'js/widgets/home-categories.widget',
-            'pdp.popup': 'js/widgets/pdp-popup.widget'
+            'home.categories': 'js/widgets/home-categories.widget'
         }
     },
 
@@ -23,8 +22,7 @@ var config = {
         'custom.select': 'js/widgets/custom-select.widget',
         'slick': 'js/vendors/slick/slick.min',
         'scrollbar': 'js/vendors/malihu/jquery.mCustomScrollbar.min',
-        'home.categories': 'js/widgets/home-categories.widget',
-        'pdp.popup': 'js/widgetspdp-popup.widget'
+        'home.categories': 'js/widgets/home-categories.widget'
     },
 
     shim: {
