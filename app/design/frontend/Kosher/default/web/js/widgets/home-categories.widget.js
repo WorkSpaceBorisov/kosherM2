@@ -1,9 +1,10 @@
 define([
     'jquery',
+    'mousewheel',
     'scrollbar',
     'matchMedia',
     'domReady!'
-], function ($, scrollbar) {
+], function ($, scrollbar, mousewheel) {
 
     'use strict';
 
@@ -12,7 +13,7 @@ define([
 
     $.widget('home.categoriesScroller', {
         options: {
-            breakPoint: '1600px'
+            breakPoint: '1700px'
 
         },
 
@@ -34,6 +35,7 @@ define([
             $(this.element).mCustomScrollbar({
                 axis: 'x',
                 theme: 'kosher-1',
+                scrollInertia: 160,
                 mouseWheel: {
                     enable: true,
                     axis: 'x'
