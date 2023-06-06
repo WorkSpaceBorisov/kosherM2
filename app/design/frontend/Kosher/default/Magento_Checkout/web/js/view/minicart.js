@@ -12,8 +12,9 @@ define([
     'sidebar',
     'mage/translate',
     'mage/dropdown',
+    'mousewheel',
     'scrollbar'
-], function (Component, customerData, $, ko, _, scrollbar) {
+], function (Component, customerData, $, ko, _) {
     'use strict';
 
     var sidebarInitialized = false,
@@ -22,23 +23,33 @@ define([
 
     miniCart = $('[data-block=\'minicart\']');
 
+    let flag = false;
+
     /**
      * @return {Boolean}
      */
     function initSidebar() {
 
-        $('.minicart-items-wrapper .block-content').mCustomScrollbar({
-            axis: 'y',
-            theme: 'popup',
-            scrollbarPosition: 'outside',
-            mouseWheel: {
-                enable: true,
-                axis: 'y'
-            },
-            scrollButtons: {
-                enable: false
-            }
-        });
+        function initSCrollbar() {
+            $('.minicart-items-wrapper').mCustomScrollbar({
+                axis: 'y',
+                theme: 'minicart',
+                scrollbarPosition: 'outside',
+                scrollInertia: 260,
+                mouseWheel: {
+                    enable: true,
+                    axis: 'y',
+                },
+                scrollButtons: {
+                    enable: false
+                }
+            });
+        }
+
+        if (!flag) {
+            initSCrollbar();
+            flag = true;
+        }
 
         if (miniCart.data('mageSidebar')) {
             miniCart.sidebar('update');
@@ -47,11 +58,13 @@ define([
         if (!$('[data-role=product-item]').length) {
             return false;
         }
+
         miniCart.trigger('contentUpdated');
 
         if (sidebarInitialized) {
             return false;
         }
+
         sidebarInitialized = true;
         miniCart.sidebar({
             'targetElement': 'div.block.block-minicart',

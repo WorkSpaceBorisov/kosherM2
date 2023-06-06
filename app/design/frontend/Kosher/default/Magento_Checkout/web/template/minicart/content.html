@@ -46,7 +46,24 @@
         </div>
 
         <div class="minicart-footer">
-            <each args="getRegion('subtotalContainer')" render=""></each>
+
+            <div class="minicart-footer__warning">
+                <div translate="'The minimal sum for an order is 40.00.'"></div>
+                <div translate="'Excluding VAT.'"></div>
+            </div>
+
+            <div class="minicart-footer__data weight">
+                <span class="label" translate="'Weight, kg'"></span>
+                <span class="data">4.75</span>
+            </div>
+
+            <div class="minicart-footer__data totals">
+                <span class="label" translate="'Total'"></span>
+                <span class="data">
+                    <each args="getRegion('subtotalContainer')" render=""></each>
+                </span>
+            </div>
+
             <each args="getRegion('extraInfo')" render=""></each>
 
             <div class="actions" if="getCartParam('possible_onepage_checkout')">
@@ -89,4 +106,3 @@
 
 </div>
 <each args="getRegion('sign-in-popup')" render=""></each>
-

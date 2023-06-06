@@ -1392,4 +1392,46 @@
         background-position: -80px -56px
     }
 
+    // Minicart
+
+    .mCS-minicart.mCSB_scrollTools .mCSB_draggerRail {
+        background-color: transparent;
+        //background-color: rgba(0, 0, 0, .15)
+    }
+    .mCustomScrollBox.mCS-minicart {
+        .mCSB_scrollTools_vertical{
+            right: 1px;
+            opacity: .6;
+        }
+    }
+
+    .mCS-minicart.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+        background-color: @kosher-color__15;
+    }
+
+    .mCS-minicart.mCustomScrollBox {
+        .mCSB_container {
+            margin-right: 0;
+        }
+    }
+
+    .mCSB_outside{
+        & + .mCS-minicart {
+
+            &.mCSB_scrollTools_vertical{
+                overflow: hidden;
+                right: -13px;
+            }
+        }
+    }
+
+    .mCS-minicart.mCSB_scrollTools {
+        .mCSB_dragger:hover .mCSB_dragger_bar {
+            background-color: rgba(0, 0, 0, .5)
+        }
+    }
+
+    .mCS-minicart.mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar, .mCS-minicart.mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar {
+        background-color: rgba(0, 0, 0, .5)
+    }
 }

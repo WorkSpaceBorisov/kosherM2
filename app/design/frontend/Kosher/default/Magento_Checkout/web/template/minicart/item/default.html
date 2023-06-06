@@ -18,133 +18,136 @@
             </div>
         </div>
 
-        <!-- ko if: product_has_url -->
-        <a data-bind="attr: {href: product_url, title: product_name}" tabindex="-1" class="product-item-photo">
-            <!-- ko foreach: $parent.getRegion('itemImage') -->
-            <!-- ko template: {name: getTemplate(), data: item.product_image} --><!-- /ko -->
+        <div class="minicart-item-inner">
+
+            <!-- ko if: product_has_url -->
+            <a data-bind="attr: {href: product_url, title: product_name}" tabindex="-1" class="product-item-photo">
+                <!-- ko foreach: $parent.getRegion('itemImage') -->
+                <!-- ko template: {name: getTemplate(), data: item.product_image} --><!-- /ko -->
+                <!-- /ko -->
+            </a>
             <!-- /ko -->
-        </a>
-        <!-- /ko -->
-        <!-- ko ifnot: product_has_url -->
-        <span class="product-item-photo">
+            <!-- ko ifnot: product_has_url -->
+            <span class="product-item-photo">
             <!-- ko foreach: $parent.getRegion('itemImage') -->
-            <!-- ko template: {name: getTemplate(), data: item.product_image} --><!-- /ko -->
-            <!-- /ko -->
+                <!-- ko template: {name: getTemplate(), data: item.product_image} --><!-- /ko -->
+                <!-- /ko -->
         </span>
-        <!-- /ko -->
-
-        <div class="product-item-details">
-            <strong class="product-item-name">
-                <!-- ko if: product_has_url -->
-                <a data-bind="attr: {href: product_url}, html: $parent.getProductNameUnsanitizedHtml(product_name)"></a>
-                <!-- /ko -->
-                <!-- ko ifnot: product_has_url -->
-                <span data-bind="html: $parent.getProductNameUnsanitizedHtml(product_name)"></span>
-                <!-- /ko -->
-            </strong>
-
-            <!-- ko if: options.length -->
-            <div class="product options" data-mage-init='{"collapsible":{"openedState": "active", "saveState": false}}'>
-                <span data-role="title" class="toggle"><!-- ko i18n: 'See Details' --><!-- /ko --></span>
-
-                <div data-role="content" class="content">
-                    <strong class="subtitle"><!-- ko i18n: 'Options Details' --><!-- /ko --></strong>
-                    <dl class="product options list">
-                        <!-- ko foreach: { data: options, as: 'option' } -->
-                        <dt class="label"><!-- ko text: option.label --><!-- /ko --></dt>
-                        <dd class="values">
-                            <!-- ko if: Array.isArray(option.value) -->
-                            <span data-bind="html: $parents[1].getOptionValueUnsanitizedHtml(option.value.join('<br>'))"></span>
-                            <!-- /ko -->
-                            <!-- ko if: (!Array.isArray(option.value) && ['file', 'html'].includes(option.option_type)) -->
-                            <span data-bind="html: $parents[1].getOptionValueUnsanitizedHtml(option.value)"></span>
-                            <!-- /ko -->
-                            <!-- ko if: (!Array.isArray(option.value) && !['file', 'html'].includes(option.option_type)) -->
-                            <span data-bind="text: option.value"></span>
-                            <!-- /ko -->
-                        </dd>
-                        <!-- /ko -->
-                    </dl>
-                </div>
-            </div>
             <!-- /ko -->
 
-            <div class="fin-block">
+            <div class="product-item-details">
+                <strong class="product-item-name">
+                    <!-- ko if: product_has_url -->
+                    <a data-bind="attr: {href: product_url}, html: $parent.getProductNameUnsanitizedHtml(product_name)"></a>
+                    <!-- /ko -->
+                    <!-- ko ifnot: product_has_url -->
+                    <span data-bind="html: $parent.getProductNameUnsanitizedHtml(product_name)"></span>
+                    <!-- /ko -->
+                </strong>
 
-                <div class="category-link">
-                    <a href="#" class="category-link__href" tabindex="0"><span>Just Bagel</span></a>
+                <!-- ko if: options.length -->
+                <div class="product options" data-mage-init='{"collapsible":{"openedState": "active", "saveState": false}}'>
+                    <span data-role="title" class="toggle"><!-- ko i18n: 'See Details' --><!-- /ko --></span>
+
+                    <div data-role="content" class="content">
+                        <strong class="subtitle"><!-- ko i18n: 'Options Details' --><!-- /ko --></strong>
+                        <dl class="product options list">
+                            <!-- ko foreach: { data: options, as: 'option' } -->
+                            <dt class="label"><!-- ko text: option.label --><!-- /ko --></dt>
+                            <dd class="values">
+                                <!-- ko if: Array.isArray(option.value) -->
+                                <span data-bind="html: $parents[1].getOptionValueUnsanitizedHtml(option.value.join('<br>'))"></span>
+                                <!-- /ko -->
+                                <!-- ko if: (!Array.isArray(option.value) && ['file', 'html'].includes(option.option_type)) -->
+                                <span data-bind="html: $parents[1].getOptionValueUnsanitizedHtml(option.value)"></span>
+                                <!-- /ko -->
+                                <!-- ko if: (!Array.isArray(option.value) && !['file', 'html'].includes(option.option_type)) -->
+                                <span data-bind="text: option.value"></span>
+                                <!-- /ko -->
+                            </dd>
+                            <!-- /ko -->
+                        </dl>
+                    </div>
                 </div>
+                <!-- /ko -->
 
-                <div class="product-item-pricing">
+                <div class="fin-block">
 
-                    <din class="price-box">
+                    <div class="category-link">
+                        <a href="#" class="category-link__href" tabindex="0"><span>Just Bagel</span></a>
+                    </div>
 
-                        <!-- ko if: canApplyMsrp -->
+                    <div class="product-item-pricing">
 
-                        <div class="details-map">
-                            <span class="label" data-bind="i18n: 'Price'"></span>
-                            <span class="value" data-bind="i18n: 'See price before order confirmation.'"></span>
-                        </div>
+                        <din class="price-box">
 
-                        <!-- /ko -->
-                        <!-- ko ifnot: canApplyMsrp -->
-                        <!-- ko foreach: $parent.getRegion('priceSidebar') -->
-                        <!-- ko template: {name: getTemplate(), data: item.product_price, as: 'price'} --><!-- /ko -->
-                        <!-- /ko -->
-                        <!-- /ko -->
+                            <!-- ko if: canApplyMsrp -->
 
-                        <span class="price-here__weight">/<span>100g</span></span>
+                            <div class="details-map">
+                                <span class="label" data-bind="i18n: 'Price'"></span>
+                                <span class="value" data-bind="i18n: 'See price before order confirmation.'"></span>
+                            </div>
 
-                    </din>
+                            <!-- /ko -->
+                            <!-- ko ifnot: canApplyMsrp -->
+                            <!-- ko foreach: $parent.getRegion('priceSidebar') -->
+                            <!-- ko template: {name: getTemplate(), data: item.product_price, as: 'price'} --><!-- /ko -->
+                            <!-- /ko -->
+                            <!-- /ko -->
 
+                            <span class="price-here__weight">/<span>100g</span></span>
 
-                    <div class="details-qty qty">
+                        </din>
 
-                        <input data-bind="attr: {
+                        <div class="details-qty qty">
+
+                            <input data-bind="attr: {
                            id: 'cart-item-'+item_id+'-qty',
                            'data-cart-item': item_id,
                            'data-item-qty': qty,
                            'data-cart-item-id': product_sku
                            }, value: qty"
-                               type="text"
-                               size="4"
-                               class="item-qty cart-item-qty custom"/>
-                        <div class="custom-qty-btn btn-minus"><span>-</span></div>
-                        <div class="custom-qty-btn btn-plus"><span>+</span></div>
+                                   type="text"
+                                   size="4"
+                                   class="item-qty cart-item-qty custom"/>
+                            <div class="custom-qty-btn btn-minus"><span>-</span></div>
+                            <div class="custom-qty-btn btn-plus"><span>+</span></div>
 
-                        <button data-bind="attr: {
+                            <button data-bind="attr: {
                            id: 'update-cart-item-'+item_id,
                            'data-cart-item': item_id,
                            title: $t('Update')
                            }"
-                                class="update-cart-item"
-                                style="display: none">
-                            <span data-bind="i18n: 'Update'"></span>
-                        </button>
+                                    class="update-cart-item"
+                                    style="display: none">
+                                <span data-bind="i18n: 'Update'"></span>
+                            </button>
+                        </div>
+
                     </div>
 
                 </div>
 
-            </div>
-
-            <div class="product actions">
-                <!-- ko if: is_visible_in_site_visibility -->
-                <div class="primary">
-                    <a data-bind="attr: {href: configure_url, title: $t('Edit item')}" class="action edit">
-                        <span data-bind="i18n: 'Edit'"></span>
-                    </a>
-                </div>
-                <!-- /ko -->
-                <div class="secondary">
-                    <a href="#" data-bind="attr: {'data-cart-item': item_id, title: $t('Remove item')}"
-                       class="action delete">
-                        <span data-bind="i18n: 'Remove'"></span>
-                    </a>
+                <div class="product actions">
+                    <!-- ko if: is_visible_in_site_visibility -->
+                    <div class="primary">
+                        <a data-bind="attr: {href: configure_url, title: $t('Edit item')}" class="action edit">
+                            <span data-bind="i18n: 'Edit'"></span>
+                        </a>
+                    </div>
+                    <!-- /ko -->
+                    <div class="secondary">
+                        <a href="#" data-bind="attr: {'data-cart-item': item_id, title: $t('Remove item')}"
+                           class="action delete">
+                            <span data-bind="i18n: 'Remove'"></span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="message notice" if="$data.message">
-        <div data-bind="text: $data.message"></div>
+        <div class="message notice" if="$data.message">
+            <div data-bind="text: $data.message"></div>
+        </div>
+        
     </div>
 </li>

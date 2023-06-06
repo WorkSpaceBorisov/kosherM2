@@ -97,7 +97,6 @@ define([
                 event.stopPropagation();
                 let input = $(event.currentTarget).closest('.details-qty').find('.cart-item-qty');
                 let val = input.val();
-                // console.log('Plus', input, val);
                 input.val(++val).change()
 
             };
@@ -108,7 +107,6 @@ define([
                 event.stopPropagation();
                 let input = $(event.currentTarget).closest('.details-qty').find('.cart-item-qty');
                 let val = input.val();
-                // console.log('Plus', input, val);
                 input.val(--val).change()
             };
 
@@ -123,21 +121,7 @@ define([
              * @param {jQuery.Event} event
              */
             events['change ' + this.options.item.qty] = function (event) {
-                // console.log('change', this.options.item.qty);
-                // let input = $(event.target).closest('.details-qty').find('.cart-item-qty');
-                // let minus = $(event.target).closest('.details-qty').find('.btn-minus');
-                // let val = input.val();
-                console.log('Changing');
                 self._showItemButton($(event.target));
-
-                // if(val == 1) {
-                //     console.log('Minusss', minus);
-                //     minus.addClass('disabled');
-                //     $(event.target).closest('.details-qty').addClass('munus')
-                //     return;
-                // }
-                // minus.removeClass('disabled');
-
             };
 
             /**
@@ -169,12 +153,7 @@ define([
                 button = 'button#update-cart-item-' + itemId,
                 self = this;
 
-            // console.log('show btn', elem, itemId, 'button#update-cart-item-' + itemId, button);
-
             if (this._isValidQty(itemQty, elem.val())) {
-                // show if valid
-                // console.log('_isValidQty');
-                // $('#update-cart-item-' + itemId).show('fade', 300);
                 self._updateItemQty($(button));
             }
         },
@@ -221,11 +200,7 @@ define([
          * @private
          */
         _updateItemQty: function (elem) {
-            // console.log('Elem::::', elem);
             var itemId = elem.data('cart-item');
-
-            // console.log('_updateItemQty', $('#cart-item-' + itemId + '-qty').val());
-            // console.log('_updateItemQty');
 
             this._ajax(this.options.url.update, {
                 'item_id': itemId,
