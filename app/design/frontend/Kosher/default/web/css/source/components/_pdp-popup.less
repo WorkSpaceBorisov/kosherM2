@@ -84,19 +84,17 @@
     .k4u-popup {
         .to-center(201);
         display: none;
+        max-height: 75vh;
         max-width: 1000px;
         position: fixed;
         width: 94%;
     }
 
-    .k4u-popup__product-container {
-    }
-
-    .k4u-popup__inner{
+    .k4u-popup__inner {
         align-items: flex-start;
         display: flex;
-        padding: 12px 32px 12px 0;
         height: 100%;
+        padding: 12px 32px 12px 0;
     }
 
     .k4u-popup__product-image-block {
@@ -104,6 +102,9 @@
         position: relative;
     }
 
+    .popup-image {
+        width: 100%;
+    }
 
     .product-image-right-labels {
         position: absolute;
@@ -138,29 +139,90 @@
 
         li {
             .lib-font-size(18);
-            color: @kosher-color__19;
+            display: none;
             font-weight: 600;
             margin-bottom: 10px;
+
+            &.exists {
+                display: block;
+            }
         }
 
         span {
-            color: @kosher-color__17;
+            &.label {
+                color: @kosher-color__17;
 
-            &:after {
-                content: ':';
-                padding-right: 5px;
+                &:after {
+                    content: ':';
+                    padding-right: 5px;
+                }
+            }
+
+            &.data {
+                color: @kosher-color__19;
             }
         }
     }
 
-    .k4u-popup-fin-block {
-        align-items: flex-end;
+    .k4u-popup.out-of-stock {
+        .k4u-popup__out-of-stock,
+        .k4u-popup__notify-user {
+            display: block;
+        }
+
+        .k4u-popup__out-of-stock {
+            margin-bottom: 28px;
+        }
+
+        .k4u-popup__add-to-cart {
+            display: none;
+        }
+
+        .k4u-popup-fin-block {
+            align-items: center;
+        }
+
+        .k4u-popup__attributies {
+            margin-bottom: 10px;
+        }
+    }
+
+    .k4u-popup__notify-user {
+        display: none;
+    }
+
+    .k4u-popup__notify-user__button {
+        .size(224, 56);
+        align-items: center;
+        background: @kosher-color__36;
+        border-radius: 8px;
         display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
+        justify-content: center;
+
+        &:before {
+            .icomoon(@icon-notify, 20, @kosher-color__06);
+            .size(20);
+            margin-right: 9px;
+        }
+
+        span {
+            .lib-font-size(16);
+            color: @kosher-color__06;
+            display: block;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        &:hover {
+            background: darken(@kosher-color__36, 10%);
+            cursor: pointer;
+        }
+    }
+
+    .k4u-popup__out-of-stock {
+        display: none;
 
         .stock {
-            display: none;
             .lib-font-size(16);
             font-weight: 600;
 
@@ -170,10 +232,17 @@
         }
     }
 
+    .k4u-popup-fin-block {
+        align-items: flex-end;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
     .k4u-popup__price-block {
         .k4u-popup__old-price {
             align-items: flex-start;
-            display: flex;
+            display: none;
             margin-bottom: 7px;
 
             span:not(.k4u-popup__discount) {
@@ -192,6 +261,12 @@
             span {
                 display: block;
                 line-height: 1;
+            }
+        }
+
+        &.special {
+            .k4u-popup__old-price {
+                display: flex;
             }
         }
 
@@ -366,11 +441,16 @@
 
     .k4u-popup__additional-info {
         border-top: 1px solid @kosher-color__15;
+        padding-top: 19px;
     }
 
     .k4u-popup__description {
         .lib-font-size(18);
-        padding-top: 19px;
+        display: none;
+
+        &.exists {
+            display: block;
+        }
 
         h4 {
             .lib-font-size(18);
@@ -447,15 +527,6 @@
 }
 
 //
-//  Desktop before tablet
-//  _____________________________________________
-
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    .k4u-popup {
-    }
-}
-
-//
 //  Desktop max to mobile
 //  _____________________________________________
 
@@ -520,15 +591,6 @@
 }
 
 //
-//  Middle 640
-//  _____________________________________________
-
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
-    .k4u-popup {
-    }
-}
-
-//
 //  Mobile 480
 //  _____________________________________________
 
@@ -568,8 +630,8 @@
             .calculator {
                 .input-text.custom {
                     .lib-font-size(16);
-                    width: 50px;
                     margin: 2px;
+                    width: 50px;
                 }
 
                 .custom-qty-btn {
@@ -598,11 +660,3 @@
     }
 }
 
-//
-//  Mobile 375
-//  _____________________________________________
-
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs2) {
-    .k4u-popup {
-    }
-}

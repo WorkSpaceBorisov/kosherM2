@@ -13,26 +13,9 @@
         }
     }
 </script>
-
 <script>
-    // Genarating menu images. Remove it
-    let topCatagories = document.querySelectorAll('.kosher-main-menu .level0.category-item > a.level-top');
 
-    for (let item of topCatagories) {
-        let icon = document.createElement('div');
-        icon.classList.add('category-icon');
-        icon.innerHTML = '<img src="/static/frontend/Kosher/default/en_US/images/categories/groceries.svg">';
-        item.prepend(icon);
-    }
-
-    let menuCategories = document.querySelectorAll('.kosher-horizontal-menu .level0.category-item > a.level-top');
-
-    for (let item of menuCategories) {
-        let icon = document.createElement('div');
-        icon.classList.add('category-icon');
-        icon.innerHTML = '<img src="/static/frontend/Kosher/default/en_US/images/categories/groceries.svg">';
-        item.prepend(icon);
-    }
+    // Store credit for mobile
 
     let storeCreditBtn = document.querySelector('.page-wrapper > .store-credit__container');
 
