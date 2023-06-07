@@ -5,6 +5,7 @@ UPDATE store_website set name = 'KOSHER4U' where name = 'Main Website';
 
 DELETE FROM `patch_list` where patch_name = 'Kosher\\WineStore\\Setup\\Patch\\Data\\CreateWineStoreDataPatch';
 DELETE FROM `patch_list` where patch_name = 'Kosher\\StoresConfiguration\\Setup\\Patch\\Data\\RemoveMailchimpAttributesDataPatch';
+DELETE FROM `patch_list` where patch_name = 'Kosher\\CategoryAdjustment\\Setup\\Patch\\Data\\SetImagePathToCategoryDataPatch';
 
 INSERT INTO `core_config_data` (`config_id`, `scope`, `scope_id`, `path`, `value`, `updated_at`)
 VALUES (NULL, 'websites', 2, 'web/unsecure/base_url', 'https://pesach.m2.kosher4u.eu/', current_timestamp());
@@ -48,3 +49,5 @@ set theme_theme_id = (select theme_id
 where store_website_id = (select website_id
                           from store_website
                           where code = "base");
+UPDATE `mst_credit_balance` SET `created_at`= current_timestamp(), `updated_at`= current_timestamp();
+UPDATE `mst_credit_balance` SET `currency_code`= 'EUR';
