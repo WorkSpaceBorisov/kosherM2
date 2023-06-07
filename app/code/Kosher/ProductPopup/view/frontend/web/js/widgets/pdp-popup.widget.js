@@ -215,10 +215,10 @@ define([
             console.log(sku);
             $.ajax({
                 url: 'http://' + this.options.apiHost + this.options.apiLink,
-                type: 'post',
+                type: 'GET',
                 dataType: 'json',
                 data: {
-                    'sku': sku
+                    sku: sku
                 },
             }).done(function (response) {
                 console.log(response);
