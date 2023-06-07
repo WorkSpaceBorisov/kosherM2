@@ -98,6 +98,7 @@
     }
 
     .k4u-popup__inner {
+    .k4u-popup__inner{
         align-items: flex-start;
         display: flex;
         padding: 12px 32px 12px 0;
@@ -452,15 +453,6 @@
 }
 
 //
-//  Desktop before tablet
-//  _____________________________________________
-
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    .k4u-popup {
-    }
-}
-
-//
 //  Desktop max to mobile
 //  _____________________________________________
 
@@ -525,15 +517,6 @@
 }
 
 //
-//  Middle 640
-//  _____________________________________________
-
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
-    .k4u-popup {
-    }
-}
-
-//
 //  Mobile 480
 //  _____________________________________________
 
@@ -573,8 +556,8 @@
             .calculator {
                 .input-text.custom {
                     .lib-font-size(16);
-                    width: 50px;
                     margin: 2px;
+                    width: 50px;
                 }
 
                 .custom-qty-btn {

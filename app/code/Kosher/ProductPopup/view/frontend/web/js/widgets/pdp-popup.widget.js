@@ -1,13 +1,14 @@
 define([
     'jquery',
     'matchMedia',
+    'mousewheel',
     'scrollbar',
     'domReady!'
 ], function ($, mediaCheck, scrollbar) {
 
     'use strict';
 
-    console.log('kosher.pdpPopup');
+    // console.log('kosher.pdpPopup');
 
     $.widget('kosher.pdpPopup', {
 
@@ -25,7 +26,6 @@ define([
             this._close();
             this._resizing();
             this._scrollbar();
-
         },
 
         _calcHeight: function(){
@@ -79,6 +79,7 @@ define([
             $('.k4u-popup').mCustomScrollbar({
                 axis: 'y',
                 theme: 'popup',
+                scrollInertia: 160,
                 mouseWheel: {
                     enable: true,
                     axis: 'y'

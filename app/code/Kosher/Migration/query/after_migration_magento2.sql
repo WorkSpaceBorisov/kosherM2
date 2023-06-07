@@ -49,3 +49,5 @@ set theme_theme_id = (select theme_id
 where store_website_id = (select website_id
                           from store_website
                           where code = "base");
+UPDATE `mst_credit_balance` SET `created_at`= current_timestamp(), `updated_at`= current_timestamp();
+UPDATE `mst_credit_balance` SET `currency_code`= 'EUR';
