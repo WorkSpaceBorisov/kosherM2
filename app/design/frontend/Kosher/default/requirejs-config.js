@@ -11,8 +11,7 @@ var config = {
             'slick': 'js/vendors/slick/slick.min',
             'mousewheel': 'js/vendors/malihu/jquery.mousewheel.min',
             'scrollbar': 'js/vendors/malihu/jquery.mCustomScrollbar.min',
-            'home.categories': 'js/widgets/home-categories.widget',
-            'pdp.popup': 'js/widgets/pdp-popup.widget'
+            'home.categories': 'js/widgets/home-categories.widget'
         }
     },
 
@@ -25,8 +24,7 @@ var config = {
         'slick': 'js/vendors/slick/slick.min',
         'mousewheel': 'js/vendors/malihu/jquery.mousewheel.min',
         'scrollbar': 'js/vendors/malihu/jquery.mCustomScrollbar.min',
-        'home.categories': 'js/widgets/home-categories.widget',
-        'pdp.popup': 'js/widgets/pdp-popup.widget'
+        'home.categories': 'js/widgets/home-categories.widget'
     },
 
     shim: {
