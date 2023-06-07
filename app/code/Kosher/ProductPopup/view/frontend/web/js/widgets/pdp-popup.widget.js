@@ -189,10 +189,8 @@ define([
                 document.querySelector('.k4u-popup__final-price').textContent = euro.format(data.price);
             }
 
-
             if (data.description || data.short_description) {
                 document.querySelector('.k4u-popup__description').classList.add('exists')
-
                 if (data.description) {
                     document.querySelector('.k4u-popup__description p').textContent = data.description;
                 } else {
@@ -225,8 +223,6 @@ define([
                 e.preventDefault()
             });
 
-            // ToDo remove
-            // $('.product-items .product-image-wrapper')[2].click()
         },
 
         _close: function () {

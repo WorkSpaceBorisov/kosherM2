@@ -21,10 +21,10 @@ if ($productSku) {
     $apiUrl = $viewModel->getProductBySkuRequest();
     $requestUrl = $storeUrl . $apiUrl;
 }
-//$productSku = '043427181129';
-//$storeUrl = $viewModel->getStoreUrl();
-//$apiUrl = $viewModel->getProductBySkuRequest();
-//$requestUrl = $storeUrl . $apiUrl;
+$productSku = '043427181129';
+$storeUrl = $viewModel->getStoreUrl();
+$apiUrl = $viewModel->getProductBySkuRequest();
+$requestUrl = $storeUrl . $apiUrl;
 ?>
 <div class="k4u-popup">
     <a href="#" class="k4u-popup__close" id="k4u_popup_close"><span><?= $escaper->escapeHtml(__('Close')) ?></span></a>
@@ -81,8 +81,7 @@ if ($productSku) {
                                 <div class="custom-qty-btn btn-plus"><span>+</span></div>
                             </div>
                             <div class="add-to-calc calc-cell">
-                                <button class="add-to-calc__button">
-                                    <span><?= $escaper->escapeHtml(__('Add to cart')) ?></span></button>
+                                <button class="add-to-calc__button"><span><?= $escaper->escapeHtml(__('Add to cart')) ?></span></button>
                             </div>
                         </div>
                     </div>
@@ -93,8 +92,7 @@ if ($productSku) {
                     <div class="k4u-popup__description">
                         <h4>Ingredients:</h4>
                         <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
                         </p>
                     </div>
                 </div>
@@ -115,10 +113,10 @@ if ($productSku) {
 </div>
 
 <script type="text/javascript">
-    require(["jquery"], function ($) {
+    require(['jquery'], function ($) {
         $(document).ready(function () {
             $.ajax({
-                url: <?= $requestUrl ?>,
+                url: '<?= $requestUrl ?>',
                 type: 'post',
                 dataType: 'json',
                 data: {
@@ -127,7 +125,7 @@ if ($productSku) {
             }).done(function (response) {
                 console.log(response);
             });
-        }
+        });
     });
 
 </script>

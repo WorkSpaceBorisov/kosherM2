@@ -131,8 +131,6 @@
         </referenceContainer>
 
         <referenceContainer name="before.body.end">
-            <!-- PDP popup -->
-            <block class="Magento\Framework\View\Element\Template" name="pdp.popup" template="Magento_Catalog::product/pdp-popup.phtml"/>
             <block class="Magento\Theme\Block\Html\Footer" name="home.scripts" template="Magento_Theme::home-scripts.phtml"/>
         </referenceContainer>
 
