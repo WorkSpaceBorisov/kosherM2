@@ -302,9 +302,6 @@
                 <document>aw_storecredit_creditmemo_totals</document>
             </ignore>
             <ignore>
-                <document>aw_storecredit</document>
-            </ignore>
-            <ignore>
                 <document>amasty_pgrid_group_column</document>
             </ignore>
             <ignore>
@@ -949,8 +946,24 @@
                 <document>sales_billing_agreement_order</document>
                 <to>paypal_billing_agreement_order</to>
             </rename>
+            <rename>
+                <document>aw_storecredit</document>
+                <to>mst_credit_balance</to>
+            </rename>
         </document_rules>
         <field_rules>
+            <move>
+                <field>aw_storecredit.customer_id</field>
+                <to>mst_credit_balance.customer_id</to>
+            </move>
+            <move>
+                <field>aw_storecredit.balance</field>
+                <to>mst_credit_balance.amount</to>
+            </move>
+            <move>
+                <field>aw_storecredit.subscribe_state</field>
+                <to>mst_credit_balance.is_subscribed</to>
+            </move>
             <move>
                 <field>cms_page.root_template</field>
                 <to>cms_page.page_layout</to>
@@ -1351,6 +1364,18 @@
                 <field>admin_rule.role_type</field>
             </ignore>
             <!-- Start Custom Fields from M1 project -->
+            <ignore>
+                <field>aw_storecredit.entity_id</field>
+            </ignore>
+            <ignore>
+                <field>aw_storecredit.status</field>
+            </ignore>
+            <ignore>
+                <field>aw_storecredit.total_balance</field>
+            </ignore>
+            <ignore>
+                <field>aw_storecredit.created_at</field>
+            </ignore>
             <ignore>
                 <field>sales_order.shipping_description</field>
             </ignore>
@@ -2010,6 +2035,21 @@
     </source>
     <destination>
         <document_rules>
+            <ignore>
+                <document>mst_credit_product_option_type_credit</document>
+            </ignore>
+            <ignore>
+                <document>mst_report_email</document>
+            </ignore>
+            <ignore>
+                <document>mst_credit_earning_rule</document>
+            </ignore>
+            <ignore>
+                <document>mst_credit_transaction</document>
+            </ignore>
+            <ignore>
+                <document>mst_core_urlrewrite</document>
+            </ignore>
             <ignore>
                 <document>aitoc_smtp_log</document>
             </ignore>
@@ -2765,6 +2805,78 @@
                 <field>quote_address_item.store_id</field>
                 <handler class="\Migration\Handler\QuoteMultiAddressStoreId" />
             </transform>
+            <ignore>
+                <field>quote_address.base_credit_amount</field>
+            </ignore>
+            <ignore>
+                <field>quote_address.credit_amount</field>
+            </ignore>
+            <ignore>
+                <field>quote.use_credit</field>
+            </ignore>
+            <ignore>
+                <field>quote.manual_used_credit</field>
+            </ignore>
+            <ignore>
+                <field>quote.credit_amount_used</field>
+            </ignore>
+            <ignore>
+                <field>quote.base_credit_amount_used</field>
+            </ignore>
+            <ignore>
+                <field>sales_order.base_credit_amount</field>
+            </ignore>
+            <ignore>
+                <field>sales_order.credit_total_refunded</field>
+            </ignore>
+            <ignore>
+                <field>sales_order.base_credit_total_refunded</field>
+            </ignore>
+            <ignore>
+                <field>sales_order.credit_refunded</field>
+            </ignore>
+            <ignore>
+                <field>sales_order.base_credit_refunded</field>
+            </ignore>
+            <ignore>
+                <field>sales_order.credit_invoiced</field>
+            </ignore>
+            <ignore>
+                <field>sales_order.base_credit_invoiced</field>
+            </ignore>
+            <ignore>
+                <field>sales_order.credit_amount</field>
+            </ignore>
+            <ignore>
+                <field>sales_invoice.base_credit_amount</field>
+            </ignore>
+            <ignore>
+                <field>sales_invoice.credit_amount</field>
+            </ignore>
+            <ignore>
+                <field>sales_creditmemo.base_credit_amount</field>
+            </ignore>
+            <ignore>
+                <field>sales_creditmemo.credit_total_refunded</field>
+            </ignore>
+            <ignore>
+                <field>sales_creditmemo.base_credit_total_refunded</field>
+            </ignore>
+            <ignore>
+                <field>sales_creditmemo.credit_amount</field>
+            </ignore>
+            <ignore>
+                <field>mst_credit_balance.balance_id</field>
+            </ignore>
+            <ignore>
+                <field>mst_credit_balance.created_at</field>
+            </ignore>
+            <ignore>
+                <field>mst_credit_balance.currency_code</field>
+            </ignore>
+            <ignore>
+                <field>mst_credit_balance.updated_at</field>
+            </ignore>
             <ignore>
                 <field>adminnotification_inbox.aitoc_notification</field>
             </ignore>
