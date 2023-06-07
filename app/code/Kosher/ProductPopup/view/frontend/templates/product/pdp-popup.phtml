@@ -111,21 +111,3 @@ $requestUrl = $storeUrl . $apiUrl;
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    require(['jquery'], function ($) {
-        $(document).ready(function () {
-            $.ajax({
-                url: '<?= $requestUrl ?>',
-                type: 'post',
-                dataType: 'json',
-                data: {
-                    'sku': '<?= $productSku ?>'
-                },
-            }).done(function (response) {
-                console.log(response);
-            });
-        });
-    });
-
-</script>

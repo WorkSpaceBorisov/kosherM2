@@ -16,9 +16,12 @@ define([
             breakPoint: '980px',
             popup: '.k4u-popup',
             close: '.k4u-popup #k4u_popup_close',
+            overlay: '.kosher-overlay-inner',
             _popup: $('.k4u-popup'),
             _close: $('.k4u-popup #k4u_popup_close'),
             _overlay: $('.kosher-overlay-inner'),
+            apiHost: location.hostname,
+            apiLink: '/rest/V1/product_popup/',
             data: {
                 'productData': {
                     'entity_id': '37',
@@ -208,39 +211,52 @@ define([
             this._open();
         },
 
+        _askAPI: function(sku){
+            console.log(sku);
+            $.ajax({
+                url: 'http://' + this.options.apiHost + this.options.apiLink,
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    'sku': sku
+                },
+            }).done(function (response) {
+                console.log(response);
+            });
+        },
+
+        _openMe: function () {
+            $('body').addClass('k4u-popup-on');
+            setTimeout(() => {
+                $('body').addClass('fadeOn-popup');
+            }, 50)
+            this._calcHeight();
+        },
+
         _open: function () {
             let self = this;
-            let openMe = () => {
-                $('body').addClass('k4u-popup-on');
-                setTimeout(() => {
-                    $('body').addClass('fadeOn-popup');
-                }, 50)
-            }
-
             $('.product-items .product-image-wrapper, .product-items .product-item-link').on('click', function (e) {
-                openMe();
-                self._calcHeight();
+                let sku = $(this).closest('.product-item-info').find('.hidden-sku').data('sku');
+                self._askAPI(sku);
+                self._openMe();
                 e.preventDefault()
             });
-
         },
 
         _close: function () {
-            let close = this.options._close;
-            let overlay = this.options._overlay;
+            let overlay = this.options.overlay;
+            let close = this.options.close;
 
-            let closeMe = () => {
+            let closeMe = (e) => {
                 $('body').removeClass('fadeOn-popup');
                 setTimeout(() => {
                     $('body').removeClass('k4u-popup-on');
-                }, 1000);
+                }, 500);
             }
 
-            close.on('click', () => {
-                closeMe()
-            });
-            overlay.on('click', () => {
-                closeMe()
+            $(overlay + ', ' + close).on('click', (e) => {
+                closeMe();
+                e.preventDefault();
             });
         },
 
