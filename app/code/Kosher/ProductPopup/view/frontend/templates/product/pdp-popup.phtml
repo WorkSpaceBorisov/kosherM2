@@ -28,18 +28,11 @@ $requestUrl = $storeUrl . $apiUrl;
 ?>
 <div class="k4u-popup">
     <a href="#" class="k4u-popup__close" id="k4u_popup_close"><span><?= $escaper->escapeHtml(__('Close')) ?></span></a>
-    <div class="k4u-popup__product-container">
+    <div class="k4u-popup__product-container sf">
         <div class="k4u-popup__inner">
             <div class="k4u-popup__product-image-block">
                 <img src="<?= /** @noEscape */
                 $block->getViewFileUrl('images/pdp-popup/pdp-popup-image-01.png') ?>" class="popup-image" alt="Bagel Onion Frosen">
-                <div class="product-image-right-labels">
-                    <img src="<?= /** @noEscape */
-                    $block->getViewFileUrl('images/labels/sf-label-big-01.png') ?>" alt="SF">
-                    <img src="<?= /** @noEscape */
-                    $block->getViewFileUrl('images/labels/bio-label-big-01.png') ?>" alt="Bio">
-                </div>
-
             </div>
             <div class="k4u-popup__product-info-block">
                 <h3 class="k4u-popup__title">Bagel Onion Frosen</h3>
@@ -100,10 +93,10 @@ $requestUrl = $storeUrl . $apiUrl;
                 <div class="k4u-popup__details">
                     <ul class="k4u-popup__details-list">
                         <li class="manufacturer"><span>Kleinblatt</span></li>
-                        <li class="location"><span>Machzike Hadass Antwerp</span></li>
+                        <li class="supervision"><span>Machzike Hadass Antwerp</span></li>
                         <li class="brutto"><span>1.20kg</span></li>
                         <li class="netto"><span>0.20kg</span></li>
-                        <li class="service"><span>Parve</span></li>
+                        <li class="type"><span>Parve</span></li>
                     </ul>
                 </div>
 
@@ -111,3 +104,13 @@ $requestUrl = $storeUrl . $apiUrl;
         </div>
     </div>
 </div>
+
+<script type="text/x-magento-init">
+    {
+        ".products-grid": {
+            "pdp.popup": {
+                "apiURL": "<?= $requestUrl ?>"
+            }
+        }
+    }
+</script>

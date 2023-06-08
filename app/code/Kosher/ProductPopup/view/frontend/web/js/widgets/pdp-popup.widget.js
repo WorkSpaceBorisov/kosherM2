@@ -11,7 +11,6 @@ define([
     // console.log('kosher.pdpPopup');
 
     $.widget('kosher.pdpPopup', {
-
         options: {
             breakPoint: '980px',
             popup: '.k4u-popup',
@@ -20,123 +19,12 @@ define([
             _popup: $('.k4u-popup'),
             _close: $('.k4u-popup #k4u_popup_close'),
             _overlay: $('.kosher-overlay-inner'),
-            apiHost: location.hostname,
-            apiLink: '/rest/V1/product_popup/',
-            data: {
-                'productData': {
-                    'entity_id': '37',
-                    'attribute_set_id': '4',
-                    'type_id': 'simple',
-                    'sku': '043427181129',
-                    'has_options': '0',
-                    'required_options': '0',
-                    'created_at': '2010-03-02 20: 58: 20',
-                    'updated_at': '2023-02-27 15: 18: 55',
-                    'name': 'Corn Chips Original',
-                    'meta_title': 'Lieber&#39s Corn Chips',
-                    'meta_description': 'lieber\'s corn chips',
-                    'image': '/b/0/b0a77963fdc091dd10caef7b891ee97ed5a47118_product_orig_23_3_6_2.jpg',
-                    'small_image': '/b/0/b0a77963fdc091dd10caef7b891ee97ed5a47118_product_orig_23_3_6_2.jpg',
-                    'thumbnail': '/b/0/b0a77963fdc091dd10caef7b891ee97ed5a47118_product_orig_23_3_6_2.jpg',
-                    'url_key': 'lieber-s-corn-chips',
-                    'custom_design': null,
-                    'page_layout': null,
-                    'options_container': 'container2',
-                    'image_label': null,
-                    'small_image_label': null,
-                    'thumbnail_label': null,
-                    'country_of_manufacture': null,
-                    'msrp_display_actual_price_type': '4',
-                    'gift_message_available': null,
-                    'barcode': '043427181129',
-                    'singleweight': '0.028',
-                    'supervision': '244',
-                    'estimated_weight': null,
-                    'subtitle': null,
-                    'mailchimp_sync_error': null,
-                    'sorting_name': 'Corn Chips Original',
-                    'manufacturer': '110',
-                    'status': '1',
-                    'visibility': '4',
-                    'tax_class_id': '2',
-                    'halavi': '4',
-                    'kosherforpesach': '0',
-                    'cube_category_featured': '0',
-                    'ebizmarts_mark_visited': '0',
-                    'mailchimp_sync_modified': '1',
-                    'country': null,
-                    'suppliers': '495',
-                    'price': '0.750000',
-                    // 'special_price': null,
-                    'special_price': '0.55000',
-                    'weight': '0.120000',
-                    'minimal_price': '0.500000',
-                    'msrp': null,
-                    'special_from_date': null,
-                    'special_to_date': null,
-                    'news_from_date': null,
-                    'news_to_date': null,
-                    'custom_design_from': null,
-                    'custom_design_to': null,
-                    'mailchimp_sync_delta': null,
-                    'dv_deal_from': null,
-                    'dv_deal_to': null,
-                    // 'description': null,
-                    'description': 'Kosher Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-                    // 'description': 'Kosher long Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Kosher Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Kosher long Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Kosher Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-                    'short_description': 'Potatoes,vegetable oil,corn,cottonseed,sunflower,soybean or canola oil,wheat starch,tomato powder',
-                    'meta_keyword': 'lieber\'s, corn, chips',
-                    'custom_layout_update': null,
-                    'options': [],
-                    'media_gallery': {
-                        'images': {
-                            '25049': {
-                                'value_id': '25049',
-                                'file': '/b/0/b0a77963fdc091dd10caef7b891ee97ed5a47118_product_orig_23_3_6_2.jpg',
-                                'media_type': 'image',
-                                'entity_id': '37',
-                                'label': null,
-                                'position': '0',
-                                'disabled': '0',
-                                'label_default': null,
-                                'position_default': '0',
-                                'disabled_default': '0',
-                                'video_provider': null,
-                                'video_url': null,
-                                'video_title': null,
-                                'video_description': null,
-                                'video_metadata': null,
-                                'video_provider_default': null,
-                                'video_url_default': null,
-                                'video_title_default': null,
-                                'video_description_default': null,
-                                'video_metadata_default': null
-                            }
-                        },
-                        'values': []
-                    },
-                    'extension_attributes': {},
-                    'tier_price': [],
-                    'tier_price_changed': 0,
-                    'quantity_and_stock_status': {
-                        'is_in_stock': true,
-                        // 'is_in_stock': false,
-                        'qty': -1080
-                    },
-                    'category_ids': [
-                        '2',
-                        '11',
-                        '292',
-                        '1122'
-                    ],
-                    'is_salable': 1
-                },
-                'status': true
-            }
+            apiURL: null,
+            testSku: '043427181129'
         },
 
         _create: function () {
-            this._build();
+            this._open();
             this._close();
             this._resizing();
             this._scrollbar();
@@ -154,9 +42,9 @@ define([
             });
         },
 
-        _build: function () {
-            let data = this.options.data.productData;
-
+        _build: function (responce) {
+            let data = $.parseJSON(responce).productData;
+            
             let euro = new Intl.NumberFormat('en-DE', {
                 style: 'currency',
                 currency: 'EUR',
@@ -170,10 +58,44 @@ define([
                 document.querySelector('.k4u-popup__attributies .barcode .data').textContent = data.barcode;
             }
 
-            if (data.weight) {
+            // Netto
+
+            if (data.singleweight) {
                 document.querySelector('.k4u-popup__attributies .weight').classList.add('exists');
-                document.querySelector('.k4u-popup__attributies .weight .data').textContent = parseFloat(data.weight).toFixed(2) * 1000;
-                document.querySelector('.k4u-popup__details .netto span').textContent = parseFloat(data.weight) + 'kg';
+                document.querySelector('.k4u-popup__attributies .weight .data').textContent = parseFloat(data.singleweight).toFixed(2) * 1000;
+                document.querySelector('.k4u-popup__details .netto').classList.add('exists')
+                document.querySelector('.k4u-popup__details .netto span').textContent = parseFloat(data.singleweight) + 'kg';
+            }
+
+            // Brutto
+
+            if (data.weight) {
+                document.querySelector('.k4u-popup__details .brutto').classList.add('exists')
+                document.querySelector('.k4u-popup__details .brutto span').textContent = parseFloat(data.weight) + 'kg';
+            }
+
+            // Manufacturer
+
+            if (data.manufacturer) {
+                let mf = data.manufacturer.toString();
+                document.querySelector('.k4u-popup__details .manufacturer').classList.add('exists')
+                document.querySelector('.k4u-popup__details .manufacturer span').textContent = mf;
+            }
+
+            // Type
+
+            if (data.halavi) {
+                let type = data.halavi.toString();
+                document.querySelector('.k4u-popup__details .type').classList.add('exists')
+                document.querySelector('.k4u-popup__details .type span').textContent = type;
+            }
+
+            // Supervision
+
+            if (data.supervision) {
+                let sp = data.supervision.toString();
+                document.querySelector('.k4u-popup__details .supervision').classList.add('exists')
+                document.querySelector('.k4u-popup__details .supervision span').textContent = sp;
             }
 
             if (!data.quantity_and_stock_status.is_in_stock) {
@@ -193,7 +115,7 @@ define([
             }
 
             if (data.description || data.short_description) {
-                document.querySelector('.k4u-popup__description').classList.add('exists')
+                document.querySelector('.k4u-popup__description').classList.add('exists');
                 if (data.description) {
                     document.querySelector('.k4u-popup__description p').textContent = data.description;
                 } else {
@@ -204,24 +126,58 @@ define([
             // Image
 
             if (data.image) {
-                let path = 'http://' + location.hostname + '/media/catalog/product/' + data.image;
+                let path = '/media/catalog/product/' + data.image;
                 let image = document.querySelector('.popup-image').setAttribute('src', path);
             }
 
-            this._open();
+            // Image right attributies
+
+            if (data.bio_attribute || data.sugar_free || data.gluten_free) {
+
+                let labelsContainer = document.createElement('div');
+                labelsContainer.classList.add('product-image-right-labels');
+                document.querySelector('.k4u-popup__product-image-block').appendChild(labelsContainer);
+
+                if(data.sugar_free) {
+                    let sf_image = document.createElement('img');
+                    sf_image.setAttribute('title', 'Sugar free');
+                    sf_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/sf-label-big-01.png');
+                    sf_image.classList.add('bio');
+                    labelsContainer.appendChild(sf_image);
+                }
+
+
+                if(data.bio_attribute) {
+                    let bio_image = document.createElement('img');
+                    bio_image.setAttribute('title', 'Bio');
+                    bio_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/bio-label-big-01.png');
+                    bio_image.classList.add('bio');
+                    labelsContainer.appendChild(bio_image);
+                }
+
+                if(data.gluten_free) {
+                    let gluten_free_image = document.createElement('img');
+                    gluten_free_image.setAttribute('title', 'Gluten free');
+                    gluten_free_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/gf-label-big-01.png');
+                    gluten_free_image.classList.add('gf');
+                    labelsContainer.appendChild(gluten_free_image);
+                }
+            }
+
+            this._openMe();
         },
 
-        _askAPI: function(sku){
-            console.log(sku);
+        _askAPI: function (sku) {
+            let self = this;
             $.ajax({
-                url: 'http://' + this.options.apiHost + this.options.apiLink,
+                url: this.options.apiURL,
                 type: 'GET',
                 dataType: 'json',
                 data: {
                     sku: sku
                 },
             }).done(function (response) {
-                console.log(response);
+                self._build(response);
             });
         },
 
@@ -238,7 +194,6 @@ define([
             $('.product-items .product-image-wrapper, .product-items .product-item-link').on('click', function (e) {
                 let sku = $(this).closest('.product-item-info').find('.hidden-sku').data('sku');
                 self._askAPI(sku);
-                self._openMe();
                 e.preventDefault()
             });
         },
@@ -256,6 +211,13 @@ define([
 
             $(overlay + ', ' + close).on('click', (e) => {
                 closeMe();
+                setTimeout(() => {
+                    $('.calc-cell-container').removeClass('show-calc');
+                    $('.k4u-popup *').removeClass('exists');
+                    $('.k4u-popup').removeClass('out-of-stock');
+                    $('.k4u-popup__price-block').removeClass('special');
+                    $('.product-image-right-labels').remove();
+                }, 500)
                 e.preventDefault();
             });
         },

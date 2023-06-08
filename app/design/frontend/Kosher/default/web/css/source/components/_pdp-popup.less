@@ -87,6 +87,7 @@
     .k4u-popup {
         .to-center(201);
         display: none;
+        min-height: 500px;
         max-height: 75vh;
         max-width: 1000px;
         position: fixed;
@@ -102,6 +103,7 @@
 
     .k4u-popup__product-image-block {
         flex-grow: 1;
+        margin: 0 20px;
         position: relative;
     }
 
@@ -251,6 +253,7 @@
             span:not(.k4u-popup__discount) {
                 .lib-font-size(14);
                 margin-right: 5px;
+                text-decoration: line-through;
             }
 
             span.k4u-popup__discount {
@@ -310,6 +313,7 @@
             align-items: center;
             display: flex;
             justify-content: flex-end;
+            padding-right: 1px;
 
 
             .input-text.custom {
@@ -478,7 +482,7 @@
 
         li {
             align-items: center;
-            display: flex;
+            display: none;
             margin-bottom: 12px;
             margin-right: 15px;
             min-width: 135px;
@@ -493,16 +497,20 @@
             &:before {
                 margin-right: 7px;
             }
+
+            &.exists{
+                display: flex;
+            }
+
         }
 
         .manufacturer {
-
             &:before {
                 .icomoon(@icon-home, 17, @kosher-color__21)
             }
         }
 
-        .location {
+        .supervision {
             &:before {
                 .icomoon(@icon-binocle, 16, @kosher-color__21)
             }
@@ -520,7 +528,7 @@
             }
         }
 
-        .service {
+        .type {
             &:before {
                 .icomoon(@icon-service, 14, @kosher-color__21)
             }
@@ -555,7 +563,7 @@
         .k4u-popup__inner {
             align-items: center;
             flex-direction: column;
-            padding: 0 15px;
+            padding: 10px 15px 0;
         }
 
         .k4u-popup__product-image-block {
@@ -602,6 +610,7 @@
     body {
         .k4u-popup {
             height: 100%;
+            min-height: 96%;
             position: fixed;
             overflow: hidden;
             width: 96%;

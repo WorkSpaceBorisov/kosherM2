@@ -57,6 +57,9 @@ use Magento\Framework\App\Action\Action;
                                 </a>
                             </div>
 
+                            <!-- get Sku -->
+                            <div class="hidden-sku" data-sku="<?= $_item->getSku() ?>"><?= $_item->getSku() ?></div>
+
                             <div class="product-item-details">
                                 <strong class="product-item-name">
                                     <a title="<?= $block->escapeHtml($_item->getName()) ?>"
@@ -137,8 +140,3 @@ use Magento\Framework\App\Action\Action;
 
 <?php endif; ?>
 
-<!-- Widget code example
-
-{{widget type="Magento\CatalogWidget\Block\Product\ProductsList" title="Test products" show_pager="1" products_per_page="5" products_count="5" template="Kosher_HomeWidgets::product/widget/content/grid-slider.phtml" conditions_encoded="^[`1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^],`1--1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Product`,`attribute`:`category_ids`,`operator`:`==`,`value`:`3, 15, 18, 34, 35, 17`^]^]" page_var_name="pzwkal"}}
-
--->
