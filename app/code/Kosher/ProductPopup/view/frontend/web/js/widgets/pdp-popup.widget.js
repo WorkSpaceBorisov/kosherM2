@@ -44,7 +44,7 @@ define([
 
         _build: function (responce) {
             let data = $.parseJSON(responce).productData;
-            
+
             let euro = new Intl.NumberFormat('en-DE', {
                 style: 'currency',
                 currency: 'EUR',
@@ -58,49 +58,78 @@ define([
                 document.querySelector('.k4u-popup__attributies .barcode .data').textContent = data.barcode;
             }
 
+            let addAttribute = (tag, attr, val) => {
+                return document.querySelector(tag).setAttribute('data-product-attribute-' + attr, val)
+            }
+
             // Netto
 
             if (data.singleweight) {
+                let val = parseFloat(data.singleweight);
                 document.querySelector('.k4u-popup__attributies .weight').classList.add('exists');
                 document.querySelector('.k4u-popup__attributies .weight .data').textContent = parseFloat(data.singleweight).toFixed(2) * 1000;
-                document.querySelector('.k4u-popup__details .netto').classList.add('exists')
-                document.querySelector('.k4u-popup__details .netto span').textContent = parseFloat(data.singleweight) + 'kg';
+                document.querySelector('.k4u-popup__details .product-attribute-class-singleweight').classList.add('exists')
+                document.querySelector('.k4u-popup__details .product-attribute-class-singleweight span').textContent = val + 'kg';
+                addAttribute('.k4u-popup__details .product-attribute-class-singleweight span', 'singleweight', val)
             }
 
             // Brutto
 
             if (data.weight) {
-                document.querySelector('.k4u-popup__details .brutto').classList.add('exists')
-                document.querySelector('.k4u-popup__details .brutto span').textContent = parseFloat(data.weight) + 'kg';
+                let val = parseFloat(data.weight);
+                document.querySelector('.k4u-popup__details .product-attribute-class-weight').classList.add('exists')
+                document.querySelector('.k4u-popup__details .product-attribute-class-weight span').textContent = val + 'kg';
+                addAttribute('.k4u-popup__details .product-attribute-class-weight span', 'weight', val)
             }
 
             // Manufacturer
 
             if (data.manufacturer) {
-                let mf = data.manufacturer.toString();
-                document.querySelector('.k4u-popup__details .manufacturer').classList.add('exists')
-                document.querySelector('.k4u-popup__details .manufacturer span').textContent = mf;
+                let val = data.manufacturer;
+                document.querySelector('.k4u-popup__details .product-attribute-class-manufacturer').classList.add('exists')
+                document.querySelector('.k4u-popup__details .product-attribute-class-manufacturer span').textContent = val;
+                addAttribute('.k4u-popup__details .product-attribute-class-manufacturer span', 'manufacturer', val);
             }
 
             // Type
 
             if (data.halavi) {
-                let type = data.halavi.toString();
-                document.querySelector('.k4u-popup__details .type').classList.add('exists')
-                document.querySelector('.k4u-popup__details .type span').textContent = type;
+                let val = data.halavi;
+                document.querySelector('.k4u-popup__details .product-attribute-class-type').classList.add('exists')
+                document.querySelector('.k4u-popup__details .product-attribute-class-type span').textContent = val;
+                addAttribute('.k4u-popup__details .product-attribute-class-type span', 'halavi', val);
             }
 
             // Supervision
 
             if (data.supervision) {
-                let sp = data.supervision.toString();
-                document.querySelector('.k4u-popup__details .supervision').classList.add('exists')
-                document.querySelector('.k4u-popup__details .supervision span').textContent = sp;
+                let container = document.querySelector('.k4u-popup__details .product-attribute-class-supervision span');
+                let reg = /,/; // true if commas exists
+
+                if (reg.test(data.supervision)) {
+                    container.classList.add('supervisions-list');
+                    let arr = data.supervision.split(',');
+                    let list = document.createDocumentFragment();
+
+                    arr.forEach(elem => {
+                        let tag = document.createElement('span');
+                        tag.innerHTML = elem;
+                        list.appendChild(tag)
+                    });
+
+                    container.appendChild(list)
+                } else {
+                    container.innerHTML = data.supervision
+                }
+
+                document.querySelector('.k4u-popup__details .product-attribute-class-supervision').classList.add('exists')
             }
 
             if (!data.quantity_and_stock_status.is_in_stock) {
                 document.querySelector('.k4u-popup').classList.add('out-of-stock');
             }
+
+            // Price
 
             if (data.special_price) {
                 let discount = Math.ceil(100 - (data.special_price * 100) / data.price);
@@ -117,9 +146,9 @@ define([
             if (data.description || data.short_description) {
                 document.querySelector('.k4u-popup__description').classList.add('exists');
                 if (data.description) {
-                    document.querySelector('.k4u-popup__description p').textContent = data.description;
+                    document.querySelector('.k4u-popup__description p').innerHTML = data.description;
                 } else {
-                    document.querySelector('.k4u-popup__description p').textContent = data.short_description;
+                    document.querySelector('.k4u-popup__description p').innerHTML = data.short_description;
                 }
             }
 
@@ -138,7 +167,7 @@ define([
                 labelsContainer.classList.add('product-image-right-labels');
                 document.querySelector('.k4u-popup__product-image-block').appendChild(labelsContainer);
 
-                if(data.sugar_free) {
+                if (data.sugar_free) {
                     let sf_image = document.createElement('img');
                     sf_image.setAttribute('title', 'Sugar free');
                     sf_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/sf-label-big-01.png');
@@ -147,7 +176,7 @@ define([
                 }
 
 
-                if(data.bio_attribute) {
+                if (data.bio_attribute) {
                     let bio_image = document.createElement('img');
                     bio_image.setAttribute('title', 'Bio');
                     bio_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/bio-label-big-01.png');
@@ -155,7 +184,7 @@ define([
                     labelsContainer.appendChild(bio_image);
                 }
 
-                if(data.gluten_free) {
+                if (data.gluten_free) {
                     let gluten_free_image = document.createElement('img');
                     gluten_free_image.setAttribute('title', 'Gluten free');
                     gluten_free_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/gf-label-big-01.png');
@@ -187,6 +216,9 @@ define([
                 $('body').addClass('fadeOn-popup');
             }, 50)
             this._calcHeight();
+            setTimeout(() => {
+            $('.k4u-popup__product-container').addClass('active');
+            }, 150)
         },
 
         _open: function () {
@@ -216,6 +248,7 @@ define([
                     $('.k4u-popup *').removeClass('exists');
                     $('.k4u-popup').removeClass('out-of-stock');
                     $('.k4u-popup__price-block').removeClass('special');
+                    $('.k4u-popup__product-container').removeClass('active');
                     $('.product-image-right-labels').remove();
                 }, 500)
                 e.preventDefault();
