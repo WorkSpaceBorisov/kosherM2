@@ -31,15 +31,13 @@
 //@screen__l: 1440px;
 //@screen__xl: 1680px;
 
-@shift: 0px;
-
 & when (@media-target = 'mobile'), (@media-target = 'all') {
 
-    @media only screen and (max-width: (@screen__xl  - @shift)) {
+    @media only screen and (max-width: (@screen__xl - 1)) {
         .media-width('max', @screen__xl);
     }
 
-    @media only screen and (max-width: (@screen__l  - @shift)) {
+    @media only screen and (max-width: (@screen__l - 1)) {
         .media-width('max', @screen__l);
     }
 
@@ -47,29 +45,30 @@
         .media-width('max', (@screen__m + 1));
     }
 
-    @media only screen and (max-width: (@screen__m  - @shift)) {
+    @media only screen and (max-width: (@screen__m - 1)) {
         .media-width('max', @screen__m);
     }
 
-    @media only screen and (max-width: (@screen__s  - @shift)) {
+    @media only screen and (max-width: (@screen__s - 1)) {
         .media-width('max', @screen__s);
     }
 
-    @media only screen and (max-width: (@screen__xs  - @shift)) {
+    @media only screen and (max-width: (@screen__xs - 1)) {
         .media-width('max', @screen__xs);
     }
 
-    @media only screen and (max-width: (@screen__xs2  - @shift)) {
+    @media only screen and (max-width: (@screen__xs2 - 1)) {
         .media-width('max', @screen__xs2);
     }
 
-    @media only screen and (max-width: (@screen__xxs  - @shift)) {
+    @media only screen and (max-width: (@screen__xxs - 1)) {
         .media-width('max', @screen__xxs);
     }
 
     @media all and (min-width: @screen__s) {
         .media-width('min', @screen__s);
     }
+
 }
 
 //
@@ -78,11 +77,15 @@
 
 & when (@media-target = 'desktop'), (@media-target = 'all') {
 
-    @media all and (min-width: @screen__m + 1 + @shift), print {
+    @media all and (min-width: @screen__m), print {
         .media-width('min', @screen__m);
     }
 
-    @media all and (min-width: @screen__l + 1 + @shift), print {
+    @media all and (min-width: (@screen__m + 1)), print {
+        .media-width('min', (@screen__m + 1));
+    }
+
+    @media all and (min-width: @screen__l), print {
         .media-width('min', @screen__l);
     }
 
