@@ -28,7 +28,7 @@ $requestUrl = $storeUrl . $apiUrl;
 ?>
 <div class="k4u-popup">
     <a href="#" class="k4u-popup__close" id="k4u_popup_close"><span><?= $escaper->escapeHtml(__('Close')) ?></span></a>
-    <div class="k4u-popup__product-container sf">
+    <div class="k4u-popup__product-container">
         <div class="k4u-popup__inner">
             <div class="k4u-popup__product-image-block">
                 <img src="<?= /** @noEscape */
@@ -92,11 +92,11 @@ $requestUrl = $storeUrl . $apiUrl;
 
                 <div class="k4u-popup__details">
                     <ul class="k4u-popup__details-list">
-                        <li class="manufacturer"><span>Kleinblatt</span></li>
-                        <li class="supervision"><span>Machzike Hadass Antwerp</span></li>
-                        <li class="brutto"><span>1.20kg</span></li>
-                        <li class="netto"><span>0.20kg</span></li>
-                        <li class="type"><span>Parve</span></li>
+                        <li class="product-attribute-class-manufacturer"><span>Kleinblatt</span></li>
+                        <li class="product-attribute-class-supervision"><span></span></li>
+                        <li class="product-attribute-class-weight"><span>1.20kg</span></li>
+                        <li class="product-attribute-class-singleweight"><span>0.20kg</span></li>
+                        <li class="product-attribute-class-type"><span>Parve</span></li>
                     </ul>
                 </div>
 
