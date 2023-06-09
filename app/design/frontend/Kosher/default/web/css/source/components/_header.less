@@ -157,7 +157,7 @@
                 pointer-events: unset;
             }
 
-            &:hover{
+            &:hover {
                 cursor: pointer;
             }
 
@@ -185,7 +185,7 @@
                 right: 3px;
                 top: 3px;
 
-                &:before{
+                &:before {
                     .icomoon(@icon-clear-field, 20, @kosher-color__03);
                     .to-center();
                     position: absolute;
@@ -582,3 +582,33 @@
         }
     }
 }
+
+//
+//  Extra small 375
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xxs) {
+    body {
+        .header.content {
+            padding-left: 9x;
+            padding-right: 8px;
+        }
+
+        .catalog-button-container {
+            margin-right: 12px;
+        }
+
+        .catalog-button {
+            .size(30);
+
+            &:before {
+                font-size: 17px;
+            }
+        }
+
+        .logo {
+            width: 130px;
+        }
+    }
+}
+

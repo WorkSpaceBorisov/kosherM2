@@ -8,7 +8,6 @@ define([
     
     // console.log('home.productSlider');
 
-
     $.widget('home.productSlider', {
         _create: function () {
             this._slider();

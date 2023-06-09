@@ -7,7 +7,6 @@
     <referenceBlock name="sidebar.additional" remove="true"/>
     <referenceBlock name="category.product.addto" remove="true"/>
 
-
     <!-- MOVE -->
     <move element="category.body" destination="page.wrapper" after="header.container"/>
     <move element="breadcrumbs" destination="main" before="-"/>
@@ -18,7 +17,7 @@
 
         <block class="Magento\Framework\View\Element\Template" name="list.total" template="Magento_Catalog::product/list/total-products.phtml" after="page.main.title"/>
 
-        <container name="category.body" htmlTag="section" htmlClass="category-body" after="header.container" />
+        <container name="category.body" htmlTag="section" htmlClass="category-body" after="header.container"/>
 
         <referenceContainer name="main">
             <referenceContainer name="content">
@@ -29,11 +28,5 @@
                 </referenceContainer>
             </referenceContainer>
         </referenceContainer>
-
-        <referenceContainer name="before.body.end">
-            <!-- PDP popup -->
-            <block class="Magento\Framework\View\Element\Template" name="pdp.popup" template="Magento_Catalog::product/pdp-popup.phtml" />
-        </referenceContainer>
-
     </body>
 </page>

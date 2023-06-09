@@ -337,6 +337,7 @@ return [
         'Kosher_OrderImport' => 1,
         'Kosher_ProductAdjustment' => 1,
         'Kosher_ProductAttributeSetExportImport' => 1,
+        'Kosher_ProductPopup' => 1,
         'Kosher_StoresConfiguration' => 1,
         'Kosher_WineStore' => 1,
         'Mirasvit_Core' => 1,
