@@ -489,7 +489,7 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs2) {
     .toolbar-products {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
 
         .center-cell {
             position: static;
@@ -498,17 +498,16 @@
         .center-cell__inner {
             left: 50%;
             transform: translate(-50%, 0);
-            width: 100%;
+            width: 300px;
 
             &:before,
             &:after {
                 left: 50%;
                 transform: translate(-40%, 0);
             }
-
         }
 
-        .modes{
+        .modes {
             padding-right: 0;
         }
 
@@ -555,6 +554,45 @@
 
         .show-toolbar-button {
             .filter-mobile-button-mix(120px);
+        }
+    }
+}
+
+//
+//  Extra small 375
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs3) {
+    body {
+        .toolbar-products {
+            position: relative;
+
+            .modes {
+                flex-direction: column;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                z-index: 20;
+
+                .modes-mode {
+                    &.mode-grid {
+                        margin-right: 0;
+                    }
+                }
+            }
+
+            .center-cell__inner {
+                left: -121px;
+                transform: unset;
+                width: 94vw;
+
+                &:before,
+                &:after {
+                    left: 50%;
+                    transform: translate(-40%, 0);
+
+                }
+            }
         }
     }
 }

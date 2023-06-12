@@ -408,7 +408,6 @@
             height: @product-item-actions-cell-height;
             justify-content: flex-end;
             width: @calc-cell-width;
-
             .actions-secondary {
                 display: none;
             }
@@ -1061,13 +1060,23 @@
             padding-right: 10px;
         }
 
+        .products-total{
+            margin-bottom: 10px;
+        }
     }
 
     body {
         .products-grid {
             .product-items {
+                display: block;
+
+                .product-item-photo-outer{
+                    margin-bottom: 10px;
+                }
+
                 .product-item-info {
-                    padding: 25px 15px 20px;
+                    margin-bottom: 10px;
+                    padding: 20px 15px 20px;
                 }
 
                 .price-box {
@@ -1076,7 +1085,7 @@
                     }
                 }
 
-                @calc-cell-width: 130px;
+                @calc-cell-width: 120px;
                 @product-item-actions-cell-height: 50px;
 
                 .product-item-actions {
