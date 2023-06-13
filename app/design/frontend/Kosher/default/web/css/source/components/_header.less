@@ -156,7 +156,10 @@
             }
 
             &:hover {
+                background: @kosher-color__01;
+                border-color: @kosher-color__03;
                 cursor: pointer;
+                text-decoration: none;
             }
 
             * {
@@ -176,12 +179,13 @@
 
             .store-credit__close {
                 .size(20);
-                background: rgba(255, 255, 255, 1);
+                background: @kosher-color__01;
                 border-radius: 50%;
                 pointer-events: none;
                 position: absolute;
                 right: 3px;
                 top: 3px;
+                z-index: 10;
 
                 &:before {
                     .icomoon(@icon-clear-field, 20, @kosher-color__03);
@@ -472,6 +476,21 @@
         .store-credit__close {
             display: none;
         }
+
+        &:hover {
+            background: @kosher-color__04;
+            cursor: pointer;
+            text-decoration: none;
+
+            .store-credit__title,
+            .store-credit__price {
+                color: @kosher-color__01;
+            }
+        }
+
+        &:visited {
+            color: @kosher-color__04;
+        }
     }
 
     .store-credit__title {
@@ -621,7 +640,7 @@
             width: 130px;
         }
 
-        .header-search-container{
+        .header-search-container {
             padding-left: 8px;
             padding-right: 8px;
         }
