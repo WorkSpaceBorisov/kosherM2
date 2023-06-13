@@ -38,7 +38,7 @@ define([
     });
 
 
-    const productListSlideFiltersOn = '(max-width: 1570px)';
+    const productListSlideFiltersOn = '(max-width: 1550px)';
     const productGridSlideFiltersOn = '(max-width: 1000px)';
 
     // Mediachecks

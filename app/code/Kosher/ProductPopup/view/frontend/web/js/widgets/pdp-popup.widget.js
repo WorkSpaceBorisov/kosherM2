@@ -53,6 +53,13 @@ define([
             document.querySelector('.k4u-popup__title').innerHTML = data.name;
             document.querySelector('.popup-image').setAttribute('title', data.name);
 
+            // Image
+
+            if (data.image) {
+                let path = '/media/catalog/product/' + data.image;
+                let image = document.querySelector('.popup-image').setAttribute('src', path);
+            }
+
             if (data.barcode) {
                 document.querySelector('.k4u-popup__attributies .barcode').classList.add('exists');
                 document.querySelector('.k4u-popup__attributies .barcode .data').textContent = data.barcode;
@@ -152,13 +159,6 @@ define([
                 }
             }
 
-            // Image
-
-            if (data.image) {
-                let path = '/media/catalog/product/' + data.image;
-                let image = document.querySelector('.popup-image').setAttribute('src', path);
-            }
-
             // Image right attributies
 
             if (data.bio_attribute || data.sugar_free || data.gluten_free) {
@@ -223,8 +223,9 @@ define([
 
         _open: function () {
             let self = this;
-            $('.product-items .product-image-wrapper, .product-items .product-item-link').on('click', function (e) {
+                        $('.product-items .product-image-wrapper, .product-items .product-item-link').on('click', function (e) {
                 let sku = $(this).closest('.product-item-info').find('.hidden-sku').data('sku');
+                console.log('Open');
                 self._askAPI(sku);
                 e.preventDefault()
             });
