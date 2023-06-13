@@ -1,6 +1,7 @@
 //
 //  Common
 //  _____________________________________________
+//@import 'variables/_colors';
 
 & when (@media-common = true) {
 
@@ -22,8 +23,14 @@
         input[type="number"],
         input[type*="date"],
         input[type="email"] {
-
+            .lib-font-size(18);
+            .size(100%, 56px);
+            background: @kosher-color__12 ;
+            border: 1px solid @kosher-color__19;
+            border-radius: 8px;
         }
+
+
 
     //.form {
     //    .field {
