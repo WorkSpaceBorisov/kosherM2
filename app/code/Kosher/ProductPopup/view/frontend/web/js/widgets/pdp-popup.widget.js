@@ -217,7 +217,7 @@ define([
             }, 50)
             this._calcHeight();
             setTimeout(() => {
-            $('.k4u-popup__product-container').addClass('active');
+                $('.k4u-popup__product-container').addClass('active');
             }, 150)
         },
 
