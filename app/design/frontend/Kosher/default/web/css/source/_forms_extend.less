@@ -6,31 +6,31 @@
 & when (@media-common = true) {
 
 
-    body{
+    body {
         ._keyfocus *:focus,
         input:not([disabled]):focus,
         textarea:not([disabled]):focus,
-        select:not([disabled]):focus{
+        select:not([disabled]):focus {
             box-shadow: none;
         }
     }
 
-        input[type="text"],
-        input[type="password"],
-        input[type="url"],
-        input[type="tel"],
-        input[type="search"],
-        input[type="number"],
-        input[type*="date"],
-        input[type="email"] {
-            .lib-font-size(18);
-            .size(100%, 56px);
-            background: @kosher-color__12 ;
-            border: 1px solid @kosher-color__19;
-            border-radius: 8px;
-        }
-
-
+    input[type="text"],
+    input[type="password"],
+    input[type="url"],
+    input[type="tel"],
+    input[type="search"],
+    input[type="number"],
+    input[type*="date"],
+    input[type="email"] {
+        .lib-font-size(18);
+        .size(100%, 56px);
+        background: @kosher-color__12;
+        border: 1px solid @kosher-color__19;
+        border-radius: 8px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 
     //.form {
     //    .field {
