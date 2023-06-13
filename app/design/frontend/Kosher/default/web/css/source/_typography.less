@@ -1,0 +1,160 @@
+//
+//  Common
+//  _____________________________________________
+@import (reference) 'variables/_colors.less';
+
+& when (@media-common = true) {
+    //
+    //  @font-face
+    //  _____________________________________________
+
+    //.lib-font-face(
+    //    @family-name: @font-family-name__roboto,
+    //    @font-path: '@{baseDir}fonts/@{font-family-name__roboto}/@{font-family-name__roboto}-Regular',
+    //    @font-format: 'woff2',
+    //    @font-type: 'woff2',
+    //    @font-weight: normal,
+    //    @font-style: normal,
+    //    @font-display: swap
+    //);
+
+    // Roboto: 400, 500
+
+    .lib-font-face(
+        @family-name: roboto,
+        @font-path: '@{baseDir}fonts/Roboto/Roboto-Regular',
+        @font-format: 'woff2',
+        @font-type: 'woff2',
+        @font-weight: normal,
+        @font-style: normal,
+        @font-display: swap
+    );
+
+    .lib-font-face(
+        @family-name: roboto,
+        @font-path: '@{baseDir}fonts/Roboto/Roboto-Medium',
+        @font-format: 'woff2',
+        @font-type: 'woff2',
+        @font-weight: 500,
+        @font-style: normal,
+        @font-display: swap
+    );
+
+    // Inter: 400, 500, 600, 700
+
+    .lib-font-face(
+        @family-name: inter,
+        @font-path: '@{baseDir}fonts/Inter/',
+        @font-format: 'woff2',
+        @font-type: 'woff2',
+        @font-weight: normal,
+        @font-style: normal,
+        @font-display: swap
+    );
+
+    .lib-font-face(
+        @family-name: inter,
+        @font-path: '@{baseDir}fonts/Inter/Inter-Regular',
+        @font-format: 'woff2',
+        @font-type: 'woff2',
+        @font-weight: normal,
+        @font-style: normal,
+        @font-display: swap
+    );
+
+    .lib-font-face(
+        @family-name: inter,
+        @font-path: '@{baseDir}fonts/Inter/Inter-Medium',
+        @font-format: 'woff2',
+        @font-type: 'woff2',
+        @font-weight: 500,
+        @font-style: normal,
+        @font-display: swap
+    );
+
+    .lib-font-face(
+        @family-name: inter,
+        @font-path: '@{baseDir}fonts/Inter/Inter-SemiBold',
+        @font-format: 'woff2',
+        @font-type: 'woff2',
+        @font-weight: 600,
+        @font-style: normal,
+        @font-display: swap
+    );
+
+    .lib-font-face(
+        @family-name: inter,
+        @font-path: '@{baseDir}fonts/Inter/Inter-Bold',
+        @font-format: 'woff2',
+        @font-type: 'woff2',
+        @font-weight: 700,
+        @font-style: normal,
+        @font-display: swap
+    );
+
+    // Icomoon
+
+    .lib-font-face(
+        @family-name: icomoon,
+        @font-path: '@{baseDir}fonts/icomoon/icomoon',
+        @font-format: 'woff',
+        @font-type: 'woff',
+        @font-weight: normal,
+        @font-style: normal,
+        @font-display: swap
+    );
+
+    //Headings
+
+    h1, h2, h3, h4, h5, h6 {
+        color: @kosher-color__19;
+        font-weight: 700;
+        letter-spacing:  0.0025em;
+        margin-top: 0;
+    }
+
+    h1 {
+        .lib-font-size(28);
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    //
+    //  Headings
+    //  _____________________________________________
+
+
+    h1 {
+        .lib-font-size(32);
+    }
+
+    h2 {
+    }
+
+    h3 {
+    }
+
+    h4 {
+    }
+
+    h5 {
+    }
+
+    h6 {
+    }
+}
+
+//
+//  Mobile 480
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs2) {
+    h1 {
+        .lib-font-size(24);
+    }
+}
+

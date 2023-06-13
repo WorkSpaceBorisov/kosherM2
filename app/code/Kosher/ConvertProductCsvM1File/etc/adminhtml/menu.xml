@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Kosher_ConvertProductCsvM1File::convert"
+             title="Convert M1 file data"
+             module="Kosher_ConvertProductCsvM1File"
+             parent="Kosher_ConvertProductCsvM1File::manage"
+             action="productcsv/convert"
+             resource="Kosher_ConvertProductCsvM1File::convert"/>
+        <add id="Kosher_ConvertProductCsvM1File::manage"
+             title="Product Convert CSV File(M1)"
+             module="Kosher_ConvertProductCsvM1File"
+             parent="Magento_Backend::system"
+             resource="Kosher_ConvertProductCsvM1File::manage"/>
+    </menu>
+</config>

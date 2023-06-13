@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">productcsv_convert_form.convert_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Import File</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <namespace>productcsv_convert_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>productcsv_convert_form.convert_data_source</dep>
+        </deps>
+        <buttons>
+            <button name="save" class="Kosher\ConvertProductCsvM1File\Block\Form\Save"/>
+        </buttons>
+    </settings>
+    <dataSource name="convert_data_source" component="Magento_Ui/js/form/provider">
+        <settings>
+            <submitUrl path="productcsv/convert/download"/>
+        </settings>
+        <dataProvider class="Kosher\ConvertProductCsvM1File\Ui\Component\DataProvider"
+                      name="convert_data_source">
+            <settings>
+                <requestFieldName>single_column_select</requestFieldName>
+                <primaryFieldName>file_name</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string"/>
+            </item>
+        </argument>
+        <field name="file_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Convert and Download</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="formElement" xsi:type="string">fileUploader</item>
+                    <item name="allowedExtensions" xsi:type="array">
+                        <item name="csv" xsi:type="string">csv</item>
+                    </item>
+                    <item name="source" xsi:type="string">import</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
+                    <item name="dataScope" xsi:type="string">file_name</item>
+                    <item name="default" xsi:type="string">0</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="productcsv/convert/upload"/>
+                    </item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="single_column_select" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Single category column</label>
+                <dataScope>single_column_select</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

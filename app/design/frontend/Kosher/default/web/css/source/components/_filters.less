@@ -1,0 +1,141 @@
+//
+//  Common - Category filters
+//  _____________________________________________
+
+@filter-width: 294px;
+@filters-margin-right: 48px;
+@slide-transition: .2s;
+
+& when (@media-common = true) {
+    .catalog-category-view {
+        .plp-filters-col {
+            align-self: stretch;
+            display: flex;
+            flex-grow: 0;
+            flex-shrink: 0;
+            justify-content: flex-end;
+            height: 100%;
+            overflow-y: hidden;
+            transition: width @filters-transition;
+            width: 0;
+        }
+
+        .plp-filters {
+            background: @kosher-color__01;
+            margin-right: @filters-margin-right;
+            padding-bottom: 200px;
+            position: relative;
+            width: 294px;
+
+            img {
+                max-width: unset;
+                width: @filter-width;
+            }
+        }
+
+        .hide-filters-button {
+            position: absolute;
+            right: 12px;
+            top: 10px;
+            z-index: 20;
+        }
+
+        &.filters-on {
+            .plp-filters-col {
+                width: calc(@filter-width + @filters-margin-right);
+                height: 100%;
+            }
+
+            &:not(.slide-filters) {
+                .show-filter-button {
+                    display: none;
+                }
+
+                .center-cell {
+                    left: 0;
+                    transform: translate(0, 0);
+                }
+            }
+        }
+    }
+
+    .catalog-category-view.slide-filters {
+        .plp-filters-col {
+            box-shadow: 2px 2px 6px 0 rgba(0,0,0,0.4);
+            left: -400px;
+            position: absolute;
+            top: -82px;
+            transition: left @filters-transition;
+            width: @filter-width;
+            z-index: 300;
+        }
+
+        .plp-filters {
+            margin-right: 0;
+            width: 100%;
+        }
+
+        &.filters-on {
+            position: relative;
+
+            .plp-filters-col {
+                left: -20px;
+            }
+
+            .kosher-overlay {
+                display: block;
+            }
+
+            .show-filter-button {
+                opacity: .5;
+            }
+        }
+    }
+
+}
+
+//
+//  Desktop before tablet
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .catalog-category-view.slide-filters {
+        .plp-filters-col {
+            top: -98px;
+        }
+
+        &.filters-on {
+            .plp-filters-col {
+                left: -2.5%;
+            }
+        }
+    }
+}
+
+//
+//  Middle 640
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+    body.catalog-category-view.slide-filters {
+        &.filters-on {
+            .plp-filters-col {
+                left: -15px;
+            }
+        }
+    }
+}
+
+//
+//  Mobile 480
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs2) {
+    body.catalog-category-view.slide-filters {
+        &.filters-on {
+            .plp-filters-col {
+                left: -10px;
+            }
+        }
+    }
+}

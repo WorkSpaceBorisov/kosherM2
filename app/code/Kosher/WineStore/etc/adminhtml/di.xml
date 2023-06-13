@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\ImportExport\Model\Import">
+        <plugin name="adjustment_source_product_file_from_tmp_plugin"
+                type="Kosher\WineStore\Plugin\AdjustmentSourceProductFileFromTmpPlugin"/>
+        <plugin name="assign_alco_product_kosher_to_wine_store_plugin"
+                type="Kosher\WineStore\Plugin\AssignAlcoProductKosherToWineStorePlugin"/>
+    </type>
+    <type name="Magento\CatalogImportExport\Model\Import\Product\Type\AbstractType">
+        <plugin name="add_suppliers_attribute_for_product_plugin"
+                type="Kosher\WineStore\Plugin\AddSuppliersAttributeForProductPlugin"/>
+    </type>
+    <type name="Magento\ImportExport\Model\Import\Entity\AbstractEntity">
+        <plugin name="set_root_category_wine_store_plugin"
+                type="Kosher\WineStore\Plugin\SetRootCategoryWineStorePlugin"/>
+    </type>
+    <preference for="Magento\CustomerImportExport\Model\Import\Customer"
+                type="Kosher\WineStore\Model\Import\Customer"/>
+</config>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Kosher_ProductAttributeSetExportImport::import"
+             title="Attribute SET Import"
+             module="Kosher_ProductAttributeSetExportImport"
+             parent="Kosher_ProductAttributeSetExportImport::manage"
+             action="attributesetexportimport/import"
+             resource="Kosher_ProductAttributeSetExportImport::import"/>
+        <add id="Kosher_ProductAttributeSetExportImport::manage"
+             title="Attribute SET Export &amp; Import"
+             module="Kosher_ProductAttributeSetExportImport"
+             parent="Magento_Backend::system"
+             resource="Kosher_ProductAttributeSetExportImport::manage"/>
+        <add id="Kosher_ProductAttributeSetExportImport::export"
+             title="Attribute SET Export"
+             module="Kosher_ProductAttributeSetExportImport"
+             parent="Kosher_ProductAttributeSetExportImport::manage"
+             action="attributesetexportimport/export"
+             resource="Kosher_ProductAttributeSetExportImport::export"/>
+    </menu>
+</config>

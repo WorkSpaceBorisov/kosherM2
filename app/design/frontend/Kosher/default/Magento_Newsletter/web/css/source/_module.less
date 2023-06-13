@@ -1,0 +1,144 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+
+& when (@media-common = true) {
+
+    //  Newsletter subscription
+    .block.newsletter {
+        margin-bottom: 35px;
+        width: 100%;
+
+        h4 {
+            .main-footer-font();
+            margin: 0 0 8px 0;
+        }
+
+        .content {
+            position: relative;
+
+            #newsletter-error {
+                .lib-font-size(12);
+                color: @kosher-color__03;
+                left: 0;
+                line-height: 1.2;
+                position: absolute;
+                top: 100%;
+            }
+        }
+
+        .form.subscribe {
+            align-items: flex-start;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .field {
+            flex-grow: 1;
+            padding-right: 0;
+
+            .control {
+                display: block;
+            }
+        }
+
+        .label {
+            display: none;
+        }
+
+        input {
+            .lib-font-size(16);
+            background: @kosher-color__30;
+            border-radius: 4px 0 0 4px;
+            border: 1px solid @kosher-color__29;
+            border-right-width: 0;
+            height: 40px;
+            letter-spacing: 0.02em;
+            padding: 5px 16px;
+            width: 100%;
+
+            .placeholder({
+                .lib-font-size(16);
+                color: @kosher-color__22;
+                letter-spacing: 0.02em;
+            });
+
+            &:focus {
+                background: @kosher-color__01;
+            }
+
+            &.mage-error{
+                border-color: @kosher-color__03;
+            }
+        }
+
+        .action.subscribe {
+            .size(102, 40);
+            .lib-font-size(14);
+            background: @button-bg;
+            border-radius: 0 4px 4px 0;
+            color: @kosher-color__01;
+            font-weight: 600;
+
+            &:hover {
+                background: @button-hover-bg;
+                border: 2px solid @button-bg;
+                border-left-width: 0;
+                color: @button-bg;
+            }
+
+            &:active {
+                background: @button-active-bg;
+            }
+
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .block.newsletter {
+        .field {
+            padding-right: 16px;
+        }
+
+        input {
+            border-radius: 4px;
+            border-right-width: 1px;
+            height: 56px;
+        }
+
+        .action.subscribe {
+            .size(102, 56);
+            border-radius: 8px;
+
+            &:hover {
+                border: 2px solid @button-bg;
+                border-left-width: 2px;
+            }
+        }
+    }
+}
+
+//
+//  Middle 640
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+    .block.newsletter {
+        margin-bottom: 30px;
+    }
+}
+
+
+
