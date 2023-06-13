@@ -8,11 +8,16 @@
         height: 100%; // Stretch screen area for sticky footer
     }
 
+    body{
+    }
+
     .page-wrapper {
         align-items: space-between;
         background: @kosher-color__12;
         display: flex;
         flex-direction: column;
+        margin: 0 auto;
+        max-width: 1920px;
         height: 100%;
         position: relative;
 
@@ -88,7 +93,7 @@
                     position: relative;
                     text-indent: -1000px;
 
-                    &:after{
+                    &:after {
                         .icomoon(@icon-home, 14px, @kosher-color__19);
                         .to-center();
                         text-indent: 0;
@@ -102,7 +107,11 @@
         }
     }
 
-    .quick_view_div{
+    .quick_view_div {
+        display: none;
+    }
+
+    [data-lastpass-icon-root="true"] {
         display: none;
     }
 }

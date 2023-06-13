@@ -14,6 +14,8 @@
         <move element="form.subscribe" destination="newsletter.footer.block" before="-"/>
 
         <referenceContainer name="header.container">
+
+
             <referenceContainer name="header-wrapper">
                 <container name="catalog.button.container" htmlTag="div" htmlClass="catalog-button-container" before="logo">
                     <block class="Magento\Framework\View\Element\Template" name="catalog.button"
@@ -23,8 +25,7 @@
                 <container name="header.search.container" htmlTag="div" htmlClass="header-search-container" after="logo"/>
 
                 <container name="header.right.container" htmlTag="div" htmlClass="header-right-container" after="-">
-                    <block class="Magento\Framework\View\Element\Template" name="store.credit.in.header"
-                           template="Magento_Theme::html/store-credit.phtml"/>
+                    <block class="Mirasvit\Credit\Block\Link" name="credit-link" before="-"/>
                     <block class="Magento\Framework\View\Element\Template" name="search.button"
                            template="Magento_Theme::html/header/search-button.phtml"/>
                     <block class="Magento\Framework\View\Element\Template" name="account.button"
@@ -40,6 +41,7 @@
 
         <referenceContainer name="footer-container">
             <referenceContainer name="footer">
+
 
                 <container name="footer.container" htmlTag="div" htmlClass="footer-container" before="-">
                     <container name="footer.info" htmlTag="div" htmlClass="footer-info" before="-">
@@ -103,8 +105,7 @@
                     </block>
                 </container>
             </container>
-            <block class="Magento\Framework\View\Element\Template" name="store.credit.floating"
-                   template="Magento_Theme::html/store-credit.phtml"/>
+            <block class="Mirasvit\Credit\Block\Link" name="credit-link-floating" before="-"/>
             <block class="Magento\Theme\Block\Html\Footer" name="global.scripts" template="Magento_Theme::global-scripts.phtml"/>
         </referenceContainer>
 

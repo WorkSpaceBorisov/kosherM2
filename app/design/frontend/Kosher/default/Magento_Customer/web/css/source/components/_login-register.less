@@ -1,0 +1,77 @@
+//
+//  Common Login/Register
+//  _____________________________________________
+
+@login-line: 1px solid @kosher-color__15;
+
+& when (@media-common = true) {
+    .customer-account-login {
+        .header.content {
+            margin-bottom: 25px;
+        }
+
+        .page-main {
+            height: 100%;
+            padding-bottom: 25px;
+        }
+
+        .columns {
+            padding: 0 48px;
+            background: @kosher-color__01;
+            height: 100%;
+
+        }
+
+        .column.main {
+            margin: 0 auto;
+            max-width: 640px;
+            padding: 80px 20px;
+            width: 100%;
+        }
+
+        .page-title {
+            text-align: center;
+        }
+
+        .actions-toolbar {
+            & > .primary,
+            & > .secondary {
+                display: block;
+                float: unset;
+
+                .action {
+                    display: block;
+                    float: unset;
+                    width: 100%;
+                }
+
+            }
+
+            a.action {
+                display: block;
+            }
+        }
+
+        .block-new-customer {
+            border-top: @login-line;
+            padding-top: 32px;
+
+            h4 {
+                text-align: center;
+            }
+
+            .action.create {
+                display: block;
+                text-align: center;
+            }
+        }
+    }
+}
+
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+}
