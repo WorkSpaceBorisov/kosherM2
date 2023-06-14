@@ -42,6 +42,10 @@
             .to-center();
         }
 
+        &:hover{
+            cursor: pointer;
+        }
+
         span {
             display: none;
         }
@@ -74,10 +78,6 @@
         &:hover {
             cursor: pointer;
         }
-
-        span {
-            display: none;
-        }
     }
 
     .header {
@@ -86,6 +86,14 @@
 
             &:before {
                 content: @icon-leans2;
+            }
+
+            &:hover{
+                cursor: pointer;
+            }
+
+            span{
+                display: none;
             }
         }
 
@@ -348,7 +356,6 @@
         &:hover {
             background: @button-hover-bg;
             border: 2px solid @button-bg;
-            cursor: pointer;
 
             &:before,
             span {

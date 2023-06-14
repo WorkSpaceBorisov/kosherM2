@@ -56,6 +56,7 @@
 
     .fadeOn-popup {
         overflow: hidden;
+
         &.k4u-popup-on {
             .k4u-popup {
                 opacity: 1;
@@ -309,6 +310,7 @@
             &.show-calc {
                 left: @calc-cell-width;
             }
+
         }
 
         .calc-cell {
@@ -316,6 +318,13 @@
             flex-shrink: 0;
             position: relative;
             width: @calc-cell-width;
+
+            .custom-validation-message {
+                left: unset;
+                right: 12px;
+                transform: unset;
+                width: 150px;
+            }
         }
 
         .calculator {
@@ -323,7 +332,6 @@
             display: flex;
             justify-content: flex-end;
             padding-right: 1px;
-
 
             .input-text.custom {
                 .lib-font-size(16);
@@ -665,7 +673,17 @@
 
             .calc-cell {
                 width: @calc-cell-width;
+
+                .custom-validation-message {
+                    bottom: 5px;
+                    left: unset;
+                    padding: 1px;
+                    right: 5px;
+                    transform: unset;
+                    width: 140px;
+                }
             }
+
 
             .calculator {
                 .input-text.custom {

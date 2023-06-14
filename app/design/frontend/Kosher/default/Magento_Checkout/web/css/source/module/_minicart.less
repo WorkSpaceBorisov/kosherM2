@@ -30,6 +30,10 @@
         }
     }
 
+    .empty-cart-content {
+        padding-bottom: 120px;
+    }
+
     .minicart-widgets {
         display: none;
     }
@@ -232,24 +236,37 @@
             }
 
             &.showcart {
+                position: relative;
                 white-space: nowrap;
 
                 .counter.qty {
-                    display: none;
-                    .lib-css(background, @active__color);
-                    .lib-css(color, @page__background-color);
-                    .lib-css(height, @minicart-qty__height);
-                    .lib-css(line-height, @minicart-qty__height);
-                    border-radius: 2px;
-                    margin: 3px 0 0;
-                    min-width: 18px;
+                    .lib-font-size(11);
+                    align-items: center;
+                    background: @kosher-color__03;
+                    border-radius: 8px;
+                    color: @kosher-color__01;
+                    display: flex;
+                    font-family: @rob;
+                    justify-content: center;
+                    height: 16px;
+                    left: 20px;
+                    line-height: 1;
+                    margin: 0;
+                    min-width: 16px;
                     overflow: hidden;
-                    padding: 0 3px;
+                    padding: 1px 1px 0 0;
+                    position: absolute;
                     text-align: center;
+                    top: 0;
                     white-space: normal;
+                    z-index: 20;
 
                     &.empty {
-                        display: none;
+                        .counter-number {
+                            &:before {
+                                content: '0';
+                            }
+                        }
                     }
 
                     .loader {
@@ -259,12 +276,8 @@
                     }
                 }
 
-                .counter-number {
-                    text-shadow: 0 0 7px rgba(0, 0, 0, 1);
-                }
-
                 .counter-label {
-                    &:extend(.abs-visually-hidden all);
+                    display: none;
                 }
             }
         }
@@ -627,6 +640,23 @@
 
                 span {
                     display: none;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop min to mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .minicart-wrapper {
+        .action {
+            &.showcart {
+                .counter.qty {
+                    left: 27px;
+                    top: 8px;
                 }
             }
         }

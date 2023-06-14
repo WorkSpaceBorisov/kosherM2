@@ -24,22 +24,16 @@
             <!-- ko if: getCartParam('summary_count') -->
                 <!-- ko text: getCartParam('summary_count').toLocaleString(window.LOCALE) --><!-- /ko -->
                 <!-- ko i18n: 'items' --><!-- /ko -->
-            <!-- /ko -->
+                <!-- /ko -->
             </span>
         </span>
     </a>
-    <?php if ($block->getIsNeedToDisplaySideBar()):?>
+    <?php if ($block->getIsNeedToDisplaySideBar()): ?>
         <div class="block block-minicart"
              data-role="dropdownDialog"
              data-mage-init='{"dropdownDialog":{
-                "appendTo":"[data-block=minicart]",
-                "triggerTarget":".showcart",
-                "timeout": "2000",
-                "closeOnMouseLeave": false,
-                "closeOnEscape": true,
-                "triggerClass":"active",
-                "parentClass":"active",
-                "buttons":[]}}'>
+                            "appendTo":"[data-block=minicart]",
+                            "buttons":[]}}'>
             <div id="minicart-content-wrapper" data-bind="scope: 'minicart_content'">
                 <!-- ko template: getTemplate() --><!-- /ko -->
             </div>
@@ -54,20 +48,21 @@
             });
 script;
         ?>
-        <?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false); ?>
+        <?= /* @noEscape */
+        $secureRenderer->renderTag('script', [], $scriptString, false); ?>
     <?php endif ?>
-    <?= /* @noEscape */ $secureRenderer->renderTag('script', [], 'window.checkout = ' .
-     /* @noEscape */ $block->getSerializedConfig(), false); ?>
+    <?= /* @noEscape */
+    $secureRenderer->renderTag('script', [], 'window.checkout = ' . /* @noEscape */ $block->getSerializedConfig(), false); ?>
     <script type="text/x-magento-init">
     {
         "[data-block='minicart']": {
-            "Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout() ?>
+            "Magento_Ui/js/core/app": <?= /* @noEscape */
+        $block->getJsLayout() ?>
         },
         "*": {
-            "Magento_Ui/js/block-loader": "<?= $block->escapeJs(
-                $block->escapeUrl($block->getViewFileUrl('images/loader-1.gif'))
-            ) ?>"
+            "Magento_Ui/js/block-loader": "<?= $block->escapeJs($block->escapeUrl($block->getViewFileUrl('images/loader-1.gif'))) ?>"
         }
     }
+
     </script>
 </div>

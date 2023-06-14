@@ -7,11 +7,11 @@ define([
 
     'use strict';
     
-    // console.log('hor.categories');
+    console.log('hor.categories');
 
     $.widget('hor.categories', {
         options: {
-            breakPoint: '1600px'
+            breakPoint: '1450px'
         },
 
         _create: function () {

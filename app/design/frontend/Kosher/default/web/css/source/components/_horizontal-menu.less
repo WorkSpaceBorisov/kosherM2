@@ -23,22 +23,23 @@
 
         .level0.category-item {
             @border-color: @kosher-color__15;
+            @mw: 130px;
 
             background: @kosher-color__01;
             border-color: @border-color;
             border-radius: 8px 8px 0 0;
             border-style: solid;
             border-width: 1px 1px 1px 0;
-            flex-basis: 180px;
+            flex-basis: @mw;
             flex-grow: 1;
             margin-bottom: 0;
-            min-width: 190px;
+            min-width: @mw;
 
             .level-top {
                 align-items: center;
                 display: flex;
                 justify-content: center;
-                padding: 17px 30px 16px;
+                padding: 17px 10px 16px;
 
                 &:hover {
                     background: @kosher-color__12;
@@ -58,6 +59,12 @@
                 }
             }
 
+            &.nav-6{
+                @mw: 150px;
+                flex-basis: @mw;
+                min-width: @mw;
+            }
+
             &:first-child {
                 border-left: 1px solid @border-color;
             }
@@ -71,7 +78,7 @@
             .size(24);
             flex-grow: 0;
             flex-shrink: 0;
-            margin-right: 15px;
+            margin-right: 12px;
             position: relative;
             top: -1px;
 

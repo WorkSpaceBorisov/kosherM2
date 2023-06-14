@@ -13,11 +13,13 @@ define([
             limit: 100,
             buttons: true, // Use false to skip _build function and apply buttons manually
             plus: 'btn-plus',
-            minus: 'btn-minus'
+            minus: 'btn-minus',
+            validate: true
         },
 
         _create: function () {
             this.options.buttons === true ? this._build() : this._calc();
+            this.options.validate === true ? this._validate() : null;
         },
 
         _build: function () {
@@ -67,7 +69,6 @@ define([
                 if (val === self.options.minimal) return;
                 qty.val(--val);
                 self._buttonDisabler(val);
-                console.log(val);
             });
 
             plus.on('click', function () {
@@ -75,9 +76,26 @@ define([
                 if (val === self.options.limit) return;
                 qty.val(++val);
                 self._buttonDisabler(val);
-                console.log(val);
             });
         },
+
+        _validate: function () {
+            let qty = $(this.element);
+            let validationMessage = '<span class="custom-validation-message">Enter the number</span>';
+            let valClass = 'custom-validation-message';
+
+            qty.parent().append(validationMessage)
+
+            qty.on('keypress', function (e) {
+                if (e.which < 48 || e.which > 57) {
+                    qty.parent().attr('data-show-notify', true);
+                    setTimeout(() => {
+                        qty.parent().removeAttr('data-show-notify');
+                    }, 1000)
+                    e.preventDefault();
+                }
+            });
+        }
     });
 
     return $.custom.plusMinus;
