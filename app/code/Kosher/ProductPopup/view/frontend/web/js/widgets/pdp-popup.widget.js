@@ -223,7 +223,7 @@ define([
 
         _open: function () {
             let self = this;
-                        $('.product-items .product-image-wrapper, .product-items .product-item-link').on('click', function (e) {
+            $('.product-items .product-image-wrapper, .product-items .product-item-link').on('click', function (e) {
                 let sku = $(this).closest('.product-item-info').find('.hidden-sku').data('sku');
                 console.log('Open');
                 self._askAPI(sku);
@@ -245,12 +245,13 @@ define([
             $(overlay + ', ' + close).on('click', (e) => {
                 closeMe();
                 setTimeout(() => {
-                    $('.calc-cell-container').removeClass('show-calc');
+                    $('.k4u-popup .calc-cell-container').removeClass('show-calc');
                     $('.k4u-popup *').removeClass('exists');
                     $('.k4u-popup').removeClass('out-of-stock');
                     $('.k4u-popup__price-block').removeClass('special');
                     $('.k4u-popup__product-container').removeClass('active');
                     $('.product-image-right-labels').remove();
+                    $('.k4u-popup .input-text.qty').val(1);
                 }, 500)
                 e.preventDefault();
             });

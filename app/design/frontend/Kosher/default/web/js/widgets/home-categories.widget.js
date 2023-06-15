@@ -13,8 +13,7 @@ define([
 
     $.widget('home.categoriesScroller', {
         options: {
-            breakPoint: '1700px'
-
+            breakPoint: '1400px'
         },
 
         _create: function () {

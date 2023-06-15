@@ -114,4 +114,23 @@
     [data-lastpass-icon-root="true"] {
         display: none;
     }
+
+    .custom-validation-message{
+        .lib-font-size(12);
+        display: none;
+        position: absolute;
+        background: rgba(255, 255, 255, .8);
+        color: @kosher-color__03;
+        padding: 2px;
+        font-weight: 600;
+        bottom: 1px;
+        left: 50%;
+        text-align: center;
+        transform: translate(-50%, 0);
+        width: 90%;
+
+        [data-show-notify="true"] &{
+            display: block;
+        }
+    }
 }

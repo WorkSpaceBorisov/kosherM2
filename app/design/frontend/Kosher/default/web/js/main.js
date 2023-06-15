@@ -10,38 +10,92 @@ define([
 
     const breakPoint = '(max-width: 980px)';
 
-    // Close account menu on minicart call if opened
+    // Close menu
 
     const cartBtn = document.querySelector('.minicart-wrapper .showcart');
-    cartBtn.addEventListener('click', () => {
-        const block = document.querySelector('.header-login-block');
-        if (block.classList.contains('active')) {
-            block.classList.remove('active');
-            block.querySelector('[data-popup-content]').removeAttribute('style');
+    const search = $('.header-search-container');
+    const login = $('.header-login-block');
+    const menuBtn = $('#catalog_button');
+    const mainMenu = $('#kosher_main_menu');
+
+    // Close account menu
+
+    let closeAccount = () => {
+        if (login.hasClass('active')) {
+            login.removeClass('active');
+            login.find('[data-popup-content]').removeAttr('style');
         }
+    }
+
+    let closeMenu = () => {
+        if(mainMenu.css('display') === 'block') mainMenu.fadeOut(150, 'swing');
+    }
+
+    // Close minicart
+
+    let closeMinicart = () => {
+        if (cartBtn.classList.contains('active')) {
+            cartBtn.classList.remove('active');
+            cartBtn.closest('div').classList.remove('active');
+            document.querySelector('.minicart-wrapper .mage-dropdown-dialog').style.display = 'none'
+        }
+    }
+
+    // Close account menu on minicart call if opened
+
+    cartBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (!cartBtn.classList.contains('active')) {
+            cartBtn.classList.add('active');
+            cartBtn.closest('div').classList.add('active');
+            document.querySelector('.minicart-wrapper .mage-dropdown-dialog').removeAttribute('style');
+            closeAccount();
+            closeMenu();
+            closeMobileSearch();
+            return;
+        }
+        closeMinicart();
     });
+
+    setTimeout(function () {
+        document.querySelector('#btn-minicart-close').addEventListener('click', () => {
+            closeMinicart();
+        });
+    }, 2000)
+
 
     // Close account on cart click
 
     document.querySelector('.header-login-block').addEventListener('click', () => {
-        document.querySelector('.minicart-wrapper').classList.remove('active');
-        document.querySelector('.action.showcart').classList.remove('active');
-        document.querySelector('.minicart-wrapper [role="dialog"]').style.display = 'none';
-
+        closeMinicart();
+        closeMenu();
+        closeMobileSearch();
     });
+
+    // Close mobile search
+
+    let closeMobileSearch = () => {
+        if($('body').hasClass('mobile-view')) search.fadeOut(200);
+    }
+
+    //Main menu
+
+    menuBtn.on('click', () => {
+        mainMenu.slideToggle(300, 'swing');
+        closeMinicart();
+        closeAccount();
+        closeMobileSearch();
+    });
+
 
     // Show/hide mobile search
 
-    const search = $('.header-search-container');
-    const login = $('.header-login-block');
-
     $('.header-right-container .search-button').on('click', () => {
         search.fadeToggle(200);
-        if (login.hasClass('active') && search.css('display') === 'block') {
-            login.removeClass('active');
-            $('.ko-customer-menu').removeAttr('style');
-        }
-    });
+        closeMenu();
+        closeAccount();
+        closeMinicart();
+     });
 
     let desktopCleaup = () => {
         search.removeAttr('style');
