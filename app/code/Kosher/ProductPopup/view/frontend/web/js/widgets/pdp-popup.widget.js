@@ -3,10 +3,12 @@ define([
     'matchMedia',
     'mousewheel',
     'scrollbar',
+    'custom.plusMinus',
     'domReady!'
-], function ($, mediaCheck, scrollbar) {
+], function ($, mediaCheck, scrollbar, plusMinus) {
 
     'use strict';
+
 
     // console.log('kosher.pdpPopup');
 
@@ -28,6 +30,7 @@ define([
             this._close();
             this._resizing();
             this._scrollbar();
+            // this._askAPI('KLBBSS');
         },
 
         _calcHeight: function () {
@@ -44,154 +47,275 @@ define([
 
         _build: function (responce) {
             let data = $.parseJSON(responce).productData;
+            let container = document.querySelector('.k4u-popup .k4u-popup__inner');
+
+            console.log(data);
 
             let euro = new Intl.NumberFormat('en-DE', {
                 style: 'currency',
                 currency: 'EUR',
             });
 
-            document.querySelector('.k4u-popup__title').innerHTML = data.name;
-            document.querySelector('.popup-image').setAttribute('title', data.name);
+            let newTag = (tag, name, content) => {
+                let elem = document.createElement(tag);
+                elem.className = name;
+                content ? elem.innerHTML = content : null;
+                return elem;
+            }
 
             // Image
 
+            let imageContainer = newTag('div', 'k4u-popup__product-image-block')
             if (data.image) {
+                let img = newTag('img', 'popup-image');
                 let path = '/media/catalog/product/' + data.image;
-                let image = document.querySelector('.popup-image').setAttribute('src', path);
+                img.setAttribute('title', data.name);
+                img.setAttribute('src', path);
+                imageContainer.appendChild(img);
             }
+            container.appendChild(imageContainer);
+
+            // InfoBlock
+
+            let infoBlock = newTag('div', 'k4u-popup__product-info-block');
+
+            let title = newTag('h3', 'k4u-popup__title', data.name);
+            infoBlock.appendChild(title);
+
+            // Main attributies
+
+            let mainAttrsBlock = newTag('ul', 'k4u-popup__attributies');
+
+            data.barcode = '194537222'
 
             if (data.barcode) {
-                document.querySelector('.k4u-popup__attributies .barcode').classList.add('exists');
-                document.querySelector('.k4u-popup__attributies .barcode .data').textContent = data.barcode;
+                let content = '<span class="label">Barcode</span> <span class="data">' + data.barcode + '</span></li>';
+                let barcode = newTag('li', 'barcode', content);
+                mainAttrsBlock.appendChild(barcode)
             }
 
-            let addAttribute = (tag, attr, val) => {
-                return document.querySelector(tag).setAttribute('data-product-attribute-' + attr, val)
-            }
-
-            // Netto
-
+            var kgWeight;
             if (data.singleweight) {
-                let val = parseFloat(data.singleweight);
-                document.querySelector('.k4u-popup__attributies .weight').classList.add('exists');
-                document.querySelector('.k4u-popup__attributies .weight .data').textContent = parseFloat(data.singleweight).toFixed(2) * 1000;
-                document.querySelector('.k4u-popup__details .product-attribute-class-singleweight').classList.add('exists')
-                document.querySelector('.k4u-popup__details .product-attribute-class-singleweight span').textContent = val + 'kg';
-                addAttribute('.k4u-popup__details .product-attribute-class-singleweight span', 'singleweight', val)
+                let val = parseFloat(data.singleweight).toFixed(2) * 1000;
+                let content = '<span class="label">Weight,gr</span> <span class="data">' + val + '</span></li>';
+                kgWeight = data.singleweight + 'kg';
+                let weight = newTag('li', 'weight', content);
+                mainAttrsBlock.appendChild(weight);
+
+                console.log(val, kgWeight);
+
+                //     document.querySelector('.k4u-popup__attributies .weight .data').textContent = parseFloat(data.singleweight).toFixed(2) * 1000;
+                //     document.querySelector('.k4u-popup__details .product-attribute-class-singleweight').classList.add('exists')
+                //     document.querySelector('.k4u-popup__details .product-attribute-class-singleweight span').textContent = val + 'kg';
+                //     addAttribute('.k4u-popup__details .product-attribute-class-singleweight span', 'singleweight', val)
             }
 
-            // Brutto
-
-            if (data.weight) {
-                let val = parseFloat(data.weight);
-                document.querySelector('.k4u-popup__details .product-attribute-class-weight').classList.add('exists')
-                document.querySelector('.k4u-popup__details .product-attribute-class-weight span').textContent = val + 'kg';
-                addAttribute('.k4u-popup__details .product-attribute-class-weight span', 'weight', val)
-            }
-
-            // Manufacturer
-
-            if (data.manufacturer) {
-                let val = data.manufacturer;
-                document.querySelector('.k4u-popup__details .product-attribute-class-manufacturer').classList.add('exists')
-                document.querySelector('.k4u-popup__details .product-attribute-class-manufacturer span').textContent = val;
-                addAttribute('.k4u-popup__details .product-attribute-class-manufacturer span', 'manufacturer', val);
-            }
-
-            // Type
-
-            if (data.halavi) {
-                let val = data.halavi;
-                document.querySelector('.k4u-popup__details .product-attribute-class-type').classList.add('exists')
-                document.querySelector('.k4u-popup__details .product-attribute-class-type span').textContent = val;
-                addAttribute('.k4u-popup__details .product-attribute-class-type span', 'halavi', val);
-            }
-
-            // Supervision
-
-            if (data.supervision) {
-                let container = document.querySelector('.k4u-popup__details .product-attribute-class-supervision span');
-                let reg = /,/; // true if commas exists
-
-                if (reg.test(data.supervision)) {
-                    container.classList.add('supervisions-list');
-                    let arr = data.supervision.split(',');
-                    let list = document.createDocumentFragment();
-
-                    arr.forEach(elem => {
-                        let tag = document.createElement('span');
-                        tag.innerHTML = elem;
-                        list.appendChild(tag)
-                    });
-
-                    container.appendChild(list)
-                } else {
-                    container.innerHTML = data.supervision
-                }
-
-                document.querySelector('.k4u-popup__details .product-attribute-class-supervision').classList.add('exists')
-            }
+            infoBlock.appendChild(mainAttrsBlock);
 
             if (!data.quantity_and_stock_status.is_in_stock) {
                 document.querySelector('.k4u-popup').classList.add('out-of-stock');
+                let content = '<div class="stock">\n' +
+                    '                        <span class="out-of-stock">Out of Stock</span>\n' +
+                    '                    </div>';
+                let outOfStock = newTag('div', 'k4u-popup__out-of-stock', content);
+                infoBlock.appendChild(outOfStock);
             }
 
-            // Price
+            // Finblock start
+            let finBlock = newTag('div', 'k4u-popup-fin-block');
+
+            // Build price
+
+            let priceBlock = newTag('div', 'k4u-popup__price-block');
 
             if (data.special_price) {
+
+                let oldPriceBlock = newTag('span', 'k4u-popup__old-price');
                 let discount = Math.ceil(100 - (data.special_price * 100) / data.price);
-                document.querySelector('.k4u-popup__final-price').textContent = euro.format(data.special_price);
-                document.querySelector('.k4u-popup__old-price-data').textContent = euro.format(data.price);
-                document.querySelector('.k4u-popup__discount').textContent = discount + '%';
-                document.querySelector('.k4u-popup__price-block').classList.add('special');
+                let oldPriceData = newTag('span', 'k4u-popup__old-price-data', euro.format(data.price));
+                let discountData = newTag('span', 'k4u-popup__discount', discount + '%');
+                oldPriceBlock.append(oldPriceData, discountData);
+
+                let finalPriceBlock = newTag('span', 'k4u-popup__final-price', euro.format(data.special_price));
+
+                priceBlock.append(oldPriceBlock, finalPriceBlock)
+
             }
 
             if (data.price && !data.special_price) {
-                document.querySelector('.k4u-popup__final-price').textContent = euro.format(data.price);
+                let finalPrice = newTag('div', 'k4u-popup__final-price', euro.format(data.price));
+                priceBlock.appendChild(finalPrice);
             }
 
-            if (data.description || data.short_description) {
-                document.querySelector('.k4u-popup__description').classList.add('exists');
-                if (data.description) {
-                    document.querySelector('.k4u-popup__description p').innerHTML = data.description;
-                } else {
-                    document.querySelector('.k4u-popup__description p').innerHTML = data.short_description;
-                }
+            finBlock.appendChild(priceBlock);
+
+            if (!data.quantity_and_stock_status.is_in_stock) {
+                let content = '<div class="k4u-popup__notify-user__button">\n' +
+                    '                            <span>Notify Availability</span>\n' +
+                    '                        </div>';
+                finBlock.appendChild(newTag('div', 'k4u-popup__notify-user', content));
+            } else {
+                let calcBlock = newTag('div', 'k4u-popup__add-to-cart');
+                let calcContainer = newTag('div', 'calc-cell-container');
+
+
+                let calcCell = newTag('div', 'calc-cell calculator');
+                let minus = newTag('div', 'custom-qty-btn btn-minus', '<span>-</span>');
+                let plus = newTag('div', 'custom-qty-btn btn-plus', '<span>+</span>')
+                let input = newTag('input', 'input-text qty custom in-popup');
+                input.setAttribute('value', 1);
+                input.setAttribute('type', 'number');
+                // input.setAttribute('data-mage-init', '{"custom.plusMinus":{"buttons": false, "limit": 10000}}');
+                // input.plusMinus({"buttons": false, "limit": 10000}}});
+                calcCell.append(minus, input, plus);
+
+                let addToCartCell = newTag('div', 'add-to-calc calc-cell');
+                let btn = newTag('button', 'add-to-calc__button', '<span>Add to cart</span>')
+                addToCartCell.appendChild(btn);
+
+                calcContainer.append(calcCell, addToCartCell);
+                calcBlock.append(calcContainer)
+
+                btn.addEventListener('click', function () {
+                    calcContainer.classList.add('show-calc');
+                })
+
+                finBlock.appendChild(calcBlock);
             }
 
-            // Image right attributies
 
-            if (data.bio_attribute || data.sugar_free || data.gluten_free) {
+            infoBlock.appendChild(finBlock);
+            // Finblock end
 
-                let labelsContainer = document.createElement('div');
-                labelsContainer.classList.add('product-image-right-labels');
-                document.querySelector('.k4u-popup__product-image-block').appendChild(labelsContainer);
+            // if (data.description || data.short_description) {
+            //     document.querySelector('.k4u-popup__description').classList.add('exists');
+            //     if (data.description) {
+            //         document.querySelector('.k4u-popup__description p').innerHTML = data.description;
+            //     } else {
+            //         document.querySelector('.k4u-popup__description p').innerHTML = data.short_description;
+            //     }
+            // }
+            //
+            //
+            // let addAttribute = (tag, attr, val) => {
+            //     return document.querySelector(tag).setAttribute('data-product-attribute-' + attr, val)
+            // }
+            //
+            //
+            // // Brutto
+            //
+            // if (data.weight) {
+            //     let val = parseFloat(data.weight);
+            //     document.querySelector('.k4u-popup__details .product-attribute-class-weight').classList.add('exists')
+            //     document.querySelector('.k4u-popup__details .product-attribute-class-weight span').textContent = val + 'kg';
+            //     addAttribute('.k4u-popup__details .product-attribute-class-weight span', 'weight', val)
+            // }
+            //
+            // // Manufacturer
+            //
+            // if (data.manufacturer) {
+            //     let val = data.manufacturer;
+            //     document.querySelector('.k4u-popup__details .product-attribute-class-manufacturer').classList.add('exists')
+            //     document.querySelector('.k4u-popup__details .product-attribute-class-manufacturer span').textContent = val;
+            //     addAttribute('.k4u-popup__details .product-attribute-class-manufacturer span', 'manufacturer', val);
+            // }
+            //
+            // // Type
+            //
+            // if (data.halavi) {
+            //     let val = data.halavi;
+            //     document.querySelector('.k4u-popup__details .product-attribute-class-type').classList.add('exists')
+            //     document.querySelector('.k4u-popup__details .product-attribute-class-type span').textContent = val;
+            //     addAttribute('.k4u-popup__details .product-attribute-class-type span', 'halavi', val);
+            // }
+            //
+            // // Supervision
+            //
+            // if (data.supervision) {
+            //     let container = document.querySelector('.k4u-popup__details .product-attribute-class-supervision span');
+            //     let reg = /,/; // true if commas exists
+            //
+            //     if (reg.test(data.supervision)) {
+            //         container.classList.add('supervisions-list');
+            //         let arr = data.supervision.split(',');
+            //         let list = document.createDocumentFragment();
+            //
+            //         arr.forEach(elem => {
+            //             let tag = document.createElement('span');
+            //             tag.innerHTML = elem;
+            //             list.appendChild(tag)
+            //         });
+            //
+            //         container.appendChild(list)
+            //     } else {
+            //         container.innerHTML = data.supervision
+            //     }
+            //
+            //     document.querySelector('.k4u-popup__details .product-attribute-class-supervision').classList.add('exists')
+            // }
+            //
+            // if (!data.quantity_and_stock_status.is_in_stock) {
+            //     document.querySelector('.k4u-popup').classList.add('out-of-stock');
+            // }
+            //
+            // // Price
+            //
+            // if (data.special_price) {
+            //     let discount = Math.ceil(100 - (data.special_price * 100) / data.price);
+            //     document.querySelector('.k4u-popup__final-price').textContent = euro.format(data.special_price);
+            //     document.querySelector('.k4u-popup__old-price-data').textContent = euro.format(data.price);
+            //     document.querySelector('.k4u-popup__discount').textContent = discount + '%';
+            //     document.querySelector('.k4u-popup__price-block').classList.add('special');
+            // }
+            //
+            // if (data.price && !data.special_price) {
+            //     document.querySelector('.k4u-popup__final-price').textContent = euro.format(data.price);
+            // }
+            //
+            // if (data.description || data.short_description) {
+            //     document.querySelector('.k4u-popup__description').classList.add('exists');
+            //     if (data.description) {
+            //         document.querySelector('.k4u-popup__description p').innerHTML = data.description;
+            //     } else {
+            //         document.querySelector('.k4u-popup__description p').innerHTML = data.short_description;
+            //     }
+            // }
+            //
+            // // Image right attributies
+            //
+            // if (data.bio_attribute || data.sugar_free || data.gluten_free) {
+            //
+            //     let labelsContainer = document.createElement('div');
+            //     labelsContainer.classList.add('product-image-right-labels');
+            //     document.querySelector('.k4u-popup__product-image-block').appendChild(labelsContainer);
+            //
+            //     if (data.sugar_free) {
+            //         let sf_image = document.createElement('img');
+            //         sf_image.setAttribute('title', 'Sugar free');
+            //         sf_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/sf-label-big-01.png');
+            //         sf_image.classList.add('bio');
+            //         labelsContainer.appendChild(sf_image);
+            //     }
+            //
+            //
+            //     if (data.bio_attribute) {
+            //         let bio_image = document.createElement('img');
+            //         bio_image.setAttribute('title', 'Bio');
+            //         bio_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/bio-label-big-01.png');
+            //         bio_image.classList.add('bio');
+            //         labelsContainer.appendChild(bio_image);
+            //     }
+            //
+            //     if (data.gluten_free) {
+            //         let gluten_free_image = document.createElement('img');
+            //         gluten_free_image.setAttribute('title', 'Gluten free');
+            //         gluten_free_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/gf-label-big-01.png');
+            //         gluten_free_image.classList.add('gf');
+            //         labelsContainer.appendChild(gluten_free_image);
+            //     }
+            // }
 
-                if (data.sugar_free) {
-                    let sf_image = document.createElement('img');
-                    sf_image.setAttribute('title', 'Sugar free');
-                    sf_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/sf-label-big-01.png');
-                    sf_image.classList.add('bio');
-                    labelsContainer.appendChild(sf_image);
-                }
-
-
-                if (data.bio_attribute) {
-                    let bio_image = document.createElement('img');
-                    bio_image.setAttribute('title', 'Bio');
-                    bio_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/bio-label-big-01.png');
-                    bio_image.classList.add('bio');
-                    labelsContainer.appendChild(bio_image);
-                }
-
-                if (data.gluten_free) {
-                    let gluten_free_image = document.createElement('img');
-                    gluten_free_image.setAttribute('title', 'Gluten free');
-                    gluten_free_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/gf-label-big-01.png');
-                    gluten_free_image.classList.add('gf');
-                    labelsContainer.appendChild(gluten_free_image);
-                }
-            }
+            container.appendChild(infoBlock);
 
             this._openMe();
         },
@@ -216,9 +340,7 @@ define([
                 $('body').addClass('fadeOn-popup');
             }, 50)
             this._calcHeight();
-            setTimeout(() => {
-                $('.k4u-popup__product-container').addClass('active');
-            }, 150)
+            $('.k4u-popup__product-container .input-text.in-popup').plusMinus({'buttons': false, 'limit': 10000})
         },
 
         _open: function () {
@@ -244,15 +366,19 @@ define([
 
             $(overlay + ', ' + close).on('click', (e) => {
                 closeMe();
-                setTimeout(() => {
-                    $('.k4u-popup .calc-cell-container').removeClass('show-calc');
-                    $('.k4u-popup *').removeClass('exists');
-                    $('.k4u-popup').removeClass('out-of-stock');
-                    $('.k4u-popup__price-block').removeClass('special');
-                    $('.k4u-popup__product-container').removeClass('active');
-                    $('.product-image-right-labels').remove();
-                    $('.k4u-popup .input-text.qty').val(1);
-                }, 500)
+
+                document.querySelector('.k4u-popup .k4u-popup__inner').innerHTML = '';
+                document.querySelector('.k4u-popup').classList.remove('out-of-stock');
+
+                // setTimeout(() => {
+                //     $('.k4u-popup .calc-cell-container').removeClass('show-calc');
+                //     $('.k4u-popup *').removeClass('exists');
+                //     $('.k4u-popup').removeClass('out-of-stock');
+                //     $('.k4u-popup__price-block').removeClass('special');
+                //     $('.k4u-popup__product-container').removeClass('active');
+                //     $('.product-image-right-labels').remove();
+                //     $('.k4u-popup .input-text.qty').val(1);
+                // }, 500)
                 e.preventDefault();
             });
         },

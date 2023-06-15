@@ -97,11 +97,6 @@
     }
 
     .k4u-popup__product-container {
-        opacity: 0;
-
-        &.active {
-            opacity: 1;
-        }
     }
 
     .k4u-popup__inner {
@@ -142,7 +137,7 @@
     }
 
     .k4u-popup__title {
-        .lib-font-size(42);
+        .lib-font-size(36);
         color: @kosher-color__19;
         font-weight: 700;
         margin-bottom: 28px;
@@ -154,13 +149,8 @@
 
         li {
             .lib-font-size(18);
-            display: none;
             font-weight: 600;
             margin-bottom: 10px;
-
-            &.exists {
-                display: block;
-            }
         }
 
         span {
@@ -202,10 +192,6 @@
         }
     }
 
-    .k4u-popup__notify-user {
-        display: none;
-    }
-
     .k4u-popup__notify-user__button {
         .size(224, 56);
         align-items: center;
@@ -235,8 +221,6 @@
     }
 
     .k4u-popup__out-of-stock {
-        display: none;
-
         .stock {
             .lib-font-size(16);
             font-weight: 600;
@@ -256,8 +240,8 @@
 
     .k4u-popup__price-block {
         .k4u-popup__old-price {
-            align-items: flex-start;
-            display: none;
+            align-items: center;
+            display: flex;
             margin-bottom: 7px;
 
             span:not(.k4u-popup__discount) {
@@ -277,12 +261,6 @@
             span {
                 display: block;
                 line-height: 1;
-            }
-        }
-
-        &.special {
-            .k4u-popup__old-price {
-                display: flex;
             }
         }
 
@@ -470,13 +448,6 @@
 
     .k4u-popup__description {
         .lib-font-size(18);
-        display: none;
-
-
-        &.exists {
-            display: block;
-        }
-
         h4 {
             .lib-font-size(18);
             color: @kosher-color__19;
@@ -505,7 +476,7 @@
 
         li {
             align-items: center;
-            display: none;
+            //display: none;
             margin-bottom: 12px;
             margin-right: 15px;
             min-width: 135px;
@@ -521,9 +492,9 @@
                 margin-right: 7px;
             }
 
-            &.exists {
-                display: flex;
-            }
+            //&.exists {
+            //    display: flex;
+            //}
 
         }
 
