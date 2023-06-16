@@ -83,8 +83,6 @@ define([
 
             let mainAttrsBlock = newTag('ul', 'k4u-popup__attributies');
 
-            data.barcode = '194537222'
-
             if (data.barcode) {
                 let content = '<span class="label">Barcode</span> <span class="data">' + data.barcode + '</span></li>';
                 mainAttrsBlock.appendChild(newTag('li', 'barcode', content))
