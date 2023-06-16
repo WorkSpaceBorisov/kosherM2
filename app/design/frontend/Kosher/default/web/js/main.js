@@ -28,7 +28,7 @@ define([
     }
 
     let closeMenu = () => {
-        if(mainMenu.css('display') === 'block') mainMenu.fadeOut(150, 'swing');
+        if (mainMenu.css('display') === 'block') mainMenu.fadeOut(150, 'swing');
     }
 
     // Close minicart
@@ -75,7 +75,7 @@ define([
     // Close mobile search
 
     let closeMobileSearch = () => {
-        if($('body').hasClass('mobile-view')) search.fadeOut(200);
+        if ($('body').hasClass('mobile-view')) search.fadeOut(200);
     }
 
     //Main menu
@@ -95,7 +95,7 @@ define([
         closeMenu();
         closeAccount();
         closeMinicart();
-     });
+    });
 
     let desktopCleaup = () => {
         search.removeAttr('style');
