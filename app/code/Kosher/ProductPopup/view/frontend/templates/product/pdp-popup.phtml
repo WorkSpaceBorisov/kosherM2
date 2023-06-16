@@ -36,7 +36,12 @@ $requestUrl = $storeUrl . $apiUrl;
 </div>
 <script type="text/x-magento-init">
     {
-        ".product-items.products": {
+        ".catalog-category-view .product-items.products": {
+            "pdp.popup": {
+                "apiURL": "<?= $requestUrl ?>"
+            }
+        },
+        ".home-interactive.special .product-items.products": {
             "pdp.popup": {
                 "apiURL": "<?= $requestUrl ?>"
             }
