@@ -29,8 +29,7 @@ class GetOptionValueByIdService
     {
         $result = [];
         $attributeOptionId = $this->changeStructureAttributeOptionData($attributeOptionId);
-        foreach ($attributeOptionId as $attributeCode => $optionId)
-        {
+        foreach ($attributeOptionId as $attributeCode => $optionId) {
             if (!is_array($optionId)) {
                 $result[$attributeCode] = [
                     $optionId => $this->getAttributeOptionValueByIdQuery->execute($optionId, $storeId),
@@ -45,7 +44,7 @@ class GetOptionValueByIdService
             }
         }
 
-        return  $result;
+        return $result;
 
     }
 
@@ -57,12 +56,14 @@ class GetOptionValueByIdService
     {
         $result = [];
         foreach ($data as $key => $optionId) {
-            $status = strpos($optionId, ',');
-            if ($status !== false) {
-                $resIds = explode(',',$optionId);
-                $result[$key] = $resIds;
-            } else {
-                $result[$key] = $optionId;
+            if (!empty($optionId)) {
+                $status = strpos($optionId, ',');
+                if ($status !== false) {
+                    $resIds = explode(',', $optionId);
+                    $result[$key] = $resIds;
+                } else {
+                    $result[$key] = $optionId;
+                }
             }
         }
 
