@@ -4,8 +4,10 @@ namespace Kosher\ProductPopup\Service;
 
 use Exception;
 use Kosher\ProductPopup\Api\PopupProductDataInterface;
+use Kosher\ProductPopup\Service\ProductAttribute\GetOptionValueByIdService;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\Serialize\Serializer\Json;
+use Magento\Store\Model\StoreManagerInterface;
 
 class GetProductService implements PopupProductDataInterface
 {
@@ -19,27 +21,55 @@ class GetProductService implements PopupProductDataInterface
      */
     private Json $json;
 
+    /**
+     * @var GetOptionValueByIdService
+     */
+    private GetOptionValueByIdService $getOptionValueByIdService;
+
+    /**
+     * @var StoreManagerInterface
+     */
+    private StoreManagerInterface $storeManager;
+
+    /**
+     * @param ProductRepositoryInterface $productRepository
+     * @param Json $json
+     * @param GetOptionValueByIdService $getOptionValueByIdService
+     * @param StoreManagerInterface $storeManager
+     */
     public function __construct(
         ProductRepositoryInterface $productRepository,
-        Json $json
+        Json $json,
+        GetOptionValueByIdService $getOptionValueByIdService,
+        StoreManagerInterface $storeManager
     ) {
         $this->productRepository = $productRepository;
         $this->json = $json;
+        $this->getOptionValueByIdService = $getOptionValueByIdService;
+        $this->storeManager = $storeManager;
     }
 
     /**
      * @param string $sku
-     * @return string
+     * @return array
      */
-    public function get(string $sku): string
+    public function get(string $sku): array
     {
         try {
             $product = $this->productRepository->get($sku);
-            $productData = $product->getData();
+            $storeId = $this->storeManager->getStore()->getId();
+            $attributeData = [
+                'manufacturer' => $product->getData('manufacturer'),
+                'supervision' => $product->getData('supervision'),
+                'halavi' => $product->getData('halavi'),
+            ];
 
-            return $this->json->serialize(['productData' => $productData, 'status' => true]);
+            $attributeData = $this->getOptionValueByIdService->execute($attributeData, $storeId);
+            $product->addData($attributeData);
+
+            return ['productData' => $product->getData(), 'status' => true];
         } catch (Exception $exception) {
-            return $this->json->serialize(['message' => $exception->getMessage(), 'status' => false]);
+            return ['message' => $exception->getMessage(), 'status' => false];
         }
     }
 }

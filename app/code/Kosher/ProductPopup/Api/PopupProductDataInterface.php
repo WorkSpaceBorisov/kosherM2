@@ -9,7 +9,7 @@ interface PopupProductDataInterface
 
     /**
      * @param string $sku
-     * @return string
+     * @return array
      */
-    public function get(string $sku): string;
+    public function get(string $sku): array;
 }
