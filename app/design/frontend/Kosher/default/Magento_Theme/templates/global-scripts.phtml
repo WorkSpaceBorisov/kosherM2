@@ -20,18 +20,21 @@
 
     let storeCreditBtn = document.querySelector('.page-wrapper > .store-credit__container');
 
-    let storeCreditActive = () => {
-        setTimeout(() => {
-            storeCreditBtn.classList.add('active')
-        }, 1000)
-    };
+    if(storeCreditBtn) {
+        let storeCreditActive = () => {
+            setTimeout(() => {
+                storeCreditBtn.classList.add('active')
+            }, 1000)
+        };
 
-    storeCreditBtn.addEventListener('click', function (e) {
-        sessionStorage.setItem('hideStoreCreditBtn', true);
-        this.classList.remove('active');
-        e.preventDefault();
-    });
+        storeCreditBtn.addEventListener('click', function (e) {
+            sessionStorage.setItem('hideStoreCreditBtn', true);
+            this.classList.remove('active');
+            e.preventDefault();
+        });
 
-    !sessionStorage.getItem('hideStoreCreditBtn') ? storeCreditActive() : null;
+        !sessionStorage.getItem('hideStoreCreditBtn') ? storeCreditActive() : null;
+    }
+
 
 </script>

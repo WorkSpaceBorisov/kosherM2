@@ -4,8 +4,6 @@ define([
 
     'use strict';
 
-    // console.log('Catalog button');
-
     // Close on click out
 
     $(window).click(() => {

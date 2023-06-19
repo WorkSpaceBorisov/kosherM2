@@ -46,8 +46,8 @@ define([
         },
 
         _build: function (responce) {
-            let data = $.parseJSON(responce).productData;
             let container = document.querySelector('.k4u-popup .k4u-popup__inner');
+            let data = responce[0];
 
             let euro = new Intl.NumberFormat('en-DE', {
                 style: 'currency',
@@ -145,7 +145,6 @@ define([
                 let calcBlock = newTag('div', 'k4u-popup__add-to-cart');
                 let calcContainer = newTag('div', 'calc-cell-container');
 
-
                 let calcCell = newTag('div', 'calc-cell calculator');
                 let minus = newTag('div', 'custom-qty-btn btn-minus', '<span>-</span>');
                 let plus = newTag('div', 'custom-qty-btn btn-plus', '<span>+</span>')
@@ -186,22 +185,18 @@ define([
 
             // Attributies
 
-
             let popupDetails = newTag('div', 'k4u-popup__details')
             let attrList = newTag('ul', 'k4u-popup__details-list');
-
-            data.supervision = '212,345,456';
 
             let attributies = {
                 'manufacturer': data.manufacturer,
                 'supervision': data.supervision,
                 'weight': data.weight,
                 'singleweight': data.singleweight,
-                'type': data.halavi
+                'halavi': data.halavi // Type
             }
 
             let simpleAttr = (name, content, attr) => {
-
                 let liClass = 'product-attribute-class-' + name;
                 let dataAttr = 'data-product-attribute-' + name;
 
@@ -210,6 +205,23 @@ define([
                 span.setAttribute(dataAttr, attr || content)
                 li.appendChild(span)
                 attrList.appendChild(li)
+            }
+
+            let objAttr = (name, attrs) => {
+                let val = '';
+                if (name == 'halavi') name = 'type';
+
+                for (let item in attrs) {
+                    let span = `<span data-attrib-id="${item}">${attrs[item]}</span>`;
+                    val += span;
+                }
+
+                if(Object.keys(attrs).length > 1) {
+                    val = `<span  class="attrs-list">${val}</span>`;
+                    name += ' attrs-list-item';
+                };
+
+                attrList.appendChild(newTag('li', 'product-attribute-class-' + name, val));
             }
 
             for (let item in attributies) {
@@ -225,28 +237,18 @@ define([
                         let singleweight = parseFloat(data.singleweight);
                         simpleAttr(item, singleweight + 'kg', singleweight);
                         break;
+                    case 'manufacturer':
+                    case 'halavi':
+                        if (data[item]) objAttr(item, data[item])
+                        break;
                     case 'supervision':
-
-                        let reg = /,/; // true if commas exists
-                        let supervisions = '';
-
-                        if (reg.test(data.supervision)) {
-                            let arr = data.supervision.split(',');
-                            arr.forEach(elem => {
-                                supervisions += '<span>' + elem + '</span>';
-                            });
-                        } else {
-                            supervisions = item;
-                        }
-
-                        attrList.appendChild(newTag('li', 'product-attribute-class-' + item, supervisions));
+                        if (data[item] && typeof data[item] === 'object') objAttr(item, data[item])
                         break;
                     default:
                         simpleAttr(item, val)
 
                 }
             }
-
 
             popupDetails.appendChild(attrList);
             infoBlock.appendChild(popupDetails)
