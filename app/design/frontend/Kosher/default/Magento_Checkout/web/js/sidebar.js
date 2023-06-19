@@ -187,8 +187,6 @@ define([
         _validateQty: function (elem) {
             var itemQty = elem.data('item-qty');
 
-            console.log('_validateQty');
-
             if (!this._isValidQty(itemQty, elem.val())) {
                 elem.val(itemQty);
             }
@@ -298,13 +296,17 @@ define([
             deleteBtn.each(function (i, item) {
                 item.click();
 
-                setTimeout(() => { cart.fadeOut(800) }, 1500);
+                setTimeout(() => {
+                    cart.fadeOut(800)
+                }, 1500);
+
                 setTimeout(() => {
                     cartBtn.removeClass('active');
                     cartBtn.closest('div').removeClass('active');
                     cart.removeAttr('style');
                     dialog.style.display = 'none';
-                }, 2500);
+                    $('body').removeClass('cart-opened scroll-lock');
+                }, 2300);
 
             })
 

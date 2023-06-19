@@ -12,7 +12,7 @@ define([
 
     // Close menu
 
-    const cartBtn = document.querySelector('.minicart-wrapper .showcart');
+    const cartBtn = $('.minicart-wrapper .showcart');
     const search = $('.header-search-container');
     const login = $('.header-login-block');
     const menuBtn = $('#catalog_button');
@@ -34,21 +34,23 @@ define([
     // Close minicart
 
     let closeMinicart = () => {
-        if (cartBtn.classList.contains('active')) {
-            cartBtn.classList.remove('active');
-            cartBtn.closest('div').classList.remove('active');
-            document.querySelector('.minicart-wrapper .mage-dropdown-dialog').style.display = 'none'
+        if (cartBtn.hasClass('active')) {
+            cartBtn.removeClass('active');
+            cartBtn.closest('div').removeClass('active');
+            $('body').removeClass('cart-opened scroll-lock')
+            $('.minicart-wrapper .mage-dropdown-dialog').css('display', 'none')
         }
     }
 
     // Close account menu on minicart call if opened
 
-    cartBtn.addEventListener('click', (e) => {
+    cartBtn.on('click', function(e) {
         e.preventDefault();
-        if (!cartBtn.classList.contains('active')) {
-            cartBtn.classList.add('active');
-            cartBtn.closest('div').classList.add('active');
-            document.querySelector('.minicart-wrapper .mage-dropdown-dialog').removeAttribute('style');
+        if (!cartBtn.hasClass('active')) {
+            cartBtn.addClass('active');
+            cartBtn.closest('div').addClass('active');
+            $('.minicart-wrapper .mage-dropdown-dialog').removeAttr('style');
+            $('body').addClass('cart-opened scroll-lock')
             closeAccount();
             closeMenu();
             closeMobileSearch();
@@ -57,6 +59,9 @@ define([
         closeMinicart();
     });
 
+    $('.kosher-overlay').on('click', () => {
+        closeMinicart();
+    });
 
     // Close account on cart click
 
@@ -121,5 +126,34 @@ define([
     if ($('body').hasClass('page-products') || $('body').hasClass('cms-index-index')) {
         $('.add-to-calc__button').on('click', (e) => $(e.target).closest('.calc-cell-container').addClass('show-calc'));
     }
+
+    let preventScroll = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+
+    // Prevent scroll on open
+
+    const eBody = document.querySelector('body')
+    const options = {
+        attributes: true
+    }
+
+    function callback(mutationList, observer) {
+        mutationList.forEach(function (mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                // handle class change
+                if (eBody.classList.contains('scroll-lock')) {
+                    eBody.addEventListener('wheel', preventScroll, {passive: false});
+                } else {
+                    eBody.removeEventListener('wheel', preventScroll, {passive: false});
+                }
+            }
+        })
+    }
+
+    const observer = new MutationObserver(callback)
+    observer.observe(eBody, options)
 
 });
