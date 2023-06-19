@@ -57,12 +57,6 @@ define([
         closeMinicart();
     });
 
-    setTimeout(function () {
-        document.querySelector('#btn-minicart-close').addEventListener('click', () => {
-            closeMinicart();
-        });
-    }, 2000)
-
 
     // Close account on cart click
 

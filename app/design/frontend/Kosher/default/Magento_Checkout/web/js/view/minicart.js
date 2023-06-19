@@ -97,34 +97,14 @@ define([
                 'button': ':button.update-cart-item',
                 'input': '.input.cart-item-qty',
                 'plus': '.custom-qty-btn.btn-plus',
-                'minus': '.custom-qty-btn.btn-minus'
+                'minus': '.custom-qty-btn.btn-minus',
+                'deleteAll': '#minicart-header-delete'
             },
             'confirmMessage': $.mage.__('Are you sure you would like to remove this item from the shopping cart?')
         });
     }
 
-    let deleteAll = function () {
-        let deleteAll = $('#minicart-header-delete');
-        let miniCart = $('.block-minicart');
-        let delay = 1500;
-
-        deleteAll.on('click', function (e) {
-            $('.action.delete').click();
-
-            setTimeout(() => {
-                miniCart.fadeOut(800);
-            }, delay);
-
-            setTimeout(() => {
-                $('#btn-minicart-close').click();
-                miniCart.removeAttr('style');
-            }, delay + 1000);
-            e.preventDefault();
-        })
-    }
-
     miniCart.on('dropdowndialogopen', function () {
-        deleteAll();
         initSidebar();
     });
 
