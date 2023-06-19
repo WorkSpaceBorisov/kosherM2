@@ -152,7 +152,13 @@ define([
          * Close mini shopping cart.
          */
         closeMinicart: function () {
-            $('[data-block="minicart"]').find('[data-role="dropdownDialog"]').dropdownDialog('close');
+            console.log('Close');
+            const cartBtn = $('.minicart-wrapper .showcart');
+            if (cartBtn.hasClass('active')) {
+                cartBtn.removeClass('active');
+                cartBtn.closest('div').removeClass('active');
+                $('.minicart-wrapper .mage-dropdown-dialog').css('display', 'none');
+            }
         },
 
         /**

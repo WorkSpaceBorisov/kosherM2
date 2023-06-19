@@ -12,7 +12,7 @@ define([
 
     // Close menu
 
-    const cartBtn = document.querySelector('.minicart-wrapper .showcart');
+    const cartBtn = $('.minicart-wrapper .showcart');
     const search = $('.header-search-container');
     const login = $('.header-login-block');
     const menuBtn = $('#catalog_button');
@@ -34,21 +34,21 @@ define([
     // Close minicart
 
     let closeMinicart = () => {
-        if (cartBtn.classList.contains('active')) {
-            cartBtn.classList.remove('active');
-            cartBtn.closest('div').classList.remove('active');
-            document.querySelector('.minicart-wrapper .mage-dropdown-dialog').style.display = 'none'
+        if (cartBtn.hasClass('active')) {
+            cartBtn.removeClass('active');
+            cartBtn.closest('div').removeClass('active');
+            $('.minicart-wrapper .mage-dropdown-dialog').css('display', 'none')
         }
     }
 
     // Close account menu on minicart call if opened
 
-    cartBtn.addEventListener('click', (e) => {
+    cartBtn.on('click', function(e) {
         e.preventDefault();
-        if (!cartBtn.classList.contains('active')) {
-            cartBtn.classList.add('active');
-            cartBtn.closest('div').classList.add('active');
-            document.querySelector('.minicart-wrapper .mage-dropdown-dialog').removeAttribute('style');
+        if (!cartBtn.hasClass('active')) {
+            cartBtn.addClass('active');
+            cartBtn.closest('div').addClass('active');
+            $('.minicart-wrapper .mage-dropdown-dialog').removeAttr('style');
             closeAccount();
             closeMenu();
             closeMobileSearch();
@@ -60,11 +60,11 @@ define([
 
     // Close account on cart click
 
-    document.querySelector('.header-login-block').addEventListener('click', () => {
-        closeMinicart();
-        closeMenu();
-        closeMobileSearch();
-    });
+    // document.querySelector('.header-login-block').addEventListener('click', () => {
+    //     closeMinicart();
+    //     closeMenu();
+    //     closeMobileSearch();
+    // });
 
     // Close mobile search
 
@@ -139,12 +139,11 @@ define([
         mutationList.forEach(function (mutation) {
             if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
                 // handle class change
-                if (eBody.classList.contains('k4u-popup-on')) {
+                if (eBody.classList.contains('scroll-lock')) {
                     eBody.addEventListener('wheel', preventScroll, {passive: false});
                 } else {
                     eBody.removeEventListener('wheel', preventScroll, {passive: false});
                 }
-                console.log('changed');
             }
         })
     }

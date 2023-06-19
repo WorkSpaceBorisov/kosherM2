@@ -103,7 +103,7 @@
 
     .k4u-popup__product-image-block {
         flex-grow: 1;
-        margin: 0 20px;
+        margin: 0 20px 20px;
         position: relative;
     }
 
@@ -120,7 +120,7 @@
 
         img {
             display: block;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
     }
 
@@ -617,6 +617,18 @@
                 .lib-font-size(16);
                 margin-bottom: 4px;
             }
+        }
+    }
+}
+
+//
+//  Tablet 768
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+    body {
+        .product-image-right-labels{
+            width: 75px;
         }
     }
 }
