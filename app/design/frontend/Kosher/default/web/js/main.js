@@ -122,4 +122,34 @@ define([
         $('.add-to-calc__button').on('click', (e) => $(e.target).closest('.calc-cell-container').addClass('show-calc'));
     }
 
+    let preventScroll = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+
+    // Prevent scroll on open
+
+    const eBody = document.querySelector('body')
+    const options = {
+        attributes: true
+    }
+
+    function callback(mutationList, observer) {
+        mutationList.forEach(function (mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                // handle class change
+                if (eBody.classList.contains('k4u-popup-on')) {
+                    eBody.addEventListener('wheel', preventScroll, {passive: false});
+                } else {
+                    eBody.removeEventListener('wheel', preventScroll, {passive: false});
+                }
+                console.log('changed');
+            }
+        })
+    }
+
+    const observer = new MutationObserver(callback)
+    observer.observe(eBody, options)
+
 });
