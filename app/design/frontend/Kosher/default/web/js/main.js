@@ -37,6 +37,7 @@ define([
         if (cartBtn.hasClass('active')) {
             cartBtn.removeClass('active');
             cartBtn.closest('div').removeClass('active');
+            $('body').removeClass('cart-opened scroll-lock')
             $('.minicart-wrapper .mage-dropdown-dialog').css('display', 'none')
         }
     }
@@ -49,6 +50,7 @@ define([
             cartBtn.addClass('active');
             cartBtn.closest('div').addClass('active');
             $('.minicart-wrapper .mage-dropdown-dialog').removeAttr('style');
+            $('body').addClass('cart-opened scroll-lock')
             closeAccount();
             closeMenu();
             closeMobileSearch();
@@ -57,14 +59,17 @@ define([
         closeMinicart();
     });
 
+    $('.kosher-overlay').on('click', () => {
+        closeMinicart();
+    });
 
     // Close account on cart click
 
-    // document.querySelector('.header-login-block').addEventListener('click', () => {
-    //     closeMinicart();
-    //     closeMenu();
-    //     closeMobileSearch();
-    // });
+    document.querySelector('.header-login-block').addEventListener('click', () => {
+        closeMinicart();
+        closeMenu();
+        closeMobileSearch();
+    });
 
     // Close mobile search
 

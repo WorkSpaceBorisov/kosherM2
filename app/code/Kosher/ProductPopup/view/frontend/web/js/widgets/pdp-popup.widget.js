@@ -30,7 +30,6 @@ define([
             this._close();
             this._resizing();
             this._scrollbar();
-            // this._askAPI('KLBBSS');
         },
 
         _calcHeight: function () {
@@ -66,7 +65,7 @@ define([
             let imageContainer = newTag('div', 'k4u-popup__product-image-block')
             if (data.image) {
                 let img = newTag('img', 'popup-image');
-                let path = '/media/catalog/product/' + data.image;
+                let path = '/media/catalog/product' + data.image;
                 img.setAttribute('title', data.name);
                 img.setAttribute('src', path);
                 imageContainer.appendChild(img);
@@ -175,8 +174,6 @@ define([
 
             let addInfoBlock = newTag('div', 'k4u-popup__additional-info');
 
-            data.description = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
-
             if (data.description || data.short_description) {
                 let title = newTag('h4', null, 'Ingredients:');
                 let content = data.description || data.short_description;
@@ -266,7 +263,7 @@ define([
                 if (data.sugar_free) {
                     let sf_image = document.createElement('img');
                     sf_image.setAttribute('title', 'Sugar free');
-                    sf_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/sf-label-big-01.png');
+                    sf_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/sf-label-big-01.svg');
                     sf_image.classList.add('bio');
                     labelsContainer.appendChild(sf_image);
                 }
@@ -275,7 +272,7 @@ define([
                 if (data.bio_attribute) {
                     let bio_image = document.createElement('img');
                     bio_image.setAttribute('title', 'Bio');
-                    bio_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/bio-label-big-01.png');
+                    bio_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/bio-label-big-01.svg');
                     bio_image.classList.add('bio');
                     labelsContainer.appendChild(bio_image);
                 }
@@ -283,7 +280,7 @@ define([
                 if (data.gluten_free) {
                     let gluten_free_image = document.createElement('img');
                     gluten_free_image.setAttribute('title', 'Gluten free');
-                    gluten_free_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/gf-label-big-01.png');
+                    gluten_free_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/gf-label-big-01.svg');
                     gluten_free_image.classList.add('gf');
                     labelsContainer.appendChild(gluten_free_image);
                 }
@@ -309,7 +306,7 @@ define([
         },
 
         _openMe: function () {
-            $('body').addClass('k4u-popup-on');
+            $('body').addClass('k4u-popup-on scroll-lock');
             setTimeout(() => {
                 $('body').addClass('fadeOn-popup');
             }, 50)
@@ -331,7 +328,7 @@ define([
             let close = this.options.close;
 
             let closeMe = (e) => {
-                $('body').removeClass('fadeOn-popup');
+                $('body').removeClass('fadeOn-popup scroll-lock');
                 setTimeout(() => {
                     $('body').removeClass('k4u-popup-on');
                 }, 500);

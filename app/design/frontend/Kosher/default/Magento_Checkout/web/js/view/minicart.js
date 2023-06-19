@@ -158,6 +158,7 @@ define([
                 cartBtn.removeClass('active');
                 cartBtn.closest('div').removeClass('active');
                 $('.minicart-wrapper .mage-dropdown-dialog').css('display', 'none');
+                $('body').removeClass('cart-opened scroll-lock');
             }
         },
 
