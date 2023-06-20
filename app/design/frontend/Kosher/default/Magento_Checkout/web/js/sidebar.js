@@ -295,23 +295,22 @@ define([
 
             deleteBtn.each(function (i, item) {
                 item.click();
+            });
 
-                setTimeout(() => {
-                    cart.fadeOut(800)
-                }, 1500);
+            setTimeout(() => {
+                cart.fadeOut(800)
+            }, 1500);
 
-                setTimeout(() => {
-                    cartBtn.removeClass('active');
-                    cartBtn.closest('div').removeClass('active');
-                    dialog.css('display', 'none');
-                    $('body').removeClass('cart-opened scroll-lock');
-                }, 2300);
+            setTimeout(() => {
+                cartBtn.removeClass('active');
+                cartBtn.closest('div').removeClass('active');
+                dialog.css('display', 'none');
+                $('body').removeClass('cart-opened scroll-lock');
+            }, 2300);
 
-                setTimeout(() => {
-                    cart.css('display', 'block');
-                }, 3000);
-
-            })
+            setTimeout(() => {
+                cart.css('display', 'block');
+            }, 3000);
 
         },
 
