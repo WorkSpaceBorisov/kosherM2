@@ -45,7 +45,6 @@ define([
                 }
             });
         }
-
         if (!flag) {
             initSCrollbar();
             flag = true;

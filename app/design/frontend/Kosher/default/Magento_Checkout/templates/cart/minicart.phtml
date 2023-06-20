@@ -9,8 +9,7 @@
 ?>
 
 <div data-block="minicart" class="minicart-wrapper">
-    <a class="action showcart" href="<?= $block->escapeUrl($block->getShoppingCartUrl()) ?>"
-       data-bind="scope: 'minicart_content'">
+    <a class="action showcart" href="<?= $block->escapeUrl($block->getShoppingCartUrl()) ?>" data-bind="scope: 'minicart_content'">
         <span class="text"><?= $block->escapeHtml(__('Cart')) ?></span>
         <span class="counter qty empty"
               data-bind="css: { empty: !!getCartParam('summary_count') == false && !isLoading() },
@@ -34,7 +33,7 @@
              data-mage-init='{"dropdownDialog":{
                             "appendTo":"[data-block=minicart]",
                             "buttons":[]}}'>
-            <div id="minicart-content-wrapper" data-bind="scope: 'minicart_content'">
+            <div id="minicart-content-wrapper" class="minicart-content-wrapper" data-bind="scope: 'minicart_content'">
                 <!-- ko template: getTemplate() --><!-- /ko -->
             </div>
             <?= $block->getChildHtml('minicart.addons') ?>
