@@ -303,10 +303,13 @@ define([
                 setTimeout(() => {
                     cartBtn.removeClass('active');
                     cartBtn.closest('div').removeClass('active');
-                    cart.removeAttr('style');
                     dialog.css('display', 'none');
                     $('body').removeClass('cart-opened scroll-lock');
-                }, 2000);
+                }, 2300);
+
+                setTimeout(() => {
+                    cart.css('display', 'block');
+                }, 3000);
 
             })
 
