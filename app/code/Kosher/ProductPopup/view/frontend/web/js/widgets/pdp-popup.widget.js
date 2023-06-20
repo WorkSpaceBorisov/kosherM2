@@ -4,8 +4,9 @@ define([
     'mousewheel',
     'scrollbar',
     'custom.plusMinus',
+    'slick',
     'domReady!'
-], function ($, mediaCheck, scrollbar, plusMinus) {
+], function ($, mediaCheck, scrollbar, plusMinus, slick) {
 
     'use strict';
 
@@ -29,7 +30,7 @@ define([
             this._open();
             this._close();
             this._resizing();
-            this._scrollbar();
+            // this._scrollbar();
         },
 
         _calcHeight: function () {
@@ -40,7 +41,7 @@ define([
         _resizing: function () {
             let self = this;
             $(window).resize(function () {
-                self._calcHeight();
+                // self._calcHeight();
             });
         },
 
@@ -215,10 +216,11 @@ define([
                     val += span;
                 }
 
-                if(Object.keys(attrs).length > 1) {
+                if (Object.keys(attrs).length > 1) {
                     val = `<span  class="attrs-list">${val}</span>`;
                     name += ' attrs-list-item';
-                };
+                }
+                ;
 
                 attrList.appendChild(newTag('li', 'product-attribute-class-' + name, val));
             }
@@ -310,8 +312,8 @@ define([
             setTimeout(() => {
                 $('body').addClass('fadeOn-popup');
             }, 50)
-            this._calcHeight();
-            $('.k4u-popup__product-container .input-text.in-popup').plusMinus({'buttons': false, 'limit': 10000})
+            // this._calcHeight();
+            $('.k4u-popup__product-container .input-text.in-popup').plusMinus({'buttons': false, 'limit': 10000});
         },
 
         _open: function () {
@@ -319,6 +321,7 @@ define([
             $('.product-items .product-image-wrapper, .product-items .product-item-link').on('click', function (e) {
                 let sku = $(this).closest('.product-item-info').find('.hidden-sku').data('sku');
                 self._askAPI(sku);
+                self._slider();
                 e.preventDefault()
             });
         },
@@ -356,7 +359,32 @@ define([
                     enable: true
                 }
             });
+        },
+
+        _slider: function () {
+
+            let isSlider = $('.k4u-popup__slider-container .widget-product-grid');
+
+            isSlider.on('init', function (event, slick) {
+                let width = $('.k4u-popup').width();
+                console.log('initialized ', width);
+                isSlider.find('.slick-list').width(width - 48);
+            });
+
+            isSlider.not('.slick-initialized').slick({
+                arrows: true,
+                dots: false,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                lazyLoad: 'ondemand',
+                pauseOnFocus: true,
+                pauseOnHover: true
+            });
+
         }
+
 
     });
 
