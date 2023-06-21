@@ -81,7 +81,7 @@ use Magento\Framework\App\Action\Action;
 
                                     <div class="price-here">
                                         <?= $block->getProductPriceHtml($_item, $type) ?>
-                                        <span class="price-here__weight">/<span>100g</span></span>
+                                        <span class="price-here__weight">/<span><?=$_item->getData("singleweight") * 1000; ?><?= $block->escapeHtml(__('gr')) ?></span></span>
                                     </div>
 
                                     <?php if ($showWishlist || $showCompare || $showCart): ?>

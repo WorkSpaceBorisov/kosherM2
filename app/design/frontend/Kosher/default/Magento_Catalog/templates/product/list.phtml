@@ -72,7 +72,6 @@ $_helper = $block->getData('outputHelper');
 
                         <!-- get Sku -->
                         <div class="hidden-sku" data-sku="<?= $_product->getSku() ?>"><?= $_product->getSku() ?></div>
-
                         <?php
                         $productImage = $block->getImage($_product, $imageDisplayArea);
                         if ($pos != null) {
@@ -106,7 +105,7 @@ $_helper = $block->getData('outputHelper');
                             <div class="fin-block">
                                 <div class="price-here">
                                     <?= $block->getProductPrice($_product) ?>
-                                    <span class="price-here__weight">/<span>100g</span></span>
+                                    <span class="price-here__weight">/<span><?= $_product->getData("singleweight") * 1000; ?><?= $block->escapeHtml(__('gr')) ?></span></span>
                                 </div>
 
                                 <div class="product-item-actions">
