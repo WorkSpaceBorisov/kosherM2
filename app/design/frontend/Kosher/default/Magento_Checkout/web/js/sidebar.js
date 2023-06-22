@@ -286,12 +286,10 @@ define([
         // Empty cart
 
         _emptyCart: function () {
-            console.log('_emptyCart');
-            let deleteBtn = $('.minicart-items .action.delete');
+            const deleteBtn = $('.minicart-items .action.delete');
             const cartBtn = $('.minicart-wrapper .showcart');
             const dialog = $('.minicart-wrapper .mage-dropdown-dialog');
             const cart = $('.block.block-minicart');
-            console.log($('.minicart-items .action.delete').length);
 
             deleteBtn.each(function (i, item) {
                 item.click();
@@ -305,7 +303,6 @@ define([
                 cartBtn.removeClass('active');
                 cartBtn.closest('div').removeClass('active');
                 dialog.css('display', 'none');
-                $('body').removeClass('cart-opened scroll-lock');
             }, 2300);
 
             setTimeout(() => {
