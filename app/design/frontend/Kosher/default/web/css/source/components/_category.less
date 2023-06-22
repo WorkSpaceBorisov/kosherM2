@@ -34,19 +34,30 @@
         }
 
         .category-view {
-            border: 1px solid red;
-
             & + .page-title-wrapper {
-                border: 1px dashed green;
                 display: none;
 
                 & + .products-total {
                     display: none;
-                    border: 1px solid blue;
                 }
             }
-
         }
+
+        .category-view{
+            position: relative;
+
+            .catagory-title{
+                .lib-font-size(92);
+                color: @kosher-color__01;
+                position: absolute;
+                .to-center();
+            }
+
+            img{
+                display: block;
+            }
+        }
+
 
     }
 }
