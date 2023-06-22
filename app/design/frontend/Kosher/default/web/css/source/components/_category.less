@@ -11,9 +11,6 @@
 
     .catalog-category-view {
 
-        .page-main {
-            position: relative;
-        }
 
         .columns {
             align-items: stretch;
@@ -25,6 +22,10 @@
 
         .column.main {
             flex-grow: 1;
+
+              & > .page-main {
+                position: relative;
+            }
 
             .breadcrumbs {
                 padding-left: 0;
@@ -52,7 +53,7 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
     .catalog-category-view {
-        .column.main{
+        .column.main {
             width: 100%;
         }
     }
