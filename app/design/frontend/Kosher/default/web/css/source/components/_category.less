@@ -23,7 +23,7 @@
         .column.main {
             flex-grow: 1;
 
-              & > .page-main {
+            & > .page-main {
                 position: relative;
             }
 
@@ -32,6 +32,22 @@
                 padding-right: 0;
             }
         }
+
+        .category-view {
+            border: 1px solid red;
+
+            & + .page-title-wrapper {
+                border: 1px dashed green;
+                display: none;
+
+                & + .products-total {
+                    display: none;
+                    border: 1px solid blue;
+                }
+            }
+
+        }
+
     }
 }
 

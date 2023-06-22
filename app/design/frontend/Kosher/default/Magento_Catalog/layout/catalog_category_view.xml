@@ -16,25 +16,15 @@
 
     <body>
 
-        <block class="Magento\Framework\View\Element\Template" name="list.total" template="Magento_Catalog::product/list/total-products.phtml" after="page.main.title"/>
+        <block name="list.total" template="Magento_Catalog::product/list/total-products.phtml" after="page.main.title"/>
 
         <container name="category.body" htmlTag="section" htmlClass="category-body" after="header.container"/>
 
         <referenceContainer name="main">
-
-            <referenceContainer name="category.view.container">
-                <block class="Magento\Theme\Block\Html\Title" name="category.banner.title" template="Magento_Catalog::html/title.phtml">
-                    <arguments>
-                        <argument name="id" xsi:type="string">page-title-heading</argument>
-                        <argument name="add_base_attribute_aria" xsi:type="string">page-title-heading toolbar-amount</argument>
-                    </arguments>
-                </block>
-            </referenceContainer>
-
             <referenceContainer name="content">
                 <referenceContainer name="columns">
                     <container name="plp.filters.col" htmlTag="div" htmlClass="plp-filters-col" before="-">
-                        <block class="Magento\Framework\View\Element\Template" name="plp-filters" template="Magento_Catalog::filters/plp-filters.phtml"/>
+                        <block name="plp-filters" template="Magento_Catalog::filters/plp-filters.phtml"/>
                     </container>
                 </referenceContainer>
             </referenceContainer>
