@@ -79,7 +79,7 @@
 
                     <div class="product-item-pricing">
 
-                        <din class="price-box">
+                        <div class="price-box">
 
                             <!-- ko if: canApplyMsrp -->
 
@@ -95,9 +95,12 @@
                             <!-- /ko -->
                             <!-- /ko -->
 
-                            <span class="price-here__weight">/<span>100g</span></span>
+                            <span class="price-here__weight" data-bind="attr: {
+                           id: 'update-cart-item-'+product_name }">/<span>100g</span></span>
 
-                        </din>
+<!--                            <span data-bind="html: $parent.getSingleWeightUnsanitizedHtml(singleweight)"></span>-->
+
+                        </div>
 
                         <div class="details-qty qty">
 

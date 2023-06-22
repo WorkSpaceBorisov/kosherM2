@@ -37,10 +37,38 @@ define([
         if (cartBtn.hasClass('active')) {
             cartBtn.removeClass('active');
             cartBtn.closest('div').removeClass('active');
-            $('body').removeClass('cart-opened scroll-lock')
             $('.minicart-wrapper .mage-dropdown-dialog').css('display', 'none');
         }
     }
+
+    // Cart fade close
+
+    let cartFade = () => {
+        const dialog = $('.minicart-wrapper .mage-dropdown-dialog');
+        const cart = $('.block.block-minicart');
+        const delay = 0;
+
+        cart.fadeOut(500)
+
+        setTimeout(() => {
+            cartBtn.removeClass('active');
+            cartBtn.closest('div').removeClass('active');
+            dialog.css('display', 'none');
+        }, delay + 1000);
+
+        setTimeout(() => {
+            cart.css('display', 'block');
+        }, delay + 1800);
+    }
+
+    // Detect cart close on scroll
+
+    $(window).scroll(function() {
+        if(cartBtn.hasClass('active')) {
+            let scroll = $(window).scrollTop();
+            if (scroll > 150) cartFade();
+        }
+    });
 
     // Close account menu on minicart call if opened
 
@@ -50,7 +78,6 @@ define([
             cartBtn.addClass('active');
             cartBtn.closest('div').addClass('active');
             $('.minicart-wrapper .mage-dropdown-dialog').removeAttr('style');
-            $('body').addClass('cart-opened scroll-lock')
             closeAccount();
             closeMenu();
             closeMobileSearch();

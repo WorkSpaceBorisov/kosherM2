@@ -155,7 +155,6 @@ define([
             if (cartBtn.hasClass('active')) {
                 cartBtn.removeClass('active');
                 cartBtn.closest('div').removeClass('active');
-                $('body').removeClass('cart-opened scroll-lock')
                 $('.minicart-wrapper .mage-dropdown-dialog').css('display', 'none');
             }
         },

@@ -99,7 +99,7 @@ $_helper = $block->getData('outputHelper');
                             <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
 
                             <div class="category-link">
-                                <a href="#" class="category-link__href"><span>Just Bagel</span></a>
+                                <a href="#" class="category-link__href"><span><?= $_product->getAttributeText('manufacturer') ?></span></a>
                             </div>
 
                             <div class="fin-block">
