@@ -10,8 +10,6 @@
     }
 
     .catalog-category-view {
-
-
         .columns {
             align-items: stretch;
             display: flex;
@@ -43,22 +41,38 @@
             }
         }
 
-        .category-view{
+        .category-view {
             position: relative;
 
-            .catagory-title{
-                .lib-font-size(92);
-                color: @kosher-color__01;
-                position: absolute;
+            .catagory-title {
+                .lib-font-size(60);
                 .to-center();
+                color: @kosher-color__01;
+                margin-bottom: 0;
+                position: absolute;
+                text-align: center;
+                text-shadow: 2px 2px rgba(0, 0, 0, .2);
+                width: 95%;
             }
 
-            img{
+            .category-image {
+                height: 195px;
+                //margin-bottom: 20px;
+                margin-bottom: 3vw;
+            }
+
+            img {
+                border-radius: 8px;
                 display: block;
+                height: 100%;
+                object-fit: fill;
+                width: 100%;
+            }
+
+            .category-description {
+                display: none;
             }
         }
-
-
     }
 }
 
@@ -70,6 +84,29 @@
     .catalog-category-view {
         .header.content {
             margin-bottom: 28px;
+        }
+
+        .column.main {
+            .breadcrumbs {
+                padding-left: 3px;
+            }
+        }
+
+        .category-view {
+            .catagory-title {
+                .lib-font-size(92);
+            }
+
+            .category-image {
+                height: auto;
+                margin-bottom: 48px;
+            }
+
+            img {
+                height: auto;
+                object-fit: unset;
+                width: auto;
+            }
         }
     }
 }
@@ -86,4 +123,21 @@
     }
 }
 
+//
+//  Mobile 480
+//  _____________________________________________
 
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs2) {
+    body.catalog-category-view {
+        .category-view {
+            .category-image {
+                height: 150px;
+                margin-bottom: 12px;
+            }
+
+            .catagory-title {
+                .lib-font-size(36);
+            }
+        }
+    }
+}

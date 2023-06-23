@@ -66,7 +66,7 @@
 
             &:after {
                 .icomoon(@icon-arrow-right-small, 8px, @kosher-color__17);
-                margin: 1px 9px 0 9px;
+                margin: 1px 7px 0 9px;
             }
 
             &:last-child {
@@ -94,7 +94,7 @@
                     text-indent: -10000px;
 
                     &:after {
-                        .icomoon(@icon-home, 14px, @kosher-color__19);
+                        .icomoon(@icon-home-02, 14px, @kosher-color__19);
                         .to-center();
                         text-indent: 0;
                     }
@@ -131,6 +131,12 @@
 
         [data-show-notify="true"] &{
             display: block;
+        }
+    }
+
+    [data-href]{
+        &:hover{
+            cursor: pointer;
         }
     }
 }

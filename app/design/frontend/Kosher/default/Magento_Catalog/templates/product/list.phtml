@@ -48,7 +48,6 @@ $_helper = $block->getData('outputHelper');
     <div class="products wrapper <?= /* @noEscape */
     $viewMode ?> products-<?= /* @noEscape */
     $viewMode ?>">
-        <div class="marker">Just the list.phtml</div>
         <!-- plist 123 -->
         <ol class="products list items product-items">
             <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
@@ -81,20 +80,20 @@ $_helper = $block->getData('outputHelper');
 
                         <?php // Product Image ?>
                         <div class="product-item-photo-outer">
-                            <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
+                            <figure data-href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
                                class="product photo product-item-photo"
                                tabindex="-1">
                                 <?= $productImage->toHtml() ?>
-                            </a>
+                            </figure>
                         </div>
                         <div class="product details product-item-details">
                             <?php $_productNameStripped = $block->stripTags($_product->getName(), null, true); ?>
                             <strong class="product name product-item-name">
-                                <a class="product-item-link"
-                                   href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>">
+                                <span class="product-item-link"
+                                   data-href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>">
                                     <?= /* @noEscape */
                                     $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
-                                </a>
+                                </span>
                             </strong>
                             <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
 
@@ -105,7 +104,7 @@ $_helper = $block->getData('outputHelper');
                             <div class="fin-block">
                                 <div class="price-here">
                                     <?= $block->getProductPrice($_product) ?>
-                                    <span class="price-here__weight">/<span><?= $_product->getData("singleweight") * 1000; ?><?= $block->escapeHtml(__('gr')) ?></span></span>
+                                    <span class="price-here__weight">/<span><?= (float)$_product->getData("singleweight") * 1000; ?><?= $block->escapeHtml(__('gr')) ?></span></span>
                                 </div>
 
                                 <div class="product-item-actions">
