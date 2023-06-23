@@ -42,7 +42,7 @@
             .to-center();
         }
 
-        &:hover{
+        &:hover {
             cursor: pointer;
         }
 
@@ -79,7 +79,7 @@
             cursor: pointer;
         }
 
-        & >  span {
+        & > span {
             display: none;
         }
     }
@@ -92,7 +92,7 @@
                 content: @icon-leans2;
             }
 
-            &:hover{
+            &:hover {
                 cursor: pointer;
             }
         }
@@ -613,6 +613,18 @@
     body {
         .header-search-container {
             padding: 10px 15px;
+        }
+    }
+}
+
+//
+//  Mobile 480
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs2) {
+    body {
+        .header.content {
+            margin-bottom: 10px;
         }
     }
 }
