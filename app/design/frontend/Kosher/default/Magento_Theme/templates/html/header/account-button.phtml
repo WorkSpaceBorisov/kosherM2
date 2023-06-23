@@ -1,45 +1,27 @@
 <?php
-/*
- * Customer authorization
+/**
+ * @var $viewModel Kosher\CustomerAdjustment\ViewModel\CustomerLoginViewModel
+ * @var $block Magento\Framework\View\Element\Template
  */
 
-/** @var \Magento\Framework\App\ObjectManager $om */
-$om = \Magento\Framework\App\ObjectManager::getInstance();
-/** @var \Magento\Framework\App\Http\Context $context */
-$context = $om->get('Magento\Framework\App\Http\Context');
-/** @var bool $isLoggedIn */
-$isLoggedIn = $context->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH);
+$viewModel = $block->getViewModel();
 ?>
 
 <div class="header-login-block" data-popup-container>
 
-    <?php if ($isLoggedIn): ?>
+    <?php if ($viewModel->isCustomerLogin()): ?>
         <!-- Logged in-->
         <div class="account-button mobile" data-popup-trigger><span><?= __('account') ?></span></div>
         <div class="account-button desktop" data-popup-trigger>
-            <span>
-                <?php $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-                $customerSession = $objectManager->create('Magento\Customer\Model\Session');
-
-                if ($customerSession->isLoggedIn()) {
-                    $customerSession->getCustomerId();  // get Customer Id
-                    $customerSession->getCustomerGroupId();
-                    $customerSession->getCustomer();
-                    $customerSession->getCustomerData();
-
-                    echo $customerSession->getCustomer()->getName();  // get  Full Name
-                    // echo $customerSession->getCustomer()->getEmail(); // get Email
-                }
-                ?>
-            </span>
+            <span><?= $viewModel->getCustomerName() ?></span>
         </div>
         <div class="ko-customer-menu" data-target="dropdown" aria-hidden="false" data-popup-content>
             <ul>
                 <li>
-                    <a href="<?php echo $block->getBaseUrl(); ?>customer/account/" id="idi3GyRLlJ"><?= __('My Account') ?></a>
+                    <a href="<?php echo $block->getBaseUrl(); ?>customer/account/" id="my-account"><?= __('My Account') ?></a>
                 </li>
                 <li>
-                    <a href="<?php echo $block->getBaseUrl(); ?>sales/order/history/" id="idi3GyRLlJ"><?= __('My Orders') ?></a>
+                    <a href="<?php echo $block->getBaseUrl(); ?>sales/order/history/" id="history"><?= __('My Orders') ?></a>
                 </li>
                 <li class="link authorization-link" data-label="or">
                     <a href="<?php echo $block->getBaseUrl(); ?>customer/account/logout/"><?= __('Sign Out') ?></a>
