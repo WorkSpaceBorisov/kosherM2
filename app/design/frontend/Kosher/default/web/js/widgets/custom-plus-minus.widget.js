@@ -82,12 +82,11 @@ define([
         _validate: function () {
             let qty = $(this.element);
             let validationMessage = '<span class="custom-validation-message">Enter the number</span>';
-            let valClass = 'custom-validation-message';
 
             qty.parent().append(validationMessage)
 
             qty.on('keypress', function (e) {
-                if (e.which < 48 || e.which > 57) {
+                if (!parseInt(e.key)) {
                     qty.parent().attr('data-show-notify', true);
                     setTimeout(() => {
                         qty.parent().removeAttr('data-show-notify');

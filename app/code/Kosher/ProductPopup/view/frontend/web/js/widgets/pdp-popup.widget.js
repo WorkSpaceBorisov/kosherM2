@@ -178,7 +178,11 @@ define([
             if (data.description || data.short_description) {
                 let title = newTag('h4', null, 'Ingredients:');
                 let content = data.description || data.short_description;
-                addInfoBlock.append(newTag('h4', null, 'Ingredients:'), newTag('p', null, content))
+                addInfoBlock.append(newTag('h4', null, 'Ingredients:'), newTag('p', null, content));
+                addInfoBlock.addEventListener('copy', function (e){
+                    e.preventDefault();
+                    e.clipboardData.setData("text/plain", "Do not copy this block content!");
+                })
             }
 
             infoBlock.appendChild(addInfoBlock);

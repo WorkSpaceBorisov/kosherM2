@@ -113,7 +113,6 @@ define([
         closeMobileSearch();
     });
 
-
     // Show/hide mobile search
 
     $('.header-right-container .search-button').on('click', () => {
