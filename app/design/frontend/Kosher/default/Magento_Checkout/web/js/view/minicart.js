@@ -129,6 +129,7 @@ define([
                 initSidebar();
             }, this);
             $('[data-block="minicart"]').on('contentLoading', function () {
+                console.log('contentLoading');
                 addToCartCalls++;
                 self.isLoading(true);
             });

@@ -48,7 +48,7 @@ $_helper = $block->getData('outputHelper');
     <div class="products wrapper <?= /* @noEscape */
     $viewMode ?> products-<?= /* @noEscape */
     $viewMode ?>">
-        <!-- plist 123 -->
+        <!-- plist 1234 -->
         <ol class="products list items product-items">
             <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
             <?php foreach ($_productCollection as $_product): ?>
@@ -109,6 +109,32 @@ $_helper = $block->getData('outputHelper');
 
                                 <div class="product-item-actions">
                                     <?php if ($_product->isSaleable()): ?>
+
+
+                                    <?php $postParams = $block->getAddToCartPostParams($_product); ?>
+                                    <form data-role="tocart-form"
+                                          data-product-sku="<?= $escaper->escapeHtml($_product->getSku()) ?>"
+                                          action="<?= $escaper->escapeUrl($postParams['action']) ?>"
+                                          method="post">
+
+                                        <?php $options = $block->getData('viewModel')->getOptionsData($_product); ?>
+                                        <?php foreach ($options as $optionItem): ?>
+                                            <input type="hidden"
+                                                   name="<?= $escaper->escapeHtml($optionItem['name']) ?>"
+                                                   value="<?= $escaper->escapeHtml($optionItem['value']) ?>">
+                                        <?php endforeach; ?>
+
+                                        <input type="hidden"
+                                               name="product"
+                                               value="<?= /* @noEscape */ $postParams['data']['product'] ?>">
+                                        <input type="hidden"
+                                               name="<?= /* @noEscape */ Action::PARAM_NAME_URL_ENCODED ?>"
+                                               value="<?=
+                                               /* @noEscape */ $postParams['data'][Action::PARAM_NAME_URL_ENCODED]
+                                               ?>">
+                                        
+                                        <?= $block->getBlockHtml('formkey') ?>
+
                                         <div class="calc-cell-container">
                                             <div class="calc-cell calculator">
                                                 <div class="custom-qty-btn btn-minus"><span>-</span></div>
@@ -117,9 +143,13 @@ $_helper = $block->getData('outputHelper');
                                                 <div class="custom-qty-btn btn-plus"><span>+</span></div>
                                             </div>
                                             <div class="add-to-calc calc-cell">
-                                                <button class="add-to-calc__button"><span>Add to</span></button>
+                                                <button type="submit" class="add-to-calc__button"><span>Add to</span></button>
                                             </div>
                                         </div>
+
+                                    </form>
+
+
                                     <?php else: ?>
                                         <?php if ($_product->isAvailable()): ?>
                                             <div class="stock available">

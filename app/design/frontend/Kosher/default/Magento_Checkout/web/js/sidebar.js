@@ -98,7 +98,6 @@ define([
                 let input = $(event.currentTarget).closest('.details-qty').find('.cart-item-qty');
                 let val = input.val();
                 input.val(++val).change()
-
             };
 
             // Decrease qty value
@@ -220,6 +219,7 @@ define([
          * @param {HTMLElement} elem
          */
         _updateItemQtyAfter: function (elem) {
+            console.log('_updateItemQtyAfter');
             var productData = this._getProductById(Number(elem.data('cart-item')));
 
             if (!_.isUndefined(productData)) {
