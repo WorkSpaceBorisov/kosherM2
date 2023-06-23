@@ -322,7 +322,6 @@ define([
                 let sku = $(this).closest('.product-item-info').find('.hidden-sku').data('sku');
                 self._askAPI(sku);
                 self._slider();
-                e.preventDefault()
             });
         },
 

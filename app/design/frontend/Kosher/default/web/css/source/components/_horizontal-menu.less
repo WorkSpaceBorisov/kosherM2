@@ -21,19 +21,19 @@
             width: 100%;
         }
 
+        @min-width: 160px;
+
         .level0.category-item {
             @border-color: @kosher-color__15;
-            @mw: 130px;
 
             background: @kosher-color__01;
             border-color: @border-color;
             border-radius: 8px 8px 0 0;
             border-style: solid;
             border-width: 1px 1px 1px 0;
-            flex-basis: @mw;
             flex-grow: 1;
             margin-bottom: 0;
-            min-width: @mw;
+            min-width: @min-width;
 
             .level-top {
                 align-items: center;
@@ -59,10 +59,8 @@
                 }
             }
 
-            &.nav-6{
-                @mw: 150px;
-                flex-basis: @mw;
-                min-width: @mw;
+            &.nav-6 {
+                min-width: @min-width + 25;
             }
 
             &:first-child {

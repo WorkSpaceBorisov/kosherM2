@@ -26,6 +26,7 @@ use Magento\Framework\App\Action\Action;
     $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
     $description = false;
     ?>
+    <!-- Grid 234 -->
     <div class="block widget block-products-list <?= /* @noEscape */
     $mode ?>">
         <div class="marker">widget-product-grid</div>
@@ -62,9 +63,9 @@ use Magento\Framework\App\Action\Action;
 
                             <!-- Photo -->
                             <div class="product-item-photo-outer">
-                                <a href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>" class="product-item-photo">
+                                <figure data-href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>" class="product-item-photo">
                                     <?= $block->getImage($_item, $image)->toHtml() ?>
-                                </a>
+                                </figure>
                             </div>
 
                             <!-- get Sku -->
@@ -72,11 +73,11 @@ use Magento\Framework\App\Action\Action;
 
                             <div class="product-item-details">
                                 <strong class="product-item-name">
-                                    <a title="<?= $block->escapeHtml($_item->getName()) ?>"
-                                       href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>"
+                                    <span title="<?= $block->escapeHtml($_item->getName()) ?>"
+                                       data-href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>"
                                        class="product-item-link">
                                         <?= $block->escapeHtml($_item->getName()) ?>
-                                    </a>
+                                    </span>
                                 </strong>
 
                                 <?php if ($templateType): ?>
