@@ -2,10 +2,10 @@
     <body>
 
         <!-- REMOVE -->
-        <referenceBlock name="header.panel.wrapper" remove="true"/>
-        <referenceBlock name="catalog.compare.link" remove="true"/>
-        <referenceBlock name="footer_links" remove="true"/>
-        <referenceBlock name="navigation.sections" remove="true"/>
+<!--        <referenceBlock name="header.panel.wrapper" remove="true"/>-->
+<!--        <referenceBlock name="catalog.compare.link" remove="true"/>-->
+<!--        <referenceBlock name="footer_links" remove="true"/>-->
+<!--        <referenceBlock name="navigation.sections" remove="true"/>-->
 
         <!-- MOVE -->
         <move element="top.search" destination="header.search.container"/>
@@ -13,9 +13,15 @@
         <move element="copyright" destination="copyright.footer.block" before="-"/>
         <move element="form.subscribe" destination="newsletter.footer.block" before="-"/>
 
+        <!-- To debug -->
+
+        <move element="header" destination="header.links" before="-"/>
+        <move element="register-link" destination="header.links"/>
+        <move element="top.links" destination="customer"/>
+        <move element="authorization-link" destination="top.links" after="-"/>
+
+
         <referenceContainer name="header.container">
-
-
             <referenceContainer name="header-wrapper">
                 <container name="catalog.button.container" htmlTag="div" htmlClass="catalog-button-container" before="logo">
                     <block class="Magento\Framework\View\Element\Template" name="catalog.button"
@@ -45,7 +51,6 @@
 
         <referenceContainer name="footer-container">
             <referenceContainer name="footer">
-
 
                 <container name="footer.container" htmlTag="div" htmlClass="footer-container" before="-">
                     <container name="footer.info" htmlTag="div" htmlClass="footer-info" before="-">
