@@ -8,7 +8,7 @@
         height: 100%; // Stretch screen area for sticky footer
     }
 
-    body{
+    body {
     }
 
     .page-wrapper {
@@ -115,7 +115,7 @@
         display: none;
     }
 
-    .custom-validation-message{
+    .custom-validation-message {
         .lib-font-size(12);
         display: none;
         position: absolute;
@@ -129,14 +129,29 @@
         transform: translate(-50%, 0);
         width: 90%;
 
-        [data-show-notify="true"] &{
+        [data-show-notify="true"] & {
             display: block;
         }
     }
 
-    [data-href]{
-        &:hover{
+    [data-href] {
+        &:hover {
             cursor: pointer;
+        }
+    }
+
+    body {
+        .customer-name{
+            border: 1px solid red;
+        }
+        .customer-welcome {
+            .customer-menu {
+                display: block;
+            }
+            ul{
+                display: block;
+                margin-top: 100px;
+            }
         }
     }
 }
