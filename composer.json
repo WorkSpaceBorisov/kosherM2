@@ -10,20 +10,22 @@
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "laminas/laminas-dependency-plugin": true,
-            "magento/*": true
+            "magento/*": true,
+            "cweagans/composer-patches": true
         },
         "preferred-install": "dist",
         "sort-packages": true
     },
-    "version": "2.4.5",
+    "version": "2.4.6-p1",
     "require": {
         "aitoc/orders-export-import": "2.0.11",
         "aitoc/smtp": "1.0.4",
+        "cweagans/composer-patches": "1.7",
         "fme/quick-view": "^1.0",
         "magento/composer-dependency-version-audit-plugin": "~0.1",
         "magento/composer-root-update-plugin": "~2.0",
-        "magento/data-migration-tool": "2.4.5",
-        "magento/product-community-edition": "2.4.5",
+        "magento/data-migration-tool": "2.4.6",
+        "magento/product-community-edition": "2.4.6-p1",
         "mirasvit/module-credit": "*",
         "olegkoval/magento2-regenerate-url-rewrites": "1.6.0"
     },
@@ -101,6 +103,12 @@
         }
     },
     "extra": {
-        "magento-force": "override"
+        "magento-force": "override",
+        "composer-exit-on-patch-failure": true,
+        "patches": {
+            "magento/module-theme": {
+                "FIX-addslashes: FIX: magento/module-theme/Block/Html/Header": "patches/composer/fix-php-type-error-in-header-block.diff"
+            }
+        }
     }
 }

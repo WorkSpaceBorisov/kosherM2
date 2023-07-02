@@ -2806,6 +2806,12 @@
                 <handler class="\Migration\Handler\QuoteMultiAddressStoreId" />
             </transform>
             <ignore>
+                <field>importexport_importdata.updated_at</field>
+            </ignore>
+            <ignore>
+                <field>importexport_importdata.is_processed</field>
+            </ignore>
+            <ignore>
                 <field>quote_address.base_credit_amount</field>
             </ignore>
             <ignore>

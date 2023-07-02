@@ -1,0 +1,22 @@
+From 5223d7e9c911f3a19a7ed42b28127b2a1afe7e1d Mon Sep 17 00:00:00 2001
+From: Tu Van <vandinhtuit@gmail.com>
+Date: Thu, 16 Mar 2023 14:20:38 +0700
+Subject: [PATCH] Fix PHP Type error in Header block class
+
+---
+ vendor/magento/module-theme/Block/Html/Header.php | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/vendor/magento/module-theme/Block/Html/Header.php b/vendor/magento/module-theme/Block/Html/Header.php
+index 1550ebaa367d..e7eafc0b7316 100644
+--- a/vendor/magento/module-theme/Block/Html/Header.php
++++ b/vendor/magento/module-theme/Block/Html/Header.php
+@@ -54,7 +54,7 @@ public function __construct(
+     public function getWelcome()
+     {
+         if (empty($this->_data['welcome'])) {
+-            $this->_data['welcome'] = $this->_scopeConfig->getValue(
++            $this->_data['welcome'] = (string)$this->_scopeConfig->getValue(
+                 'design/header/welcome',
+                 ScopeInterface::SCOPE_STORE
+             );
