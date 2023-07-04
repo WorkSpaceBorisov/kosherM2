@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
 <classmap xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
           xs:noNamespaceSchemaLocation="urn:magento:module:Magento_DataMigrationTool:etc/class-map.xsd">
     <rename>
@@ -453,6 +459,7 @@
         <from>sales/quote_item</from>
         <to>Magento\Quote\Model\Quote\Item</to>
     </rename>
+
     <rename>
         <from>sales/order_address</from>
         <to>Magento\Sales\Model\Order\Address</to>
