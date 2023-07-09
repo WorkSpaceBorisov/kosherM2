@@ -2,16 +2,17 @@
     <body>
 
         <!-- REMOVE -->
-        <referenceBlock name="header.panel.wrapper" remove="true"/>
         <referenceBlock name="catalog.compare.link" remove="true"/>
         <referenceBlock name="footer_links" remove="true"/>
         <referenceBlock name="navigation.sections" remove="true"/>
+        <referenceBlock name="header" remove="true"/>
 
         <!-- MOVE -->
         <move element="top.search" destination="header.search.container"/>
         <move element="minicart" destination="header.right.container" after="top.links"/>
         <move element="copyright" destination="copyright.footer.block" before="-"/>
         <move element="form.subscribe" destination="newsletter.footer.block" before="-"/>
+        <move element="header.panel.wrapper" destination="header.right.container"/>
 
         <referenceContainer name="header.container">
 
@@ -25,15 +26,8 @@
                 <container name="header.search.container" htmlTag="div" htmlClass="header-search-container" after="logo"/>
 
                 <container name="header.right.container" htmlTag="div" htmlClass="header-right-container" after="-">
-                    <block class="Mirasvit\Credit\Block\Link" name="credit-link" before="-"/>
                     <block class="Magento\Framework\View\Element\Template" name="search.button"
                            template="Magento_Theme::html/header/search-button.phtml"/>
-                    <block name="account.button"
-                           template="Magento_Theme::html/header/account-button.phtml">
-                        <arguments>
-                            <argument name="view_model" xsi:type="object">Kosher\CustomerAdjustment\ViewModel\CustomerLoginViewModel</argument>
-                        </arguments>
-                    </block>
                 </container>
             </referenceContainer>
             <container name="main.menu" htmlTag="div" htmlClass="kosher-main-menu" htmlId="kosher_main_menu" after="-">
@@ -109,9 +103,7 @@
                     </block>
                 </container>
             </container>
-            <block class="Mirasvit\Credit\Block\Link" name="credit-link-floating" before="-"/>
             <block class="Magento\Theme\Block\Html\Footer" name="global.scripts" template="Magento_Theme::global-scripts.phtml"/>
         </referenceContainer>
-
     </body>
 </page>
