@@ -4,7 +4,6 @@ var config = {
     map: {
         '*': {
             'main': 'js/main',
-            'custon.dropdown': 'js/widgets/custom-dropdown.widget',
             'custom.plusMinus': 'js/widgets/custom-plus-minus.widget',
             'custom.accordion': 'js/widgets/custom-accordion.widget',
             'custom.select': 'js/widgets/custom-select.widget',
@@ -17,7 +16,6 @@ var config = {
 
     paths: {
         'main': 'js/main',
-        'custon.dropdown': 'js/widgets/custom-dropdown.widget',
         'custom.plusMinus': 'js/widgets/custom-plus-minus.widget',
         'custom.accordion': 'js/widgets/custom-accordion.widget',
         'custom.select': 'js/widgets/custom-select.widget',
