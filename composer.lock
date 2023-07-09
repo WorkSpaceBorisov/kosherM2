@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a0e76e6662879374adc2a81ec3a64a65",
+    "content-hash": "3e0ba7c12bf197ae711b0873966183a2",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -92,13 +92,13 @@
         },
         {
             "name": "aitoc/orders-export-import",
-            "version": "2.0.11",
+            "version": "2.0.12",
             "dist": {
                 "type": "zip",
-                "url": "https://composer.aitoc.com/community/packages/orders-export-import_2.0.11.zip"
+                "url": "https://composer.aitoc.com/community/packages/orders-export-import_2.0.12.zip"
             },
             "require": {
-                "aitoc/core": ">=1.0.16",
+                "aitoc/core": ">=1.0.8",
                 "ext-dom": "*",
                 "ext-json": "*"
             },
@@ -237,16 +237,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.275.1",
+            "version": "3.275.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "6cf6aacecda1dec52bf4a70d8e1503b5bc56e924"
+                "reference": "d46961b82e857f77059c0c78160719ecb26f6cc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6cf6aacecda1dec52bf4a70d8e1503b5bc56e924",
-                "reference": "6cf6aacecda1dec52bf4a70d8e1503b5bc56e924",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d46961b82e857f77059c0c78160719ecb26f6cc6",
+                "reference": "d46961b82e857f77059c0c78160719ecb26f6cc6",
                 "shasum": ""
             },
             "require": {
@@ -326,9 +326,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.275.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.275.5"
             },
-            "time": "2023-06-30T18:23:40+00:00"
+            "time": "2023-07-07T18:20:11+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
@@ -1470,16 +1470,16 @@
         },
         {
             "name": "cweagans/composer-patches",
-            "version": "1.7.3",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cweagans/composer-patches.git",
-                "reference": "e190d4466fe2b103a55467dfa83fc2fecfcaf2db"
+                "reference": "ae02121445ad75f4eaff800cc532b5e6233e2ddf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cweagans/composer-patches/zipball/e190d4466fe2b103a55467dfa83fc2fecfcaf2db",
-                "reference": "e190d4466fe2b103a55467dfa83fc2fecfcaf2db",
+                "url": "https://api.github.com/repos/cweagans/composer-patches/zipball/ae02121445ad75f4eaff800cc532b5e6233e2ddf",
+                "reference": "ae02121445ad75f4eaff800cc532b5e6233e2ddf",
                 "shasum": ""
             },
             "require": {
@@ -1512,9 +1512,9 @@
             "description": "Provides a way to patch Composer packages.",
             "support": {
                 "issues": "https://github.com/cweagans/composer-patches/issues",
-                "source": "https://github.com/cweagans/composer-patches/tree/1.7.3"
+                "source": "https://github.com/cweagans/composer-patches/tree/1.7.0"
             },
-            "time": "2022-12-20T22:53:13+00:00"
+            "time": "2020-09-30T17:56:20+00:00"
         },
         {
             "name": "dasprid/enum",
@@ -4678,16 +4678,16 @@
         },
         {
             "name": "laminas/laminas-validator",
-            "version": "2.33.0",
+            "version": "2.34.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-validator.git",
-                "reference": "1d82b5c0ede9316263e14d11e9284dfb3130f158"
+                "reference": "74a9701d12ed71e2110ddc291a0caaba5832a4ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-validator/zipball/1d82b5c0ede9316263e14d11e9284dfb3130f158",
-                "reference": "1d82b5c0ede9316263e14d11e9284dfb3130f158",
+                "url": "https://api.github.com/repos/laminas/laminas-validator/zipball/74a9701d12ed71e2110ddc291a0caaba5832a4ca",
+                "reference": "74a9701d12ed71e2110ddc291a0caaba5832a4ca",
                 "shasum": ""
             },
             "require": {
@@ -4758,7 +4758,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2023-06-12T09:43:54+00:00"
+            "time": "2023-07-03T07:58:17+00:00"
         },
         {
             "name": "laminas/laminas-view",
@@ -17988,11 +17988,11 @@
         },
         {
             "name": "mirasvit/module-credit",
-            "version": "1.2.10",
+            "version": "1.2.12",
             "dist": {
                 "type": "tar",
-                "url": "https://packages.mirasvit.com/61512:9VK8QCMIXT/downloads/mirasvit-module-credit-1.2.10-65c2df.tar",
-                "reference": "96bee70c308b1841ba701c879e77422f8bf953cd"
+                "url": "https://packages.mirasvit.com/61512:9VK8QCMIXT/downloads/mirasvit-module-credit-1.2.12-506e70.tar",
+                "reference": "a44beaca848834735d9a995644f4d129bd4f541a"
             },
             "require": {
                 "magento/framework": "102.0.*|103.0.*",
@@ -18016,7 +18016,7 @@
                 "proprietary"
             ],
             "description": "Store Credit & Refund",
-            "time": "2023-05-16T09:55:59+00:00"
+            "time": "2023-07-04T14:28:45+00:00"
         },
         {
             "name": "mirasvit/module-report",
@@ -25253,16 +25253,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.22",
+            "version": "1.10.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "97d694dfd4ceb57bcce4e3b38548f13ea62e4287"
+                "reference": "578f4e70d117f9a90699324c555922800ac38d8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/97d694dfd4ceb57bcce4e3b38548f13ea62e4287",
-                "reference": "97d694dfd4ceb57bcce4e3b38548f13ea62e4287",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/578f4e70d117f9a90699324c555922800ac38d8c",
+                "reference": "578f4e70d117f9a90699324c555922800ac38d8c",
                 "shasum": ""
             },
             "require": {
@@ -25311,7 +25311,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-06-30T20:04:11+00:00"
+            "time": "2023-07-06T12:11:37+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",

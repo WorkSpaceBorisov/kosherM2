@@ -18,7 +18,7 @@
     },
     "version": "2.4.6-p1",
     "require": {
-        "aitoc/orders-export-import": "2.0.11",
+        "aitoc/orders-export-import": "2.0.12",
         "aitoc/smtp": "1.0.4",
         "cweagans/composer-patches": "1.7",
         "fme/quick-view": "^1.0",

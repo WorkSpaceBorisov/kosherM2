@@ -42,7 +42,7 @@ class SetImagePathToCategoryDataPatch implements DataPatchInterface
             'Groceries' => '/media/catalog/category/Groceries.png',
             'Health' => '/media/catalog/category/Health.png',
             'Household' => '/media/catalog/category/Household.png',
-            'Judaica ' => '/media/catalog/category/Judaica.png',
+            'Judaica' => '/media/catalog/category/Judaica.png',
             'Snacks' => '/media/catalog/category/Snacks.png',
             'Wine & Spirits' => '/media/catalog/category/Wine.png',
         ];
@@ -51,11 +51,12 @@ class SetImagePathToCategoryDataPatch implements DataPatchInterface
             $categoryIconAttributeId = $this->getCategoryIconAttributeId();
             foreach ($categoriesEntityId as $categoryEntityId)
             {
+
                 $iconData = [
                     'attribute_id' => $categoryIconAttributeId,
                     'store_id' => 0,
                     'entity_id' => $categoryEntityId['entity_id'],
-                    'value' => $iconPath[$categoryEntityId['value']],
+                    'value' => $iconPath[trim($categoryEntityId['value'])],
                 ];
 
                 $this->setCategoryIconPath($iconData);

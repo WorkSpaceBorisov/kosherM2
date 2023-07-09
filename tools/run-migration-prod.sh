@@ -13,7 +13,6 @@ echo "${bold}Run prep scripts M2:${normal}"
 pv app/code/Kosher/Migration/query/before_migration_magento2.sql | mysql -um2_kosher4u_eu -pIN2uXFYHM1U10VLF m2_kosher4u_eu
 echo "${bold}• Clean Temp Dirs ${normal}" && rm -rf ./generated/* ./var/* ./pub/static/* &&
 echo "${bold}• Install packages ${normal}" && rm -rf ./vendor ./setup ./bin ./lib ./phpserver ./dev ./.docker && composer clear-cache && composer install &&
-echo "${bold}• Revert etc/di.xml ${normal}" && git checkout -- app/etc/di.xml &&
 echo "${bold}• Revert nginx.conf.sample ${normal}" && git checkout -- nginx.conf.sample &&
 echo "${bold}Create var/tmp folder:${normal}"
 mkdir -p var/tmp
