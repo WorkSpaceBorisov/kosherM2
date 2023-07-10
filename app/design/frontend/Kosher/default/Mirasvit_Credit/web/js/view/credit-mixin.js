@@ -30,7 +30,7 @@ define(function () {
                     }, 1000)
                 };
 
-                storeCreditBtn.addEventListener('click', function (e) {
+                storeCreditBtn?.addEventListener('click', function (e) {
                     if(e.target === e.currentTarget) {
                         sessionStorage.setItem('hideStoreCreditBtn', true);
                         this.classList.remove('active');
