@@ -2,14 +2,10 @@
 /** @var Magento\Customer\Block\Account\Customer $block */
 ?>
 <?php if ($block->customerLoggedIn()) : ?>
-    <li class="customer-welcome">
+    <li class="customer-welcome" data-block="customer-menu">
         <span class="customer-name"
-              role="link"
-              tabindex="0"
-              data-mage-init='{"dropdown":{}}'
-              data-toggle="dropdown"
-              data-trigger-keypress-button="true"
-              data-bind="scope: 'customer'">
+            data-trigger="customer-trigger"
+            data-bind="scope: 'customer'">
             <!-- ko if: customer().fullname  -->
                 <span 
                     data-bind="text: new String('<?= $escaper->escapeHtml(__('%1', '%1')) ?>').
@@ -36,7 +32,13 @@
         }
         </script>
         <?php if ($block->getChildHtml()) :?>
-            <div class="customer-menu" data-target="dropdown">
+            <div class="customer-menu" data-role="dropdownDialog"
+             data-mage-init='{"dropdownDialog":{
+                "triggerTarget":"[data-trigger=customer-trigger]",
+                "appendTo":"[data-block=customer-menu]",
+                "closeOnMouseLeave": false,
+                "closeOnEscape": true,
+                "buttons":[]}}'>
                 <?= $block->getChildHtml() ?>
             </div>
         <?php endif; ?>

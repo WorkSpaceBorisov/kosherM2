@@ -14,17 +14,14 @@ define([
 
     const cartBtn = $('.minicart-wrapper .showcart');
     const search = $('.header-search-container');
-    const login = $('.header-login-block');
+    const login = $('[data-trigger="customer-trigger"]');
     const menuBtn = $('#catalog_button');
     const mainMenu = $('#kosher_main_menu');
 
     // Close account menu
 
     let closeAccount = () => {
-        if (login.hasClass('active')) {
-            login.removeClass('active');
-            login.find('[data-popup-content]').removeAttr('style');
-        }
+        $('[data-block="customer-menu"]').find('[data-role="dropdownDialog"]').dropdownDialog('close');
     }
 
     let closeMenu = () => {
@@ -92,7 +89,7 @@ define([
 
     // Close account on cart click
 
-    document.querySelector('.header-login-block').addEventListener('click', () => {
+    login.on('click', () => {
         closeMinicart();
         closeMenu();
         closeMobileSearch();
