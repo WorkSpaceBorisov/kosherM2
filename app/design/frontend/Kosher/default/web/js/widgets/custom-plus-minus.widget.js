@@ -1,7 +1,8 @@
 define([
     'jquery',
-    'domReady!'
-], function ($) {
+    'Magento_Customer/js/customer-data',
+    'domReady!',
+], function ($, customerData) {
 
     'use strict';
 
@@ -14,7 +15,10 @@ define([
             buttons: true, // Use false to skip _build function and apply buttons manually
             plus: 'btn-plus',
             minus: 'btn-minus',
-            validate: true
+            validate: true,
+            productId: '',
+            updateQtyUrl: '',
+            removeItemUrl: ''
         },
 
         _create: function () {
@@ -65,35 +69,152 @@ define([
             this._buttonDisabler(qty.val());
 
             minus.on('click', function () {
+                self._addLoader();
                 let val = +qty.val();
                 if (val === self.options.minimal) return;
                 qty.val(--val);
                 self._buttonDisabler(val);
+                self._updateQty('decrease');
             });
 
             plus.on('click', function () {
+                self._addLoader();
                 let val = +qty.val();
                 if (val === self.options.limit) return;
                 qty.val(++val);
                 self._buttonDisabler(val);
+                self._updateQty('increase');
             });
         },
 
         _validate: function () {
-            let qty = $(this.element);
-            let validationMessage = '<span class="custom-validation-message">Enter the number</span>';
+            const self = this;
+            const qty = $(this.element);
 
-            qty.parent().append(validationMessage)
-
-            qty.on('keypress', function (e) {
-                if (!parseInt(e.key)) {
-                    qty.parent().attr('data-show-notify', true);
-                    setTimeout(() => {
-                        qty.parent().removeAttr('data-show-notify');
-                    }, 1000)
-                    e.preventDefault();
-                }
+            qty.on('keyup', () => {
+                self._addLoader();
+                self._updateQty(qty.val());
+                qty.trigger("blur");
             });
+        },
+
+        /**
+         * Update qty for current product
+         * @param {Number} sign increase or decrease the product qty
+         * @private
+         */
+        _updateQty(sign) {
+            const self = this;
+            const cartItems = customerData.get("cart")().items;
+            const product = cartItems.find(
+                (item) => item.product_id === this.options.productId
+            );
+
+            // check if product still in the cart
+            if (product) {
+                const productQty = product.qty;
+                const productItemId = product.item_id;
+                const formKey = $(this.element)
+                    .parents('[data-role="tocart-form"]')
+                    .find('[name="form_key"]')
+                    .val();
+                let newQuantity;
+                let data;
+                let actionUrl;
+
+                if(sign === 'increase') {
+                    newQuantity = productQty + 1
+                } else if(sign >= 1) {
+                    newQuantity = Number(sign);
+                } else if(sign == 0) {
+                    newQuantity = 1;
+                    $(self.element).val(1);
+                } else {
+                    newQuantity = productQty - 1
+                }
+
+                (newQuantity === 0) 
+                    ? this._removeItem(productItemId, formKey)
+                    : this._updateItemQty(productItemId, formKey, newQuantity);
+
+                this._updateItemQty(actionUrl, data);
+            }
+
+            // submit ajax form only if qty !== '0'
+            if (!product && $(this.element).val() !== "0") {
+                this._submitAjaxForm();
+            }
+
+            setTimeout(() => {
+                this._removeLoader();
+            }, 1000)
+        },
+
+        /**
+         * Update item qty in cart
+         * @param {String} productId
+         * @param {String} formKey
+         * @param {String} qty
+         * @returns {void}
+         */
+        _updateItemQty(productId, formKey, qty) {
+            const self = this;
+
+            $.ajax({
+                url: this.options.updateQtyUrl,
+                data: {
+                    item_id: productId,
+                    item_qty: qty,
+                    form_key: formKey,
+                },
+                type: "post",
+                dataType: "json"
+            });
+        },
+
+        /**
+         * Remove item from cart
+         * @param {String} productId
+         * @param {String} formKey
+         * @returns {void}
+         */
+        _removeItem(productId, formKey) {
+            $.ajax({
+                url: this.options.removeItemUrl,
+                data: {
+                    item_id: productId,
+                    form_key: formKey,
+                },
+                type: "post",
+                dataType: "json"
+            });
+        },
+
+        /**
+         * Add item to cart
+         * For the situation when you add product, change qty and then remove the product from minicart
+         * then next click on +/- will add needed amount of products
+         * @returns {void}
+         */
+        _submitAjaxForm() {
+            $(this.element).parents('[data-role="tocart-form"]').submit();
+            this._removeLoader();
+        },
+
+        /**
+         * Add loader
+         * @returns {void}
+         */
+        _addLoader() {
+            $(this.element).closest(".calc-cell").addClass('loading');
+        },
+
+        /**
+         * Remove loader
+         * @returns {void}
+         */
+        _removeLoader() {
+            $(this.element).closest(".calc-cell").removeClass('loading');
         }
     });
 
