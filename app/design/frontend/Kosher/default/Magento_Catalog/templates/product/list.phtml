@@ -62,10 +62,10 @@ $_helper = $block->getData('outputHelper');
 
                         <div class="product-item__label-left-container">
                             <div class="product-item__label-left sale">
-                                <span><?= $block->escapeHtml(__('Sale')) ?></span>
+                                <span><?= $escaper->escapeHtml(__('Sale')) ?></span>
                             </div>
                             <div class="product-item__label-left new">
-                                <span><?= $block->escapeHtml(__('New')) ?></span>
+                                <span><?= $escaper->escapeHtml(__('New')) ?></span>
                             </div>
                         </div>
 
@@ -109,17 +109,56 @@ $_helper = $block->getData('outputHelper');
 
                                 <div class="product-item-actions">
                                     <?php if ($_product->isSaleable()): ?>
-                                        <div class="calc-cell-container">
-                                            <div class="calc-cell calculator">
-                                                <div class="custom-qty-btn btn-minus"><span>-</span></div>
-                                                <input type="text" value="1" class="input-text qty custom"
-                                                       data-mage-init='{"custom.plusMinus":{"buttons": false, "limit": 10000}}'>
-                                                <div class="custom-qty-btn btn-plus"><span>+</span></div>
+                                        <?php $postParams = $block->getAddToCartPostParams($_product); ?>
+                                        <form data-role="tocart-form"
+                                              data-product-sku="<?= $escaper->escapeHtml($_product->getSku()) ?>"
+                                              action="<?= $escaper->escapeUrl($postParams['action']) ?>"
+                                              data-mage-init='{"catalogAddToCart": {}}'
+                                              method="post">
+                                            <?php $options = $block->getData('viewModel')->getOptionsData($_product); ?>
+                                            <?php foreach ($options as $optionItem): ?>
+                                                <input type="hidden"
+                                                       name="<?= $escaper->escapeHtml($optionItem['name']) ?>"
+                                                       value="<?= $escaper->escapeHtml($optionItem['value']) ?>">
+                                            <?php endforeach; ?>
+                                            <input type="hidden"
+                                                   name="product"
+                                                   value="<?= /* @noEscape */ $postParams['data']['product'] ?>">
+                                            <input type="hidden"
+                                                   name="<?= /* @noEscape */ Action::PARAM_NAME_URL_ENCODED ?>"
+                                                   value="<?=
+                                                   /* @noEscape */ $postParams['data'][Action::PARAM_NAME_URL_ENCODED]
+                                                    ?>">
+                                            <?= $block->getBlockHtml('formkey') ?>
+                                            <div class="calc-cell-container">
+                                                <div class="calc-cell calculator">
+                                                    <div class="custom-qty-btn btn-minus"><span>-</span></div>
+                                                    <input 
+                                                        data-mage-init='{
+                                                            "custom.plusMinus":{
+                                                                "buttons": false, 
+                                                                "limit": 1000, 
+                                                                "productId" : "<?php echo $_product->getId(); ?>",
+                                                                "updateQtyUrl" : "<?php echo $block->getUrl("checkout/sidebar/updateItemQty"); ?>",
+                                                                "removeItemUrl" : "<?php echo $block->getUrl("checkout/sidebar/removeItem"); ?>"
+                                                            }}' 
+                                                        type="number" 
+                                                        name="qty"
+                                                        min="1" 
+                                                        value="1" class="product-quantity input-text qty custom">
+                                                    <div class="custom-qty-btn btn-plus"><span>+</span></div>
+                                                </div>
+                                                <div class="add-to-calc calc-cell">
+                                                    <button type="submit"
+                                                            title="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
+                                                            class="action tocart primary add-to-calc__button" 
+                                                            disabled>
+                                                        <span><?= $escaper->escapeHtml(__('Add to Cart')) ?></span>
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div class="add-to-calc calc-cell">
-                                                <button class="add-to-calc__button"><span>Add to</span></button>
-                                            </div>
-                                        </div>
+                                        </form>
+                                        
                                     <?php else: ?>
                                         <?php if ($_product->isAvailable()): ?>
                                             <div class="stock available">
