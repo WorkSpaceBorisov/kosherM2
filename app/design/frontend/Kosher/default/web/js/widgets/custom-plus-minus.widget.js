@@ -1,12 +1,8 @@
-define([
-    'jquery',
-    'Magento_Customer/js/customer-data',
-    'domReady!',
-], function ($, customerData) {
-
+define(['jquery', 'Magento_Customer/js/customer-data', 'domReady!'], function (
+    $,
+    customerData,
+) {
     'use strict';
-
-    // console.log('Custom plus minus widget by Max');
 
     $.widget('custom.plusMinus', {
         options: {
@@ -15,52 +11,74 @@ define([
             buttons: true, // Use false to skip _build function and apply buttons manually
             plus: 'btn-plus',
             minus: 'btn-minus',
-            validate: true,
+            keyup: true,
             productId: '',
             updateQtyUrl: '',
-            removeItemUrl: ''
+            removeItemUrl: '',
         },
 
-        _create: function () {
+        /**
+         * @private
+         */
+        _create() {
             this.options.buttons === true ? this._build() : this._calc();
-            this.options.validate === true ? this._validate() : null;
+            this.options.keyup === true ? this._initKeyup() : null;
         },
 
-        _build: function () {
-            let btnMinus = $(`<div class="custom-qty-btn ${self.options.minus}"><span>-</span></div>`);
-            let btnPlus = $(`<div class="custom-qty-btn ${self.options.plus}"><span>+</span></div>`);
+        /**
+         * @return {*}
+         */
+        _build() {
+            let btnMinus = $(
+                `<div class="custom-qty-btn ${self.options.minus}"><span>-</span></div>`,
+            );
+            let btnPlus = $(
+                `<div class="custom-qty-btn ${self.options.plus}"><span>+</span></div>`,
+            );
 
-            this.element.before(btnMinus)
-            this.element.after(btnPlus)
+            this.element.before(btnMinus);
+            this.element.after(btnPlus);
 
             this._calc();
         },
 
-        _buttonDisabler: function (val) {
+        /**
+         * @param {string} val
+         * @return {*}
+         */
+        _buttonDisabler(val) {
             let self = this;
             let qty = $(this.element);
             let minus = qty.prev(`.${self.options.minus}`);
             let plus = qty.next(`.${self.options.plus}`);
-            +val === self.options.minimal ? minus.addClass('disabled') : minus.removeClass('disabled');
-            +val === self.options.limit ? plus.addClass('disabled') : plus.removeClass('disabled');
+            +val === self.options.minimal
+                ? minus.addClass('disabled')
+                : minus.removeClass('disabled');
+            +val === self.options.limit
+                ? plus.addClass('disabled')
+                : plus.removeClass('disabled');
 
-
-            if(+val === self.options.minimal){
-                let container = qty.closest(".calc-cell-container");
+            if (+val === self.options.minimal) {
+                let container = qty.closest('.calc-cell-container');
                 setTimeout(() => {
-                    qty.closest('.show-calc').removeClass('show-calc').find('.disabled').removeClass('disabled');
+                    qty.closest('.show-calc')
+                        .removeClass('show-calc')
+                        .find('.disabled')
+                        .removeClass('disabled');
                     container.addClass('no-hover');
-                }, 700)
+                }, 700);
                 setTimeout(() => {
                     qty.val(1);
                     container.removeClass('no-hover');
                 }, 2000);
             }
-
         },
 
-        _calc: function () {
-
+        /**
+         * Calculate logic
+         * @return {*}
+         */
+        _calc() {
             let self = this;
             let qty = $(this.element);
             let minus = qty.prev(`.${self.options.minus}`);
@@ -74,7 +92,7 @@ define([
                 if (val === self.options.minimal) return;
                 qty.val(--val);
                 self._buttonDisabler(val);
-                self._updateQty('decrease');
+                self._changeQty('decrease');
             });
 
             plus.on('click', function () {
@@ -83,31 +101,35 @@ define([
                 if (val === self.options.limit) return;
                 qty.val(++val);
                 self._buttonDisabler(val);
-                self._updateQty('increase');
+                self._changeQty('increase');
             });
         },
 
-        _validate: function () {
+        /**
+         * Add keyup logic for updating qty
+         * @return {*}
+         */
+        _initKeyup() {
             const self = this;
             const qty = $(this.element);
 
             qty.on('keyup', () => {
                 self._addLoader();
-                self._updateQty(qty.val());
-                qty.trigger("blur");
+                self._changeQty(qty.val());
+                qty.trigger('blur');
             });
         },
 
         /**
-         * Update qty for current product
+         * Change qty for current product
          * @param {Number} sign increase or decrease the product qty
          * @private
          */
-        _updateQty(sign) {
+        _changeQty(sign) {
             const self = this;
-            const cartItems = customerData.get("cart")().items;
+            const cartItems = customerData.get('cart')().items;
             const product = cartItems.find(
-                (item) => item.product_id === this.options.productId
+                (item) => item.product_id === this.options.productId,
             );
 
             // check if product still in the cart
@@ -122,18 +144,18 @@ define([
                 let data;
                 let actionUrl;
 
-                if(sign === 'increase') {
-                    newQuantity = productQty + 1
-                } else if(sign >= 1) {
+                if (sign === 'increase') {
+                    newQuantity = productQty + 1;
+                } else if (sign >= 1) {
                     newQuantity = Number(sign);
-                } else if(sign == 0) {
+                } else if (sign == 0) {
                     newQuantity = 1;
                     $(self.element).val(1);
                 } else {
-                    newQuantity = productQty - 1
+                    newQuantity = productQty - 1;
                 }
 
-                (newQuantity === 0) 
+                newQuantity === 0
                     ? this._removeItem(productItemId, formKey)
                     : this._updateItemQty(productItemId, formKey, newQuantity);
 
@@ -141,13 +163,13 @@ define([
             }
 
             // submit ajax form only if qty !== '0'
-            if (!product && $(this.element).val() !== "0") {
+            if (!product && $(this.element).val() !== '0') {
                 this._submitAjaxForm();
             }
 
             setTimeout(() => {
                 this._removeLoader();
-            }, 1000)
+            }, 1000);
         },
 
         /**
@@ -167,8 +189,8 @@ define([
                     item_qty: qty,
                     form_key: formKey,
                 },
-                type: "post",
-                dataType: "json"
+                type: 'post',
+                dataType: 'json',
             });
         },
 
@@ -185,8 +207,8 @@ define([
                     item_id: productId,
                     form_key: formKey,
                 },
-                type: "post",
-                dataType: "json"
+                type: 'post',
+                dataType: 'json',
             });
         },
 
@@ -206,7 +228,7 @@ define([
          * @returns {void}
          */
         _addLoader() {
-            $(this.element).closest(".calc-cell").addClass('loading');
+            $(this.element).closest('.calc-cell').addClass('loading');
         },
 
         /**
@@ -214,8 +236,8 @@ define([
          * @returns {void}
          */
         _removeLoader() {
-            $(this.element).closest(".calc-cell").removeClass('loading');
-        }
+            $(this.element).closest('.calc-cell').removeClass('loading');
+        },
     });
 
     return $.custom.plusMinus;
