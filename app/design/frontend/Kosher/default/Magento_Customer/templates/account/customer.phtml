@@ -11,9 +11,9 @@
               data-trigger-keypress-button="true"
               data-bind="scope: 'customer'">
             <!-- ko if: customer().fullname  -->
-                <span 
+                <span
                     data-bind="text: new String('<?= $escaper->escapeHtml(__('%1', '%1')) ?>').
-                    replace('%1', customer().fullname)">
+                    replace('%1', customer().firstname)">
                 </span>
             <!-- /ko -->
             <button type="button"
