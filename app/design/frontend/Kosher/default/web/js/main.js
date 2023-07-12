@@ -10,12 +10,16 @@ define([
 
     const breakPoint = '(max-width: 980px)';
 
+    $(window).click(() => {
+        $('.mobile-view .header-search-container').fadeOut(500);
+    });
+
     // Close menu
 
     const cartBtn = $('.minicart-wrapper .showcart');
     const search = $('.header-search-container');
     const login = $('[data-trigger="customer-trigger"]');
-    const menuBtn = $('#catalog_button');
+    const menuBtn = $('[data-action="toggle-nav"]');
     const mainMenu = $('#kosher_main_menu');
 
     // Close account menu
@@ -104,7 +108,6 @@ define([
     //Main menu
 
     menuBtn.on('click', () => {
-        mainMenu.slideToggle(300, 'swing');
         closeMinicart();
         closeAccount();
         closeMobileSearch();
