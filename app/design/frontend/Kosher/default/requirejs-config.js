@@ -1,11 +1,8 @@
-// Kosher4U js config
-
-var config = {
+const config = {
     map: {
         '*': {
             'main': 'js/main',
             'custom.plusMinus': 'js/widgets/custom-plus-minus.widget',
-            'custom.accordion': 'js/widgets/custom-accordion.widget',
             'custom.select': 'js/widgets/custom-select.widget',
             'slick': 'js/vendors/slick/slick.min',
             'mousewheel': 'js/vendors/malihu/jquery.mousewheel.min',
@@ -17,7 +14,6 @@ var config = {
     paths: {
         'main': 'js/main',
         'custom.plusMinus': 'js/widgets/custom-plus-minus.widget',
-        'custom.accordion': 'js/widgets/custom-accordion.widget',
         'custom.select': 'js/widgets/custom-select.widget',
         'slick': 'js/vendors/slick/slick.min',
         'mousewheel': 'js/vendors/malihu/jquery.mousewheel.min',
@@ -32,10 +28,9 @@ var config = {
         scrollbar: {
             deps: ['jquery']
         }
-    }
+    },
 
-    // deps: [
-    //     "js/main"
-    // ]
-
+    deps: [
+        'js/widgets/custom-navigation'
+    ]
 };

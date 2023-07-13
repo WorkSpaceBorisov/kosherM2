@@ -172,3 +172,24 @@
     font-weight: 500;
 }
 
+.scrollbar-vertical(@thumb-color: @kosher-color__15, @border-color: @kosher-color__13) {
+    overflow: auto;
+    /* Firefox */
+    scrollbar-width: auto;
+    scrollbar-color: @thumb-color @border-color;
+
+    /* Chrome, Edge, and Safari */
+    &::-webkit-scrollbar {
+        width: 16px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: @border-color;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: @thumb-color;
+        border-radius: 10px;
+        border: 5px solid @border-color;
+    }
+}

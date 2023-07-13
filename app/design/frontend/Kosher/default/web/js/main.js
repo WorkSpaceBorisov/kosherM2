@@ -6,17 +6,16 @@ define([
 
     'use strict';
 
-    // console.log('Global scripts');
-
     const breakPoint = '(max-width: 980px)';
 
-    // Close menu
+    $(window).click(() => {
+        $('.mobile-view .header-search-container').fadeOut(500);
+    });
 
     const cartBtn = $('.minicart-wrapper .showcart');
     const search = $('.header-search-container');
     const login = $('[data-trigger="customer-trigger"]');
-    const menuBtn = $('#catalog_button');
-    const mainMenu = $('#kosher_main_menu');
+    const menuBtn = $('[data-action="toggle-nav"]');
 
     // Close account menu
 
@@ -25,7 +24,14 @@ define([
     }
 
     let closeMenu = () => {
-        if (mainMenu.css('display') === 'block') mainMenu.fadeOut(150, 'swing');
+        const $html = $('html');
+        const $nav = $('[data-action="navigation"]');
+        
+        if($html.hasClass('nav-opened')) {
+            $html.removeClass('nav-opened');
+            $nav.slideToggle(300, 'swing');
+            $nav.find('.expanded').removeClass('expanded').find('.submenu').slideUp(300);
+        }
     }
 
     // Close minicart
@@ -104,7 +110,6 @@ define([
     //Main menu
 
     menuBtn.on('click', () => {
-        mainMenu.slideToggle(300, 'swing');
         closeMinicart();
         closeAccount();
         closeMobileSearch();

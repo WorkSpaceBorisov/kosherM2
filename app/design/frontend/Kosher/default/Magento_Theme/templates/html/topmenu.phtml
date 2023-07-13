@@ -14,15 +14,9 @@ $columnsLimit = $block->getColumnsLimit() ?: 0;
 $_menuHtml = $block->getHtml('level-top', 'submenu', $columnsLimit)
 ?>
 
-<ul data-mage-init='{"menu":{"responsive":true, "expanded":true, "position":{"my":"left top","at":"left bottom"}}}'>
-    <?= /* @noEscape */
-    $_menuHtml ?>
-    <?= $block->getChildHtml() ?>
-</ul>
-
-<script>
-
-
-
-    // topCatagories[1].classList.add('opened');
-</script>
+<nav class="navigation" data-action="navigation">
+    <ul data-init="navigation">
+        <?= /* @noEscape */ $_menuHtml?>
+        <?= $block->getChildHtml() ?>
+    </ul>
+</nav>
