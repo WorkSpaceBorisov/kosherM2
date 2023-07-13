@@ -6,21 +6,16 @@ define([
 
     'use strict';
 
-    // console.log('Global scripts');
-
     const breakPoint = '(max-width: 980px)';
 
     $(window).click(() => {
         $('.mobile-view .header-search-container').fadeOut(500);
     });
 
-    // Close menu
-
     const cartBtn = $('.minicart-wrapper .showcart');
     const search = $('.header-search-container');
     const login = $('[data-trigger="customer-trigger"]');
     const menuBtn = $('[data-action="toggle-nav"]');
-    const mainMenu = $('#kosher_main_menu');
 
     // Close account menu
 
@@ -29,7 +24,14 @@ define([
     }
 
     let closeMenu = () => {
-        if (mainMenu.css('display') === 'block') mainMenu.fadeOut(150, 'swing');
+        const $html = $('html');
+        const $nav = $('[data-action="navigation"]');
+        
+        if($html.hasClass('nav-opened')) {
+            $html.removeClass('nav-opened');
+            $nav.slideToggle(300, 'swing');
+            $nav.find('.expanded').removeClass('expanded').find('.submenu').slideUp(300);
+        }
     }
 
     // Close minicart

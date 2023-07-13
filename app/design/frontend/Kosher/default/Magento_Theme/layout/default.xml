@@ -13,10 +13,9 @@
         <move element="copyright" destination="copyright.footer.block" before="-"/>
         <move element="form.subscribe" destination="newsletter.footer.block" before="-"/>
         <move element="header.panel.wrapper" destination="header.right.container"/>
+        <move element="catalog.topnav" destination="header-wrapper"/>
 
         <referenceContainer name="header.container">
-
-
             <referenceContainer name="header-wrapper">
                 <container name="header.search.container" htmlTag="div" htmlClass="header-search-container" after="logo"/>
 
@@ -25,9 +24,6 @@
                            template="Magento_Theme::html/header/search-button.phtml"/>
                 </container>
             </referenceContainer>
-            <container name="main.menu" htmlTag="div" htmlClass="kosher-main-menu" htmlId="kosher_main_menu" after="-">
-                <block class="Magento\Theme\Block\Html\Topmenu" name="catalog.topnav" template="Magento_Theme::html/topmenu.phtml" ttl="3600"/>
-            </container>
         </referenceContainer>
 
         <referenceContainer name="main" htmlTag="section" htmlClass="column main kosher-main" />

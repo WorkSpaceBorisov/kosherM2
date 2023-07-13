@@ -28,5 +28,9 @@ const config = {
         scrollbar: {
             deps: ['jquery']
         }
-    }
+    },
+
+    deps: [
+        'js/widgets/custom-navigation'
+    ]
 };
