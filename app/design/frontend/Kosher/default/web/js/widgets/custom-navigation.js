@@ -20,7 +20,7 @@ define(['jquery', 'domReady!'], function ($) {
 
                 $('[data-action="toggle-nav"]').on('click', function () {
                     $('html').toggleClass('nav-opened');
-                    $('[data-action="navigation"]').slideToggle(300, 'swing');
+                    $('.page-header [data-action="navigation"]').slideToggle(300, 'swing');
                     self.element
                         .find('.expanded')
                         .removeClass('expanded')
