@@ -1,12 +1,10 @@
 define([
     'jquery',
     'matchMedia',
-    'mousewheel',
-    'scrollbar',
     'custom.plusMinus',
     'slick',
     'domReady!'
-], function ($, mediaCheck, scrollbar, plusMinus, slick) {
+], function ($, mediaCheck, plusMinus, slick) {
 
     'use strict';
 
@@ -30,7 +28,6 @@ define([
             this._open();
             this._close();
             this._resizing();
-            // this._scrollbar();
         },
 
         _calcHeight: function () {
@@ -346,21 +343,6 @@ define([
                 document.querySelector('.k4u-popup .k4u-popup__inner').innerHTML = '';
                 document.querySelector('.k4u-popup').classList.remove('out-of-stock');
                 e.preventDefault();
-            });
-        },
-
-        _scrollbar: function () {
-            $('.k4u-popup').mCustomScrollbar({
-                axis: 'y',
-                theme: 'popup',
-                scrollInertia: 160,
-                mouseWheel: {
-                    enable: true,
-                    axis: 'y'
-                },
-                scrollButtons: {
-                    enable: true
-                }
             });
         },
 

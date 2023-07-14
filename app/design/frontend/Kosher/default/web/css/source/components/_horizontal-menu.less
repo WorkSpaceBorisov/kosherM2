@@ -9,11 +9,11 @@
 
     .kosher-horizontal-menu {
         margin-bottom: 22px;
-        overflow-x: hidden;
         padding: 0;
         position: relative;
         width: 100%;
         z-index: 2;
+        .custom-scrollbar();
 
         ul:not(.submenu) {
             .lib-list-reset-styles();
@@ -21,16 +21,9 @@
             width: 100%;
         }
 
-        @min-width: 160px;
+        @min-width: 170px;
 
         .level0.category-item {
-            @border-color: @kosher-color__15;
-
-            background: @kosher-color__01;
-            border-color: @border-color;
-            border-radius: 8px 8px 0 0;
-            border-style: solid;
-            border-width: 1px 1px 1px 0;
             flex-grow: 1;
             margin-bottom: 0;
             min-width: @min-width;
@@ -39,21 +32,17 @@
                 align-items: center;
                 display: flex;
                 justify-content: center;
-                padding: 17px 10px 16px;
-
-                &:hover {
-                    background: @kosher-color__12;
-                    border-radius: 8px 8px 0 0;
-                    border: 1px solid @kosher-color__35;
-                    padding: 16px 29px 15px;
-                    text-decoration: none;
-                }
+                padding: 12px 10px;
+                background: @kosher-color__01;
+                border: 1px solid @kosher-color__15;
+                border-radius: 8px 8px 0 0;
+                text-decoration: none;
+                height: 100%;
 
                 span {
-                    .lib-font-size(17);
                     color: @kosher-color__19;
                     display: block;
-                    font-weight: 600;
+                    font-weight: @font-weight__semibold;
                     line-height: 1;
                     white-space: nowrap;
                 }
@@ -64,7 +53,7 @@
             }
 
             &:first-child {
-                border-left: 1px solid @border-color;
+                border-left: 1px solid @kosher-color__15;
             }
         }
 
@@ -85,25 +74,36 @@
                 width: 100%;
             }
         }
+    }
+}
 
-        // Scrollbar
+//
+//  Desktop before tablet
+//  _____________________________________________
 
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .kosher-horizontal-menu {
+        @min-width: 220px;
 
-        &.mCustomScrollbar {
-            margin-bottom: 2px;
-        }
+        .level0.category-item {
+            min-width: @min-width;
 
-        .mCSB_horizontal.mCSB_inside {
-            & > .mCSB_container {
-                margin-bottom: 22px;
-                overflow-y: unset;
+            .level-top {
+                padding: 17px 10px 16px;
+                transition: .2s border-color;
+
+                &:hover {
+                    border-color: @kosher-color__35;
+                }
+
+                span {
+                    .lib-font-size(18);
+                }
             }
 
-            .mCSB_scrollTools_horizontal {
+            &.nav-6 {
+                min-width: @min-width + 25;
             }
         }
     }
 }
-
-
-

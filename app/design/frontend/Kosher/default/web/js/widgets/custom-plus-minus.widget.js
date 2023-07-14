@@ -23,6 +23,12 @@ define(['jquery', 'Magento_Customer/js/customer-data', 'domReady!'], function (
         _create() {
             this.options.buttons === true ? this._build() : this._calc();
             this.options.keyup === true ? this._initKeyup() : null;
+
+            // Add to cart category button slide
+            const $body = $('body');
+            if ($body.hasClass('page-products') || $body.hasClass('cms-index-index')) {
+                $('.add-to-calc__button').on('click', (e) => $(e.target).closest('.calc-cell-container').addClass('show-calc'));
+            }
         },
 
         /**

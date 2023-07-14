@@ -27,24 +27,30 @@
 
         input[type=text] {
             .lib-font-size(16);
-            background: #f9f9f9;
+            background: @kosher-color__37;
             border: 1px solid @kosher-color__02;
             border-radius: 4px;
             height: 40px;
             line-height: 1;
-            letter-spacing: 0.01em;
+            letter-spacing: .01em;
             padding: 4px 15px 0 15px;
             width: 100%;
 
             .placeholder({
                 .lib-font-size(16);
                 color: @kosher-color__18;
-                font-weight: 500;
+                font-weight: @font-weight__heavier;
             });
         }
 
-        .nested {
+        .nested,
+        .label,
+        .block-title {
             display: none;
+        }
+
+        .block-content {
+            margin-bottom: 0;
         }
 
         .action.search {
@@ -79,10 +85,8 @@
                 }
             }
 
-            &:active {
-                &:after {
-                    color: @kosher-color__03;
-                }
+            &:active:after {
+                color: @kosher-color__03;
             }
         }
 
@@ -134,59 +138,51 @@
     }
 
     .form.search.advanced {
-        .fields.range {
-            .field {
-                &:first-child {
-                    position: relative;
+        .fields.range .field {
+            &:first-child {
+                position: relative;
 
-                    .control {
-                        padding-right: 25px;
+                .control {
+                    padding-right: 25px;
 
-                        &:after {
-                            content: ' \2013 ';
-                            display: inline-block;
-                            position: absolute;
-                            right: 0;
-                            text-align: center;
-                            top: 6px;
-                            width: 25px;
-                        }
-                    }
-                }
-
-                &:last-child {
-                    position: relative;
-
-                    div.mage-error {
-                        left: 0;
+                    &:after {
+                        content: ' \2013 ';
+                        display: inline-block;
                         position: absolute;
-                        top: 32px;
+                        right: 0;
+                        text-align: center;
+                        top: 6px;
+                        width: 25px;
                     }
                 }
+            }
 
-                &.with-addon {
-                    .control {
-                        padding-right: 45px;
-                    }
-                }
+            &:last-child {
+                position: relative;
 
-                &.date {
-                    &:extend(.abs-field-date all);
+                div.mage-error {
+                    left: 0;
+                    position: absolute;
+                    top: 32px;
                 }
+            }
+
+            &.with-addon .control {
+                padding-right: 45px;
+            }
+
+            &.date {
+                &:extend(.abs-field-date all);
             }
         }
 
-        .group.price {
-            .addon {
-                .addafter {
-                    background: none;
-                    border: 0;
-                    padding-top: 6px;
-                    position: absolute;
-                    right: 0;
-                    top: 0;
-                }
-            }
+        .group.price .addon .addafter {
+            background: none;
+            border: 0;
+            padding-top: 6px;
+            position: absolute;
+            right: 0;
+            top: 0;
         }
     }
 
@@ -214,7 +210,6 @@
         max-width: 800px;
 
         input[type=text] {
-            .lib-font-size(16);
             background: @custom-form-input-bg;
             border: 0;
             border-radius: 8px 8px 0 0;
@@ -229,29 +224,7 @@
         }
 
         .action.search {
-            .size(30);
-            background: transparent;
             left: 13px;
-            top: 50%;
-            transform: translate(0, -50%);
-
-            &:after {
-                .icomoon(@icon-lens, 18px, @kosher-color__19);
-                .to-center();
-                z-index: 1;
-            }
-
-            &:hover {
-                &:after {
-                    color: @kosher-color__21;
-                }
-            }
-
-            &:active {
-                &:after {
-                    color: @kosher-color__03;
-                }
-            }
         }
     }
 }
