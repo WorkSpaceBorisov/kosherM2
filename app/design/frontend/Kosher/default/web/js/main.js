@@ -3,39 +3,18 @@ define([
     'matchMedia',
     'domReady!'
 ], function ($, mediaCheck) {
-
     'use strict';
 
     const breakPoint = '(max-width: 980px)';
-
-    $(window).click(() => {
-        $('.mobile-view .header-search-container').fadeOut(500);
-    });
-
     const cartBtn = $('.minicart-wrapper .showcart');
-    const search = $('.header-search-container');
+    const search = $('.js_header_search_container');
     const login = $('[data-trigger="customer-trigger"]');
     const menuBtn = $('[data-action="toggle-nav"]');
+    const $body = $('body');
 
-    // Close account menu
-
-    let closeAccount = () => {
-        $('[data-block="customer-menu"]').find('[data-role="dropdownDialog"]').dropdownDialog('close');
-    }
-
-    let closeMenu = () => {
-        const $html = $('html');
-        const $nav = $('[data-action="navigation"]');
-        
-        if($html.hasClass('nav-opened')) {
-            $html.removeClass('nav-opened');
-            $nav.slideToggle(300, 'swing');
-            $nav.find('.expanded').removeClass('expanded').find('.submenu').slideUp(300);
-        }
-    }
+    // =========== minicart =============== 
 
     // Close minicart
-
     let closeMinicart = () => {
         if (cartBtn.hasClass('active')) {
             cartBtn.removeClass('active');
@@ -45,9 +24,7 @@ define([
     }
 
     // Cart fade close
-
     let cartFade = () => {
-        const dialog = $('.minicart-wrapper .mage-dropdown-dialog');
         const cart = $('.block.block-minicart');
         const delay = 0;
 
@@ -56,7 +33,7 @@ define([
         setTimeout(() => {
             cartBtn.removeClass('active');
             cartBtn.closest('div').removeClass('active');
-            dialog.css('display', 'none');
+            $('.minicart-wrapper .mage-dropdown-dialog').css('display', 'none');
         }, delay + 1000);
 
         setTimeout(() => {
@@ -65,7 +42,6 @@ define([
     }
 
     // Detect cart close on scroll
-
     $(window).scroll(function() {
         if(cartBtn.hasClass('active')) {
             let scroll = $(window).scrollTop();
@@ -73,8 +49,11 @@ define([
         }
     });
 
-    // Close account menu on minicart call if opened
+    $('#kosher_overlay').on('click', () => {
+        closeMinicart();
+    });
 
+    // Close nav/search/account on minicart call if opened
     cartBtn.on('click', function(e) {
         e.preventDefault();
         if (!cartBtn.hasClass('active')) {
@@ -89,35 +68,19 @@ define([
         closeMinicart();
     });
 
-    $('.kosher-overlay').on('click', () => {
-        closeMinicart();
-    });
+    // =========== search =============== 
 
-    // Close account on cart click
-
-    login.on('click', () => {
-        closeMinicart();
-        closeMenu();
-        closeMobileSearch();
+    $(window).click(() => {
+        $('.mobile-view .js_header_search_container').fadeOut(500);
     });
 
     // Close mobile search
-
     let closeMobileSearch = () => {
-        if ($('body').hasClass('mobile-view')) search.fadeOut(200);
+        if ($body.hasClass('mobile-view')) search.fadeOut(200);
     }
 
-    //Main menu
-
-    menuBtn.on('click', () => {
-        closeMinicart();
-        closeAccount();
-        closeMobileSearch();
-    });
-
     // Show/hide mobile search
-
-    $('.header-right-container .search-button').on('click', () => {
+    $('.js_open_search').on('click', () => {
         search.fadeToggle(200);
         closeMenu();
         closeAccount();
@@ -128,32 +91,59 @@ define([
         search.removeAttr('style');
     }
 
-    // Mediacheck
+    // =========== navigation =============== 
 
+    // Close navigation
+    let closeMenu = () => {
+        const $html = $('html');
+        const $nav = $('[data-action="navigation"]');
+        
+        if($html.hasClass('nav-opened')) {
+            $html.removeClass('nav-opened');
+            $nav.slideToggle(300, 'swing');
+            $nav.find('.expanded').removeClass('expanded').find('.submenu').slideUp(300);
+        }
+    }
+
+    // Close minicart/search/account on nav opened
+    menuBtn.on('click', () => {
+        closeMinicart();
+        closeAccount();
+        closeMobileSearch();
+    });
+
+    // =========== login =============== 
+
+    // Close account menu
+    let closeAccount = () => {
+        $('[data-block="customer-menu"]').find('[data-role="dropdownDialog"]').dropdownDialog('close');
+    }
+
+    // Close menu/search/minicart on login click
+    login.on('click', () => {
+        closeMinicart();
+        closeMenu();
+        closeMobileSearch();
+    });
+    
+    // Mediacheck
     mediaCheck({
         media: breakPoint,
         entry: () => {
             // Mobile mode
-            $('body').addClass('mobile-view');
+            $body.addClass('mobile-view');
         },
         exit: () => {
             // Desktop mode
             desktopCleaup();
-            $('body').removeClass('mobile-view');
+            $body.removeClass('mobile-view');
         }
     });
 
     // No close
-
-    $('.page-header, #kosher_main_menu').on('click', (e) => {
+    $('.page-header').on('click', (e) => {
         e.stopPropagation()
     });
-
-    // Add to cart category button slide
-
-    if ($('body').hasClass('page-products') || $('body').hasClass('cms-index-index')) {
-        $('.add-to-calc__button').on('click', (e) => $(e.target).closest('.calc-cell-container').addClass('show-calc'));
-    }
 
     let preventScroll = function (e) {
         e.preventDefault();
@@ -162,7 +152,6 @@ define([
     }
 
     // Prevent scroll on open
-
     const eBody = document.querySelector('body')
     const options = {
         attributes: true

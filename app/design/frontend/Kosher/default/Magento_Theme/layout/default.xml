@@ -17,7 +17,7 @@
 
         <referenceContainer name="header.container">
             <referenceContainer name="header-wrapper">
-                <container name="header.search.container" htmlTag="div" htmlClass="header-search-container" after="logo"/>
+                <container name="header.search.container" htmlTag="div" htmlClass="header-search-container js_header_search_container" after="logo"/>
 
                 <container name="header.right.container" htmlTag="div" htmlClass="header-right-container" after="-">
                     <block class="Magento\Framework\View\Element\Template" name="search.button"

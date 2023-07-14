@@ -11,10 +11,15 @@
  */
 
 $columnsLimit = $block->getColumnsLimit() ?: 0;
-$_menuHtml = $block->getHtml('level-top', 'submenu', $columnsLimit)
+$_menuHtml = $block->getHtml('level-top', 'submenu', $columnsLimit);
+$customClass = $block->getClassName();
 ?>
 
-<nav class="navigation" data-action="navigation">
+<?php if ($customClass): ?>
+    <nav class="<?php echo $customClass ?>" data-action="navigation">
+<?php else: ?>
+    <nav class="navigation" data-action="navigation">
+<?php endif; ?>
     <ul data-init="navigation">
         <?= /* @noEscape */ $_menuHtml?>
         <?= $block->getChildHtml() ?>

@@ -16,10 +16,8 @@
         }
 
         .columns {
-            padding: 0 48px;
             background: @kosher-color__01;
             height: 100%;
-
         }
 
         .column.main {
@@ -44,7 +42,6 @@
                     float: unset;
                     width: 100%;
                 }
-
             }
 
             a.action {
@@ -52,26 +49,60 @@
             }
         }
 
-        .block-new-customer {
-            border-top: @login-line;
-            padding-top: 32px;
+        .login-container {
+            .block-customer-login {
+                width: 100%;
+                float: none;
 
-            h4 {
-                text-align: center;
+                .block-title,
+                .field.note,
+                .field.choice {
+                    display: none;
+                }
             }
 
-            .action.create {
-                display: block;
-                text-align: center;
+            .fieldset:after {
+                display: none;
+            }
+
+            .block-new-customer {
+                border-top: @login-line;
+                padding-top: 32px;
+                clear: both;
+                width: 100%;
+                float: none;
+    
+                .block-title {
+                    border-bottom: 0;
+                    padding-bottom: 0;
+                    margin-bottom: 10px;
+                    text-align: center;
+
+                    strong {
+                        .lib-font-size(14);
+                        font-weight: @font-weight__bold;
+                    }
+                }
+    
+                .action.create {
+                    display: block;
+                    text-align: center;
+                }
+
+                .block-content p {
+                    display: none;
+                }
             }
         }
     }
 }
 
-
 //
-//  Mobile
+//  Desktop
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .customer-account-login .columns {
+        padding: 0 48px;
+    }
 }
