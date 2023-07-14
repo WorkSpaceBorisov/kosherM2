@@ -1,6 +1,6 @@
 define([
     'jquery',
-    'mage/translate',
+    'mage/dropdown'
 ], function ($) {
     'use strict';
 
@@ -69,13 +69,16 @@ define([
     });
 
     const mixin = {
-        initialize() {
-            return this._super();
-        },
+        initSidebar: initSidebar,
 
+        /**
+         * return config with static block
+         * 
+         * @returns String
+         */
         getFooterStaticBlock() {
             return window.minicartFooterMessage;
-        }
+        },
     }
 
     return function (target) {
