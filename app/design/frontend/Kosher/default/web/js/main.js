@@ -96,7 +96,7 @@ define([
     // Close navigation
     let closeMenu = () => {
         const $html = $('html');
-        const $nav = $('[data-action="navigation"]');
+        const $nav = $('.page-header [data-action="navigation"]');
         
         if($html.hasClass('nav-opened')) {
             $html.removeClass('nav-opened');
