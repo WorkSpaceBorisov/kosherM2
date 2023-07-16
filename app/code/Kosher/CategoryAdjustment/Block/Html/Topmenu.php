@@ -90,7 +90,7 @@ class Topmenu extends ThemeTopmenu
             if ($pathAttributeIcon) {
                 $attributeIcon = '<div class="' .
                     $attributeIconClass . '">' .
-                    '<img src="' . $pathAttributeIcon . '">' .
+                    '<img alt="" src="' . $pathAttributeIcon . '">' .
                     '</div>';
             }
 
