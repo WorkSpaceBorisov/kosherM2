@@ -53,3 +53,6 @@ UPDATE `mst_credit_balance` SET `created_at`= current_timestamp(), `updated_at`=
 UPDATE `mst_credit_balance` SET `currency_code`= 'EUR';
 DELETE FROM `core_config_data` WHERE path like "%jobs%";
 UPDATE `core_config_data` SET `value`= 0 WHERE path = 'admin/captcha/enable';
+UPDATE `core_config_data` SET `value`= 1 WHERE path = 'customer/startup/redirect_dashboard';
+UPDATE `core_config_data` SET `value`= 0 WHERE path = 'checkout/cart/redirect_to_cart';
+UPDATE `core_config_data` SET `value`= '' WHERE path = 'design/footer/absolute_footer';
