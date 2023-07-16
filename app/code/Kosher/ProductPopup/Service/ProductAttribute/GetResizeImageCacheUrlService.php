@@ -29,7 +29,7 @@ class GetResizeImageCacheUrlService
      */
     public function execute(ProductInterface $product): array
     {
-        $image = $this->imageHelper->init($product, 'product_base_image')->setImageFile($product->getImage())->getUrl();
+        $image = $this->imageHelper->init($product, 'product_base_image')->setImageFile($product->getImage())->resize(700)->getUrl();
         $smallImage = $this->imageHelper->init($product, 'product_small_image')->setImageFile($product->getImage())->getUrl();
         $thumbnail = $this->imageHelper->init($product, 'product_page_image_small')->setImageFile($product->getImage())->getUrl();
 
