@@ -63,7 +63,7 @@ define([
             let imageContainer = newTag('div', 'k4u-popup__product-image-block')
             if (data.image) {
                 let img = newTag('img', 'popup-image');
-                let path = '/media/catalog/product' + data.image;
+                let path = data.image;
                 img.setAttribute('title', data.name);
                 img.setAttribute('src', path);
                 imageContainer.appendChild(img);

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kosher\ProductPopup\Service;
 
@@ -8,6 +9,7 @@ use Kosher\ProductPopup\Service\ProductAttribute\GetOptionValueByIdService;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Store\Model\StoreManagerInterface;
+use Kosher\ProductPopup\Service\ProductAttribute\GetResizeImageCacheUrlService;
 
 class GetProductService implements PopupProductDataInterface
 {
@@ -32,21 +34,29 @@ class GetProductService implements PopupProductDataInterface
     private StoreManagerInterface $storeManager;
 
     /**
+     * @var GetResizeImageCacheUrlService
+     */
+    private GetResizeImageCacheUrlService $getResizeImageCacheUrlService;
+
+    /**
      * @param ProductRepositoryInterface $productRepository
      * @param Json $json
      * @param GetOptionValueByIdService $getOptionValueByIdService
      * @param StoreManagerInterface $storeManager
+     * @param GetResizeImageCacheUrlService $getResizeImageCacheUrlService
      */
     public function __construct(
         ProductRepositoryInterface $productRepository,
         Json $json,
         GetOptionValueByIdService $getOptionValueByIdService,
-        StoreManagerInterface $storeManager
+        StoreManagerInterface $storeManager,
+        GetResizeImageCacheUrlService $getResizeImageCacheUrlService
     ) {
         $this->productRepository = $productRepository;
         $this->json = $json;
         $this->getOptionValueByIdService = $getOptionValueByIdService;
         $this->storeManager = $storeManager;
+        $this->getResizeImageCacheUrlService = $getResizeImageCacheUrlService;
     }
 
     /**
@@ -57,7 +67,7 @@ class GetProductService implements PopupProductDataInterface
     {
         try {
             $product = $this->productRepository->get($sku);
-            $storeId = $this->storeManager->getStore()->getId();
+            $storeId = (int)$this->storeManager->getStore()->getId();
             $attributeData = [
                 'manufacturer' => $product->getData('manufacturer'),
                 'supervision' => $product->getData('supervision'),
@@ -65,6 +75,8 @@ class GetProductService implements PopupProductDataInterface
             ];
 
             $attributeData = $this->getOptionValueByIdService->execute($attributeData, $storeId);
+            $resizeImages = $this->getResizeImageCacheUrlService->execute($product);
+            $product->addData($resizeImages);
             $product->addData($attributeData);
 
             return ['productData' => $product->getData(), 'status' => true];
