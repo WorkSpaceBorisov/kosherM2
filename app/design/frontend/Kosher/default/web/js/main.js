@@ -145,6 +145,10 @@ define([
         e.stopPropagation()
     });
 
+    $('#show_toolbar_button').on('click', (e) => {
+        $(e.target).parents('.center-cell').toggleClass('active');
+    });
+
     let preventScroll = function (e) {
         e.preventDefault();
         e.stopPropagation();

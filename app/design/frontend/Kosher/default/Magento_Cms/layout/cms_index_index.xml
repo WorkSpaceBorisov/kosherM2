@@ -129,10 +129,5 @@
             </container>
 
         </referenceContainer>
-
-        <referenceContainer name="before.body.end">
-            <block class="Magento\Theme\Block\Html\Footer" name="home.scripts" template="Magento_Theme::home-scripts.phtml"/>
-        </referenceContainer>
-
     </body>
 </page>

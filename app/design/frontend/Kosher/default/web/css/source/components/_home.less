@@ -27,18 +27,15 @@
         }
     }
 
-    .home-main {
-        .block-title {
-            .lib-font-size(24);
-            font-weight: 700;
-            margin: 40px auto 20px;
-            text-align: center;
-        }
+    .home-main .block-title {
+        .lib-font-size(24);
+        font-weight: @font-weight__bold;
+        margin: 40px auto 20px;
+        text-align: center;
     }
 
     .home-adv-block {
         border-radius: 8px;
-
 
         &.special {
             background: url('@{baseDir}images/home/specials-bg-02.jpg') no-repeat 50% 0;
@@ -86,8 +83,8 @@
     .home-adv-block__title {
         .lib-font-size(96);
         color: @kosher-color__01;
-        font-weight: 700;
-        letter-spacing: -0.015em;
+        font-weight: @font-weight__bold;
+        letter-spacing: -.015em;
         margin-bottom: 28px;
         text-align: center;
     }
@@ -99,7 +96,7 @@
         border: 2px solid @kosher-color__03;
         color: @kosher-color__01;
         display: block;
-        font-weight: 700;
+        font-weight: @font-weight__bold;
         line-height: 1;
         margin: 0 auto;
         padding: 18px 20px;
@@ -215,9 +212,6 @@
         margin-bottom: 0;
         position: relative;
         width: 100%;
-
-        img {
-        }
     }
 
     .home-main-slider__content {
@@ -232,8 +226,8 @@
     .home-main-slider__title {
         .lib-font-size(96);
         color: @kosher-color__01;
-        font-weight: 700;
-        letter-spacing: -0.015em;
+        font-weight: @font-weight__bold;
+        letter-spacing: -.015em;
         margin-bottom: 28px;
         text-align: center;
     }
@@ -253,7 +247,7 @@
     .home-updates__title {
         .lib-font-size(48);
         color: @kosher-color__19;
-        font-weight: 700;
+        font-weight: @font-weight__bold;
         margin-bottom: 41px;
         text-align: center;
     }
@@ -274,13 +268,13 @@
 
     .home-updates__date {
         .lib-font-size(14);
-        font-weight: 600;
+        font-weight: @font-weight__semibold;
         margin-bottom: 15px;
     }
 
     .home-updates__subtitle {
         .lib-font-size(24);
-        font-weight: 700;
+        font-weight: @font-weight__bold;
         margin-bottom: 20px;
         text-transform: capitalize;
     }
@@ -302,7 +296,7 @@
     .home-updates__more {
         .lib-font-size(14);
         color: inherit;
-        font-weight: 600;
+        font-weight: @font-weight__semibold;
         margin-left: 10px;
         text-decoration: underline;
         white-space: nowrap;
@@ -315,7 +309,6 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__l) {
     body {
-
         @block-margin-bottom: 35px;
 
         .home-main-slider {
@@ -331,7 +324,7 @@
 
         .home-main-slider__title {
             .lib-font-size(60);
-            letter-spacing: 0.02em;
+            letter-spacing: .02em;
             margin-bottom: 35px;
         }
 
@@ -347,7 +340,7 @@
 
         .home-adv-block__title {
             .lib-font-size(60);
-            letter-spacing: 0.02em;
+            letter-spacing: .02em;
             margin-bottom: 35px;
         }
 
@@ -379,7 +372,7 @@
         // Slider
 
         .home-main-slider__title {
-            .lib-font-size(46);
+            .lib-font-size(32);
         }
 
         // Updated
@@ -453,9 +446,15 @@
 
         .home-main-slider__list {
             height: 280px;
+
+            .slick-slide > div {
+                height: 100%;
+            }
         }
 
         .home-main-slider__slide {
+            height: 100%;
+
             img {
                 height: 100%;
                 object-fit: cover;
@@ -512,10 +511,8 @@
             margin-bottom: 30px;
         }
 
-        .home-adv-block {
-            &.new {
-                margin-bottom: 0;
-            }
+        .home-adv-block.new {
+            margin-bottom: 0;
         }
 
         .home-interactive.new {
@@ -539,9 +536,7 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs4) {
-    .cms-index-index {
-        .home-updates {
-            padding: 30px 15px 20px;
-        }
+    .cms-index-index .home-updates {
+        padding: 30px 15px 20px;
     }
 }
