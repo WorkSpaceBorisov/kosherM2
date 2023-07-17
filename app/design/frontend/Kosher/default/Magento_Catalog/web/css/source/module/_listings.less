@@ -23,6 +23,46 @@
 
 & when (@media-common = true) {
 
+    .category-link {
+        flex-grow: 0;
+        flex-shrink: 0;
+        align-self: flex-start;
+
+        &__href {
+            align-items: center;
+            display: flex;
+            text-decoration: none;
+
+            span {
+                color: @kosher-color__10;
+                font-weight: 500;
+                line-height: 1;
+                text-decoration: underline;
+                text-underline-offset: 3px;
+                transition: color .2s;
+            }
+
+            &:before {
+                .icomoon(@icon-home, 16px, @kosher-color__10);
+                margin-right: 9px;
+                transition: color .2s;
+            }
+
+            &:hover {
+                text-decoration: none;
+
+                span {
+                    color: @kosher-color__19;
+                    text-decoration: none;
+                }
+
+                &:before {
+                    color: @kosher-color__19;
+                }
+            }
+        }
+    }
+
     //  Product Lists common
 
     .catalog-category-view {
@@ -209,39 +249,6 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-        }
-
-        .category-link {
-            flex-grow: 0;
-            flex-shrink: 0;
-            width: 100%;
-        }
-
-        .category-link__href {
-            align-items: center;
-            display: flex;
-
-            span {
-                color: @kosher-color__10;
-                font-weight: 500;
-                line-height: 1;
-                text-decoration: underline;
-            }
-
-            &:before {
-                .icomoon(@icon-home, 16px, @kosher-color__10);
-                margin-right: 9px;
-            }
-
-            &:hover {
-                span {
-                    color: @kosher-color__19;
-                }
-
-                &:before {
-                    color: @kosher-color__19;
-                }
-            }
         }
 
         .price-here {
@@ -542,36 +549,6 @@
 
             .product-item-link {
                 .lib-font-size(22);
-            }
-        }
-
-        .category-link__href {
-            align-items: center;
-            display: flex;
-
-            span {
-                color: @kosher-color__10;
-                font-weight: 500;
-                line-height: 1;
-                text-decoration: underline;
-                white-space: nowrap;
-            }
-
-            &:before {
-                .icomoon(@icon-home, 16px, @kosher-color__10);
-                margin-right: 9px;
-            }
-
-            &:hover {
-                text-decoration: none;
-
-                span {
-                    color: @kosher-color__19;
-                }
-
-                &:before {
-                    color: @kosher-color__19;
-                }
             }
         }
 
