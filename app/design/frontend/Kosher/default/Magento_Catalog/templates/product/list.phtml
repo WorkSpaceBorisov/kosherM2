@@ -99,7 +99,7 @@ $_helper = $block->getData('outputHelper');
 
                             <?php if ($manufacturer = $_product->getAttributeText('manufacturer')): ?>
                                 <div class="category-link">
-                                    <a href="<?= $escaper->escapeUrl(__('catalogsearch/result/?q=%1', $manufacturer)) ?>" class="category-link__href">
+                                    <a href="<?= $escaper->escapeUrl(__('/catalogsearch/result/?q=%1', $manufacturer)) ?>" class="category-link__href">
                                         <span><?= /* @noEscape */ $manufacturer ?></span>
                                     </a>
                                 </div>
