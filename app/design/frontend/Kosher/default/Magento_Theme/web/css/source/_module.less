@@ -59,6 +59,18 @@
 
 & when (@media-common = true) {
 
+    .page-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 99;
+    }
+
+    .page-wrapper {
+        padding-top: 62px;
+    }
+
     .page-print .nav-toggle {
         display: none;
     }
@@ -269,6 +281,11 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    
+    .page-wrapper {
+        padding-top: 69px;
+    }
+
     .navigation ul {
         padding: 0 8px;
     }

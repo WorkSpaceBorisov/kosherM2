@@ -339,14 +339,15 @@
         }
     }
 
-    body .header.content {
-        border-bottom: 0;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
-        flex-wrap: nowrap;
-        height: 69px;
-        margin-bottom: 20px;
-        padding-bottom: 6px;
-        padding-top: 6px;
+    body {
+        .header.content {
+            border-bottom: 0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+            flex-wrap: nowrap;
+            height: 69px;
+            padding-bottom: 6px;
+            padding-top: 6px;
+        }
     }
 
     .action.nav-toggle {
@@ -357,12 +358,15 @@
         display: flex;
         justify-content: center;
         padding-left: 1px;
+        transition: @button_transition;
+        border: 2px solid transparent;
 
         &:before {
             .icomoon(@icon-quads, 19px, @kosher-color__01);
             margin-right: 10px;
             position: static;
             transform: none;
+            transition: color .3s;
         }
 
         span {
@@ -371,11 +375,12 @@
             display: block;
             font-weight: @font-weight__semibold;
             line-height: 1;
+            transition: color .3s;
         }
 
         &:hover {
             background: @button-hover-bg;
-            border: 2px solid @button-bg;
+            border-color: @button-bg;
 
             &:before,
             span {
@@ -439,9 +444,15 @@
         .minicart-wrapper .action.showcart {
             .desktop-header-icon(@icon-cart-new);
             width: 99px;
+            transition: @button_transition;
 
             .text {
                 display: block;
+            }
+
+            &:before,
+            .text {
+                transition: color .2s;
             }
 
             &.active {
@@ -497,6 +508,14 @@
                     white-space: nowrap;
                 }
 
+            }
+
+            a {
+                transition: @button_transition;
+
+                &:before {
+                    transition: color .3s;
+                }
             }
         }
 
@@ -642,15 +661,6 @@
     }
 }
 
-//
-//  Mobile 480
-//  _____________________________________________
-
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs2) {
-    body .header.content {
-        margin-bottom: 10px;
-    }
-}
 
 //
 //  Extra small 320

@@ -87,13 +87,6 @@
             color: @kosher-color__01;
             font-weight: 600;
 
-            &:hover {
-                background: @button-hover-bg;
-                border: 2px solid @button-bg;
-                border-left-width: 0;
-                color: @button-bg;
-            }
-
             &:active {
                 background: @button-active-bg;
             }
@@ -121,10 +114,12 @@
         .action.subscribe {
             .size(102, 56);
             border-radius: 8px;
+            border: 2px solid transparent;
 
             &:hover {
-                border: 2px solid @button-bg;
-                border-left-width: 2px;
+                background-color: @kosher-color__01;
+                color: @kosher-color__04;
+                border-color: @button-bg;
             }
         }
     }
