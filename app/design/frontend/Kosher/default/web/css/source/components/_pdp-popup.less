@@ -439,6 +439,8 @@
         border-top: 1px solid @kosher-color__15;
         margin-bottom: 15px;
         padding-top: 19px;
+        max-height: 200px;
+        .custom-scrollbar();
 
         h4 {
             .lib-font-size(18);
@@ -482,7 +484,6 @@
             span {
                 .lib-font-size(16);
                 color: @kosher-color__21;
-                line-height: 1;
                 white-space: nowrap;
 
                 &.attrs-list {
@@ -503,22 +504,40 @@
             }
         }
 
-        .product-attribute-class-manufacturer {
+        .product-attribute-class-manufacturer a {
+            text-decoration: none;
+
             &:before {
                 .icomoon(@icon-home, 17, @kosher-color__21);
+                margin-right: 7px;
+            }
+
+            &:hover span {
+                text-decoration: none;
+            }
+
+            span {
+                text-decoration: underline;
             }
         }
 
-        .product-attribute-class-supervision {
+        .product-attribute-class-supervision a {
             align-items: flex-start;
+            text-decoration: none;
 
             &:before {
                 .icomoon(@icon-binocle, 16, @kosher-color__21);
                 top: 0;
+                margin-right: 7px;
             }
 
             span {
+                text-decoration: underline;
                 white-space: unset;
+            }
+
+            &:hover span {
+                text-decoration: none;
             }
 
             span:not(:last-child):after {

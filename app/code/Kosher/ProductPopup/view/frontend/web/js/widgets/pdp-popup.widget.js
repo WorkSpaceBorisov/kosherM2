@@ -21,6 +21,7 @@ define([
             _close: $('.k4u-popup #k4u_popup_close'),
             _overlay: $('.kosher-overlay-inner'),
             apiURL: null,
+            searchUrl: '',
             testSku: '043427181129'
         },
 
@@ -45,6 +46,7 @@ define([
         _build: function (responce) {
             let container = document.querySelector('.k4u-popup .k4u-popup__inner');
             let data = responce[0];
+            const urlForSearch = this.options.searchUrl;
 
             let euro = new Intl.NumberFormat('en-DE', {
                 style: 'currency',
@@ -213,8 +215,14 @@ define([
                 if (name == 'halavi') name = 'type';
 
                 for (let item in attrs) {
-                    let span = `<span data-attrib-id="${item}">${attrs[item]}</span>`;
-                    val += span;
+                    let innerElement;
+                    if(name === 'manufacturer' || name === 'supervision') {
+                        innerElement = `<a href="${urlForSearch}${attrs[item]}" target="_blank"><span>${attrs[item]}</span></a>`;
+                    } else {
+                        innerElement = `<span data-attrib-id="${item}">${attrs[item]}</span>`;
+                    }
+                    
+                    val += innerElement;
                 }
 
                 if (Object.keys(attrs).length > 1) {
