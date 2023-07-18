@@ -25,6 +25,7 @@ $productSku = '043427181129';
 $storeUrl = $viewModel->getStoreUrl();
 $apiUrl = $viewModel->getProductBySkuRequest();
 $requestUrl = $storeUrl . $apiUrl;
+$searchUrl = $escaper->escapeUrl(__('catalogsearch/result/?q='));
 ?>
 <div class="k4u-popup">
     <a href="#" class="k4u-popup__close" id="k4u_popup_close"><span><?= $escaper->escapeHtml(__('Close')) ?></span></a>
@@ -49,17 +50,20 @@ $requestUrl = $storeUrl . $apiUrl;
     {
         ".catalog-category-view .page-main .product-items.products": {
             "pdp.popup": {
-                "apiURL": "<?= $requestUrl ?>"
+                "apiURL": "<?= $requestUrl ?>",
+                "searchUrl": "<?= $searchUrl ?>"
             }
         },
         ".catalogsearch-result-index .page-main .product-items.products": {
             "pdp.popup": {
-                "apiURL": "<?= $requestUrl ?>"
+                "apiURL": "<?= $requestUrl ?>",
+                "searchUrl": "<?= $searchUrl ?>"
             }
         },
         ".page-main .home-interactive.special .product-items.products": {
             "pdp.popup": {
-                "apiURL": "<?= $requestUrl ?>"
+                "apiURL": "<?= $requestUrl ?>",
+                "searchUrl": "<?= $searchUrl ?>"
             }
         }
     }
