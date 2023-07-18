@@ -5,8 +5,6 @@ define([
 
     'use strict';
 
-    // console.log('Custom select widget by Max');
-
     $.widget('custom.select', {
         options: {
             action: 'change', // Set to submit to submit form on select option

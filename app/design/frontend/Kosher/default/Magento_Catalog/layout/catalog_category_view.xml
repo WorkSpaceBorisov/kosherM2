@@ -8,26 +8,7 @@
     <referenceBlock name="category.product.addto" remove="true"/>
 
     <!-- MOVE -->
-    <move element="category.body" destination="page.wrapper" after="header.container"/>
-    <move element="breadcrumbs" destination="main" before="-"/>
-    <move element="category.view.container" destination="main" after="breadcrumbs"/>
-    <move element="page.main.title" destination="main" after="breadcrumbs"/>
-    <move element="list.total" destination="main" after="page.main.title"/>
-
     <body>
-
-        <block name="list.total" template="Magento_Catalog::product/list/total-products.phtml" after="page.main.title"/>
-
         <container name="category.body" htmlTag="section" htmlClass="category-body" after="header.container"/>
-
-        <referenceContainer name="main">
-            <referenceContainer name="content">
-                <referenceContainer name="columns">
-                    <container name="plp.filters.col" htmlTag="div" htmlClass="plp-filters-col" before="-">
-                        <block name="plp-filters" template="Magento_Catalog::filters/plp-filters.phtml"/>
-                    </container>
-                </referenceContainer>
-            </referenceContainer>
-        </referenceContainer>
     </body>
 </page>

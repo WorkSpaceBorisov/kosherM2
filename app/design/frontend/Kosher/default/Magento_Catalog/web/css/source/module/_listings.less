@@ -60,7 +60,7 @@
         .products-grid & {
             display: grid;
             grid-gap: 16px 16px;
-            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             margin-bottom: 20px;
         }
 
@@ -1128,5 +1128,11 @@
                 }
             }
         }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .products-grid .product-items {
+        margin-right: 3px;
     }
 }

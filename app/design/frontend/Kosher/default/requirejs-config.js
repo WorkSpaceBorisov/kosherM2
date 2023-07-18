@@ -4,7 +4,7 @@ const config = {
             'main': 'js/main',
             'custom.plusMinus': 'js/widgets/custom-plus-minus.widget',
             'custom.select': 'js/widgets/custom-select.widget',
-            'slick': 'js/vendors/slick/slick.min'
+            'slider': 'js/widgets/slider'
         }
     },
 
@@ -16,8 +16,14 @@ const config = {
     },
 
     shim: {
-        slick: {
-            deps: ['jquery']
+        'slick': ['jquery']
+    },
+
+    config: {
+        mixins: {
+            'mage/collapsible': {
+                'js/mage/collapsible-mixin': true
+            }
         }
     },
 

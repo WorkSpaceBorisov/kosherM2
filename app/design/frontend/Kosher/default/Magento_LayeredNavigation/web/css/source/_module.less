@@ -1,34 +1,59 @@
-// /**
-//  * Copyright © Magento, Inc. All rights reserved.
-//  * See COPYING.txt for license details.
-//  */
-
 //
 //  Common
 //  _____________________________________________
 
+@filter-width: 294px;
+@filters-margin-right: 48px;
+@slide-transition: .2s;
+
 & when (@media-common = true) {
+    .page-with-filter {
+        .sidebar-main {
+            order: -1;
+            align-self: stretch;
+            display: flex;
+            flex-grow: 0;
+            flex-shrink: 0;
+            justify-content: flex-end;
+            height: 100%;
+        }
+    }
+
     .filter {
         &.block {
+            background: @kosher-color__01;
+            margin-right: @filters-margin-right;
+            padding-bottom: 200px;
             margin-bottom: 0;
         }
 
         &-title {
             strong {
-                @_shadow: inset 0 1px 0 0 @color-white, inset 0 -1px 0 0 fade(@border-color__base, 30);
+                align-items: center;
+                background-color: @kosher-color__01;
+                border-radius: 8px;
+                border: 2px solid @kosher-color__04;
+                display: flex;
+                margin-right: 12px;
+                justify-content: center;
+                .lib-font-size(16);
+                color: @kosher-color__04;
+                padding: 17px 32px;
+                display: inline-block;
+                font-weight: 600;
+                line-height: 1;
+                cursor: pointer;
+                transition: background-color .2s;
 
-                .lib-css(background-color, @toolbar-element-background);
-                .lib-css(box-shadow, @_shadow);
-                border: 1px solid @border-color__base;
-                border-radius: 3px;
-                font-weight: 400;
-                left: 0;
-                line-height: 16px;
-                padding: 7px @indent__s;
-                position: absolute;
-                text-align: center;
-                top: 0;
-                z-index: 2;
+                &:hover,
+                &:focus {
+                    background-color: @kosher-color__27;
+                }
+
+                &:before {
+                    .icomoon(@icon-filter, 17px, @kosher-color__04);
+                    margin-right: 12px;
+                }
 
                 &[data-count]:after {
                     .lib-css(color, @color-white);
@@ -55,6 +80,11 @@
             font-weight: @font-weight__semibold;
             line-height: 1em;
             padding: @indent__s @indent__s @indent__base;
+
+            &:before {
+                .icomoon(@icon-filter, 14px, @kosher-color__02);
+                margin-right: 12px;
+            }
         }
 
         &-subtitle {
@@ -204,7 +234,19 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    body {
+    .page-with-filter {
+        &:not(.filter-active) {
+            .filter-title {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+            .sidebar-main {
+                width: 0;
+            }
+        }
+
         &.filter-active {
             .page-header {
                 display: none;
@@ -242,6 +284,9 @@
                 z-index: 2;
 
                 strong {
+                    width: 100%;
+                    
+                    justify-content: space-between;
                     .lib-css(box-shadow, none);
                     background: none;
                     border: 0;
@@ -255,6 +300,11 @@
                     @_icon-font-size: 16px,
                     @_icon-font-position: after
                     );
+                    display: flex;
+
+                    &:before {
+                        display: none;
+                    }
                 }
             }
 
@@ -288,6 +338,10 @@
         & &-subtitle {
             font-size: 20px;
             font-weight: @font-weight__light;
+        }
+
+        &-title {
+            z-index: 19;
         }
 
         &-actions {
@@ -388,13 +442,84 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
 
-    .filter {
-        &.block {
-            margin-bottom: @indent__xl;
+    .page-with-filter {
+        &:not(.filter-active) {
+            .filter-title {
+                position: absolute;
+                left: calc(100% + 33px);
+                top: 0;
+                z-index: 14;
+            }
+
+            .sidebar-main {
+                left: -285px;
+            }
+
+            .toolbar-products {
+                padding-left: 200px;
+            }
+
+            .filter-content {
+                opacity: 0;
+            }
         }
 
-        &-title {
-            display: none;
+        .columns {
+            overflow: hidden;
+        }
+
+        .toolbar-products {
+            transition: padding-left @filters-transition;
+        }
+
+        .sidebar-main {
+            transition: left @filters-transition;
+            width: 252px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .filter-content {
+            opacity: 1;
+        }
+
+        .column.main {
+            transition: @filters-transition padding-left;
+        }
+
+        &.filter-active {
+            .column.main {
+                padding-left: 300px;
+            }
+
+            .filter-title strong {
+                border: 0;
+                font-size: 0;
+                padding: 0;
+                height: 30px;
+                display: flex;
+                background-color: transparent;
+                position: absolute;
+                right: 0;
+
+                &:before {
+                    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg fill='none' viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m5.7801 6.5302-1.7198 1.7198h8.6895c0.199 0 0.3897 0.07902 0.5304 0.21967 0.1406 0.14065 0.2196 0.33142 0.2196 0.53033s-0.079 0.38968-0.2196 0.53033c-0.1407 0.14065-0.3314 0.21967-0.5304 0.21967h-8.6895l1.7198 1.7197c0.07163 0.0692 0.12877 0.152 0.16808 0.2435 0.0393 0.0915 0.05999 0.1899 0.06086 0.2895 8.6e-4 0.0996-0.01811 0.1983-0.05582 0.2905s-0.0934 0.1759-0.16382 0.2463c-0.07042 0.0705-0.15416 0.1262-0.24633 0.1639-0.09218 0.0377-0.19094 0.0567-0.29052 0.0558-0.09959-9e-4 -0.198-0.0216-0.2895-0.0609-0.09151-0.0393-0.17427-0.0964-0.24345-0.168l-3-3c-0.1406-0.14065-0.21959-0.33138-0.21959-0.53025s0.07899-0.3896 0.21959-0.53025l3-3c0.06918-0.07163 0.15194-0.12877 0.24345-0.16808 0.0915-0.0393 0.18991-0.05999 0.2895-0.06086 0.09958-8.6e-4 0.19834 0.01811 0.29052 0.05582 0.09217 0.03771 0.17591 0.0934 0.24633 0.16382s0.12611 0.15416 0.16382 0.24633c0.03771 0.09218 0.05668 0.19094 0.05582 0.29052-8.7e-4 0.09959-0.02156 0.198-0.06086 0.2895-0.03931 0.09151-0.09645 0.17426-0.16808 0.24345z' fill='%23474747'/%3E%3Cpath d='m16 1.5v15' stroke='%23474747' stroke-linecap='round' stroke-width='1.5'/%3E%3C/svg%3E%0A");
+                    margin: 0;
+                    content: '';
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+    }
+
+    .filter {
+        &.block {
+            width: 100%;
+            margin-bottom: @indent__xl;
+            margin-right: 0;
+            position: relative;
         }
 
         &-content {
