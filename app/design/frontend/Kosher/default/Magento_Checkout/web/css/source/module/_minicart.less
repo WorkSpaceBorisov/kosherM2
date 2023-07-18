@@ -380,7 +380,9 @@
     .minicart-items-wrapper {
         flex-grow: 1;
         max-height: 430px;
+        overflow: auto;
         margin: 0 13px 0 8px;
+        .custom-scrollbar();
     }
 
     .minicart-items {
@@ -459,31 +461,16 @@
         }
 
         .category-link__href {
-            align-items: center;
-            display: flex;
             margin-bottom: 3px;
 
             span {
                 .lib-font-size(14);
-                color: @kosher-color__10;
                 font-weight: @font-weight__regular;
-                line-height: 1;
-                text-decoration: underline;
             }
 
             &:before {
                 .icomoon(@icon-home, 13px, @kosher-color__10);
                 margin-right: 7px;
-            }
-
-            &:hover {
-                span {
-                    color: @kosher-color__19;
-                }
-
-                &:before {
-                    color: @kosher-color__19;
-                }
             }
         }
 

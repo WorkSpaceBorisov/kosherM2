@@ -165,7 +165,6 @@ define(['jquery', 'Magento_Customer/js/customer-data', 'domReady!'], function (
                     ? this._removeItem(productItemId, formKey)
                     : this._updateItemQty(productItemId, formKey, newQuantity);
 
-                this._updateItemQty(actionUrl, data);
             }
 
             // submit ajax form only if qty !== '0'

@@ -82,7 +82,7 @@ define(['jquery', 'domReady!'], function ($) {
         };
     };
 
-    const navigation = new Navigation('[data-init="navigation"]');
+    const navigation = new Navigation('.page-header [data-init="navigation"]');
 
     navigation.init();
 
