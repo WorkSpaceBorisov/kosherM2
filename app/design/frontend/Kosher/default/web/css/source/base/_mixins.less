@@ -19,14 +19,6 @@
     z-index: @z-index;
 }
 
-// Placeholder
-//
-// .placeholder({
-//    .rem(12);
-//    color: #687278;
-// });
-//
-
 .placeholder(@rules) {
     &::-webkit-input-placeholder {
         @rules();
@@ -42,11 +34,6 @@
         @rules();
     }
 }
-
-// Triangle .triangle(direction,width,height,color);
-//
-// .triangle(top, 7px, 7px, #333);
-//
 
 .triangle-base() {
     content: '';
@@ -105,16 +92,6 @@
     border-color: @color transparent transparent transparent;
 }
 
-// Custom font mixin based on .lib-font-face
-//
-//.custom-font-face(
-//    @family-name: 'pt-sans',
-//    @font-display: swap,
-//    @font-path: '@{baseDir}fonts/PTSans-Web-Regular',
-//    @font-weight: normal,
-//    @font-style: normal
-//);
-
 .custom-font-face(
     @family-name,
     @font-display: swap,
@@ -134,14 +111,6 @@
 }
 
 // For icomoon
-
-//.my-icon{
-//    display: inline-block;
-//    line-height: 1;
-//    &:before{
-//        .icomoon('\e8cc', 28, #ff0000);
-//    }
-//}
 
 .icomoon(@icon, @size: 24, @color: @kosher-color__02) {
     font-family: 'icomoon', sans-serif;

@@ -183,6 +183,7 @@
             border-radius: 8px;
             display: block;
             position: relative;
+            border: 1px solid transparent;
 
             span {
                 display: none;
@@ -195,7 +196,7 @@
 
             &:not(.active) {
                 &:hover {
-                    border: 1px solid @kosher-color__26;
+                    border-color: @kosher-color__26;
                     cursor: pointer;
                 }
             }
@@ -261,6 +262,7 @@
             height: 56px;
             padding: 16px;
             width: 100%;
+            transition: border-color .2s;
 
             &.active {
                 .select-arrow-up();
