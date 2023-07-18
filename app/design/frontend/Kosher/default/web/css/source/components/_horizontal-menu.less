@@ -15,6 +15,10 @@
         z-index: 2;
         .custom-scrollbar();
 
+        .navigation {
+            max-width: inherit;
+        }
+
         ul:not(.submenu) {
             .lib-list-reset-styles();
             display: flex;
@@ -105,5 +109,11 @@
                 min-width: @min-width + 25;
             }
         }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__1370) {
+    .kosher-horizontal-menu li.level0.category-item {
+        min-width: inherit;
     }
 }
