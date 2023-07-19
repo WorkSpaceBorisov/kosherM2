@@ -85,11 +85,11 @@
                             <!-- /ko -->
                             <!-- /ko -->
 
-                            <span class="price-here__weight" data-bind="attr: {
-                           id: 'update-cart-item-'+product_name }">/<span>100g</span></span>
-
-<!--                            <span data-bind="html: $parent.getSingleWeightUnsanitizedHtml(singleweight)"></span>-->
-
+                            <!-- ko if: singleweight -->
+                                <span class="price-here__weight" data-bind="attr: {id: 'update-cart-item-'+product_name }">
+                                    /<span data-bind="i18n: singleweight + 'g'"></span>
+                                </span>
+                            <!-- /ko -->
                         </div>
 
                         <div class="details-qty qty">
