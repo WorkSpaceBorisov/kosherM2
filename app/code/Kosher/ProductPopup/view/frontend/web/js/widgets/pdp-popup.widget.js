@@ -3,8 +3,9 @@ define([
     'matchMedia',
     'custom.plusMinus',
     'slick',
+    'catalogAddToCart',
     'domReady!'
-], function ($, mediaCheck, plusMinus, slick) {
+], function ($, mediaCheck, plusMinus, slick, catalogAddToCart) {
 
     'use strict';
 
@@ -22,6 +23,8 @@ define([
             _overlay: $('.kosher-overlay-inner'),
             apiURL: null,
             searchUrl: '',
+            updateItemQtyUrl: '',
+            removeItemUrl: '',
             testSku: '043427181129'
         },
 
@@ -43,7 +46,7 @@ define([
             });
         },
 
-        _build: function (responce) {
+        _build: function (responce, formHtml) {
             let container = document.querySelector('.k4u-popup .k4u-popup__inner');
             let data = responce[0];
             const urlForSearch = this.options.searchUrl;
@@ -141,8 +144,7 @@ define([
                     '                        </div>';
                 finBlock.appendChild(newTag('div', 'k4u-popup__notify-user', content));
             } else {
-                let calcBlock = newTag('div', 'k4u-popup__add-to-cart');
-                let calcContainer = newTag('div', 'calc-cell-container');
+                let calcBlock = newTag('div', 'k4u-popup__add-to-cart', formHtml);
 
                 let calcCell = newTag('div', 'calc-cell calculator');
                 let minus = newTag('div', 'custom-qty-btn btn-minus', '<span>-</span>');
@@ -156,12 +158,6 @@ define([
                 let btn = newTag('button', 'add-to-calc__button', '<span>Add to cart</span>')
                 addToCartCell.appendChild(btn);
 
-                calcContainer.append(calcCell, addToCartCell);
-                calcBlock.append(calcContainer)
-
-                btn.addEventListener('click', function () {
-                    calcContainer.classList.add('show-calc');
-                })
 
                 finBlock.appendChild(calcBlock);
             }
@@ -178,7 +174,7 @@ define([
                 let title = newTag('h4', null, 'Ingredients:');
                 let content = data.description || data.short_description;
                 addInfoBlock.append(newTag('h4', null, 'Ingredients:'), newTag('p', null, content));
-                addInfoBlock.addEventListener('copy', function (e){
+                addInfoBlock.addEventListener('copy', function (e) {
                     e.preventDefault();
                     e.clipboardData.setData("text/plain", "Do not copy this block content!");
                 })
@@ -216,12 +212,12 @@ define([
 
                 for (let item in attrs) {
                     let innerElement;
-                    if(name === 'manufacturer' || name === 'supervision') {
+                    if (name === 'manufacturer' || name === 'supervision') {
                         innerElement = `<a href="${urlForSearch}${attrs[item]}" target="_blank"><span>${attrs[item]}</span></a>`;
                     } else {
                         innerElement = `<span data-attrib-id="${item}">${attrs[item]}</span>`;
                     }
-                    
+
                     val += innerElement;
                 }
 
@@ -299,10 +295,10 @@ define([
 
             container.appendChild(infoBlock);
 
-            this._openMe();
+            this._openMe(responce[0]);
         },
 
-        _askAPI: function (sku) {
+        _askAPI: function (sku, formHtml) {
             let self = this;
             $.ajax({
                 url: this.options.apiURL,
@@ -312,24 +308,34 @@ define([
                     sku: sku
                 },
             }).done(function (response) {
-                self._build(response);
+                self._build(response, formHtml);
             });
         },
 
-        _openMe: function () {
+        _openMe: function (productData) {
+            const self = this;
+
             $('body').addClass('k4u-popup-on scroll-lock');
             setTimeout(() => {
                 $('body').addClass('fadeOn-popup');
             }, 50)
-            // this._calcHeight();
-            $('.k4u-popup__product-container .input-text.in-popup').plusMinus({'buttons': false, 'limit': 10000});
+            $('.k4u-popup__product-container [data-role="tocart-form"]').catalogAddToCart({});
+            $('.k4u-popup__product-container [name="qty"]').plusMinus(
+                {
+                    'buttons': false,
+                    'limit': 10000,
+                    "productId": productData.entity_id,
+                    "updateQtyUrl": self.options.updateItemQtyUrl,
+                    "removeItemUrl": self.options.removeItemUrl
+                });
         },
 
         _open: function () {
             let self = this;
             $('.product-items .product-image-wrapper, .product-items .product-item-link').on('click', function (e) {
-                let sku = $(this).closest('.product-item-info').find('.hidden-sku').data('sku');
-                self._askAPI(sku);
+                const sku = $(this).closest('.product-item-info').find('.hidden-sku').data('sku');
+                const addToCartForm = $(e.target).parents('[data-container="product-grid"]').find('[data-role="tocart-form"]')[0].outerHTML;
+                self._askAPI(sku, addToCartForm);
                 self._slider();
             });
         },
