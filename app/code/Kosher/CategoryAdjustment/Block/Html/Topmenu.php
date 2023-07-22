@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kosher\CategoryAdjustment\Block\Html;
 
@@ -159,10 +160,10 @@ class Topmenu extends ThemeTopmenu
             ->setPageSize(10);
 
         if ($category->getSize()) {
-            $categoryAttributeId = $category->getAttribute('category_icon')->getAttributeId();
+            $categoryAttributeId = (int)$category->getAttribute('category_icon')->getAttributeId();
             $categoryList = $category->getItems();
             foreach ($categoryList as $data) {
-                $categoryId = $data->getEntityId();
+                $categoryId = (int)$data->getEntityId();
                 $iconPath = $this->categoryIconPathQuery->execute($categoryAttributeId, $categoryId);
                 if ($iconPath) {
                     return $iconPath;

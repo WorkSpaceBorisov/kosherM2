@@ -62,6 +62,7 @@ define([
                  */	
                 events['click ' + this.options.button.remove] = function (event) {	
                     event.stopPropagation();	
+                    event.preventDefault();
                     self._removeItem($(event.currentTarget));	
                 };	
                 // Increase qty value	

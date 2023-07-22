@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kosher\ProductPopup\Service\ProductAttribute;
 
@@ -32,12 +33,12 @@ class GetOptionValueByIdService
         foreach ($attributeOptionId as $attributeCode => $optionId) {
             if (!is_array($optionId)) {
                 $result[$attributeCode] = [
-                    $optionId => $this->getAttributeOptionValueByIdQuery->execute($optionId, $storeId),
+                    $optionId => $this->getAttributeOptionValueByIdQuery->execute((int)$optionId, $storeId),
                 ];
             } else {
                 $arrayResult = [];
                 foreach ($optionId as $id) {
-                    $arrayResult[$id] = $this->getAttributeOptionValueByIdQuery->execute($id, $storeId);
+                    $arrayResult[$id] = $this->getAttributeOptionValueByIdQuery->execute((int)$id, $storeId);
                 }
 
                 $result[$attributeCode] = $arrayResult;

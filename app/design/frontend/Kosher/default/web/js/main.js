@@ -17,35 +17,15 @@ define([
     // Close minicart
     let closeMinicart = () => {
         if (cartBtn.hasClass('active')) {
-            cartBtn.removeClass('active');
-            cartBtn.closest('div').removeClass('active');
-            $('.minicart-wrapper .mage-dropdown-dialog').css('display', 'none');
+            cartBtn.trigger('click');
         }
     }
 
-    // Cart fade close
-    let cartFade = () => {
-        const cart = $('.block.block-minicart');
-        const delay = 0;
-
-        cart.fadeOut(500)
-
-        setTimeout(() => {
-            cartBtn.removeClass('active');
-            cartBtn.closest('div').removeClass('active');
-            $('.minicart-wrapper .mage-dropdown-dialog').css('display', 'none');
-        }, delay + 1000);
-
-        setTimeout(() => {
-            cart.css('display', 'block');
-        }, delay + 1800);
-    }
-
     // Detect cart close on scroll
-    $(window).scroll(function() {
+    $(window).bind('mousewheel DOMMouseScroll touchmove', () => {
         if(cartBtn.hasClass('active')) {
             let scroll = $(window).scrollTop();
-            if (scroll > 150) cartFade();
+            if (scroll > 150) closeMinicart();
         }
     });
 
@@ -57,15 +37,11 @@ define([
     cartBtn.on('click', function(e) {
         e.preventDefault();
         if (!cartBtn.hasClass('active')) {
-            cartBtn.addClass('active');
-            cartBtn.closest('div').addClass('active');
-            $('.minicart-wrapper .mage-dropdown-dialog').removeAttr('style');
             closeAccount();
             closeMenu();
             closeMobileSearch();
             return;
         }
-        closeMinicart();
     });
 
     // =========== search =============== 
