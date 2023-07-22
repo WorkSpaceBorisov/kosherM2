@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Kosher\ConvertProductCsvM1File\Block\Form;

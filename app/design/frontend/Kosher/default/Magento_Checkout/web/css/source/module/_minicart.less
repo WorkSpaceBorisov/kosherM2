@@ -213,7 +213,8 @@
         align-items: center;
         border-radius: 8px;
         border: 0;
-        color: @kosher-color__01;
+        color: @kosher-color__04;
+        text-decoration: underline;
         display: inline-block;
         .lib-font-size(14);
         font-weight: @font-weight__semibold;
@@ -221,6 +222,10 @@
         line-height: 1;
         margin: 0 auto;
         text-align: center;
+
+        &:hover {
+            text-decoration: none;
+        }
     }
 
     .minicart-wrapper {

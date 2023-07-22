@@ -77,7 +77,7 @@ use Magento\Framework\App\Action\Action;
 
                                 <?php if ($manufacturer = $_item->getAttributeText('manufacturer')): ?>
                                     <div class="category-link">
-                                        <a href="<?= $escaper->escapeUrl(__('catalogsearch/result/?q=%1', $manufacturer)) ?>" class="category-link__href">
+                                        <a href="<?= $escaper->escapeUrl(__('/catalogsearch/result/?q=%1', $manufacturer)) ?>" class="category-link__href">
                                             <span><?= /* @noEscape */ $manufacturer ?></span>
                                         </a>
                                     </div>

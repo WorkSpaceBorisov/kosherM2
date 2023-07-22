@@ -336,6 +336,7 @@ return [
         'Kosher_CategoryAdjustment' => 1,
         'Kosher_ConvertProductCsvM1File' => 1,
         'Kosher_Migration' => 1,
+        'Kosher_MiniCartAdjustment' => 1,
         'Kosher_OrderImport' => 1,
         'Kosher_ProductAdjustment' => 1,
         'Kosher_ProductAttributeSetExportImport' => 1,
