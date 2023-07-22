@@ -138,19 +138,21 @@
 //  Messages
 //  ---------------------------------------------
 
-@icon-success: '\e60e';
-@icon-error: '\e61f';
-@icon-edit: '\e601';
-@icon-print: '\e624';
+@icon-success: false;
+@icon-error: false;
+@icon-edit: false;
+@icon-print: false;
 
+@message-success__color: rgb(2, 31, 9);
+@message-success__background: rgba(42, 159, 71, 1);
 
-@message__padding: 12px @indent__base 12px @indent__m;
-@message__line-height: false;
-@message-icon__font-size: 24px;
-@message-icon__inner-padding-left: 45px;
-@message-icon__top: 22px;
-@message-error-icon: @icon-error;
-@message-success-icon: @icon-success;
+@message__padding: 8px 20px;
+@message__line-height: 20px;
+@message__font-size: 16px;
+@message__font-weight: 600;
+@message-icon__inner-padding-left: false;
+@message__border-radius: 6px 6px 0 0;
+@message__margin: 0 0 20px;
 
 //
 //  Loaders

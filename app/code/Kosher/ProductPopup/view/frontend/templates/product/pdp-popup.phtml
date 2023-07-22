@@ -26,6 +26,8 @@ $storeUrl = $viewModel->getStoreUrl();
 $apiUrl = $viewModel->getProductBySkuRequest();
 $requestUrl = $storeUrl . $apiUrl;
 $searchUrl = $escaper->escapeUrl(__('catalogsearch/result/?q='));
+$updateItemQtyUrl = $escaper->escapeUrl(__('checkout/sidebar/updateItemQty'));
+$removeItemUrl = $escaper->escapeUrl(__('checkout/sidebar/removeItem'));
 ?>
 <div class="k4u-popup">
     <a href="#" class="k4u-popup__close" id="k4u_popup_close"><span><?= $escaper->escapeHtml(__('Close')) ?></span></a>
@@ -51,19 +53,25 @@ $searchUrl = $escaper->escapeUrl(__('catalogsearch/result/?q='));
         ".catalog-category-view .page-main .product-items.products": {
             "pdp.popup": {
                 "apiURL": "<?= $requestUrl ?>",
-                "searchUrl": "<?= $searchUrl ?>"
+                "searchUrl": "<?= $searchUrl ?>",
+                "updateItemQtyUrl": "<?= $updateItemQtyUrl ?>",
+                "removeItemUrl": "<?= $removeItemUrl ?>"
             }
         },
         ".catalogsearch-result-index .page-main .product-items.products": {
             "pdp.popup": {
                 "apiURL": "<?= $requestUrl ?>",
-                "searchUrl": "<?= $searchUrl ?>"
+                "searchUrl": "<?= $searchUrl ?>",
+                "updateItemQtyUrl": "<?= $updateItemQtyUrl ?>",
+                "removeItemUrl": "<?= $removeItemUrl ?>"
             }
         },
         ".page-main .home-interactive.special .product-items.products": {
             "pdp.popup": {
                 "apiURL": "<?= $requestUrl ?>",
-                "searchUrl": "<?= $searchUrl ?>"
+                "searchUrl": "<?= $searchUrl ?>",
+                "updateItemQtyUrl": "<?= $updateItemQtyUrl ?>",
+                "removeItemUrl": "<?= $removeItemUrl ?>"
             }
         }
     }
