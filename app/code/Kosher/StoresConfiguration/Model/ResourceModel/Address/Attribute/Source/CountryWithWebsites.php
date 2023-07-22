@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kosher\StoresConfiguration\Model\ResourceModel\Address\Attribute\Source;
 
