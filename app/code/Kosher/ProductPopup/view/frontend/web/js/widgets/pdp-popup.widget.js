@@ -102,6 +102,18 @@ define([
 
             infoBlock.appendChild(mainAttrsBlock);
 
+            // description
+
+            let descriptionBlock = newTag('div', 'k4u-popup__description');
+
+            const description = data.description;
+
+            if (description) {
+                descriptionBlock.append(newTag('div', null, description));
+            }
+
+            infoBlock.appendChild(descriptionBlock);
+
             if (!data.quantity_and_stock_status.is_in_stock) {
                 document.querySelector('.k4u-popup').classList.add('out-of-stock');
                 let content = '<div class="stock">\n' +
@@ -166,13 +178,15 @@ define([
 
             // Finblock end
 
-            // Additional info
+            // Short description
 
             let addInfoBlock = newTag('div', 'k4u-popup__additional-info');
 
-            if (data.description || data.short_description) {
+            const shortDescription = data.short_description;
+
+            if (shortDescription) {
                 let title = newTag('h4', null, 'Ingredients:');
-                let content = data.description || data.short_description;
+                let content = shortDescription;
                 addInfoBlock.append(newTag('h4', null, 'Ingredients:'), newTag('p', null, content));
                 addInfoBlock.addEventListener('copy', function (e) {
                     e.preventDefault();
