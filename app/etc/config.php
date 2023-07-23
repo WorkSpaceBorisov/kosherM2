@@ -343,6 +343,7 @@ return [
         'Kosher_ProductPopup' => 1,
         'Kosher_StoresConfiguration' => 1,
         'Kosher_WineStore' => 1,
+        'Magebees_Layerednavigation' => 1,
         'Mirasvit_Core' => 1,
         'Mirasvit_Report' => 1,
         'Mirasvit_Credit' => 1,

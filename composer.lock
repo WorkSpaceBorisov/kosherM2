@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e0ba7c12bf197ae711b0873966183a2",
+    "content-hash": "3afcf71afe99dc7c5c822d1b45b3619f",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -5132,6 +5132,44 @@
                 }
             ],
             "time": "2022-04-17T13:12:02+00:00"
+        },
+        {
+            "name": "magebees/module-layerednavigation",
+            "version": "1.2.18",
+            "dist": {
+                "type": "zip",
+                "url": "https://repo.magebees.com/magebees-19186/dists/magebees/module-layerednavigation/1.2.18.0/1123a55a0cf9484d525093c67aa0da774b295c1b.zip",
+                "reference": "1123a55a0cf9484d525093c67aa0da774b295c1b",
+                "mirrors": [
+                    {
+                        "url": "https://repo.magebees.com/magebees-19186/dists/%package%/%version%/r%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magebees\\Layerednavigation\\": ""
+                }
+            },
+            "notification-url": "https://repo.magebees.com/magebees-19186/downloads/",
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Magebees",
+                    "email": "support@magebees.com",
+                    "homepage": "https://www.magebees.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "For Improved Layered Navigation of Magebees."
         },
         {
             "name": "magento/adobe-stock-integration",
