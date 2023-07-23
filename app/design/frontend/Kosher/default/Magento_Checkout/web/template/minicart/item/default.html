@@ -87,7 +87,7 @@
 
                             <!-- ko if: singleweight -->
                                 <span class="price-here__weight" data-bind="attr: {id: 'update-cart-item-'+product_name }">
-                                    /<span data-bind="i18n: singleweight + 'g'"></span>
+                                    /<span data-bind="i18n: (singleweight * 1000) + 'g'"></span>
                                 </span>
                             <!-- /ko -->
                         </div>

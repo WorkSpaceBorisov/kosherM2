@@ -348,7 +348,7 @@ define([
             let self = this;
             $('.product-items .product-image-wrapper, .product-items .product-item-link').on('click', function (e) {
                 const sku = $(this).closest('.product-item-info').find('.hidden-sku').data('sku');
-                const addToCartForm = $(e.target).parents('[data-container="product-grid"]').find('[data-role="tocart-form"]')[0].outerHTML;
+                const addToCartForm = $(e.target).parents('.product-item-info').find('[data-role="tocart-form"]')[0].outerHTML;
                 self._askAPI(sku, addToCartForm);
                 self._slider();
             });
