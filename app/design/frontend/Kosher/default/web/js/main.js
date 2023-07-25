@@ -125,32 +125,32 @@ define([
         $(e.target).parents('.center-cell').toggleClass('active');
     });
 
-    let preventScroll = function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-    }
+    // let preventScroll = function (e) {
+    //     e.preventDefault();
+    //     e.stopPropagation();
+    //     return false;
+    // }
 
-    // Prevent scroll on open
-    const eBody = document.querySelector('body')
-    const options = {
-        attributes: true
-    }
+    // // Prevent scroll on open
+    // const eBody = document.querySelector('body')
+    // const options = {
+    //     attributes: true
+    // }
 
-    function callback(mutationList, observer) {
-        mutationList.forEach(function (mutation) {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                // handle class change
-                if (eBody.classList.contains('scroll-lock')) {
-                    eBody.addEventListener('wheel', preventScroll, {passive: false});
-                } else {
-                    eBody.removeEventListener('wheel', preventScroll, {passive: false});
-                }
-            }
-        })
-    }
+    // function callback(mutationList, observer) {
+    //     mutationList.forEach(function (mutation) {
+    //         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+    //             // handle class change
+    //             if (eBody.classList.contains('scroll-lock')) {
+    //                 eBody.addEventListener('wheel', preventScroll, {passive: false});
+    //             } else {
+    //                 eBody.removeEventListener('wheel', preventScroll, {passive: false});
+    //             }
+    //         }
+    //     })
+    // }
 
-    const observer = new MutationObserver(callback)
-    observer.observe(eBody, options)
+    // const observer = new MutationObserver(callback)
+    // observer.observe(eBody, options)
 
 });
