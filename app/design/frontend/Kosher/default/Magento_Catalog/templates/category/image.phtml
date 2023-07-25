@@ -29,5 +29,8 @@ if ($_imgUrl = $block->getImage()->getUrl($_category)) {
             . '" class="image" /><h1 class="catagory-title">'. $_categoryName . '</h1></div>';
     $_imgHtml = $block->getOutput()->categoryAttribute($_category, $_imgHtml, 'image');
     /* @noEscape */ echo $_imgHtml;
+} else {
+    $_imgHtml = '<h1 class="page-title">'. $_categoryName . '</h1>';
+    /* @noEscape */ echo $_imgHtml;
 }
 ?>

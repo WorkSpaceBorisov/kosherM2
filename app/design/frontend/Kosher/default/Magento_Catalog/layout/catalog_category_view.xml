@@ -6,6 +6,7 @@
     <referenceBlock name="rss.link" remove="true"/>
     <referenceBlock name="sidebar.additional" remove="true"/>
     <referenceBlock name="category.product.addto" remove="true"/>
+    <referenceBlock name="page.main.title" remove="true"/>
 
     <!-- MOVE -->
     <body>
