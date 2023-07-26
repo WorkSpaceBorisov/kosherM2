@@ -6,7 +6,7 @@
 @account-table-border-bottom-color: @color-gray_light;
 @account-table-action-delete: @color-red12;
 
-@_password-default: @color-gray-light01;
+@_password-default: @kosher-color__15;
 @_password-weak: #ffafae;
 @_password-medium: #ffd6b3;
 @_password-strong: #c5eeac;
@@ -21,13 +21,13 @@
         .block {
             &-new-customer {
                 .actions-toolbar {
-                    margin-top: 25px;
+                    margin-top: 15px;
                 }
             }
 
             .block-title {
                 &:extend(.abs-login-block-title all);
-                .lib-font-size(18);
+                .lib-font-size(16);
             }
         }
 
@@ -91,12 +91,6 @@
                 .field {
                     float: none;
                 }
-            }
-        }
-        .fieldset.create.account {
-            .lib-form-hasrequired(bottom);
-            &:after {
-                margin-top: 35px;
             }
         }
     }
@@ -266,54 +260,54 @@
     }
 
     .password-strength-meter {
-        background-color: @_password-default;
         height: @form-element-input__height;
         line-height: @form-element-input__height;
-        padding: @form-element-input__padding;
+        padding-left: 20px;
         position: relative;
         z-index: 1;
 
         &:before {
             content: '';
-            height: 100%;
+            height: 12px;
+            max-height: 12px;
+            width: 12px;
+            max-width: 12px;
             left: 0;
             position: absolute;
-            top: 0;
-            z-index: -1;
+            top: 50%;
+            z-index: 1;
+            border-radius: 50%;
+            margin: -6px 0 0;
+            background-color: @_password-default;
         }
 
         .password-none & {
             &:before {
                 background-color: @_password-default;
-                width: 100%;
             }
         }
 
         .password-weak & {
             &:before {
                 background-color: @_password-weak;
-                width: 25%;
             }
         }
 
         .password-medium & {
             &:before {
                 background-color: @_password-medium;
-                width: 50%;
             }
         }
 
         .password-strong & {
             &:before {
                 background-color: @_password-strong;
-                width: 75%;
             }
         }
 
         .password-very-strong & {
             &:before {
                 background-color: @_password-very-strong;
-                width: 100%;
             }
         }
     }
