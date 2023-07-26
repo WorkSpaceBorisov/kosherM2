@@ -26,6 +26,7 @@ define([
                 arrows: true,
                 dots: false,
                 infinite: true,
+                draggable: false,
                 speed: 500,
                 slidesToShow: 4,
                 slidesToScroll: 4,

@@ -29,7 +29,7 @@ use Magento\Framework\App\Action\Action;
             <?= /* @noEscape */
             '<!-- ' . $image . '-->' ?>
             <div class="products-grid">
-                <ol class="product-items products widget-product-grid" data-container="popup-init">
+                <ol class="product-items products widget-product-grid">
                     <?php $iterator = 1; ?>
                     <?php foreach ($items as $_item): ?>
                         <?= /* @noEscape */
@@ -49,9 +49,9 @@ use Magento\Framework\App\Action\Action;
 
                             <!-- Photo -->
                             <div class="product-item-photo-outer">
-                                <figure data-href="<?= $escaper->escapeUrl($block->getProductUrl($_item)) ?>" class="product-item-photo">
+                                <a href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>" class="product-item-photo">
                                     <?= $block->getImage($_item, $image)->toHtml() ?>
-                                </figure>
+                                </a>
                             </div>
 
                             <!-- get Sku -->
@@ -59,11 +59,11 @@ use Magento\Framework\App\Action\Action;
 
                             <div class="product-item-details">
                                 <strong class="product-item-name">
-                                    <span title="<?= $escaper->escapeHtml($_item->getName()) ?>"
-                                       data-href="<?= $escaper->escapeUrl($block->getProductUrl($_item)) ?>"
+                                    <a title="<?= $block->escapeHtml($_item->getName()) ?>"
+                                       href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>"
                                        class="product-item-link">
-                                        <?= $escaper->escapeHtml($_item->getName()) ?>
-                                    </span>
+                                        <?= $block->escapeHtml($_item->getName()) ?>
+                                    </a>
                                 </strong>
 
                                 <?php if ($templateType): ?>
@@ -141,25 +141,4 @@ use Magento\Framework\App\Action\Action;
         </div>
     </div>
 
-    <script type="text/x-magento-init">
-            {
-                ".page-main .widget-product-grid": {
-                    "js/widgets/slider": {
-                        "useCarousel": true
-                    }
-                }
-            }
-    </script>
-
-    <?php if ($block->getBlockHtml('formkey')): ?>
-        <script type="text/x-magento-init">
-        {
-            ".block-products-list [data-role=tocart-form]": {
-                "Magento_Catalog/js/validate-product": {}
-            }
-        }
-        </script>
-    <?php endif; ?>
-
 <?php endif; ?>
-

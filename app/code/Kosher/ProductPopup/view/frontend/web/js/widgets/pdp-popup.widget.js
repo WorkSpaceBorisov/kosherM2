@@ -1,16 +1,12 @@
 define([
     'jquery',
-    'matchMedia',
     'custom.plusMinus',
     'slick',
     'catalogAddToCart',
     'domReady!'
-], function ($, mediaCheck, plusMinus, slick, catalogAddToCart) {
+], function ($, plusMinus, slick, catalogAddToCart) {
 
     'use strict';
-
-
-    // console.log('kosher.pdpPopup');
 
     $.widget('kosher.pdpPopup', {
         options: {
@@ -24,26 +20,12 @@ define([
             apiURL: null,
             searchUrl: '',
             updateItemQtyUrl: '',
-            removeItemUrl: '',
-            testSku: '043427181129'
+            removeItemUrl: ''
         },
 
         _create: function () {
             this._open();
             this._close();
-            this._resizing();
-        },
-
-        _calcHeight: function () {
-            let innerHeight = $('.k4u-popup__product-container').height();
-            this.options._popup.height(innerHeight + 5)
-        },
-
-        _resizing: function () {
-            let self = this;
-            $(window).resize(function () {
-                // self._calcHeight();
-            });
         },
 
         _build: function (responce, formHtml) {
@@ -185,7 +167,6 @@ define([
             const shortDescription = data.short_description;
 
             if (shortDescription) {
-                let title = newTag('h4', null, 'Ingredients:');
                 let content = shortDescription;
                 addInfoBlock.append(newTag('h4', null, 'Ingredients:'), newTag('p', null, content));
                 addInfoBlock.addEventListener('copy', function (e) {
@@ -289,7 +270,6 @@ define([
                     labelsContainer.appendChild(sf_image);
                 }
 
-
                 if (data.bio_attribute) {
                     let bio_image = document.createElement('img');
                     bio_image.setAttribute('title', 'Bio');
@@ -346,9 +326,13 @@ define([
 
         _open: function () {
             let self = this;
-            $('.product-items .product-image-wrapper, .product-items .product-item-link').on('click', function (e) {
+            $('[data-container="popup-init"] .product-image-wrapper, [data-container="popup-init"] .product-item-link').on('click', function (e) {
                 const sku = $(this).closest('.product-item-info').find('.hidden-sku').data('sku');
-                const addToCartForm = $(e.target).parents('.product-item-info').find('[data-role="tocart-form"]')[0].outerHTML;
+                const addToCart = $(e.target).parents('.product-item-info').find('[data-role="tocart-form"]');
+                let addToCartForm = '';
+                if (addToCart.length) {
+                    addToCartForm = addToCart[0].outerHTML;
+                }
                 self._askAPI(sku, addToCartForm);
                 self._slider();
             });
@@ -367,7 +351,6 @@ define([
 
             $(overlay + ', ' + close).on('click', (e) => {
                 closeMe();
-
                 document.querySelector('.k4u-popup .k4u-popup__inner').innerHTML = '';
                 document.querySelector('.k4u-popup').classList.remove('out-of-stock');
                 e.preventDefault();
@@ -378,10 +361,9 @@ define([
 
             let isSlider = $('.k4u-popup__slider-container .widget-product-grid');
 
-            isSlider.on('init', function (event, slick) {
+            isSlider.on('init', function () {
                 let width = $('.k4u-popup').width();
-                console.log('initialized ', width);
-                isSlider.find('.slick-list').width(width - 48);
+                isSlider.find('.slick-list').width(width - 40);
             });
 
             isSlider.not('.slick-initialized').slick({
@@ -395,10 +377,7 @@ define([
                 pauseOnFocus: true,
                 pauseOnHover: true
             });
-
         }
-
-
     });
 
     return $.kosher.pdpPopup;

@@ -22,11 +22,18 @@ define([
     }
 
     // Detect cart close on scroll
-    $(window).bind('mousewheel DOMMouseScroll touchmove', () => {
-        if(cartBtn.hasClass('active')) {
-            let scroll = $(window).scrollTop();
-            if (scroll > 150) closeMinicart();
+    
+
+    let lastScrollTop = 0;
+    $(window).scroll(function (event) {
+        let st = $(this).scrollTop();
+        if (st > lastScrollTop) {
+            if (cartBtn.hasClass('active')) {
+                let scroll = $(window).scrollTop();
+                if (scroll > 150) closeMinicart();
+            }
         }
+        lastScrollTop = st;
     });
 
     $('#kosher_overlay').on('click', () => {
@@ -34,7 +41,7 @@ define([
     });
 
     // Close nav/search/account on minicart call if opened
-    cartBtn.on('click', function(e) {
+    cartBtn.on('click', function (e) {
         e.preventDefault();
         if (!cartBtn.hasClass('active')) {
             closeAccount();
@@ -73,8 +80,8 @@ define([
     let closeMenu = () => {
         const $html = $('html');
         const $nav = $('.page-header [data-action="navigation"]');
-        
-        if($html.hasClass('nav-opened')) {
+
+        if ($html.hasClass('nav-opened')) {
             $html.removeClass('nav-opened');
             $nav.slideToggle(300, 'swing');
             $nav.find('.expanded').removeClass('expanded').find('.submenu').slideUp(300);
@@ -101,7 +108,7 @@ define([
         closeMenu();
         closeMobileSearch();
     });
-    
+
     // Mediacheck
     mediaCheck({
         media: breakPoint,
@@ -124,33 +131,4 @@ define([
     $('#show_toolbar_button').on('click', (e) => {
         $(e.target).parents('.center-cell').toggleClass('active');
     });
-
-    let preventScroll = function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-    }
-
-    // Prevent scroll on open
-    const eBody = document.querySelector('body')
-    const options = {
-        attributes: true
-    }
-
-    function callback(mutationList, observer) {
-        mutationList.forEach(function (mutation) {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                // handle class change
-                if (eBody.classList.contains('scroll-lock')) {
-                    eBody.addEventListener('wheel', preventScroll, {passive: false});
-                } else {
-                    eBody.removeEventListener('wheel', preventScroll, {passive: false});
-                }
-            }
-        })
-    }
-
-    const observer = new MutationObserver(callback)
-    observer.observe(eBody, options)
-
 });
