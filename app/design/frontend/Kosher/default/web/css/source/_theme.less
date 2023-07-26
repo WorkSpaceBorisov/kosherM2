@@ -23,10 +23,10 @@
 @h3__margin-top: @indent__base;
 
 //  Links
-@link__color: @theme__color__primary-alt;
+@link__color: @kosher-color__04;
 
 //  Focus
-@focus__color: @color-blue3;
+@focus__color: @kosher-color__10;
 
 //
 //  Tables
@@ -102,21 +102,31 @@
 //
 //  Buttons
 //  ---------------------------------------------
-
+@button__font-size: 16px;
+@button__padding: 18px 15px;
+@button__border-radius: 8px;
 @button__font-weight: @font-weight__semibold;
+@button__font-family: false;
 
 //  Default = secondary button
 @button__background: @color-gray-darken0;
-@button__border: 1px solid @border-color__base;
+@button__border: 2px solid @border-color__base;
 @button__hover__color: @button__color;
 @button__hover__background: darken(@button__background, 5%);
 @button__active__background: @color-gray-darken1;
 
 //  Primary button
-@button-primary__hover__color: @color-white;
-@button-primary__active__background: @link__hover__color;
+@button-primary__background: @kosher-color__04;
+@button-primary__border: 2px solid @kosher-color__04;
+@button-primary__hover__color: @kosher-color__04;
+
+@button-primary__hover__background: @color-white;
+@button-primary__hover__border: 2px solid @kosher-color__04;
+@button-primary__hover__color: @kosher-color__04;
+
+@button-primary__active__background: @color-white;
 @button-primary__active__border: 1px solid @link__hover__color;
-@button-primary__active__color: @color-white;
+@button-primary__active__color: @kosher-color__04;
 
 //  Button with icon
 @button-icon__line-height: @icon-font__line-height;
@@ -171,6 +181,7 @@
 @select__padding: 4px 25px @indent__xs @indent__s;
 
 //  Form fieldset
+@form-fieldset__margin: 0;
 @form-fieldset-legend__font-size: 18px;
 @form-fieldset-legend__font-weight: @font-weight__light;
 @form-fieldset-legend__margin: 0 0 @indent__base;
@@ -180,6 +191,7 @@
 //  Form field
 @form-field-type-revert: false;
 @form-field__additional-vertical-indent: @indent__s;
+@form-field-type-block__margin: 0 0 17px;
 
 //  Form field label
 @form-field-label__font-weight: @font-weight__semibold;
@@ -238,6 +250,7 @@
 //  Actions-toolbar
 @actions-toolbar-actions__position: left;
 @actions-toolbar-actions-primary__margin: 0 15px 0 0;
+@actions-toolbar-actions-links-secondary__margin-top: 32px;
 
 //
 //  Breadcrumbs

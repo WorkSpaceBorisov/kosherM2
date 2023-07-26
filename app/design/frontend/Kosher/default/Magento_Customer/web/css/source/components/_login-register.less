@@ -5,32 +5,52 @@
 @login-line: 1px solid @kosher-color__15;
 
 & when (@media-common = true) {
-    .customer-account-login {
+    .customer-account-login,
+    .customer-account-create {
+        .page-title {
+            text-align: center;
+            text-transform: uppercase;
+        }
+
         .page-wrapper {
             margin-top: 25px;
         }
 
         .page-main {
-            height: 100%;
             padding-bottom: 25px;
         }
 
         .columns {
             background: @kosher-color__01;
-            height: 100%;
+            border-radius: 12px;
         }
 
         .column.main {
             margin: 0 auto;
             max-width: 640px;
-            padding: 80px 20px;
+            padding: 80px 20px 40px;
             width: 100%;
         }
+    }
 
-        .page-title {
-            text-align: center;
+    .form-create-account .actions-toolbar .primary {
+        float: none;
+        width: 100%;
+
+        .action.submit {
+            width: 100%;
         }
+    }
 
+    .fieldset.create.info .field.choice {
+        display: none;
+    }
+
+    .fieldset.create.account .field.choice {
+        margin-bottom: 17px;
+    }
+
+    .customer-account-login {
         .actions-toolbar {
             & > .primary,
             & > .secondary {
@@ -48,52 +68,68 @@
                 display: block;
             }
         }
+    }
 
-        .login-container {
-            .block-customer-login {
-                width: 100%;
-                float: none;
+    div.login-container {
+        .block-customer-login {
+            width: 100%;
+            float: none;
 
-                .block-title,
-                .field.note,
-                .field.choice {
-                    display: none;
-                }
-            }
-
-            .fieldset:after {
+            .block-title,
+            .field.note,
+            .field.choice {
                 display: none;
             }
+        }
 
-            .block-new-customer {
-                border-top: @login-line;
-                padding-top: 32px;
-                clear: both;
-                width: 100%;
-                float: none;
-    
-                .block-title {
-                    border-bottom: 0;
-                    padding-bottom: 0;
-                    margin-bottom: 10px;
-                    text-align: center;
+        .fieldset:after {
+            display: none;
+        }
 
-                    strong {
-                        .lib-font-size(14);
-                        font-weight: @font-weight__bold;
-                    }
-                }
-    
-                .action.create {
-                    display: block;
-                    text-align: center;
-                }
+        .block-new-customer {
+            border-top: @login-line;
+            padding-top: 32px;
+            clear: both;
+            width: 100%;
+            float: none;
 
-                .block-content p {
-                    display: none;
-                }
+            .block-title {
+                border-bottom: 0;
+                padding-bottom: 0;
+                margin-bottom: 10px;
+                text-align: center;
+                font-size: 16px;
+            }
+
+            .action.create {
+                &:extend(.action.secondary all);
+            }
+
+            .block-content p {
+                display: none;
             }
         }
+
+        .action.back {
+            color: @kosher-color__10;
+        }
+    }
+
+    .field-columns {
+        margin-bottom: 17px;
+    }
+
+    .agreements.checkout {
+        .lib-list-reset-styles();
+        margin: 11px 0 24px;
+
+        a {
+            color: @kosher-color__10;
+        }
+    }
+
+    .checkout-agreement-item-content {
+        display: none;
     }
 }
 
@@ -104,5 +140,23 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .customer-account-login .columns {
         padding: 0 48px;
+    }
+
+    .customer-account-login,
+    .customer-account-create {
+        .page-title {
+            margin-bottom: 50px;
+        }
+    }
+
+    .field-columns {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        margin-bottom: 0;
+
+        .field {
+            width: 50%;
+        }
     }
 }
