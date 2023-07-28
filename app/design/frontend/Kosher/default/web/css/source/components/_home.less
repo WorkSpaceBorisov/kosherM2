@@ -59,7 +59,6 @@
             }
 
         }
-
     }
 
     .home-adv-block__container {
@@ -164,6 +163,10 @@
             .slick-slide > div .product-item,
             .slick-slide > div {
                 height: 100%;
+            }
+
+            .slick-track {
+                width: 100% !important;
             }
         }
 
@@ -541,5 +544,11 @@
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs4) {
     .cms-index-index .home-updates {
         padding: 30px 15px 20px;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .product-items.slick-slider .slick-slide {
+        width: 25% !important;
     }
 }
