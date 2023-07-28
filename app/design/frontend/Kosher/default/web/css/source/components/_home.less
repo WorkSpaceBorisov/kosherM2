@@ -57,7 +57,6 @@
             }
 
         }
-
     }
 
     .home-adv-block__container {
@@ -397,4 +396,18 @@
             padding-right: 30px;
         }
     }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .home-products-slider {
+        .slick-list,
+        .slick-track {
+            width: 100% !important;
+        }
+
+        .product-items.slick-slider .slick-slide {
+            width: 25% !important;
+        }
+    }
+    
 }

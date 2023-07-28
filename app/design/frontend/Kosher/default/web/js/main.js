@@ -131,4 +131,10 @@ define([
     $('#show_toolbar_button').on('click', (e) => {
         $(e.target).parents('.center-cell').toggleClass('active');
     });
+
+    $('.home-adv-block').each(function() {
+        if ($(this).find('.grid-slider').length == 0) {
+          $(this).hide();
+        }
+      });
 });
