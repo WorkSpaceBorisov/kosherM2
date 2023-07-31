@@ -146,6 +146,8 @@
 
     .k4u-popup__description {
         margin-bottom: 15px;
+        max-height: 205px;
+        .custom-scrollbar();
     }
     
     .k4u-popup__attributies {
@@ -529,28 +531,33 @@
             }
         }
 
-        .product-attribute-class-supervision a {
+        .product-attribute-class-supervision {
             align-items: flex-start;
-            text-decoration: none;
             margin-right: 12px;
 
-            &:before {
-                .icomoon(@icon-binocle, 16, @kosher-color__21);
-                top: 0;
-                margin-right: 7px;
+            .attrs-list {
+                &:before {
+                    .icomoon(@icon-binocle, 16, @kosher-color__21);
+                    top: 0;
+                    margin-right: 7px;
+                }
             }
 
-            span {
-                text-decoration: underline;
-                white-space: unset;
-            }
-
-            &:hover span {
+            a {
                 text-decoration: none;
-            }
 
-            span:not(:last-child):after {
-                content: ', ';
+                span {
+                    text-decoration: underline;
+                    white-space: unset;
+                }
+
+                &:hover span {
+                    text-decoration: none;
+                }
+
+                &:not(:last-child):after {
+                    content: ', ';
+                }
             }
         }
 
