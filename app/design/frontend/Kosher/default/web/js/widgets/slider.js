@@ -42,14 +42,14 @@ define([
                         }
                     },
                     {
-                        breakpoint: 1150,
+                        breakpoint: 1024,
                         settings: {
                             slidesToShow: 2,
                             slidesToScroll: 2,
                         }
                     },
                     {
-                        breakpoint: 780,
+                        breakpoint: 768,
                         settings: {
                             slidesToShow: 2,
                             slidesToScroll: 2,
