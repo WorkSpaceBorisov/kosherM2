@@ -27,6 +27,14 @@ define(['jquery', 'domReady!'], function ($) {
                         .find('.submenu')
                         .slideUp(300);
                 });
+
+                $(document).mouseup(function (e) {
+                    const container = $('.page-header [data-action="navigation"]');
+                    if (!container.is(e.target) &&
+                        container.has(e.target).length === 0 && $('html').hasClass('nav-opened') && $(e.target).attr("data-action") !== 'toggle-nav') {
+                        $('[data-action="toggle-nav"]').trigger('click')
+                    }
+                });
             },
 
             _initNavigation() {
@@ -54,7 +62,7 @@ define(['jquery', 'domReady!'], function ($) {
                     }
                 });
             },
-            
+
             _addViewAll() {
                 const subMenus = this.element.find('li.level1.parent');
 

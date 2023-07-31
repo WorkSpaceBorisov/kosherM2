@@ -98,13 +98,6 @@
             display: none;
         }
 
-        .products-grid & {
-            display: grid;
-            grid-gap: 16px 16px;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            margin-bottom: 20px;
-        }
-
         &.widget-product-grid {
             display: flex;
             overflow: hidden;
@@ -783,7 +776,19 @@
     }
 }
 
-//
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .products-grid .product-items {
+        display: flex;
+        flex-flow: wrap;
+        justify-content: space-between;
+
+        .product-item {
+            width: calc(~'50% - 5px');
+            margin-bottom: 10px;
+        }
+    }
+}
+
 //  Tablet
 //  _____________________________________________
 
@@ -1107,6 +1112,10 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .catalog-category-view .products-grid:not(.slick-slider) .product-items {
         margin-right: 3px;
+        display: grid;
+        grid-gap: 16px 16px;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        margin-bottom: 20px;
     }
 
     .products-grid .product-items {

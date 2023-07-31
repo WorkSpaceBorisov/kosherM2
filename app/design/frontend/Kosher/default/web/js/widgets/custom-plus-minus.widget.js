@@ -120,8 +120,10 @@ define(['jquery', 'Magento_Customer/js/customer-data', 'domReady!'], function (
             const qty = $(this.element);
 
             qty.on('keyup', () => {
+                const cleanValue = qty.val().replace(/[^0-9]+/g, '');
+                qty.val(cleanValue);
                 self._addLoader();
-                self._changeQty(qty.val());
+                self._changeQty(cleanValue);
                 qty.trigger('blur');
             });
         },
