@@ -39,12 +39,17 @@ use Magento\Framework\App\Action\Action;
                             <!-- Label left -->
 
                             <div class="product-item__label-left-container">
-                                <div class="product-item__label-left sale">
-                                    <span><?= $escaper->escapeHtml(__('Sale')) ?></span>
-                                </div>
-                                <div class="product-item__label-left new">
-                                    <span><?= $escaper->escapeHtml(__('New')) ?></span>
-                                </div>
+                                <?php if ($_item->getData('special_price')): ?>
+                                    <div class="product-item__label-left sale">
+                                        <span><?= $escaper->escapeHtml(__('Sale')) ?></span>
+                                    </div>
+                                <?php endif; ?>
+                                
+                                <?php if ($_item->getData('news_from_date')): ?>
+                                    <div class="product-item__label-left new">
+                                        <span><?= $escaper->escapeHtml(__('New')) ?></span>
+                                    </div>
+                                <?php endif; ?>
                             </div>
 
                             <!-- Photo -->
