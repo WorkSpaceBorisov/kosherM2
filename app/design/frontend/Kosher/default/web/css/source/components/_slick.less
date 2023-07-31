@@ -21,10 +21,10 @@
                         background: rgba(0, 0, 0, .1);
                         border-radius: 14px;
                         border: 1px dotted @kosher-color__18;
-                        bottom: 15px;
+                        bottom: 8px;
                         left: 50%;
                         margin: 0;
-                        padding: 7px;
+                        padding: 0;
                         position: absolute;
                         text-align: center;
                         transform: translate(-50%, 0);
@@ -136,5 +136,13 @@
                 outline: none;
             }
         }
+    }
+}
+
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    body .slick-slider.slick-initialized.slick-dotted .slick-dots {
+        bottom: 15px;
+        padding: 7px;
     }
 }
