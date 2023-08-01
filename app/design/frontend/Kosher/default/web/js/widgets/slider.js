@@ -1,8 +1,9 @@
 define([
     'jquery',
     'slick',
+    'matchMedia',
     'domReady!'
-], function ($, slick) {
+], function ($, slick, mediaCheck) {
     'use strict';
 
     $.widget('kosh.slider', {
@@ -61,6 +62,7 @@ define([
             },
             
             useCarousel: false,
+            onlyDesktop: false,
             initial: 1
         },
 
@@ -69,7 +71,40 @@ define([
          * @private
          */
         _create() {
-            this.slickObject = this._initSlick();
+            var self = this,
+                element = self.element;
+
+            if (this.options.useCarousel) {
+                if (this.options.onlyDesktop) {
+                    mediaCheck({
+                        media: '(min-width: 768px)',
+                        entry: function () {
+                            this.slickObject = self.element.slick(this.options.carouselOptions);
+                        }.bind(this),
+                        exit: function () {
+                            setTimeout(function () {
+                                if (this.slickObject) {
+                                    this.slickObject.slick('destroy');
+                                    this.slickObject = null;
+                                }
+                            }.bind(this), 500)
+                        }.bind(this)
+                    })
+                } else {
+                    this.slickObject = self.element.slick(this.options.carouselOptions);
+                }
+            } else {
+                this.options.sliderOptions.initialSlide = self._getRandomSlide();
+                this.slickObject  = self.element.slick(self.options.sliderOptions);
+            }
+
+            $(document).on('slider:needUpdate', $.proxy(this._recalcSlider, this));
+
+            if (!this.slickObject) return this;
+        },
+
+        _recalcSlider: function () {
+            this.slickObject.slick('setPosition');
         },
 
         /**
@@ -81,23 +116,6 @@ define([
             let max = +$(this.element).find('li').length;
             let random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
             return random(min, max)
-        },
-
-        /**
-         * Call all methods of initialization.
-         * @private
-         */
-        _initSlick() {
-            let slickObject = null;
-
-            if (this.options.useCarousel) {
-                slickObject = this.element.slick(this.options.carouselOptions);
-            } else {
-                this.options.sliderOptions.initialSlide = this._getRandomSlide();
-                slickObject = this.element.slick(this.options.sliderOptions);
-            }
-
-            return slickObject;
         }
 
     });

@@ -118,13 +118,17 @@ define(['jquery', 'Magento_Customer/js/customer-data', 'domReady!'], function (
         _initKeyup() {
             const self = this;
             const qty = $(this.element);
+            let timeout = null;
 
             qty.on('keyup', () => {
-                const cleanValue = qty.val().replace(/[^0-9]+/g, '');
-                qty.val(cleanValue);
-                self._addLoader();
-                self._changeQty(cleanValue);
-                qty.trigger('blur');
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    const cleanValue = qty.val().replace(/[^0-9]+/g, '');
+                    qty.val(cleanValue);
+                    self._addLoader();
+                    self._changeQty(cleanValue);
+                    qty.trigger('blur');
+                }, 1000);
             });
         },
 

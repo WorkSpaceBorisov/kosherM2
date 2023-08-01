@@ -22,7 +22,13 @@
                     ) ?>
             <?php endif; ?>
             <?php if($_data['code'] === 'weight'): ?>
-                (Shipping weight <?= /* @noEscape */ ($_helper->productAttribute($_product, $_data['value'], $_data['code']) * 1000) ?>) 
+                (Shipping weight 
+                <?php if(($_helper->productAttribute($_product, $_data['value'], $_data['code']) * 1000) < 1000): ?>
+                    <?= /* @noEscape */ ($_helper->productAttribute($_product, $_data['value'], $_data['code']) * 1000) ?> g
+                <?php else: ?>
+                    <?= /* @noEscape */ ($_helper->productAttribute($_product, $_data['value'], $_data['code']) / 1000) ?> kg
+                <?php endif; ?>
+                ) 
             <?php endif; ?>
         <?php endforeach; ?>
     </div>
