@@ -1,8 +1,3 @@
-// /**
-//  * Copyright © Magento, Inc. All rights reserved.
-//  * See COPYING.txt for license details.
-//  */
-
 @import 'module/_listings.less';
 @import 'module/_toolbar.less';
 
@@ -19,6 +14,16 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
+
+    .attributes-top {
+        margin-bottom: 20px;
+        color: @kosher-color__19;
+    }
+
+    .product.attribute.description {
+        margin-bottom: 20px;
+        color: @kosher-color__19;
+    }
 
     //  Category view
     .old-price,
@@ -146,37 +151,13 @@
         }
     }
 
-    .product.info.detailed {
-        clear: both;
-        margin-bottom: 30px;
-
-        .additional-attributes {
-            width: auto;
-            .lib-table-bordered(
-                @_table_type: clear
-            );
-            .lib-table-resize(
-                @_th-padding-left: 0,
-                @_th-padding-right: @indent__l,
-                @_th-padding-bottom: @indent__s,
-                @_td-padding-bottom: @indent__s
-            );
-        }
-    }
-
     .product-info-main {
         .product-info-price {
             .lib-css(color, @product-info-price);
             border-bottom: 1px solid @color-gray-light5;
-            display: table;
             margin-bottom: @indent__s + @indent__xs;
-            width: 100%;
 
             .price-box {
-                display: inline-block;
-                vertical-align: top;
-                width: auto;
-
                 .price-container {
                     > span {
                         display: block;
@@ -227,12 +208,7 @@
         }
 
         .product-info-stock-sku {
-            display: inline-block;
-            float: right;
             padding-bottom: @indent__s;
-            padding-left: 10%;
-            text-align: right;
-            vertical-align: top;
         }
 
         .stock {
@@ -256,10 +232,6 @@
                     .type {
                         font-weight: normal;
                         margin-right: @indent__xs;
-
-                        &:after {
-                            content: '#:';
-                        }
                     }
 
                     .value {
@@ -635,12 +607,6 @@
             padding-right: @indent__s;
         }
     }
-
-    .product.info.detailed {
-        .additional-attributes-wrapper {
-            &:extend(.abs-no-border-top all);
-        }
-    }
 }
 
 //
@@ -651,6 +617,8 @@
     .product-info-main {
         .page-title-wrapper {
             h1 {
+                .lib-font-size(48);
+                .lib-line-height(58);
                 .lib-css(margin-bottom, @product-h1-margin-bottom-desktop);
             }
         }
@@ -768,6 +736,12 @@
         .column.main {
             min-height: inherit;
         }
+    }
+
+    .attributes-top,
+    .product.attribute.description {
+        .lib-font-size(18);
+        .lib-line-height(30);
     }
 }
 
