@@ -61,7 +61,9 @@ define([
 
             let infoBlock = newTag('div', 'k4u-popup__product-info-block');
 
-            infoBlock.appendChild(newTag('h3', 'k4u-popup__title', data.name));
+            let link = `<a href="${data.url_key}.html">${data.name}</a>`
+
+            infoBlock.append(newTag('h3', 'k4u-popup__title', link));
 
             // Main attributies
 
