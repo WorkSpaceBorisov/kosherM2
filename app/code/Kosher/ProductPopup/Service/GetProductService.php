@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Kosher\ProductPopup\Service;
 
 use Exception;
+use Kosher\CategoryAdjustment\Service\CategoryAttribute\GetLabelCategoryAttributeFromProductService;
 use Kosher\ProductPopup\Api\PopupProductDataInterface;
-use Kosher\ProductPopup\Service\CategoryAttribute\GetLabelCategoryAttributeFromProductService;
 use Kosher\ProductPopup\Service\ProductAttribute\GetOptionValueByIdService;
 use Kosher\ProductPopup\Service\ProductAttribute\GetResizeImageCacheUrlService;
 use Magento\Catalog\Api\ProductRepositoryInterface;

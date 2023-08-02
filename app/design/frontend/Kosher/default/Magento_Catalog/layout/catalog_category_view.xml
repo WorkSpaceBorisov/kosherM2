@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
 
     <!-- REMOVE -->
     <referenceBlock name="category.product.addto" remove="true"/>
@@ -7,7 +8,13 @@
     <referenceBlock name="sidebar.additional" remove="true"/>
     <referenceBlock name="category.product.addto" remove="true"/>
     <referenceBlock name="page.main.title" remove="true"/>
-
+    <referenceBlock name="category.products.list">
+        <arguments>
+            <argument name="view_model" xsi:type="object">
+                Kosher\ProductAdjustment\ViewModel\CategoriesDataFromProductViewModel
+            </argument>
+        </arguments>
+    </referenceBlock>
     <!-- MOVE -->
     <body>
         <container name="category.body" htmlTag="section" htmlClass="category-body" after="header.container"/>
