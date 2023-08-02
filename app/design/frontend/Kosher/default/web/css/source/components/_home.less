@@ -391,7 +391,10 @@
     }
 
     .home-products-slider .products-grid .product-items {
-        margin: 0 -8px;
+        flex-flow: row;
+        overflow: auto;
+        margin-right: 0;
+        .custom-scrollbar();
         
         .product-item-info {
             margin: 0 4px;

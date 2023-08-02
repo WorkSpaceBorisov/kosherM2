@@ -6,18 +6,34 @@
 
     .message.info {
         .lib-message-icon-inner(info);
+
+        > *:first-child:before {
+            font-family: 'icomoon', sans-serif;
+        }
     }
 
     .message.error {
         .lib-message-icon-inner(error);
+
+        > *:first-child:before {
+            font-family: 'icomoon', sans-serif;
+        }
     }
 
     .message.warning {
         .lib-message-icon-inner(warning);
+
+        > *:first-child:before {
+            font-family: 'icomoon', sans-serif;
+        }
     }
 
     .message.notice {
         .lib-message-icon-inner(notice);
+
+        > *:first-child:before {
+            font-family: 'icomoon', sans-serif;
+        }
     }
 
     .message.success {
@@ -25,10 +41,6 @@
     }
 
     .page.messages .message {
-        > *:first-child:before {
-            font-family: 'icomoon', sans-serif;
-        }
-
         &.error:before {
             content: '';
             position: absolute;
