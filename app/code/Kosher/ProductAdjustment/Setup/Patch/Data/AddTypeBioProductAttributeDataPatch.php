@@ -3,17 +3,17 @@ declare(strict_types=1);
 
 namespace Kosher\ProductAdjustment\Setup\Patch\Data;
 
-use Magento\Catalog\Model\Product;
-use Magento\Eav\Setup\EavSetup;
+use Magento\Catalog\Model\Category;
+use Magento\Catalog\Model\Category\Attribute\Backend\Image;
+use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
-use Magento\Catalog\Model\Product\Attribute\Frontend\Image as ImageFrontendModel;
-use \Zend_Validate_Exception;
+use Magento\Framework\Validator\ValidateException;
+
 class AddTypeBioProductAttributeDataPatch implements DataPatchInterface
 {
-
     /**
      * @var ModuleDataSetupInterface
      */
@@ -30,86 +30,41 @@ class AddTypeBioProductAttributeDataPatch implements DataPatchInterface
      */
     public function __construct(
         ModuleDataSetupInterface $moduleDataSetup,
-        EavSetupFactory          $eavSetupFactory
-    )
-    {
+        EavSetupFactory $eavSetupFactory
+    ) {
         $this->moduleDataSetup = $moduleDataSetup;
         $this->eavSetupFactory = $eavSetupFactory;
     }
 
     /**
-     * @return void
+     * @return AddTypeBioProductAttributeDataPatch
      * @throws LocalizedException
-     * @throws Zend_Validate_Exception
+     * @throws ValidateException
      */
-    public function apply(): void
+    public function apply(): AddTypeBioProductAttributeDataPatch
     {
-        /** @var EavSetup $eavSetup */
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
 
         $eavSetup->addAttribute(
-            Product::ENTITY,
-            'gluten_free',
+            Category::ENTITY,
+            'category_label',
             [
-                'is_visible_in_grid' => true,
-                'is_html_allowed_on_front' => true,
-                'visible_on_front' => true,
+                'input' => 'image',
                 'visible' => true,
-                'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
-                'label' => 'Gluten Free',
+                'global' => ScopedAttributeInterface::SCOPE_STORE,
+                'label' => 'Category Label',
                 'source' => null,
                 'type' => 'varchar',
-                'is_used_in_grid' => true,
-                'required' => false,
-                'input' => 'media_image',
-                'frontend' => ImageFrontendModel::class,
-                'used_in_product_listing' => true,
-                'is_filterable_in_grid' => true,
-                'sort_order' => 10,
-            ]
-        );
-        $eavSetup->addAttribute(
-            Product::ENTITY,
-            'sugar_free',
-            [
-                'is_visible_in_grid' => true,
-                'is_html_allowed_on_front' => true,
-                'visible_on_front' => true,
-                'visible' => true,
-                'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
-                'label' => 'Sugar Free',
-                'source' => null,
-                'type' => 'varchar',
-                'is_used_in_grid' => true,
-                'required' => false,
-                'input' => 'media_image',
-                'frontend' => ImageFrontendModel::class,
-                'used_in_product_listing' => true,
-                'is_filterable_in_grid' => true,
                 'sort_order' => 11,
-            ]
-        );
-        $eavSetup->addAttribute(
-            Product::ENTITY,
-            'bio_attribute',
-            [
-                'is_visible_in_grid' => true,
-                'is_html_allowed_on_front' => true,
-                'visible_on_front' => true,
-                'visible' => true,
-                'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
-                'label' => 'BIO',
-                'source' => null,
-                'type' => 'varchar',
-                'is_used_in_grid' => true,
                 'required' => false,
-                'input' => 'media_image',
-                'frontend' => ImageFrontendModel::class,
-                'used_in_product_listing' => true,
-                'is_filterable_in_grid' => true,
-                'sort_order' => 12,
+                'group' => 'General Information',
+                'backend' => Image::class,
+                'default' => null,
+                'user_defined' => false,
             ]
         );
+
+        return $this;
     }
 
     /**

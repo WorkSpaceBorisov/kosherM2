@@ -257,36 +257,17 @@ define([
             infoBlock.appendChild(popupDetails)
 
             // Image right attributies
-
-            if (data.bio_attribute || data.sugar_free || data.gluten_free) {
+            if (data.categoryLabels.size !== 0) {
 
                 let labelsContainer = document.createElement('div');
                 labelsContainer.classList.add('product-image-right-labels');
                 document.querySelector('.k4u-popup__product-image-block').appendChild(labelsContainer);
 
-                if (data.sugar_free) {
+                $.each(data.categoryLabels, function( key, value ) {
                     let sf_image = document.createElement('img');
-                    sf_image.setAttribute('title', 'Sugar free');
-                    sf_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/sf-label-big-01.svg');
-                    sf_image.classList.add('bio');
+                    sf_image.setAttribute('src', value);
                     labelsContainer.appendChild(sf_image);
-                }
-
-                if (data.bio_attribute) {
-                    let bio_image = document.createElement('img');
-                    bio_image.setAttribute('title', 'Bio');
-                    bio_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/bio-label-big-01.svg');
-                    bio_image.classList.add('bio');
-                    labelsContainer.appendChild(bio_image);
-                }
-
-                if (data.gluten_free) {
-                    let gluten_free_image = document.createElement('img');
-                    gluten_free_image.setAttribute('title', 'Gluten free');
-                    gluten_free_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/gf-label-big-01.svg');
-                    gluten_free_image.classList.add('gf');
-                    labelsContainer.appendChild(gluten_free_image);
-                }
+                });
             }
 
             container.appendChild(infoBlock);
