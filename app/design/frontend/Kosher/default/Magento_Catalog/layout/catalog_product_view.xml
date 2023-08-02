@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <remove src="mage/gallery/gallery.css" />
+    </head>
+    
+    <referenceBlock name="product.info.extrahint" remove="true"/>
+    <referenceBlock name="content.aside" remove="true"/>
+    <referenceBlock name="product.info.review" remove="true"/>
+    <referenceBlock name="product.reviews.wrapper" remove="true"/>
+
+    <body>
+        <container name="product.info.price.row" htmlTag="div" htmlClass="product-info-price-row"></container>
+
+        <block class="Magento\Framework\View\Element\Template" name="product.attributes.bottom.wrapper" template="Magento_PageBuilder::catalog/product/view/section_wrapper.phtml">
+            <block class="Magento\PageBuilder\Block\Catalog\Block\Product\View\Attributes" name="product.bottom.attributes.exclude.pagebuilder" template="Magento_Catalog::product/view/attributes-bottom.phtml">
+                <arguments>
+                    <argument name="display_attributes" xsi:type="string">non_pagebuilder</argument>
+                </arguments>
+            </block>
+        </block>
+
+        <block name="product.info.labels" class="Magento\PageBuilder\Block\Catalog\Block\Product\View\Attributes" template="Magento_Catalog::product/view/labels.phtml"></block>
+    
+        <move element="product.info.stock.sku" destination="product.info.main" after="page.main.title" />
+        <move element="product.attributes.wrapper" destination="product.info.main" after="page.main.title" />
+        <move element="product.info.price.row" destination="product.info.main" after="product.attributes.wrapper" />
+
+        
+        <move element="product.info.overview" destination="product.info.main" before="product.info.price.row" />
+        <move element="product.attributes.bottom.wrapper" destination="product.info.main" after="-" />
+        
+        <!--  -->
+        <move element="product.info" destination="product.info.price.row" after="-" />
+        <move element="product.info.price" destination="product.info.price.row" before="-" />
+
+        <move element="product.info.description" destination="product.attributes.wrapper" after="-" />
+        <move element="product.info.labels" destination="page.main.title" after="-" />
+    </body>
+</page>

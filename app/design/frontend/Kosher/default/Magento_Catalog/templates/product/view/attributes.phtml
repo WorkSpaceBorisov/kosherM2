@@ -1,0 +1,35 @@
+<?php
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+
+/**
+ * Product additional attributes template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Attributes
+ */
+?>
+<?php
+    $_helper = $this->helper(Magento\Catalog\Helper\Output::class);
+    $_product = $block->getProduct();
+?>
+
+<?php if ($_additional = $block->getAdditionalData()) :?>
+    <div class="attributes-top">
+        <?php foreach ($_additional as $_data) :?>
+            <?php if($_data['code'] === 'singleweight'): ?>
+                Weight, gr.
+                <?= /* @noEscape */ (
+                    $_helper->productAttribute($_product, $_data['value'], $_data['code']) * 1000
+                    ) ?>
+            <?php endif; ?>
+            <?php if($_data['code'] === 'weight'): ?>
+                (Shipping weight 
+                <?php if(($_helper->productAttribute($_product, $_data['value'], $_data['code']) * 1000) < 1000): ?>
+                    <?= /* @noEscape */ ($_helper->productAttribute($_product, $_data['value'], $_data['code']) * 1000) ?> g
+                <?php else: ?>
+                    <?= /* @noEscape */ ($_helper->productAttribute($_product, $_data['value'], $_data['code']) / 1000) ?> kg
+                <?php endif; ?>
+                ) 
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+<?php endif;?>

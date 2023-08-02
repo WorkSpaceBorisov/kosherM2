@@ -1,0 +1,50 @@
+<?php
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+<?php $_product = $block->getProduct(); ?>
+<?php $buttonTitle = __('Add to Cart'); ?>
+<?php if ($_product->isSaleable()) :?>
+    <div class="calc-cell-container">
+        <?php if ($block->shouldRenderQuantity()) :?>
+            <div class="calc-cell calculator">
+                <div class="custom-qty-btn btn-minus"><span>-</span></div>
+                <input type="number"
+                    data-mage-init='{
+                    "custom.plusMinus":{
+                        "minimal": 1,
+                        "buttons": false, 
+                        "limit": 1000, 
+                        "productId" : "<?php echo $_product->getId(); ?>",
+                        "updateQtyUrl" : "<?php echo $block->getUrl("checkout/sidebar/updateItemQty"); ?>",
+                        "removeItemUrl" : "<?php echo $block->getUrl("checkout/sidebar/removeItem"); ?>"
+                    }}'
+                    type="number" 
+                    name="qty"
+                    id="qty"
+                    min="1"
+                    value="<?= $block->getProductDefaultQty() * 1 ?>"
+                    title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
+                    class="product-quantity input-text qty custom"
+                    data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                    />
+                <div class="custom-qty-btn btn-plus"><span>+</span></div>
+            </div>
+        <?php endif; ?>
+        <div class="add-to-calc calc-cell">
+            <button type="submit"
+                title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
+                class="action primary tocart add-to-calc__button"
+                id="product-addtocart-button" disabled>
+                <span><?= $block->escapeHtml($buttonTitle) ?></span>
+            </button>
+            <?= $block->getChildHtml('', true) ?>
+        </div>
+    </div>
+<?php endif; ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/js/validate-product": {}
+        }
+    }
+</script>

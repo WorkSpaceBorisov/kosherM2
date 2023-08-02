@@ -26,7 +26,7 @@ define(['jquery', 'Magento_Customer/js/customer-data', 'domReady!'], function (
 
             // Add to cart category button slide
             const $body = $('body');
-            if ($body.hasClass('page-products') || $body.hasClass('cms-index-index')) {
+            if ($body.hasClass('page-products') || $body.hasClass('cms-index-index') || $body.hasClass('catalog-product-view')) {
                 $('.add-to-calc__button').on('click', (e) => $(e.target).closest('.calc-cell-container').addClass('show-calc'));
             }
         },
@@ -64,7 +64,7 @@ define(['jquery', 'Magento_Customer/js/customer-data', 'domReady!'], function (
                 ? plus.addClass('disabled')
                 : plus.removeClass('disabled');
 
-            if (+val === self.options.minimal) {
+            if (+val === self.options.minimal && self.options.minimal !== 1) {
                 let container = qty.closest('.calc-cell-container');
                 setTimeout(() => {
                     qty.closest('.show-calc')
@@ -118,13 +118,17 @@ define(['jquery', 'Magento_Customer/js/customer-data', 'domReady!'], function (
         _initKeyup() {
             const self = this;
             const qty = $(this.element);
+            let timeout = null;
 
             qty.on('keyup', () => {
-                const cleanValue = qty.val().replace(/[^0-9]+/g, '');
-                qty.val(cleanValue);
-                self._addLoader();
-                self._changeQty(cleanValue);
-                qty.trigger('blur');
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    const cleanValue = qty.val().replace(/[^0-9]+/g, '');
+                    qty.val(cleanValue);
+                    self._addLoader();
+                    self._changeQty(cleanValue);
+                    qty.trigger('blur');
+                }, 1000);
             });
         },
 

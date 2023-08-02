@@ -153,10 +153,36 @@
 @icon-edit: false;
 @icon-print: false;
 
-@message-success__color: rgb(2, 31, 9);
-@message-success__background: rgba(42, 159, 71, 1);
+@message-icon__font-size: 24px;
 
-@message__padding: 8px 20px;
+@message-success__color: @color-white;
+@message-success__background: #2a9f47;
+@message-success-icon: false;
+
+@message-info__color: @color-white;
+@message-info__background: #f2ba00;
+@message-info-icon: '\e933';
+@message-info-icon__left: 10px;
+@message-info-icon__color-inner: @color-white;
+
+@message-warning__color: @color-white;
+@message-warning__background: #f2ba00;
+@message-warning-icon: '\e933';
+@message-warning-icon__left: 10px;
+@message-warning-icon__color-inner: @color-white;
+
+@message-error__color: #be0e0b;
+@message-error__background: transparent;
+@message-error-icon: '\e933';
+@message-error-icon__left: 10px;
+
+@message-notice__color: @color-white;
+@message-notice__background: #f2ba00;
+@message-notice-icon: '\e933';
+@message-notice-icon__left: 10px;
+@message-notice-icon__color-inner: @color-white;
+
+@message__padding: 8px 15px 8px 40px;
 @message__line-height: 20px;
 @message__font-size: 16px;
 @message__font-weight: 600;
@@ -284,8 +310,6 @@
 @overlay__background: @color-gray55;
 @overlay__opacity: .7;
 @overlay__opacity-old: 70;
-
-@gallery-thumb-border-color-active: @active__color;
 
 //  Checkout tooltip icon
 @checkout-tooltip-icon__font-size: 21px;

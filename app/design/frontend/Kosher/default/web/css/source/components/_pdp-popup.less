@@ -139,9 +139,13 @@
 
     .k4u-popup__title {
         .lib-font-size(20);
-        color: @kosher-color__19;
         font-weight: 700;
         margin-bottom: 15px;
+
+        a {
+            color: @kosher-color__19;
+            text-decoration: none;
+        }
     }
 
     .k4u-popup__description {
@@ -432,20 +436,6 @@
         .actions-secondary {
             display: none;
         }
-
-        .stock {
-            .lib-font-size(19);
-            font-weight: 700;
-            line-height: 1;
-
-            &.unavailable {
-                color: @kosher-color__03;
-            }
-
-            &.available {
-                color: @kosher-color__09;
-            }
-        }
     }
 
     .k4u-popup__additional-info {
@@ -535,12 +525,10 @@
             align-items: flex-start;
             margin-right: 12px;
 
-            .attrs-list {
-                &:before {
-                    .icomoon(@icon-binocle, 16, @kosher-color__21);
-                    top: 0;
-                    margin-right: 7px;
-                }
+            &:before {
+                .icomoon(@icon-binocle, 16, @kosher-color__21);
+                top: 0;
+                margin-right: 7px;
             }
 
             a {
