@@ -26,7 +26,7 @@ define(['jquery', 'Magento_Customer/js/customer-data', 'domReady!'], function (
 
             // Add to cart category button slide
             const $body = $('body');
-            if ($body.hasClass('page-products') || $body.hasClass('cms-index-index')) {
+            if ($body.hasClass('page-products') || $body.hasClass('cms-index-index') || $body.hasClass('catalog-product-view')) {
                 $('.add-to-calc__button').on('click', (e) => $(e.target).closest('.calc-cell-container').addClass('show-calc'));
             }
         },
@@ -64,7 +64,7 @@ define(['jquery', 'Magento_Customer/js/customer-data', 'domReady!'], function (
                 ? plus.addClass('disabled')
                 : plus.removeClass('disabled');
 
-            if (+val === self.options.minimal) {
+            if (+val === self.options.minimal && self.options.minimal !== 1) {
                 let container = qty.closest('.calc-cell-container');
                 setTimeout(() => {
                     qty.closest('.show-calc')

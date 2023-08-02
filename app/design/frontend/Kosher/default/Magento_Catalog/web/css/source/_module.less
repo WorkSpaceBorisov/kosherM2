@@ -15,20 +15,85 @@
 
 & when (@media-common = true) {
 
+    // need to remove after reviews implementation
+    .review-hardcode {
+        .lib-font-size(16);
+        .lib-line-height(24);
+        letter-spacing: -.025em;
+        margin: 34px 0 22px;
+        display: flex;
+        align-items: center;
+
+        .product-full-width-section & {
+            display: none;
+        }
+
+        svg {
+            margin-right: 10px;
+        }
+    }
+
+    .product-info-main .product.attribute.overview + .review-hardcode {
+        display: none;
+    }
+    // need to remove
+
     .catalog-product-view .column.main {
         background-color: @color-white;
         display: flex;
         flex-direction: column;
     }
 
+    .page-title-wrapper.product {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 17px;
+
+        .page-title {
+            margin-bottom: 0;
+        }
+    }
+
+    .product-label {
+        order: -1;
+        margin-right: 15px;
+    }
+
+    .product-label-item {
+        font-weight: @font-weight__bold;
+
+        &--sale {
+            color: @kosher-color__03;
+        }
+
+        &--new {
+            color: @kosher-color__08;
+        }
+    }
+
     .attributes-top {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         color: @kosher-color__19;
     }
 
     .product.attribute.description {
-        margin-bottom: 20px;
+        margin-bottom: 12px;
         color: @kosher-color__19;
+    }
+
+    .stock {
+        .lib-font-size(14);
+        font-weight: @font-weight__heavier;
+        letter-spacing: -.01em;
+        line-height: 1;
+
+        &.unavailable {
+            color: @kosher-color__06;
+        }
+
+        &.available {
+            color: @kosher-color__09;
+        }
     }
 
     //  Category view
@@ -170,7 +235,7 @@
 
         .product-info-price-row {
             border-bottom: 1px solid @kosher-color__15;
-            padding-bottom: 12px;
+            padding-bottom: 16px;
         }
 
         .product-info-price {
@@ -211,18 +276,16 @@
             flex-wrap: wrap;
 
             .attribute-item {
-                .lib-font-size(16);
-                .lib-line-height(24);
                 letter-spacing: -.025em;
                 display: flex;
                 align-items: center;
                 margin-bottom: 12px;
-                margin-right: 45px;
-                min-width: 135px;
+                margin-right: 15px;
+                min-width: 90px;
                 color: @kosher-color__21;
 
                 svg {
-                    margin-right: 4px;
+                    margin-right: 11px;
                 }
             }
         }
@@ -237,12 +300,6 @@
             &.available {
                 display: none;
             }
-
-            &.available,
-            &.unavailable {
-                font-weight: @font-weight__bold;
-                text-transform: uppercase;
-            }
         }
 
         .product {
@@ -254,6 +311,7 @@
                         font-weight: @font-weight__semibold;
                         letter-spacing: -.015em;
                         color: @kosher-color__17;
+                        margin-right: 6px;
                     }
 
                     .value {
@@ -268,7 +326,7 @@
 
                 &.overview {
                     color: @kosher-color__19;
-                    margin: @indent__base 0;
+                    margin: 33px 0 21px;
                 }
             }
 
@@ -277,18 +335,150 @@
             }
         }
 
+        @calc-cell-width: 191px;
+        @product-item-actions-cell-height: 60px;
+
         .product-add-form {
-            clear: both;
-            padding-top: @indent__s + @indent__xs;
+            align-items: flex-end;
+            display: flex;
+            height: @product-item-actions-cell-height;
+            justify-content: flex-end;
+            overflow: hidden;
+            width: @calc-cell-width;
+            margin-left: 35px;
         }
 
-        .product-reviews-summary {
-            float: left;
+        .calc-cell-container {
+            display: flex;
+            height: 100%;
+            left: -50px;
+            position: relative;
+            transition: left .2s;
+            width: 332px;
+
+            &.show-calc {
+                left: 141px;
+            }
         }
 
-        .product-options-bottom {
-            .box-tocart {
-                margin-top: @form-field__vertical-indent;
+        .calc-cell {
+            flex-grow: 0;
+            flex-shrink: 0;
+            position: relative;
+            width: @calc-cell-width;
+
+            .custom-validation-message {
+                left: unset;
+                right: 12px;
+                transform: unset;
+                width: 150px;
+            }
+        }
+
+        .calculator {
+            align-items: center;
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 1px;
+
+            .input-text.custom {
+                .lib-font-size(16);
+                border: 0;
+                font-weight: @font-weight__semibold;
+                margin: 2px;
+                text-align: center;
+                width: 50px;
+            }
+
+            .custom-qty-btn {
+                .size(56);
+                align-items: center;
+                background: @kosher-color__01;
+                border-radius: 8px;
+                border: 1px solid @kosher-color__02;
+                display: flex;
+                flex-grow: 0;
+                flex-shrink: 0;
+                justify-content: center;
+                position: relative;
+                transition: all .2s;
+
+                & > span {
+                    display: none;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &:active {
+                    background: @kosher-color__30;
+                }
+
+                &:before {
+                    .to-center();
+                }
+
+                &.btn-plus {
+                    &:before {
+                        .icomoon(@icon-plus-plusminus, 12px, @kosher-color__19);
+                    }
+                }
+
+                &.btn-minus {
+                    &:before {
+                        .icomoon(@icon-minus-plusminus, 2px, @kosher-color__19);
+                    }
+                }
+
+                &.disabled {
+                    background: @kosher-color__27;
+                    border: 0;
+                    pointer-events: none;
+                }
+            }
+        }
+
+        .add-to-calc {
+            align-items: flex-end;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .add-to-calc__button {
+            .size(100%, 56px);
+            align-items: center;
+            background: @kosher-color__04;
+            border-radius: 8px;
+            border: 2px solid @kosher-color__04;
+            display: flex;
+            justify-content: center;
+            position: relative;
+
+            span {
+                .lib-font-size(16);
+                color: @kosher-color__01;
+                display: block;
+                font-weight: @font-weight__semibold;
+                line-height: 1;
+                text-transform: capitalize;
+            }
+
+            &:before {
+                .icomoon(@icon-cart-new, 20px, @kosher-color__01);
+                margin-right: 12px;
+            }
+
+            &:hover {
+                background: @kosher-color__27;
+
+                &:before {
+                    color: @kosher-color__04;
+                }
+
+                span {
+                    color: @kosher-color__04;
+                }
             }
         }
     }
@@ -346,25 +536,6 @@
             .note.mage-error {
                 color: @error__color;
             }
-        }
-    }
-
-    .box-tocart {
-        &:extend(.abs-box-tocart all);
-
-        .input-text.qty {
-            &:extend(.abs-input-qty all);
-        }
-
-        .action.tocart {
-            &:extend(.abs-button-l all);
-            &:extend(.abs-button-responsive all);
-
-            &:not(:last-child) {
-                margin-bottom: 15px;
-            }
-
-            vertical-align: top;
         }
     }
 
@@ -557,12 +728,21 @@
         flex-direction: row;
     }
 
+    .attributes-top {
+        margin-bottom: 31px;
+    }
+
     .product.media {
-        padding: 20px 0;
+        padding: 20px 0 80px;
+    }
+
+    .product-label-item {
+        .lib-font-size(24);
+        .lib-line-height(33);
     }
 
     .product-info-main {
-        padding: 60px 40px;
+        padding: 72px 40px 60px 71px;
 
         .page-title-wrapper {
             h1 {
@@ -570,10 +750,6 @@
                 .lib-line-height(58);
                 .lib-css(margin-bottom, @product-h1-margin-bottom-desktop);
             }
-        }
-
-        .product-add-form {
-            padding-top: @indent__base;
         }
 
         .product-info-price-row {
@@ -589,13 +765,11 @@
                 }
             }
         }
-    }
 
-    .box-tocart {
-        .action.tocart {
-            margin-bottom: 0;
-            margin-right: 1%;
-            width: 49%;
+        .additional-attributes .attribute-item {
+            .lib-font-size(16);
+            .lib-line-height(24);
+            margin-right: 58px;
         }
     }
 
@@ -626,16 +800,6 @@
 
         .product.media {
             width: 50%;
-        }
-    }
-
-    .product-add-form {
-        .product-options-wrapper {
-            .field {
-                .control {
-                    width: 80%;
-                }
-            }
         }
     }
 
@@ -676,6 +840,8 @@
         .lib-font-size(18);
         .lib-line-height(30);
     }
+
+    
 }
 
 //
@@ -928,6 +1094,55 @@
                     flex-basis: inherit;
                 }
             }
+        }
+    }
+
+    .page-title-wrapper.product {
+        align-items: flex-end;
+    }
+
+    .product-info-main .product-add-form {
+        display: block;
+        width: 100%;
+        height: auto;
+        margin: 0;
+
+        .calc-cell-container {
+            width: 200%;
+            left: -100%;
+            margin-top: 10px;
+
+            &.show-calc {
+                left: 0;
+            }
+        }
+
+        .calc-cell {
+            width: 50%;
+            justify-content: center;
+        }
+
+        .calculator {
+            .custom-qty-btn {
+                height: 30px;
+                width: 30px;
+                border-radius: 4px;
+            }
+
+            .input-text.custom {
+                height: 30px;
+                width: 40px;
+            }
+        }
+        
+        .add-to-calc__button {
+            font-size: 1.2rem;
+            line-height: 1.4rem;
+            width: 100%;
+            padding: 6px 10px;
+            height: auto;
+            border-radius: 4px;
+            margin-left: 0;
         }
     }
 }

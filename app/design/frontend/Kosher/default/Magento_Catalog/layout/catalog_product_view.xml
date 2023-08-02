@@ -19,6 +19,8 @@
                 </arguments>
             </block>
         </block>
+
+        <block name="product.info.labels" class="Magento\PageBuilder\Block\Catalog\Block\Product\View\Attributes" template="Magento_Catalog::product/view/labels.phtml"></block>
     
         <move element="product.info.stock.sku" destination="product.info.main" after="page.main.title" />
         <move element="product.attributes.wrapper" destination="product.info.main" after="page.main.title" />
@@ -33,5 +35,6 @@
         <move element="product.info.price" destination="product.info.price.row" before="-" />
 
         <move element="product.info.description" destination="product.attributes.wrapper" after="-" />
+        <move element="product.info.labels" destination="page.main.title" after="-" />
     </body>
 </page>
