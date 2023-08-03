@@ -1,10 +1,17 @@
 <?php
-// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+
+use Magento\Catalog\Block\Product\View\Attributes;
+use Magento\Framework\Escaper;
+
+?>
+
+<?php
 
 /**
  * Product additional attributes template
  *
- * @var $block \Magento\Catalog\Block\Product\View\Attributes
+ * @var Attributes $block
+ * @var Escaper $escaper
  */
 ?>
 <?php
@@ -16,13 +23,14 @@
     <div class="attributes-top">
         <?php foreach ($_additional as $_data) :?>
             <?php if($_data['code'] === 'singleweight'): ?>
-                Weight, gr.
+                <?= $escaper->escapeHtml(__('Weight, gr.')) ?>
                 <?= /* @noEscape */ (
                     $_helper->productAttribute($_product, $_data['value'], $_data['code']) * 1000
                     ) ?>
             <?php endif; ?>
             <?php if($_data['code'] === 'weight'): ?>
-                (Shipping weight 
+                (
+                <?= $escaper->escapeHtml(__('Shipping weight')) ?>
                 <?php if(($_helper->productAttribute($_product, $_data['value'], $_data['code']) * 1000) < 1000): ?>
                     <?= /* @noEscape */ ($_helper->productAttribute($_product, $_data['value'], $_data['code']) * 1000) ?> g
                 <?php else: ?>

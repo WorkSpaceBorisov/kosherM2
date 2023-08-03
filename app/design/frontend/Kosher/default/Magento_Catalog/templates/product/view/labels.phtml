@@ -1,5 +1,12 @@
 <?php
-$_helper = $this->helper(Magento\Catalog\Helper\Output::class);
+/**
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+
+<?php
+/** @var \Magento\Catalog\Helper\Output $_helper */
+$_helper = $block->getData('outputHelper');
 $_product = $block->getProduct();
 ?>
 
