@@ -4,43 +4,33 @@
         <!-- Labels left -->
 
         <div class="product-item__label-left-container">
+            <!-- ko if: $data?.special_price -->
             <div class="product-item__label-left sale">
-                <span>Sale</span>
+                <span data-bind="i18n: 'Sale'"></span>
             </div>
+            <!-- /ko -->
+            <!-- ko if: $data?.news_from_date -->
             <div class="product-item__label-left new">
-                <span>New</span>
+                <span data-bind="i18n: 'New'"></span>
             </div>
+            <!-- /ko -->
         </div>
 
         <div class="minicart-item-inner">
-
-            <!-- ko if: product_has_url -->
-            <a data-bind="attr: {href: product_url, title: product_name}" tabindex="-1" class="product-item-photo">
+            <span class="product-item-photo">
                 <!-- ko foreach: $parent.getRegion('itemImage') -->
                 <!-- ko template: {name: getTemplate(), data: item.product_image} --><!-- /ko -->
                 <!-- /ko -->
-            </a>
-            <!-- /ko -->
-            <!-- ko ifnot: product_has_url -->
-            <span class="product-item-photo">
-            <!-- ko foreach: $parent.getRegion('itemImage') -->
-                <!-- ko template: {name: getTemplate(), data: item.product_image} --><!-- /ko -->
-                <!-- /ko -->
-        </span>
-            <!-- /ko -->
+            </span>
 
             <div class="product-item-details">
-                <strong class="product-item-name">
-                    <!-- ko if: product_has_url -->
-                    <a data-bind="attr: {href: product_url}, html: $parent.getProductNameUnsanitizedHtml(product_name)"></a>
-                    <!-- /ko -->
-                    <!-- ko ifnot: product_has_url -->
+                <div class="product-item-name">
                     <span data-bind="html: $parent.getProductNameUnsanitizedHtml(product_name)"></span>
-                    <!-- /ko -->
-                </strong>
+                </div>
 
                 <!-- ko if: options.length -->
-                <div class="product options" data-mage-init='{"collapsible":{"openedState": "active", "saveState": false}}'>
+                <div class="product options"
+                    data-mage-init='{"collapsible":{"openedState": "active", "saveState": false}}'>
                     <span data-role="title" class="toggle"><!-- ko i18n: 'See Details' --><!-- /ko --></span>
 
                     <div data-role="content" class="content">
@@ -50,7 +40,8 @@
                             <dt class="label"><!-- ko text: option.label --><!-- /ko --></dt>
                             <dd class="values">
                                 <!-- ko if: Array.isArray(option.value) -->
-                                <span data-bind="html: $parents[1].getOptionValueUnsanitizedHtml(option.value.join('<br>'))"></span>
+                                <span
+                                    data-bind="html: $parents[1].getOptionValueUnsanitizedHtml(option.value.join('<br>'))"></span>
                                 <!-- /ko -->
                                 <!-- ko if: (!Array.isArray(option.value) && ['file', 'html'].includes(option.option_type)) -->
                                 <span data-bind="html: $parents[1].getOptionValueUnsanitizedHtml(option.value)"></span>
@@ -71,24 +62,35 @@
 
                         <div class="price-box">
 
-                            <!-- ko if: canApplyMsrp -->
+                            <div class="price-wrap"
+                                data-bind="
+                                css: parseFloat($data?.price).toFixed(2) != $data.product_price_value ? 'price-wrap--special' : ''">
+                                <!-- ko if: parseFloat($data?.price).toFixed(2) != $data.product_price_value -->
+                                    <div class="old-price">
+                                        <span class="price" data-bind="i18n: parseFloat($data?.price).toFixed(2)"></span>
+                                    </div>
+                                <!-- /ko -->
 
-                            <div class="details-map">
-                                <span class="label" data-bind="i18n: 'Price'"></span>
-                                <span class="value" data-bind="i18n: 'See price before order confirmation.'"></span>
+                                <!-- ko if: canApplyMsrp -->
+
+                                <div class="details-map">
+                                    <span class="label" data-bind="i18n: 'Price'"></span>
+                                    <span class="value" data-bind="i18n: 'See price before order confirmation.'"></span>
+                                </div>
+
+                                <!-- /ko -->
+                                <!-- ko ifnot: canApplyMsrp -->
+                                <!-- ko foreach: $parent.getRegion('priceSidebar') -->
+                                <!-- ko template: {name: getTemplate(), data: item.product_price, as: 'price'} --><!-- /ko -->
+                                <!-- /ko -->
+                                <!-- /ko -->
+
                             </div>
 
-                            <!-- /ko -->
-                            <!-- ko ifnot: canApplyMsrp -->
-                            <!-- ko foreach: $parent.getRegion('priceSidebar') -->
-                            <!-- ko template: {name: getTemplate(), data: item.product_price, as: 'price'} --><!-- /ko -->
-                            <!-- /ko -->
-                            <!-- /ko -->
-
-                            <!-- ko if: singleweight -->
-                                <span class="price-here__weight" data-bind="attr: {id: 'update-cart-item-'+product_name }">
-                                    /<span data-bind="i18n: (singleweight * 1000) + 'g'"></span>
-                                </span>
+                            <!-- ko if: $data?.singleweight -->
+                            <span class="price-here__weight" data-bind="attr: {id: 'update-cart-item-'+product_name }">
+                                /<span data-bind="i18n: ($data.singleweight * 1000) + 'g'"></span>
+                            </span>
                             <!-- /ko -->
                         </div>
 
@@ -99,10 +101,7 @@
                            'data-cart-item': item_id,
                            'data-item-qty': qty,
                            'data-cart-item-id': product_sku
-                           }, value: qty"
-                                   type="text"
-                                   size="4"
-                                   class="item-qty cart-item-qty custom"/>
+                           }, value: qty" type="text" size="4" class="item-qty cart-item-qty custom" />
                             <div class="custom-qty-btn btn-minus"><span>-</span></div>
                             <div class="custom-qty-btn btn-plus"><span>+</span></div>
 
@@ -110,9 +109,7 @@
                            id: 'update-cart-item-'+item_id,
                            'data-cart-item': item_id,
                            title: $t('Update')
-                           }"
-                                    class="update-cart-item"
-                                    style="display: none">
+                           }" class="update-cart-item" style="display: none">
                                 <span data-bind="i18n: 'Update'"></span>
                             </button>
                         </div>
@@ -131,7 +128,7 @@
                     <!-- /ko -->
                     <div class="secondary">
                         <a href="#" data-bind="attr: {'data-cart-item': item_id, title: $t('Remove item')}"
-                           class="action delete">
+                            class="action delete">
                             <span data-bind="i18n: 'Remove'"></span>
                         </a>
                     </div>
@@ -141,6 +138,6 @@
         <div class="message notice" if="$data.message">
             <div data-bind="text: $data.message"></div>
         </div>
-        
+
     </div>
 </li>
