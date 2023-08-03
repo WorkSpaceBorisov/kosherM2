@@ -15,6 +15,10 @@
     //
     //  Minicart
     //  ---------------------------------------------
+    .price-wrap--special .price-container .minicart-price .price {
+        .lib-font-size(16);
+        color: @kosher-color__05;
+    }
 
     body {
         &.cart-opened .kosher-overlay {
@@ -514,9 +518,9 @@
 
         .minicart-price {
             .price {
-                .lib-font-size(15);
+                .lib-font-size(16);
                 color: @kosher-color__21;
-                font-weight: @font-weight__heavier;
+                font-weight: @font-weight__regular;
                 line-height: 1;
             }
         }
@@ -529,8 +533,8 @@
 
         .price-here__weight {
             .lib-font-size(14);
+            .lib-line-height(16);
             display: block;
-            line-height: 1;
             margin-left: 3px;
 
             & > span {
