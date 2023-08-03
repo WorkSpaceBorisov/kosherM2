@@ -1,5 +1,14 @@
 <?php
-/** @var $block \Magento\Catalog\Block\Product\View */
+
+use Magento\Catalog\Block\Product\View;
+use Magento\Framework\Escaper;
+
+?>
+
+<?php
+/** @var View $block
+ *  @var Escaper $escaper
+ */
 ?>
 <?php $_product = $block->getProduct(); ?>
 <?php $buttonTitle = __('Add to Cart'); ?>
@@ -23,7 +32,7 @@
                     id="qty"
                     min="1"
                     value="<?= $block->getProductDefaultQty() * 1 ?>"
-                    title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
+                    title="<?=  $escaper->escapeHtml(__('Qty')) ?>"
                     class="product-quantity input-text qty custom"
                     data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
                     />
@@ -32,7 +41,7 @@
         <?php endif; ?>
         <div class="add-to-calc calc-cell">
             <button type="submit"
-                title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
+                title="<?=  $escaper->escapeHtml($buttonTitle) ?>"
                 class="action primary tocart add-to-calc__button"
                 id="product-addtocart-button" disabled>
                 <span><?= $block->escapeHtml($buttonTitle) ?></span>

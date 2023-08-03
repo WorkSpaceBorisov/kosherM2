@@ -8,6 +8,7 @@
     <referenceBlock name="content.aside" remove="true"/>
     <referenceBlock name="product.info.review" remove="true"/>
     <referenceBlock name="product.reviews.wrapper" remove="true"/>
+    <referenceBlock name="product.info.details" remove="true"/>
 
     <body>
         <container name="product.info.price.row" htmlTag="div" htmlClass="product-info-price-row"></container>

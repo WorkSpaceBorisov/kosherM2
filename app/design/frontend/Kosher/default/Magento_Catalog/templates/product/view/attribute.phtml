@@ -1,17 +1,20 @@
 <?php
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
 
-// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+use Magento\Catalog\Block\Product\View\Description;
+use Magento\Framework\Escaper;
+
+?>
+
+<?php
 
 /**
  * Product view template
  *
- * @var $block \Magento\Catalog\Block\Product\View\Description
+ * @var Description $block
+ * @var Escaper $escaper
  */
 ?>
+
 <?php
 $_helper = $this->helper(Magento\Catalog\Helper\Output::class);
 $_product = $block->getProduct();
