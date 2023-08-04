@@ -31,7 +31,6 @@
         <move element="product.info.overview" destination="product.info.main" before="product.info.price.row" />
         <move element="product.attributes.bottom.wrapper" destination="product.info.main" after="-" />
         
-        <!--  -->
         <move element="product.info" destination="product.info.price.row" after="-" />
         <move element="product.info.price" destination="product.info.price.row" before="-" />
 
