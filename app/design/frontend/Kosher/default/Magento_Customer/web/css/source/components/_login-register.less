@@ -6,7 +6,11 @@
 
 & when (@media-common = true) {
     .customer-account-login,
-    .customer-account-create {
+    .customer-account-create,
+    .customer-account-forgotpassword,
+    .customer-account-logoutsuccess,
+    .customer-account-createpassword,
+    .customer-account-confirmation {
         .page-title {
             text-align: center;
             text-transform: uppercase;
@@ -31,20 +35,24 @@
             max-width: 640px;
             padding: 40px 20px;
             width: 100%;
+
+            .field.note {
+                display: none;
+            }
         }
 
-        .actions-toolbar button {
-            border-radius: 8px;
+        .actions-toolbar > .primary, .actions-toolbar > .secondary {
+            float: none;
+            width: 100%;
+
+            .action {
+                width: 100%;
+            }
         }
     }
 
-    .form-create-account .actions-toolbar .primary {
-        float: none;
-        width: 100%;
-
-        .action.submit {
-            width: 100%;
-        }
+    .customer-account-logoutsuccess .column.main p {
+        text-align: center;
     }
 
     .fieldset.create.info .field.choice {
@@ -148,8 +156,14 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    .customer-account-create .column.main {
-        padding: 50px 20px 40px;
+    .customer-account-create,
+    .customer-account-forgotpassword,
+    .customer-account-logoutsuccess,
+    .customer-account-createpassword,
+    .customer-account-confirmation {
+        .column.main {
+            padding: 50px 20px 40px;
+        }
     }
 
     .customer-account-login {
