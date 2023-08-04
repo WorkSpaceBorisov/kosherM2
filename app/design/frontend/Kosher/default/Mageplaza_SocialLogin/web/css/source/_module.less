@@ -1,0 +1,76 @@
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common =true) {
+
+    .login-container .block.account-social-login {
+        margin-bottom: 30px;
+        width: 100% !important;
+        float: none !important;
+        clear: both;
+
+        &:before {
+            .lib-font-size(16);
+            .lib-line-height(20);
+            font-weight: @font-weight__semibold;
+            color: @kosher-color__19;
+            text-align: center;
+            content: 'or';
+            border-top: 1px solid @kosher-color__15;
+            display: block;
+            padding: 16px 0;
+        }
+    }
+
+    .customer-account-create .block.account-social-login {
+        margin-bottom: 30px;
+
+        &:after {
+            .lib-font-size(16);
+            .lib-line-height(20);
+            font-weight: @font-weight__semibold;
+            color: @kosher-color__19;
+            text-align: center;
+            content: 'or';
+            display: block;
+            padding-top: 30px;
+        }
+    }
+
+    .block.account-social-login .actions-toolbar.social-btn {
+        width: 100%;
+        
+        .btn-social {
+            &:extend(.action.secondary all);
+            width: 100%;
+            text-align: center;
+            transition: all .2s;
+    
+            &.btn-google {
+                border-color: transparent;
+                background-color: rgba(8, 55, 182, .08);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+    
+                .fa {
+                    width: 22px;
+                    height: 22px;
+                    background: url('@{baseDir}/images/google.svg') no-repeat;
+    
+                    &:before {
+                        content: '';
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {}

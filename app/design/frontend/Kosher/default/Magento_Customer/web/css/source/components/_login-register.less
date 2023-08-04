@@ -23,13 +23,18 @@
         .columns {
             background: @kosher-color__01;
             border-radius: 12px;
+            height: 100%;
         }
 
         .column.main {
             margin: 0 auto;
             max-width: 640px;
-            padding: 80px 20px 40px;
+            padding: 40px 20px;
             width: 100%;
+        }
+
+        .actions-toolbar button {
+            border-radius: 8px;
         }
     }
 
@@ -55,7 +60,7 @@
             & > .primary,
             & > .secondary {
                 display: block;
-                float: unset;
+                float: unset !important;
 
                 .action {
                     display: block;
@@ -74,11 +79,16 @@
         .block-customer-login {
             width: 100%;
             float: none;
+            margin-bottom: 10px;
 
             .block-title,
             .field.note,
             .field.choice {
                 display: none;
+            }
+
+            .actions-toolbar .secondary a.action {
+                margin-top: 32px;
             }
         }
 
@@ -138,8 +148,18 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    .customer-account-login .columns {
-        padding: 0 48px;
+    .customer-account-create .column.main {
+        padding: 50px 20px 40px;
+    }
+
+    .customer-account-login {
+        .columns {
+            padding: 0 48px;
+        }
+
+        .column.main {
+            padding: 80px 20px 40px;
+        }
     }
 
     .customer-account-login,
