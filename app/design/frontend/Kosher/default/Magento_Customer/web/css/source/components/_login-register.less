@@ -6,7 +6,11 @@
 
 & when (@media-common = true) {
     .customer-account-login,
-    .customer-account-create {
+    .customer-account-create,
+    .customer-account-forgotpassword,
+    .customer-account-logoutsuccess,
+    .customer-account-createpassword,
+    .customer-account-confirmation {
         .page-title {
             text-align: center;
             text-transform: uppercase;
@@ -23,23 +27,32 @@
         .columns {
             background: @kosher-color__01;
             border-radius: 12px;
+            height: 100%;
         }
 
         .column.main {
             margin: 0 auto;
             max-width: 640px;
-            padding: 80px 20px 40px;
+            padding: 40px 20px;
             width: 100%;
+
+            .field.note {
+                display: none;
+            }
+        }
+
+        .actions-toolbar > .primary, .actions-toolbar > .secondary {
+            float: none;
+            width: 100%;
+
+            .action {
+                width: 100%;
+            }
         }
     }
 
-    .form-create-account .actions-toolbar .primary {
-        float: none;
-        width: 100%;
-
-        .action.submit {
-            width: 100%;
-        }
+    .customer-account-logoutsuccess .column.main p {
+        text-align: center;
     }
 
     .fieldset.create.info .field.choice {
@@ -55,7 +68,7 @@
             & > .primary,
             & > .secondary {
                 display: block;
-                float: unset;
+                float: unset !important;
 
                 .action {
                     display: block;
@@ -74,11 +87,16 @@
         .block-customer-login {
             width: 100%;
             float: none;
+            margin-bottom: 10px;
 
             .block-title,
             .field.note,
             .field.choice {
                 display: none;
+            }
+
+            .actions-toolbar .secondary a.action {
+                margin-top: 32px;
             }
         }
 
@@ -138,8 +156,24 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    .customer-account-login .columns {
-        padding: 0 48px;
+    .customer-account-create,
+    .customer-account-forgotpassword,
+    .customer-account-logoutsuccess,
+    .customer-account-createpassword,
+    .customer-account-confirmation {
+        .column.main {
+            padding: 50px 20px 40px;
+        }
+    }
+
+    .customer-account-login {
+        .columns {
+            padding: 0 48px;
+        }
+
+        .column.main {
+            padding: 80px 20px 40px;
+        }
     }
 
     .customer-account-login,
