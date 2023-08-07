@@ -82,6 +82,9 @@ class GetProductService implements PopupProductDataInterface
                 'manufacturer' => $product->getData('manufacturer'),
                 'supervision' => $product->getData('supervision'),
                 'halavi' => $product->getData('halavi'),
+                'color' => $product->getData('color'),
+                'size' => $product->getData('size'),
+                'alcvol' => $product->getData('alcvol')
             ];
 
             $attributeData = $this->getOptionValueByIdService->execute($attributeData, $storeId);

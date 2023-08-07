@@ -106,6 +106,35 @@ define([
                 infoBlock.appendChild(newTag('div', 'k4u-popup__out-of-stock', content));
             }
 
+            // Wine attributes
+
+            let wineDetails = newTag('div', 'k4u-popup__wine');
+
+            let wineObjAttr = (name, attrs) => {
+                let value = '';
+
+                for (let item in attrs) {
+                    if(attrs[item] !== null) {
+                        let innerElement;
+                        if (name === 'alcvol') {
+                            innerElement = `ABV: ${attrs[item]}%`;
+                        } else if (name === 'size') {
+                            innerElement = `Volume: ${attrs[item]}`;
+                        } else {
+                            innerElement = `${attrs[item]}`;
+                        }
+    
+                        value += innerElement;
+                    }
+                }
+
+                if(value) {
+                    wineDetails.appendChild(newTag('span', 'product-attribute-class-' + name, value));
+                }
+            }
+
+            infoBlock.appendChild(wineDetails);
+
             // Finblock start
 
             let finBlock = newTag('div', 'k4u-popup-fin-block');
@@ -189,7 +218,10 @@ define([
                 'supervision': data.supervision,
                 'weight': data.weight,
                 'singleweight': data.singleweight,
-                'halavi': data.halavi // Type
+                'halavi': data.halavi, // Type
+                'alcvol': data.alcvol,
+                'size': data.size,
+                'color': data.color
             }
 
             let simpleAttr = (name, content, attr) => {
@@ -208,53 +240,65 @@ define([
                 if (name == 'halavi') name = 'type';
 
                 for (let item in attrs) {
-                    let innerElement;
-                    if (name === 'manufacturer' || name === 'supervision') {
-                        innerElement = `<a href="${urlForSearch}${attrs[item]}" target="_blank"><span>${attrs[item]}</span></a>`;
-                    } else {
-                        innerElement = `<span data-attrib-id="${item}">${attrs[item]}</span>`;
+                    if(attrs[item] !== null) {
+                        let innerElement;
+                        if (name === 'manufacturer' || name === 'supervision') {
+                            innerElement = `<a href="${urlForSearch}${attrs[item]}" target="_blank"><span>${attrs[item]}</span></a>`;
+                        } else {
+                            innerElement = `<span data-attrib-id="${item}">${attrs[item]}</span>`;
+                        }
+    
+                        val += innerElement;
                     }
-
-                    val += innerElement;
                 }
 
                 if (Object.keys(attrs).length > 1) {
                     val = `<span  class="attrs-list">${val}</span>`;
                     name += ' attrs-list-item';
-                }
-                ;
+                };
 
-                attrList.appendChild(newTag('li', 'product-attribute-class-' + name, val));
+                if(val) {
+                    attrList.appendChild(newTag('li', 'product-attribute-class-' + name, val));
+                }
             }
 
             for (let item in attributies) {
                 let val = attributies[item];
 
-                switch (item) {
-
-                    case 'weight':
-                        let weight = parseFloat(data.weight);
-                        simpleAttr(item, weight + 'kg', weight);
-                        break;
-                    case 'singleweight':
-                        let singleweight = parseFloat(data.singleweight);
-                        simpleAttr(item, singleweight + 'kg', singleweight);
-                        break;
-                    case 'manufacturer':
-                    case 'halavi':
-                        if (data[item]) objAttr(item, data[item])
-                        break;
-                    case 'supervision':
-                        if (data[item] && typeof data[item] === 'object') objAttr(item, data[item])
-                        break;
-                    default:
-                        simpleAttr(item, val)
-
+                if(val) {
+                    switch (item) {
+                        case 'weight':
+                            let weight = parseFloat(data.weight);
+                            simpleAttr(item, weight + 'kg', weight);
+                            break;
+                        case 'singleweight':
+                            let singleweight = parseFloat(data.singleweight);
+                            simpleAttr(item, singleweight + 'kg', singleweight);
+                            break;
+                        case 'manufacturer':
+                        case 'halavi':
+                            if (data[item]) objAttr(item, data[item])
+                            break;
+                        case 'supervision':
+                            if (data[item] && typeof data[item] === 'object') objAttr(item, data[item])
+                            break;
+                        case 'color':
+                            if (data[item]) wineObjAttr(item, data[item])
+                            break;
+                        case 'size':
+                            if (data[item]) wineObjAttr(item, data[item])
+                            break;
+                        case 'alcvol':
+                            if (data[item]) wineObjAttr(item, data[item])
+                            break;
+                        default:
+                            simpleAttr(item, val)
+                    }
                 }
             }
 
             popupDetails.appendChild(attrList);
-            infoBlock.appendChild(popupDetails)
+            infoBlock.appendChild(popupDetails);
 
             // Image right attributies
             if (data.categoryLabels.size !== 0) {

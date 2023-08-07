@@ -8,6 +8,29 @@
         transition: opacity @time;
     }
 
+    .k4u-popup__wine {
+        .lib-font-size(18);
+        .lib-line-height(20);
+        letter-spacing: -.015em;
+        font-weight: @font-weight__semibold;
+        margin-bottom: 10px;
+        display: flex;
+
+        .product-attribute-class-color {
+            order: -1;
+        }
+
+        span {
+            display: inline-block;
+
+            &:not(.product-attribute-class-size) {
+                padding-right: 7px;
+                margin-right: 5px;
+                border-right: 2px solid @kosher-color__19;
+            }
+        }
+    }
+
     .k4u-popup {
         .transition();
         background: @kosher-color__01;
