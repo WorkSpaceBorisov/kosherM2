@@ -27,8 +27,8 @@
         "magento/composer-root-update-plugin": "~2.0",
         "magento/data-migration-tool": "2.4.6",
         "magento/product-community-edition": "2.4.6-p1",
-        "mageplaza/magento-2-social-login": "^4.1",
-        "mageplaza/module-smtp": "^4.7",
+        "mageplaza/magento-2-social-login": "4.1",
+        "mageplaza/module-smtp": "4.7",
         "mirasvit/module-credit": "*",
         "olegkoval/magento2-regenerate-url-rewrites": "1.6.0"
     },
