@@ -56,7 +56,7 @@ define(['jquery', 'domReady!'], function ($) {
                             .siblings('.parent')
                             .removeClass('expanded')
                             .find('.submenu')
-                            .slideUp(300);
+                            .slideUp(300).find('.parent').removeClass('expanded');
                         $(parent).addClass('expanded');
                         $(parent).children('.submenu').slideToggle(300);
                     }
