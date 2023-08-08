@@ -1,0 +1,44 @@
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    .cms-no-route {
+        .page-title {
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .columns {
+            background-color: @color-white;
+            border-radius: 12px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .page-main {
+            padding-bottom: 25px;
+        }
+
+        .column.main {
+            margin: 0 auto;
+            max-width: 640px;
+            padding: 40px 20px;
+            width: 100%;
+            
+            a {
+                &:extend(.minicart-continue-shopping-button all);
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    
+}

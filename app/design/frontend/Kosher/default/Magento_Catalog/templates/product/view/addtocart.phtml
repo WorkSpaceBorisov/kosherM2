@@ -31,7 +31,7 @@ use Magento\Framework\Escaper;
                     name="qty"
                     id="qty"
                     min="1"
-                    value="<?= $block->getProductDefaultQty() * 1 ?>"
+                    value="1"
                     title="<?=  $escaper->escapeHtml(__('Qty')) ?>"
                     class="product-quantity input-text qty custom"
                     data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
