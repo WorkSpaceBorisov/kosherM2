@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Model\Layer\ItemCollectionProviderInterface">
+        <plugin name="product_collection_with_custom_request_plugin"
+                type="Kosher\ProductAdjustment\Plugin\ProductCollectionWithCustomRequestPlugin"/>
+    </type>
+</config>
