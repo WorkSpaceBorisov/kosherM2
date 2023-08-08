@@ -65,7 +65,7 @@
                             <div class="price-wrap"
                                 data-bind="
                                 css: parseFloat($data?.price).toFixed(2) != parseFloat($data.product_price_value).toFixed(2) ? 'price-wrap--special' : ''">
-                                <!-- ko if: parseFloat($data?.price).toFixed(2) != $data.product_price_value -->
+                                <!-- ko if: $data.price -->
                                     <div class="old-price">
                                         <span class="price" data-bind="i18n: $data.currency_symbol"></span>
                                         <span class="price" data-bind="i18n: parseFloat($data?.price).toFixed(2)"></span></div>

@@ -10,6 +10,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Model\Quote\Item;
 use Magento\Store\Model\StoreManagerInterface;
+use Kosher\MiniCartAdjustment\Service\CheckProductSpecialPriceService;
 
 class SetDefaultItemsForMinicartPlugin
 {
@@ -35,18 +36,27 @@ class SetDefaultItemsForMinicartPlugin
     private StoreManagerInterface $storeManager;
 
     /**
+     * @var CheckProductSpecialPriceService
+     */
+    private CheckProductSpecialPriceService $checkProductSpecialPriceService;
+
+    /**
      * @param ProductRepositoryInterface $productRepository
      * @param Currencysymbol $currencySymbol
      * @param StoreManagerInterface $storeManager
+     * @param CheckProductSpecialPriceService $checkProductSpecialPriceService
      */
     public function __construct(
-        ProductRepositoryInterface $productRepository,
-        Currencysymbol $currencySymbol,
-        StoreManagerInterface $storeManager
-    ) {
+        ProductRepositoryInterface      $productRepository,
+        Currencysymbol                  $currencySymbol,
+        StoreManagerInterface           $storeManager,
+        CheckProductSpecialPriceService $checkProductSpecialPriceService
+    )
+    {
         $this->productRepository = $productRepository;
         $this->currencySymbol = $currencySymbol;
         $this->storeManager = $storeManager;
+        $this->checkProductSpecialPriceService = $checkProductSpecialPriceService;
     }
 
     /**
@@ -54,6 +64,7 @@ class SetDefaultItemsForMinicartPlugin
      * @param $result
      * @param Item $item
      * @return array
+     * @throws LocalizedException
      * @throws NoSuchEntityException
      */
     public function afterGetItemData(AbstractItem $subject, $result, Item $item): array
@@ -62,20 +73,18 @@ class SetDefaultItemsForMinicartPlugin
         $product = $this->productRepository->get($productSku);
         $singleweight = $product->getData(self::CART_ITEM_SINGLEWEIGHT);
         $newFromDate = $product->getData(self::CART_ITEM_NEWS_FROM_DATE);
-        $specialPrice = $product->getData(self::CART_ITEM_SPECIAL_PRICE);
-        $oldPrice = $product->getData(self::CART_ITEM_OLD_PRICE);
+        $checkPrice = $this->checkProductSpecialPriceService->execute($product);
+        if ($checkPrice) {
+            $result[self::CART_ITEM_SPECIAL_PRICE] = $product->getData(self::CART_ITEM_SPECIAL_PRICE);
+            $result[self::CART_ITEM_OLD_PRICE] = $product->getPrice();;
+        }
 
         if (!empty($singleweight)) {
             $result[self::CART_ITEM_SINGLEWEIGHT] = $singleweight;
         }
+
         if (!empty($newFromDate)) {
             $result[self::CART_ITEM_NEWS_FROM_DATE] = $newFromDate;
-        }
-        if (!empty($specialPrice)) {
-            $result[self::CART_ITEM_SPECIAL_PRICE] = $specialPrice;
-        }
-        if (!empty($oldPrice)) {
-            $result[self::CART_ITEM_OLD_PRICE] = $oldPrice;
         }
 
         $result[self::CART_ITEM_CURRENCY] = $this->currencySymbolForStore();
