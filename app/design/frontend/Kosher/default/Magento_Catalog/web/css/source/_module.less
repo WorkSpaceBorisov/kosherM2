@@ -33,9 +33,6 @@
         }
     }
 
-    .product-info-main .product.attribute.overview + .review-hardcode {
-        display: none;
-    }
     // need to remove
 
     .catalog-product-view .column.main {
@@ -230,6 +227,15 @@
         padding: 30px 10px;
         box-sizing: border-box;
 
+        .product-image-right-labels {
+            position: relative;
+            width: auto;
+            right: auto;
+            display: flex;
+            margin-bottom: 26px;
+            gap: 15px;
+        }
+
         .product-section-title {
             display: none;
         }
@@ -240,6 +246,9 @@
         }
 
         .product-info-price {
+            display: flex;
+            align-items: center;
+
             .special-price [data-price-type="finalPrice"] {
                 color: @kosher-color__03;
             }
@@ -286,22 +295,60 @@
                 min-width: 90px;
                 color: @kosher-color__21;
 
+                &__link {
+                    color: @kosher-color__21;
+
+                    &:not(:last-child):after {
+                        content: ', ';
+                        margin: 0 3px 0 -2px;
+                    }
+                }
+
                 svg {
                     margin-right: 11px;
                 }
             }
         }
 
+        .product.alert {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .action.alert {
+            &:extend(.action.primary all);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: @kosher-color__36;
+            color: @kosher-color__06;
+            border: 2px solid @kosher-color__36 !important;
+            border-radius: 8px;
+            text-decoration: none;
+    
+            &:before {
+                .icomoon(@icon-notify, 20, @kosher-color__06);
+                .size(20);
+                margin-right: 9px;
+            }
+    
+            &:hover {
+                background: darken(@kosher-color__36, 10%);
+                color: @kosher-color__06;transition: .2s all;
+            }
+        }
+
         .product-info-stock-sku {
             padding-bottom: @indent__s;
+
+            .stock {
+                display: none;
+            }
         }
 
         .stock {
             margin: 0 0 3px;
-
-            &.available {
-                display: none;
-            }
         }
 
         .product {
@@ -347,7 +394,7 @@
             justify-content: flex-end;
             overflow: hidden;
             width: @calc-cell-width;
-            margin-left: 35px;
+            margin-left: 60px;
         }
 
         .calc-cell-container {
