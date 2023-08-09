@@ -21,6 +21,7 @@ use Magento\Catalog\Api\Data\ProductInterface;
  */
 ?>
 <?php
+$requestParams = $block->getRequest()->getParams();
 $viewModel = $block->getData('view_model');
 $_productCollection = $block->getLoadedProductCollection();
 /** @var Output $_helper */
@@ -57,6 +58,7 @@ $_helper = $block->getData('outputHelper');
         <ol class="products list items product-items" data-container="popup-init">
             <?php /** @var $_product ProductInterface */ ?>
             <?php foreach ($_productCollection as $_product): ?>
+            <?php if ($viewModel->checkToDateAttributeProductByRequestParams($requestParams, $_product)): ?>
             <?php $_product = $viewModel->getCategoryLabels($_product) ?>
                 <li class="item product product-item">
                     <div class="product-item-info"
@@ -67,14 +69,19 @@ $_helper = $block->getData('outputHelper');
                         <!-- Labels left -->
 
                         <div class="product-item__label-left-container">
-                            <?php if ($_product->getData('special_price')): ?>
+                            <?php if ($viewModel->checkLastDateForLabels($_product, 'sale')): ?>
                                 <div class="product-item__label-left sale">
                                     <span><?= $escaper->escapeHtml(__('Sale')) ?></span>
                                 </div>
                             <?php endif; ?>
-                            <?php if ($_product->getData('news_from_date')): ?>
+                            <?php if ($viewModel->checkLastDateForLabels($_product, 'new')): ?>
                                 <div class="product-item__label-left new">
                                     <span><?= $escaper->escapeHtml(__('New')) ?></span>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($viewModel->checkLastDateForLabels($_product, 'holidays')): ?>
+                                <div class="product-item__label-left holidays">
+                                    <span><?= $escaper->escapeHtml(__('Holidays')) ?></span>
                                 </div>
                             <?php endif; ?>
                         </div>
@@ -202,6 +209,7 @@ $_helper = $block->getData('outputHelper');
                     <?= ($pos && strpos($pos, $viewMode . '-actions')) ? /* @noEscape */
                             $secureRenderer->renderStyleAsTag($position, 'product-item-info_' . $_product->getId() . ' div.product-item-actions') : '' ?>
                 </li>
+                <?php endif; ?>
             <?php endforeach; ?>
         </ol>
     </div>
