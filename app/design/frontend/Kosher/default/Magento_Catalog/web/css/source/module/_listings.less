@@ -748,7 +748,7 @@
     }
 }
 
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
     .products-grid .product-items {
         display: flex;
         flex-flow: wrap;
@@ -1090,8 +1090,8 @@
     }
 }
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    .page-products .product-items:not(.slick-slider):not(.list) {
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s) {
+    .products-grid .product-items:not(.slick-slider) {
         margin-right: 3px;
         display: grid;
         grid-gap: 16px 16px;
