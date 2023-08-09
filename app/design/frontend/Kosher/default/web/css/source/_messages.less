@@ -41,14 +41,20 @@
     }
 
     .page.messages .message {
-        &.error:before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 2px;
-            height: 100%;
-            background-color: #be0e0b;
+        &.error {
+            &:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 2px;
+                height: 100%;
+                background-color: #be0e0b;
+            }
+
+            a {
+                color: #0837b6;
+            }
         }
 
         &.success {
