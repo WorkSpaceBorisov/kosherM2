@@ -18,7 +18,7 @@
 
 @modal-popup__indent-vertical: 5rem;
 @modal-popup__padding: 3rem;
-@modal-popup__width: 75%;
+@modal-popup__width: calc(100% - 20px);
 @modal-popup__z-index: @modal__z-index;
 
 @modal-slide__first__indent-left: 14.8rem;
@@ -69,6 +69,20 @@
         .lib-css(box-shadow, @modal__box-shadow);
         opacity: 1;
         pointer-events: auto;
+    }
+
+    .modal-footer {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+
+        button {
+            width: 50%;
+        }
+
+        .action-secondary {
+            &:extend(.action.secondary all);
+        }
     }
 }
 
@@ -123,6 +137,7 @@
         left: 0;
         position: absolute;
         right: 0;
+        max-width: 640px;
         -webkit-transform: translateY(-200%);
                 transform: translateY(-200%);
         -webkit-transition: -webkit-transform .2s ease;

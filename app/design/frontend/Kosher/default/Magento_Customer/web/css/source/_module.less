@@ -72,10 +72,6 @@
         .region_id {
             display: none;
         }
-
-        .actions-toolbar .action.primary {
-            &:extend(.abs-button-l all);
-        }
     }
 
     .form-edit-account {
@@ -127,22 +123,36 @@
             .lib-wrap-words();
             &:extend(.abs-account-block-line-height all);
         }
+
+        .box-actions a {
+        }
     }
 
     //  My account
     .account {
-        .page-title-wrapper {
-            .page-title {
-                display: inline-block;
-            }
+        .page-title-wrapper .page-title {
+            display: inline-block;
+            font-weight: @font-weight__heavier;
         }
 
         .messages {
             margin-bottom: @indent__base;
         }
 
+        .columns {
+            display: flex;
+            flex-direction: column;
+            background-color: @color-white;
+            max-width: 1824px;
+            margin: 0 auto 40px;
+        }
+
+        .sidebar {
+            order: -1;
+        }
+
         .column.main {
-            margin-bottom: @indent__l;
+            padding: 0 10px 30px;
 
             h2 {
                 margin-top: 0;
@@ -150,6 +160,32 @@
 
             .block:not(.widget) {
                 &:extend(.abs-account-blocks all);
+            }
+
+            .actions-toolbar {
+                display: flex;
+
+                .primary {
+                    margin-right: 15px;
+
+                    .action {
+                        margin-right: 0;
+                    }
+                }
+                
+                .action {
+                    min-width: 120px;
+                }
+            }
+
+            .field-columns {
+                .label {
+                    display: none;
+                }
+
+                .field {
+                    margin-bottom: 17px;
+                }
             }
         }
 
@@ -168,7 +204,7 @@
         }
 
         .legend {
-            &:extend(.abs-account-title all);
+            display: none;
         }
     }
 
@@ -358,6 +394,26 @@
 //  Desktop
 //  _____________________________________________
 
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s) {
+    .account {
+        .page-title {
+            .lib-font-size(24);
+            .lib-line-height(33);
+        }
+
+        .column.main .block .block-content {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+
+            .box {
+                width: 50%;
+                max-width: 350px;
+            }
+        }
+    }
+}
+
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .login-container {
         &:extend(.abs-add-clearfix-desktop all);
@@ -411,39 +467,19 @@
         width: 50%;
     }
 
-    //  My account
-    .account.page-layout-2columns-left {
-        .sidebar-main,
-        .sidebar-additional {
-            width: 22.3%;
-        }
-
-        .column.main {
-            width: 77.7%;
-        }
-
-        .sidebar-main {
-            .block {
-                margin-bottom: 0;
-            }
-        }
-    }
-
     .account {
-        .page-title-wrapper {
-            &:extend(.abs-add-clearfix-desktop all);
+        .columns {
+            flex-direction: row;
+        }
+
+        .sidebar {
+            width: 320px;
         }
 
         .column.main {
-            .block:not(.widget) {
-                .block-content {
-                    &:extend(.abs-add-clearfix-desktop all);
-
-                    .box {
-                        &:extend(.abs-blocks-2columns all);
-                    }
-                }
-            }
+            width: calc(~'100% - 320px');
+            padding: 20px 30px;
+            border: 1px solid @kosher-color__15;
         }
 
         .data.table {
@@ -458,6 +494,13 @@
 
         .toolbar {
             &:extend(.abs-pager-toolbar all);
+        }
+
+        .field-columns {
+            .field {
+                max-width: 400px;
+                margin-bottom: 17px;
+            }
         }
     }
 
@@ -489,39 +532,6 @@
         }
     }
 
-    .page-main {
-        .block {
-            &:extend(.abs-margin-for-blocks-and-widgets-desktop all);
-        }
-    }
-
-    .form-address-edit {
-        > .fieldset {
-            &:extend(.abs-blocks-2columns all);
-        }
-    }
-
-    .form-edit-account {
-        .fieldset {
-            &:extend(.abs-blocks-2columns all);
-
-            .fieldset {
-                margin-bottom: @indent__base;
-                width: 100%;
-            }
-        }
-    }
-
-    .box-billing-address,
-    .box-shipping-address,
-    .box-address-billing,
-    .box-address-shipping,
-    .box-information {
-        .box-content {
-            &:extend(.abs-account-block-font-size all);
-        }
-    }
-
     .control.captcha-image {
         .captcha-img {
             margin: 0 @indent__s @indent__s 0;
@@ -538,7 +548,6 @@
         .column.main,
         .sidebar-additional {
             margin: 0;
-            padding: 0;
         }
 
         .data.table {
