@@ -40,20 +40,22 @@ use Kosher\ProductAdjustment\ViewModel\CategoriesDataFromProductViewModel;
     <div class="attributes-top">
         <?php foreach ($_additional as $_data) :?>
             <?php if($_data['code'] === 'singleweight'): ?>
-                <?= $escaper->escapeHtml(__('Weight, gr.')) ?>
-                <?= /* @noEscape */ (
-                    $_helper->productAttribute($_product, $_data['value'], $_data['code']) * 1000
-                    ) ?>
+                <span class="weight-attribute">
+                    <?= $escaper->escapeHtml(__('Weight, gr.')) ?>
+                    <?= /* @noEscape */ (
+                        $_helper->productAttribute($_product, $_data['value'], $_data['code']) * 1000
+                        ) ?>
+                </span>
             <?php endif; ?>
             <?php if($_data['code'] === 'weight'): ?>
-                (
-                <?= $escaper->escapeHtml(__('Shipping weight')) ?>
-                <?php if(($_helper->productAttribute($_product, $_data['value'], $_data['code']) * 1000) < 1000): ?>
-                    <?= /* @noEscape */ ($_helper->productAttribute($_product, $_data['value'], $_data['code']) * 1000) ?> g
-                <?php else: ?>
-                    <?= /* @noEscape */ ($_helper->productAttribute($_product, $_data['value'], $_data['code']) / 1000) ?> kg
-                <?php endif; ?>
-                ) 
+                <span class="weight-attribute--shipping">
+                    <?= $escaper->escapeHtml(__('Shipping weight')) ?>
+                    <?php if(($_helper->productAttribute($_product, $_data['value'], $_data['code']) * 1000) < 1000): ?>
+                        <?= /* @noEscape */ ($_helper->productAttribute($_product, $_data['value'], $_data['code']) * 1000) ?> g)
+                    <?php else: ?>
+                        <?= /* @noEscape */ ($_helper->productAttribute($_product, $_data['value'], $_data['code']) / 1000) ?> kg
+                    <?php endif; ?>
+                </span>
             <?php endif; ?>
         <?php endforeach; ?>
     </div>

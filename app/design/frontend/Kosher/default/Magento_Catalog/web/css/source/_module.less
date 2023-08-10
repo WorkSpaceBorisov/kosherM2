@@ -71,6 +71,23 @@
     .attributes-top {
         margin-bottom: 10px;
         color: @kosher-color__19;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .weight-attribute {
+        order: -1;
+        margin-right: 5px;
+
+        &--shipping {
+            &:before {
+                content: '(';
+            }
+
+            &:after {
+                content: ')';
+            }
+        }
     }
 
     .product.attribute.description {
@@ -274,7 +291,6 @@
                     [data-price-type="oldPrice"] {
                         .lib-font-size(16);
                         .lib-line-height(24);
-                        text-decoration: line-through;
                         color: @kosher-color__17;
                     }
                 }
@@ -294,6 +310,18 @@
                 margin-right: 15px;
                 min-width: 90px;
                 color: @kosher-color__21;
+
+                &.manufacturer {
+                    order: 1;
+                }
+
+                &.supervision {
+                    order: 2;
+                }
+
+                &.halavi {
+                    order: 3;
+                }
 
                 &__link {
                     color: @kosher-color__21;
