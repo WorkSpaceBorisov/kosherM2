@@ -34,7 +34,7 @@ class CheckProductSpecialPriceService
         $specialPrice = $product->getData(ProductCollectionWithCustomRequestService::SPECIAL_PRICE);
         if (!empty($specialPrice)) {
             if (!empty($productAttribute) || !empty($productAttributeFrom)) {
-                if (!empty($productAttribute)) return $this->checkToDateAttributeProduct($productAttribute);
+                if (!empty($productAttribute)) return $this->checkToDateAttributeProduct->execute($productAttribute);
                 return true;
             }
 

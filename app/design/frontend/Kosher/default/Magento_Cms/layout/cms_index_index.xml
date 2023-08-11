@@ -39,9 +39,8 @@
                         <block class="Magento\Theme\Block\Html\Topmenu" name="horizonlal.menu1" template="Magento_Cms::homepage/products-navigation.phtml"
                                ttl="3600">
                             <arguments>
-                                <argument name="url_parameter" xsi:type="string">
-                                    holidays
-                                </argument>
+                                <argument name="url_parameter" xsi:type="string">holidays</argument>
+                                <argument name="view_model" xsi:type="object">Kosher\CategoryAdjustment\ViewModel\ProductNavigationViewModel</argument>
                             </arguments>
                         </block>
                     </container>
@@ -79,9 +78,8 @@
                         <block class="Magento\Theme\Block\Html\Topmenu" name="horizonlal.menu3" template="Magento_Cms::homepage/products-navigation.phtml"
                                ttl="3600">
                             <arguments>
-                                <argument name="url_parameter" xsi:type="string">
-                                    new
-                                </argument>
+                                <argument name="url_parameter" xsi:type="string">new</argument>
+                                <argument name="view_model" xsi:type="object">Kosher\CategoryAdjustment\ViewModel\ProductNavigationViewModel</argument>
                             </arguments>
                         </block>
                     </container>
@@ -119,9 +117,8 @@
                         <block class="Magento\Theme\Block\Html\Topmenu" name="horizonlal.menu2" template="Magento_Cms::homepage/products-navigation.phtml"
                                ttl="3600">
                             <arguments>
-                                <argument name="url_parameter" xsi:type="string">
-                                    sale
-                                </argument>
+                                <argument name="url_parameter" xsi:type="string">sale</argument>
+                                <argument name="view_model" xsi:type="object">Kosher\CategoryAdjustment\ViewModel\ProductNavigationViewModel</argument>
                             </arguments>
                         </block>
                     </container>
