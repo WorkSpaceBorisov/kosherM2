@@ -1,0 +1,48 @@
+<?php
+
+use Magento\Framework\View\Element\Html\Topmenu;
+
+?>
+<?php
+/**
+ * @var Topmenu $block
+ */
+?>
+
+<nav class="navigation">
+    <ul>
+        <?php
+        $categoryCollectionFactory = $block->getData('categoryCollectionFactory');
+        $urlParameter = $block->getData('url_parameter');
+        
+        $categoryCollection = $categoryCollectionFactory->create()
+            ->addAttributeToSelect('*')
+            ->addIsActiveFilter()
+            ->addLevelFilter(2)
+            ->setOrder('position', 'ASC')
+            ->load();
+        
+        foreach ($categoryCollection as $category) {
+            if ($category->getId() == 2) {
+                continue;
+            }
+            
+            $url = $category->getUrl() . '?show=' . $urlParameter;
+            $isActive = $block->getHtmlClass() == 'level-top' ? '' : '';
+            $iconUrl = $category->getData('category_icon');
+        ?>
+        <li class="level0 nav-1 category-item">
+            <a class="level-top" href="<?php echo $url; ?>">
+                <?php if ($iconUrl): ?>
+                    <img class="category-icon" src="<?php echo $block->escapeUrl($iconUrl); ?>" alt="<?php echo $block->escapeHtmlAttr($category->getName()); ?>" />
+                <?php endif; ?>
+                <span>
+                    <?php echo $block->escapeHtml($category->getName()); ?>
+                </span>
+            </a>
+        </li>
+        <?php
+        }
+        ?>
+    </ul>
+</nav>
