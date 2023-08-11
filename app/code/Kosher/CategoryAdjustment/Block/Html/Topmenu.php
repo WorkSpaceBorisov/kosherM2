@@ -43,6 +43,9 @@ class Topmenu extends ThemeTopmenu
     ) {
         $this->categotyCollectionFactory = $categotyCollectionFactory;
         $this->categoryIconPathQuery = $categoryIconPathQuery;
+
+        $data['categoryCollectionFactory'] = $categotyCollectionFactory;
+        
         parent::__construct($context, $nodeFactory, $treeFactory, $data);
     }
 
