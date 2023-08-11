@@ -1,0 +1,22 @@
+<?php
+/** @var \Magento\Customer\Block\Account\Link $block */
+$customerSession = $block->getLayout()->getBlock('customer.account.dashboard.info')->getCustomer();
+$isDashboard = $block->getRequest()->getFullActionName() == 'customer_account_index';
+?>
+
+<li class="nav item <?php echo $isDashboard ? 'current' : ''; ?>">
+    <a href="<?php echo $block->escapeUrl($block->getUrl('customer/account')) ?>">
+        <?php if ($customerSession && $customerSession->getId()): ?>
+            <div class="desktop-show">
+                <?php echo $block->escapeHtml($customerSession->getFirstname() . ' ' . $customerSession->getLastname()); ?>
+                <div class="nav-email">
+                    <?php echo $block->escapeHtml($customerSession->getEmail()); ?>
+                </div>
+            </div>
+            <div class="mobile-show">
+                <?= __('My Account') ?>
+            </div>
+        <?php endif; ?>
+    </a>
+</li>
+

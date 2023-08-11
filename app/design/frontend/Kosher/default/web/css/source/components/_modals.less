@@ -49,6 +49,8 @@
     top: 0;
     visibility: hidden;
     opacity: 0;
+    display: flex;
+    align-items: center;
     -webkit-transition: visibility 0s .3s, opacity .3s ease;
             transition: visibility 0s .3s, opacity .3s ease;
 
@@ -117,6 +119,10 @@
     &.confirm {
         .modal-inner-wrap {
             .lib-css(max-width, @modal-popup-confirm__width);
+        }
+
+        .modal-content {
+            .lib-font-size(18);
         }
     }
 

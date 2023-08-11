@@ -123,16 +123,17 @@
             .lib-wrap-words();
             &:extend(.abs-account-block-line-height all);
         }
-
-        .box-actions a {
-        }
     }
 
     //  My account
     .account {
-        .page-title-wrapper .page-title {
-            display: inline-block;
-            font-weight: @font-weight__heavier;
+        .page-title-wrapper {
+            position: relative;
+
+            .page-title {
+                display: inline-block;
+                font-weight: @font-weight__heavier;
+            }
         }
 
         .messages {
@@ -142,13 +143,16 @@
         .columns {
             display: flex;
             flex-direction: column;
-            background-color: @color-white;
             max-width: 1824px;
             margin: 0 auto 40px;
         }
 
         .sidebar {
             order: -1;
+
+            .block-dashboard-info {
+                display: none;
+            }
         }
 
         .column.main {
@@ -195,8 +199,12 @@
 
         .table-wrapper {
             .lib-css(margin-bottom, @indent__base);
-            border-bottom: 1px solid @account-table-border-bottom-color;
             overflow-x: auto;
+            width: 100%;
+
+            &:not(.orders-recent):not(.additional-addresses) {
+                border-bottom: 1px solid @account-table-border-bottom-color;
+            }
 
             &:last-child {
                 margin-bottom: 0;
@@ -211,16 +219,6 @@
     .account,
     [class^='sales-guest-'],
     .sales-guest-view {
-        .column.main {
-            .order-details-items {
-                .table-wrapper {
-                    .data.table {
-                        &:extend(.abs-table-striped all);
-                    }
-                }
-            }
-        }
-
         .data.table {
             .col.actions {
                 .action {
@@ -467,9 +465,28 @@
         width: 50%;
     }
 
+    .form-address-edit .message.info {
+        max-width: 815px;
+    }
+
     .account {
+        .block-collapsible-nav {
+            .nav-email {
+                .lib-font-size(14);
+            }
+
+            .mobile-show {
+                display: none;
+            }
+        }
+
+        .page-wrapper {
+            padding-top: 68px;
+        }
+
         .columns {
             flex-direction: row;
+            background-color: @color-white;
         }
 
         .sidebar {
@@ -478,7 +495,7 @@
 
         .column.main {
             width: calc(~'100% - 320px');
-            padding: 20px 30px;
+            padding: 40px 48px;
             border: 1px solid @kosher-color__15;
         }
 
@@ -548,6 +565,21 @@
         .column.main,
         .sidebar-additional {
             margin: 0;
+
+            .table-wrapper.additional-addresses {
+                border-top: 0;
+
+                tbody {
+                    td {
+                        padding-left: 0 !important;
+                        padding-right: 0 !important;
+                    }
+
+                    tr:first-child td:first-child {
+                        padding-top: 0 !important;
+                    }
+                }
+            }
         }
 
         .data.table {
@@ -580,15 +612,20 @@
             margin-bottom: 0;
         }
 
+        .block-collapsible-nav {
+            .desktop-show {
+                display: none;
+            }
+        }
+
         .column.main {
             .block:not(.widget) {
+                background-color: @color-white;
+                padding: 20px 10px;
+                border: 1px solid @kosher-color__26;
+
                 .block-title {
                     &:extend(.abs-add-clearfix-mobile-m all);
-
-                    > .action {
-                        float: right;
-                        .lib-css(margin-top, @indent__xs);
-                    }
                 }
 
                 .block-content {
@@ -599,6 +636,34 @@
                         }
                     }
                 }
+            }
+
+            .table-wrapper {
+                background-color: @color-white;
+
+                &:not(.orders-recent):not(.additional-addresses) {
+                    border: 1px solid @kosher-color__26;
+                }
+            }
+
+            .actions-toolbar:not(.order-actions-toolbar) {
+                margin-bottom: 15px;
+
+                .action {
+                    .lib-font-size(14);
+                    padding: 7px 20px;
+                    min-width: inherit;
+                }
+            }
+
+            .action {
+                .lib-font-size(14);
+            }
+
+            form {
+                background-color: @color-white;
+                border: 1px solid @kosher-color__26;
+                padding: 20px 10px 0;
             }
         }
     }

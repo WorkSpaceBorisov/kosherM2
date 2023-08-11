@@ -1,0 +1,123 @@
+//
+//    Common
+//--------------------------------------
+
+& when (@media-common = true) {
+    .credit__account {
+        .credit__account-blocks {
+            list-style: none;
+            padding: 0;
+        }
+    }
+
+    .credit__account-balance {
+        .block-content {
+            .lib-font-size(16);
+            flex-direction: column !important;
+        }
+
+        .button {
+            &:extend(.action.primary all);
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+    }
+
+    .credit__account-send2friend {
+        textarea {
+            max-width: 506px;
+            .lib-font-size(16);
+            .size(100%, 200px);
+            background: @kosher-color__12;
+            border: 1px solid @kosher-color__19;
+            border-radius: 8px;
+            padding: 15px;
+            color: @kosher-color__21;
+            resize: none;
+            font-family: inherit;
+
+            &::placeholder {
+                color: @kosher-color__21;
+            }
+        }
+    }
+
+    .credit__account-refill {
+        .options {
+            .lib-clearfix();
+            margin-left: -1rem;
+    
+            .field {
+                float: left;
+                width: 33.333%;
+                padding: 1rem;
+                box-sizing: border-box;
+            }
+        }
+    }
+    
+    .credit__account-send2friend {
+        fieldset.general {
+            .lib-clearfix();
+            margin-left: -1rem;
+            margin-bottom: 0;
+    
+            .field.email, .field.amount {
+                float: left;
+                padding-left: 1rem;
+                box-sizing: border-box;
+            }
+    
+            .field.email {
+                width: 70%;
+            }
+    
+            .field.amount {
+                width: 30%;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .account .column.main .credit__account .block {
+        &.credit__account-balance,
+        &.credit__account-send2friend {
+            form {
+                border: 0;
+                padding: 0;
+            }
+
+            button {
+                .lib-font-size(14);
+                padding: 7px 20px;
+            }
+        }
+
+        &.credit__account-balance form {
+            font-size: 0;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+    .credit__account-send2friend .block-content fieldset.general div.field {
+        width: 100%;
+        float: none
+    }
+}
+
+//
+//    Desktop
+//--------------------------------------
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .account .column.main .credit__account .block {
+        &.credit__account-balance,
+        &.credit__account-send2friend {
+            button {
+                min-width: 120px;
+            }
+        }
+    }
+}
