@@ -36,8 +36,7 @@
                 </container>
                 <container name="home.interactive1" htmlTag="div" htmlClass="home-interactive special" after="-">
                     <container name="horizonlal.menu.container1" htmlTag="div" htmlClass="kosher-horizontal-menu" before="-">
-                        <block class="Magento\Theme\Block\Html\Topmenu" name="horizonlal.menu1" template="Magento_Cms::homepage/products-navigation.phtml"
-                               ttl="3600">
+                        <block name="horizonlal.menu1" template="Magento_Cms::homepage/products-navigation.phtml">
                             <arguments>
                                 <argument name="url_parameter" xsi:type="string">holidays</argument>
                                 <argument name="view_model" xsi:type="object">Kosher\CategoryAdjustment\ViewModel\ProductNavigationViewModel</argument>
@@ -75,8 +74,7 @@
                 </container>
                 <container name="home.interactive3" htmlTag="div" htmlClass="home-interactive new" after="-">
                     <container name="horizonlal.menu.container3" htmlTag="div" htmlClass="kosher-horizontal-menu" before="-">
-                        <block class="Magento\Theme\Block\Html\Topmenu" name="horizonlal.menu3" template="Magento_Cms::homepage/products-navigation.phtml"
-                               ttl="3600">
+                        <block name="horizonlal.menu3" template="Magento_Cms::homepage/products-navigation.phtml">
                             <arguments>
                                 <argument name="url_parameter" xsi:type="string">new</argument>
                                 <argument name="view_model" xsi:type="object">Kosher\CategoryAdjustment\ViewModel\ProductNavigationViewModel</argument>
@@ -114,8 +112,7 @@
                 </container>
                 <container name="home.interactive2" htmlTag="div" htmlClass="home-interactive sale" after="-">
                     <container name="horizonlal.menu.container2" htmlTag="div" htmlClass="kosher-horizontal-menu" before="-">
-                        <block class="Magento\Theme\Block\Html\Topmenu" name="horizonlal.menu2" template="Magento_Cms::homepage/products-navigation.phtml"
-                               ttl="3600">
+                        <block name="horizonlal.menu2" template="Magento_Cms::homepage/products-navigation.phtml">
                             <arguments>
                                 <argument name="url_parameter" xsi:type="string">sale</argument>
                                 <argument name="view_model" xsi:type="object">Kosher\CategoryAdjustment\ViewModel\ProductNavigationViewModel</argument>
