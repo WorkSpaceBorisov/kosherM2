@@ -335,6 +335,7 @@ return [
         'Infomodus_Wine' => 1,
         'Kosher_CategoryAdjustment' => 1,
         'Kosher_ConvertProductCsvM1File' => 1,
+        'Kosher_CustomerAdjustment' => 1,
         'Kosher_Migration' => 1,
         'Kosher_MiniCartAdjustment' => 1,
         'Kosher_OrderImport' => 1,

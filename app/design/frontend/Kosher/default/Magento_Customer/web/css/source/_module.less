@@ -478,6 +478,56 @@
             .mobile-show {
                 display: none;
             }
+
+            .nav.item {
+                a {
+                    cursor: pointer;
+                }
+
+                a,
+                strong {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    flex-direction: row;
+
+                    &:before {
+                        margin-right: 19px;
+                    }
+
+                    &.customer:before {
+                        .icomoon(@icon-acc-login, 20px, currentColor);
+                    }
+
+                    &.orders:before {
+                        .icomoon(@icon-acc-orders, 20px, currentColor);
+                    }
+
+                    &.address:before {
+                        .icomoon(@icon-acc-address-book, 20px, currentColor);
+                    }
+
+                    &.account-info:before {
+                        .icomoon(@icon-note, 20px, currentColor);
+                    }
+
+                    &.payment:before {
+                        .icomoon(@icon-acc-stored, 20px, currentColor);
+                    }
+
+                    &.newsletter:before {
+                        .icomoon(@icon-acc-newsletter, 20px, currentColor);
+                    }
+
+                    &.storecredit:before {
+                        .icomoon(@icon-euro01, 20px, currentColor);
+                    }
+
+                    &.logout:before {
+                        .icomoon(@icon-change, 20px, currentColor);
+                    }
+                }
+            }
         }
 
         .page-wrapper {

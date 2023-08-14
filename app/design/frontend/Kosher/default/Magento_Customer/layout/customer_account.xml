@@ -17,6 +17,15 @@
                     </argument>
                 </arguments>
             </block>
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-logout-link">
+                <arguments>
+                    <argument name="path" xsi:type="string">customer/account/logout</argument>
+                    <argument name="label" xsi:type="string">Logout</argument>
+                    <argument name="attributes" xsi:type="array">
+                        <item name="class" xsi:type="string">logout</item>
+                    </argument>
+                </arguments>
+            </block>
             <block class="Magento\Customer\Block\Account\Dashboard\Info" name="customer.account.dashboard.info" template="Magento_Customer::account/dashboard/info.phtml"/>
         </referenceBlock>
 
