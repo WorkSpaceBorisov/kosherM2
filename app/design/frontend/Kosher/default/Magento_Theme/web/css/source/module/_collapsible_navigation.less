@@ -1,0 +1,121 @@
+//
+//  Variables
+//  _____________________________________________
+
+@collapsible-nav-background: @sidebar__background-color;
+@collapsible-nav-color: @kosher-color__21;
+@collapsible-nav-current-color: @kosher-color__04;
+@collapsible-nav-delimiter__border-color: @color-gray82;
+@collapsible-nav-item-hover: #ebeff9;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    //
+    //  Collapsible navigation
+    //  -----------------------------------------
+
+    .block-collapsible-nav {
+        .items {
+            .lib-list-reset-styles();
+        }
+
+        .content {
+            padding: 10px;
+        }
+
+        .item {
+            margin: 0;
+
+            a,
+            > strong {
+                font-weight: @font-weight__heavier;
+                .lib-css(color, @collapsible-nav-color);
+                display: block;
+                padding: 6px 10px;
+                border-radius: 12px;
+                text-align: center;
+            }
+
+            a {
+                text-decoration: none;
+            }
+
+            &.current {
+                a,
+                > strong {
+                    .lib-css(color, @collapsible-nav-current-color);
+                    .lib-css(background, @collapsible-nav-item-hover);
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .block-collapsible-nav {
+        .title {
+            &:extend(.abs-visually-hidden-desktop all);
+        }
+
+        .item {
+            a,
+            > strong {
+                .lib-font-size(16);
+                .lib-line-height(24);
+                height: 56px;
+                padding: 5px 15px;
+                text-align: left;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            a:hover {
+                .lib-css(background, @collapsible-nav-item-hover);
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .block-collapsible-nav {
+        z-index: 5;
+        padding: 0 10px;
+
+        .title {
+            &:extend(.abs-toggling-title-mobile all);
+            border: 1px solid @kosher-color__26;
+            background-color: @color-white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            strong {
+                margin: 0;
+            }
+        }
+
+        .content {
+            border: 1px solid @kosher-color__26;
+            border-top: none;
+            display: none;
+            background-color: @color-white;
+
+            &.active {
+                display: block;
+            }
+        }
+    }
+}

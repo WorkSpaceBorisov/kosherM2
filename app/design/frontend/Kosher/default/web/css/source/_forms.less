@@ -297,11 +297,17 @@
 
     //  TEMP
 
-    .field .tooltip {
-        .lib-tooltip(right);
-        .tooltip-content {
-            min-width: 200px;
-            white-space: normal;
+    .field {
+        .tooltip {
+            .lib-tooltip(right);
+            .tooltip-content {
+                min-width: 200px;
+                white-space: normal;
+            }
+        }
+
+        .field-tooltip .field-tooltip-action::before {
+            overflow: visible;
         }
     }
 

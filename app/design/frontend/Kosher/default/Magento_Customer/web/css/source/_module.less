@@ -72,10 +72,6 @@
         .region_id {
             display: none;
         }
-
-        .actions-toolbar .action.primary {
-            &:extend(.abs-button-l all);
-        }
     }
 
     .form-edit-account {
@@ -132,8 +128,11 @@
     //  My account
     .account {
         .page-title-wrapper {
+            position: relative;
+
             .page-title {
                 display: inline-block;
+                font-weight: @font-weight__heavier;
             }
         }
 
@@ -141,8 +140,23 @@
             margin-bottom: @indent__base;
         }
 
+        .columns {
+            display: flex;
+            flex-direction: column;
+            max-width: 1824px;
+            margin: 0 auto 40px;
+        }
+
+        .sidebar {
+            order: -1;
+
+            .block-dashboard-info {
+                display: none;
+            }
+        }
+
         .column.main {
-            margin-bottom: @indent__l;
+            padding: 0 10px 30px;
 
             h2 {
                 margin-top: 0;
@@ -150,6 +164,32 @@
 
             .block:not(.widget) {
                 &:extend(.abs-account-blocks all);
+            }
+
+            .actions-toolbar {
+                display: flex;
+
+                .primary {
+                    margin-right: 15px;
+
+                    .action {
+                        margin-right: 0;
+                    }
+                }
+                
+                .action {
+                    min-width: 120px;
+                }
+            }
+
+            .field-columns {
+                .label {
+                    display: none;
+                }
+
+                .field {
+                    margin-bottom: 17px;
+                }
             }
         }
 
@@ -159,8 +199,12 @@
 
         .table-wrapper {
             .lib-css(margin-bottom, @indent__base);
-            border-bottom: 1px solid @account-table-border-bottom-color;
             overflow-x: auto;
+            width: 100%;
+
+            &:not(.orders-recent):not(.additional-addresses) {
+                border-bottom: 1px solid @account-table-border-bottom-color;
+            }
 
             &:last-child {
                 margin-bottom: 0;
@@ -168,23 +212,13 @@
         }
 
         .legend {
-            &:extend(.abs-account-title all);
+            display: none;
         }
     }
 
     .account,
     [class^='sales-guest-'],
     .sales-guest-view {
-        .column.main {
-            .order-details-items {
-                .table-wrapper {
-                    .data.table {
-                        &:extend(.abs-table-striped all);
-                    }
-                }
-            }
-        }
-
         .data.table {
             .col.actions {
                 .action {
@@ -358,6 +392,26 @@
 //  Desktop
 //  _____________________________________________
 
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s) {
+    .account {
+        .page-title {
+            .lib-font-size(24);
+            .lib-line-height(33);
+        }
+
+        .column.main .block .block-content {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+
+            .box {
+                width: 50%;
+                max-width: 350px;
+            }
+        }
+    }
+}
+
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .login-container {
         &:extend(.abs-add-clearfix-desktop all);
@@ -411,39 +465,88 @@
         width: 50%;
     }
 
-    //  My account
-    .account.page-layout-2columns-left {
-        .sidebar-main,
-        .sidebar-additional {
-            width: 22.3%;
-        }
-
-        .column.main {
-            width: 77.7%;
-        }
-
-        .sidebar-main {
-            .block {
-                margin-bottom: 0;
-            }
-        }
+    .form-address-edit .message.info {
+        max-width: 815px;
     }
 
     .account {
-        .page-title-wrapper {
-            &:extend(.abs-add-clearfix-desktop all);
-        }
+        .block-collapsible-nav {
+            .nav-email {
+                .lib-font-size(14);
+            }
 
-        .column.main {
-            .block:not(.widget) {
-                .block-content {
-                    &:extend(.abs-add-clearfix-desktop all);
+            .mobile-show {
+                display: none;
+            }
 
-                    .box {
-                        &:extend(.abs-blocks-2columns all);
+            .nav.item {
+                a {
+                    cursor: pointer;
+                }
+
+                a,
+                strong {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    flex-direction: row;
+
+                    &:before {
+                        margin-right: 19px;
+                    }
+
+                    &.customer:before {
+                        .icomoon(@icon-acc-login, 20px, currentColor);
+                    }
+
+                    &.orders:before {
+                        .icomoon(@icon-acc-orders, 20px, currentColor);
+                    }
+
+                    &.address:before {
+                        .icomoon(@icon-acc-address-book, 20px, currentColor);
+                    }
+
+                    &.account-info:before {
+                        .icomoon(@icon-note, 20px, currentColor);
+                    }
+
+                    &.payment:before {
+                        .icomoon(@icon-acc-stored, 20px, currentColor);
+                    }
+
+                    &.newsletter:before {
+                        .icomoon(@icon-acc-newsletter, 20px, currentColor);
+                    }
+
+                    &.storecredit:before {
+                        .icomoon(@icon-euro01, 20px, currentColor);
+                    }
+
+                    &.logout:before {
+                        .icomoon(@icon-change, 20px, currentColor);
                     }
                 }
             }
+        }
+
+        .page-wrapper {
+            padding-top: 68px;
+        }
+
+        .columns {
+            flex-direction: row;
+            background-color: @color-white;
+        }
+
+        .sidebar {
+            width: 320px;
+        }
+
+        .column.main {
+            width: calc(~'100% - 320px');
+            padding: 40px 48px;
+            border: 1px solid @kosher-color__15;
         }
 
         .data.table {
@@ -458,6 +561,13 @@
 
         .toolbar {
             &:extend(.abs-pager-toolbar all);
+        }
+
+        .field-columns {
+            .field {
+                max-width: 400px;
+                margin-bottom: 17px;
+            }
         }
     }
 
@@ -489,39 +599,6 @@
         }
     }
 
-    .page-main {
-        .block {
-            &:extend(.abs-margin-for-blocks-and-widgets-desktop all);
-        }
-    }
-
-    .form-address-edit {
-        > .fieldset {
-            &:extend(.abs-blocks-2columns all);
-        }
-    }
-
-    .form-edit-account {
-        .fieldset {
-            &:extend(.abs-blocks-2columns all);
-
-            .fieldset {
-                margin-bottom: @indent__base;
-                width: 100%;
-            }
-        }
-    }
-
-    .box-billing-address,
-    .box-shipping-address,
-    .box-address-billing,
-    .box-address-shipping,
-    .box-information {
-        .box-content {
-            &:extend(.abs-account-block-font-size all);
-        }
-    }
-
     .control.captcha-image {
         .captcha-img {
             margin: 0 @indent__s @indent__s 0;
@@ -538,7 +615,21 @@
         .column.main,
         .sidebar-additional {
             margin: 0;
-            padding: 0;
+
+            .table-wrapper.additional-addresses {
+                border-top: 0;
+
+                tbody {
+                    td {
+                        padding-left: 0 !important;
+                        padding-right: 0 !important;
+                    }
+
+                    tr:first-child td:first-child {
+                        padding-top: 0 !important;
+                    }
+                }
+            }
         }
 
         .data.table {
@@ -571,15 +662,20 @@
             margin-bottom: 0;
         }
 
+        .block-collapsible-nav {
+            .desktop-show {
+                display: none;
+            }
+        }
+
         .column.main {
             .block:not(.widget) {
+                background-color: @color-white;
+                padding: 20px 10px;
+                border: 1px solid @kosher-color__26;
+
                 .block-title {
                     &:extend(.abs-add-clearfix-mobile-m all);
-
-                    > .action {
-                        float: right;
-                        .lib-css(margin-top, @indent__xs);
-                    }
                 }
 
                 .block-content {
@@ -590,6 +686,34 @@
                         }
                     }
                 }
+            }
+
+            .table-wrapper {
+                background-color: @color-white;
+
+                &:not(.orders-recent):not(.additional-addresses) {
+                    border: 1px solid @kosher-color__26;
+                }
+            }
+
+            .actions-toolbar:not(.order-actions-toolbar) {
+                margin-bottom: 15px;
+
+                .action {
+                    .lib-font-size(14);
+                    padding: 7px 20px;
+                    min-width: inherit;
+                }
+            }
+
+            .action {
+                .lib-font-size(14);
+            }
+
+            form {
+                background-color: @color-white;
+                border: 1px solid @kosher-color__26;
+                padding: 20px 10px 0;
             }
         }
     }

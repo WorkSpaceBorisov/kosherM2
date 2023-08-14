@@ -856,12 +856,6 @@
     cursor: pointer;
     margin-bottom: 0;
     position: relative;
-
-    &:after {
-        position: absolute;
-        right: @indent__base;
-        top: @indent__s;
-    }
 };
 
 & when (@media-common = true) {
@@ -889,7 +883,7 @@
         @icon-down,
         @_icon-font-size: 12px,
         @_icon-font-text-hide: false,
-        @_icon-font-margin: 3px 0 0 0,
+        @_icon-font-margin: 3px 0 0 10px,
         @_icon-font-position: after,
         @_icon-font-display: block
         );
@@ -1021,9 +1015,17 @@
 
 & when (@media-common = true) {
     .abs-account-title {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+
+        .action {
+            margin-left: 15px;
+        }
+
         > strong,
         > span {
-            .lib-font-size(22);
+            .lib-font-size(18);
             .lib-css(font-weight, @font-weight__light);
         }
 
@@ -1130,8 +1132,6 @@
     .abs-incl-excl-tax {
         .price-including-tax,
         .price-excluding-tax {
-            .lib-css(color, @cart-price-color);
-            .lib-font-size(18);
             display: block;
             line-height: 1;
             white-space: nowrap;
@@ -1265,10 +1265,6 @@
     .abs-account-blocks {
         .block-title {
             &:extend(.abs-account-title all);
-
-            > .action {
-                margin-left: 15px;
-            }
         }
 
         .box-title {
@@ -1381,20 +1377,20 @@
 
 & when (@media-common = true) {
     .abs-status {
-        .lib-css(border, 2px solid @border-color__base);
+        .lib-font-size(12);
+        .lib-css(color, @color-white);
+        .lib-css(background-color, @kosher-color__07);
         border-radius: 3px;
         display: inline-block;
-        margin: 3px 0 0;
-        padding: 2px @indent__s;
+        padding: 2px 5px;
         text-transform: uppercase;
-        vertical-align: top;
+        font-weight: @font-weight__semibold;
     }
 }
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .abs-status-desktop {
-        margin-top: 6px;
-        padding: @indent__xs @indent__s;
+        padding: 5px 10px;
     }
 }
 
@@ -1429,11 +1425,6 @@
             .page-title-wrapper {
                 .page-title {
                     display: block;
-                }
-
-                .order-status {
-                    @order-status-indent: ceil(@h1__margin-bottom/2);
-                    margin: -@order-status-indent 0 @indent__s;
                 }
             }
         }
