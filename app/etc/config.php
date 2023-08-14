@@ -333,6 +333,7 @@ return [
         'Aitoc_Smtp' => 1,
         'FME_QuickView' => 0,
         'Infomodus_Wine' => 1,
+        'Kosher_CatalogWidgetAdjustment' => 1,
         'Kosher_CategoryAdjustment' => 1,
         'Kosher_ConvertProductCsvM1File' => 1,
         'Kosher_Migration' => 1,
