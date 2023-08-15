@@ -258,13 +258,6 @@
     }
 }
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
-    .home-main-slider__title {
-        .lib-font-size(96);
-        margin-bottom: 28px;
-    }
-}
-
 //
 //  Tablet 768
 //  _____________________________________________
@@ -365,6 +358,13 @@
         &.slick-initialized {
             opacity: 1;
         }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .home-main .home-main-slider__title {
+        .lib-font-size(96);
+        margin-bottom: 28px;
     }
 }
 
