@@ -3,35 +3,6 @@
         "*": {
             "main": {
             }
-        },
-        ".kosher-main-menu": {
-            "custom.accordion": {
-                "speed": 200,
-                "triggerClass": ".level0.category-item .level-top",
-                "contentClass": ".submenu"
-            }
         }
     }
-
-</script>
-<script>
-
-    // Store credit for mobile
-
-    let storeCreditBtn = document.querySelector('.page-wrapper > .store-credit__container');
-
-    let storeCreditActive = () => {
-        setTimeout(() => {
-            storeCreditBtn.classList.add('active')
-        }, 1000)
-    };
-
-    storeCreditBtn.addEventListener('click', function (e) {
-        sessionStorage.setItem('hideStoreCreditBtn', true);
-        this.classList.remove('active');
-        e.preventDefault();
-    });
-
-    !sessionStorage.getItem('hideStoreCreditBtn') ? storeCreditActive() : null;
-
 </script>

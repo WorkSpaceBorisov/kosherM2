@@ -1,8 +1,3 @@
-// /**
-//  * Copyright © Magento, Inc. All rights reserved.
-//  * See COPYING.txt for license details.
-//  */
-
 //
 //  Luma theme overrides
 //  _____________________________________________
@@ -28,10 +23,10 @@
 @h3__margin-top: @indent__base;
 
 //  Links
-@link__color: @theme__color__primary-alt;
+@link__color: #0837b6;
 
 //  Focus
-@focus__color: @color-blue3;
+@focus__color: #007aff;
 
 //
 //  Tables
@@ -107,20 +102,30 @@
 //
 //  Buttons
 //  ---------------------------------------------
-
+@button__font-size: 16px;
+@button__padding: 18px 15px;
+@button__border-radius: 8px;
 @button__font-weight: @font-weight__semibold;
+@button__font-family: false;
 
 //  Default = secondary button
 @button__background: @color-gray-darken0;
-@button__border: 1px solid @border-color__base;
+@button__border: 2px solid @border-color__base;
 @button__hover__color: @button__color;
 @button__hover__background: darken(@button__background, 5%);
 @button__active__background: @color-gray-darken1;
 
 //  Primary button
-@button-primary__hover__color: @color-white;
-@button-primary__active__background: @link__hover__color;
-@button-primary__active__border: 1px solid @link__hover__color;
+@button-primary__background: #0837b6;
+@button-primary__border: 2px solid #0837b6;
+@button-primary__hover__color: #0837b6;
+
+@button-primary__hover__background: @color-white;
+@button-primary__hover__border: 2px solid #0837b6;
+@button-primary__hover__color: #0837b6;
+
+@button-primary__active__background: #0837b6;
+@button-primary__active__border: 2px solid #0837b6;
 @button-primary__active__color: @color-white;
 
 //  Button with icon
@@ -143,19 +148,47 @@
 //  Messages
 //  ---------------------------------------------
 
-@icon-success: '\e60e';
-@icon-error: '\e61f';
-@icon-edit: '\e601';
-@icon-print: '\e624';
+@icon-success: false;
+@icon-error: false;
+@icon-edit: false;
+@icon-print: false;
 
-
-@message__padding: 12px @indent__base 12px @indent__m;
-@message__line-height: false;
 @message-icon__font-size: 24px;
-@message-icon__inner-padding-left: 45px;
-@message-icon__top: 22px;
-@message-error-icon: @icon-error;
-@message-success-icon: @icon-success;
+
+@message-success__color: @color-white;
+@message-success__background: #2a9f47;
+@message-success-icon: false;
+
+@message-info__color: @color-white;
+@message-info__background: #f2ba00;
+@message-info-icon: '\e933';
+@message-info-icon__left: 10px;
+@message-info-icon__color-inner: @color-white;
+
+@message-warning__color: @color-white;
+@message-warning__background: #f2ba00;
+@message-warning-icon: '\e933';
+@message-warning-icon__left: 10px;
+@message-warning-icon__color-inner: @color-white;
+
+@message-error__color: #be0e0b;
+@message-error__background: transparent;
+@message-error-icon: '\e933';
+@message-error-icon__left: 10px;
+
+@message-notice__color: @color-white;
+@message-notice__background: #f2ba00;
+@message-notice-icon: '\e933';
+@message-notice-icon__left: 10px;
+@message-notice-icon__color-inner: @color-white;
+
+@message__padding: 8px 15px 8px 40px;
+@message__line-height: 20px;
+@message__font-size: 16px;
+@message__font-weight: 600;
+@message-icon__inner-padding-left: false;
+@message__border-radius: 6px 6px 0 0;
+@message__margin: 0 0 20px;
 
 //
 //  Loaders
@@ -174,6 +207,7 @@
 @select__padding: 4px 25px @indent__xs @indent__s;
 
 //  Form fieldset
+@form-fieldset__margin: 0;
 @form-fieldset-legend__font-size: 18px;
 @form-fieldset-legend__font-weight: @font-weight__light;
 @form-fieldset-legend__margin: 0 0 @indent__base;
@@ -183,6 +217,7 @@
 //  Form field
 @form-field-type-revert: false;
 @form-field__additional-vertical-indent: @indent__s;
+@form-field-type-block__margin: 0 0 17px;
 
 //  Form field label
 @form-field-label__font-weight: @font-weight__semibold;
@@ -241,6 +276,7 @@
 //  Actions-toolbar
 @actions-toolbar-actions__position: left;
 @actions-toolbar-actions-primary__margin: 0 15px 0 0;
+@actions-toolbar-actions-links-secondary__margin-top: 32px;
 
 //
 //  Breadcrumbs
@@ -275,8 +311,6 @@
 @overlay__opacity: .7;
 @overlay__opacity-old: 70;
 
-@gallery-thumb-border-color-active: @active__color;
-
 //  Checkout tooltip icon
 @checkout-tooltip-icon__font-size: 21px;
 
@@ -310,4 +344,9 @@
 @icon-star-empty: '\e625';
 @icon-download: '\e626';
 @icon-private: '\e629';
+
+//
+// Tooltip
+//
+@tooltip__background: #fff;
 

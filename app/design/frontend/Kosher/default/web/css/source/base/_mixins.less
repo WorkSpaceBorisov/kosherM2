@@ -19,14 +19,6 @@
     z-index: @z-index;
 }
 
-// Placeholder
-//
-// .placeholder({
-//    .rem(12);
-//    color: #687278;
-// });
-//
-
 .placeholder(@rules) {
     &::-webkit-input-placeholder {
         @rules();
@@ -42,11 +34,6 @@
         @rules();
     }
 }
-
-// Triangle .triangle(direction,width,height,color);
-//
-// .triangle(top, 7px, 7px, #333);
-//
 
 .triangle-base() {
     content: '';
@@ -105,16 +92,6 @@
     border-color: @color transparent transparent transparent;
 }
 
-// Custom font mixin based on .lib-font-face
-//
-//.custom-font-face(
-//    @family-name: 'pt-sans',
-//    @font-display: swap,
-//    @font-path: '@{baseDir}fonts/PTSans-Web-Regular',
-//    @font-weight: normal,
-//    @font-style: normal
-//);
-
 .custom-font-face(
     @family-name,
     @font-display: swap,
@@ -135,14 +112,6 @@
 
 // For icomoon
 
-//.my-icon{
-//    display: inline-block;
-//    line-height: 1;
-//    &:before{
-//        .icomoon('\e8cc', 28, #ff0000);
-//    }
-//}
-
 .icomoon(@icon, @size: 24, @color: @kosher-color__02) {
     font-family: 'icomoon', sans-serif;
     content: @icon;
@@ -156,6 +125,14 @@
     -webkit-font-smoothing: antialiased;
 }
 
+.input-number-arrows-remove(){
+    -moz-appearance: textfield;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+}
+
 // Kosher custom
 
 .main-footer-font(@color: @kosher-color__21) {
@@ -164,3 +141,24 @@
     font-weight: 500;
 }
 
+.custom-scrollbar(@thumb-color: @kosher-color__15, @border-color: @kosher-color__13) {
+    overflow: auto;
+    /* Firefox */
+    scrollbar-width: auto;
+    scrollbar-color: @thumb-color @border-color;
+
+    /* Chrome, Edge, and Safari */
+    &::-webkit-scrollbar {
+        width: 16px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: @border-color;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: @thumb-color;
+        border-radius: 10px;
+        border: 5px solid @border-color;
+    }
+}

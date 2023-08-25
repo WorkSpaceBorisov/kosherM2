@@ -19,13 +19,18 @@
 
     .checkout-cart-index {
         .page-main {
-            padding-left: 0;
-            padding-right: 0;
+            padding-bottom: 30px;
         }
 
         .page-title-wrapper {
             padding-left: @layout__width-xs-indent;
             padding-right: @layout__width-xs-indent;
+        }
+
+        .columns,
+        .column.main,
+        .cart-empty {
+            height: 100%;
         }
     }
 
@@ -371,6 +376,34 @@
     .cart-empty {
         padding-left: @layout__width-xs-indent;
         padding-right: @layout__width-xs-indent;
+        background-color: @color-white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 1824px;
+        margin: 0 auto;
+
+        &:before {
+            .size(70);
+            background-size: 100% auto;
+            background: url('@{baseDir}images/minicart/empty-cart.png') no-repeat;
+            background-position: center;
+            background-size: cover;
+            content: '';
+            display: block;
+            margin: 0 auto 27px;
+        }
+
+        a {
+            &:extend(.minicart-continue-shopping-button all);
+        }
+
+        p {
+            .lib-font-size(16);
+            .lib-line-height(24);
+            color: @kosher-color__21;
+        }
     }
 
     .cart-tax-info,
@@ -741,6 +774,10 @@
     //  Empty cart
     .cart-empty {
         &:extend(.abs-revert-side-paddings all);
+
+        &:before {
+            .size(126);
+        }
     }
 
     //  Cross sell

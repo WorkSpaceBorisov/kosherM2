@@ -1,0 +1,33 @@
+<?php
+
+use Magento\Framework\Escaper;
+use Magento\Customer\Block\Account\Link;
+
+?>
+
+<?php
+/** 
+ * @var Escaper $escaper 
+ * @var Link $block 
+ */
+
+$customerSession = $block->getLayout()->getBlock('customer.account.dashboard.info')->getCustomer();
+$isDashboard = $block->getRequest()->getFullActionName() == 'customer_account_index';
+?>
+
+<li class="nav item <?php echo $isDashboard ? 'current' : ''; ?>">
+    <a href="<?php echo $escaper->escapeUrl($block->getUrl('customer/account')) ?>" class="customer">
+        <?php if ($customerSession && $customerSession->getId()): ?>
+            <div class="desktop-show">
+                <?php echo $escaper->escapeHtml($customerSession->getFirstname() . ' ' . $customerSession->getLastname()); ?>
+                <div class="nav-email">
+                    <?php echo $escaper->escapeHtml($customerSession->getEmail()); ?>
+                </div>
+            </div>
+            <div class="mobile-show">
+                <?= $escaper->escapeHtml(__('My Account')) ?>
+            </div>
+        <?php endif; ?>
+    </a>
+</li>
+

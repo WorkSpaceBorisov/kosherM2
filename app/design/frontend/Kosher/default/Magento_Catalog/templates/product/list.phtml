@@ -1,24 +1,30 @@
 <?php
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
 
 use Magento\Framework\App\Action\Action;
+use Kosher\ProductAdjustment\ViewModel\CategoriesDataFromProductViewModel;
+use Magento\Catalog\Block\Product\ListProduct;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+use Magento\Catalog\Helper\Output;
+use Magento\Catalog\Block\Product\ReviewRendererInterface;
+use Magento\Catalog\Api\Data\ProductInterface;
 
 ?>
 <?php
 /**
  * Product list template
  *
- * @var $block \Magento\Catalog\Block\Product\ListProduct
- * @var \Magento\Framework\Escaper $escaper
- * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ * @var ListProduct $block
+ * @var Escaper $escaper
+ * @var SecureHtmlRenderer $secureRenderer
+ * @var CategoriesDataFromProductViewModel $viewModel
  */
 ?>
 <?php
+$requestParams = $block->getRequest()->getParams();
+$viewModel = $block->getData('view_model');
 $_productCollection = $block->getLoadedProductCollection();
-/** @var \Magento\Catalog\Helper\Output $_helper */
+/** @var Output $_helper */
 $_helper = $block->getData('outputHelper');
 ?>
 <?php if (!$_productCollection->count()): ?>
@@ -33,12 +39,12 @@ $_helper = $block->getData('outputHelper');
         $viewMode = 'grid';
         $imageDisplayArea = 'category_page_grid';
         $showDescription = false;
-        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+        $templateType = ReviewRendererInterface::SHORT_VIEW;
     } else {
         $viewMode = 'list';
         $imageDisplayArea = 'category_page_list';
         $showDescription = true;
-        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::FULL_VIEW;
+        $templateType = ReviewRendererInterface::FULL_VIEW;
     }
     /**
      * Position for actions regarding image size changing in vde if needed
@@ -48,11 +54,12 @@ $_helper = $block->getData('outputHelper');
     <div class="products wrapper <?= /* @noEscape */
     $viewMode ?> products-<?= /* @noEscape */
     $viewMode ?>">
-        <div class="marker">Just the list.phtml</div>
         <!-- plist 123 -->
-        <ol class="products list items product-items">
-            <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
+        <ol class="products list items product-items" data-container="popup-init">
+            <?php /** @var $_product ProductInterface */ ?>
             <?php foreach ($_productCollection as $_product): ?>
+            <?php if ($viewModel->checkToDateAttributeProductByRequestParams($requestParams, $_product)): ?>
+            <?php $_product = $viewModel->getCategoryLabels($_product) ?>
                 <li class="item product product-item">
                     <div class="product-item-info"
                          id="product-item-info_<?= /* @noEscape */
@@ -62,66 +69,124 @@ $_helper = $block->getData('outputHelper');
                         <!-- Labels left -->
 
                         <div class="product-item__label-left-container">
-                            <div class="product-item__label-left sale">
-                                <span><?= $block->escapeHtml(__('Sale')) ?></span>
-                            </div>
-                            <div class="product-item__label-left new">
-                                <span><?= $block->escapeHtml(__('New')) ?></span>
-                            </div>
+                            <?php if ($viewModel->checkLastDateForLabels($_product, 'sale')): ?>
+                                <div class="product-item__label-left sale">
+                                    <span><?= $escaper->escapeHtml(__('Sale')) ?></span>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($viewModel->checkLastDateForLabels($_product, 'new')): ?>
+                                <div class="product-item__label-left new">
+                                    <span><?= $escaper->escapeHtml(__('New')) ?></span>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($viewModel->checkLastDateForLabels($_product, 'holidays')): ?>
+                                <div class="product-item__label-left holidays">
+                                    <span><?= $escaper->escapeHtml(__('Holidays')) ?></span>
+                                </div>
+                            <?php endif; ?>
                         </div>
 
                         <!-- get Sku -->
                         <div class="hidden-sku" data-sku="<?= $_product->getSku() ?>"><?= $_product->getSku() ?></div>
-
                         <?php
                         $productImage = $block->getImage($_product, $imageDisplayArea);
                         if ($pos != null) {
                             $position = 'left:' . $productImage->getWidth() . 'px;' . 'top:' . $productImage->getHeight() . 'px;';
                         }
                         ?>
+                        <?php if (!empty($_product['categoryLabels'])): ?>
+                            <div class="product-image-right-labels">
+                        <?php foreach ($_product['categoryLabels'] as $labels): ?>
+                            <img src="<?= $labels ?>" alt="">
+                        <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
 
                         <?php // Product Image ?>
                         <div class="product-item-photo-outer">
-                            <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
+                            <figure data-href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
                                class="product photo product-item-photo"
                                tabindex="-1">
                                 <?= $productImage->toHtml() ?>
-                            </a>
+                            </figure>
                         </div>
                         <div class="product details product-item-details">
                             <?php $_productNameStripped = $block->stripTags($_product->getName(), null, true); ?>
                             <strong class="product name product-item-name">
-                                <a class="product-item-link"
-                                   href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>">
+                                <span class="product-item-link"
+                                   data-href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>">
                                     <?= /* @noEscape */
                                     $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
-                                </a>
+                                </span>
                             </strong>
                             <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
 
-                            <div class="category-link">
-                                <a href="#" class="category-link__href"><span>Just Bagel</span></a>
-                            </div>
+                            <?php if ($manufacturer = $_product->getAttributeText('manufacturer')): ?>
+                                <div class="category-link">
+                                    <a href="<?= $escaper->escapeUrl(__('/catalogsearch/result/?q=%1', $manufacturer)) ?>" class="category-link__href">
+                                        <span><?= /* @noEscape */ $manufacturer ?></span>
+                                    </a>
+                                </div>
+                            <?php endif; ?>
 
                             <div class="fin-block">
                                 <div class="price-here">
                                     <?= $block->getProductPrice($_product) ?>
-                                    <span class="price-here__weight">/<span>100g</span></span>
+                                    <span class="price-here__weight">/<span><?= (float)$_product->getData("singleweight") * 1000; ?><?= $block->escapeHtml(__('gr')) ?></span></span>
                                 </div>
 
                                 <div class="product-item-actions">
                                     <?php if ($_product->isSaleable()): ?>
-                                        <div class="calc-cell-container">
-                                            <div class="calc-cell calculator">
-                                                <div class="custom-qty-btn btn-minus"><span>-</span></div>
-                                                <input type="text" value="1" class="input-text qty custom"
-                                                       data-mage-init='{"custom.plusMinus":{"buttons": false, "limit": 10000}}'>
-                                                <div class="custom-qty-btn btn-plus"><span>+</span></div>
+                                        <?php $postParams = $block->getAddToCartPostParams($_product); ?>
+                                        <form data-role="tocart-form"
+                                              data-product-sku="<?= $escaper->escapeHtml($_product->getSku()) ?>"
+                                              action="<?= $escaper->escapeUrl($postParams['action']) ?>"
+                                              data-mage-init='{"catalogAddToCart": {}}'
+                                              method="post">
+                                            <?php $options = $block->getData('viewModel')->getOptionsData($_product); ?>
+                                            <?php foreach ($options as $optionItem): ?>
+                                                <input type="hidden"
+                                                       name="<?= $escaper->escapeHtml($optionItem['name']) ?>"
+                                                       value="<?= $escaper->escapeHtml($optionItem['value']) ?>">
+                                            <?php endforeach; ?>
+                                            <input type="hidden"
+                                                   name="product"
+                                                   value="<?= /* @noEscape */ $postParams['data']['product'] ?>">
+                                            <input type="hidden"
+                                                   name="<?= /* @noEscape */ Action::PARAM_NAME_URL_ENCODED ?>"
+                                                   value="<?=
+                                                   /* @noEscape */ $postParams['data'][Action::PARAM_NAME_URL_ENCODED]
+                                                    ?>">
+                                            <?= $block->getBlockHtml('formkey') ?>
+                                            <div class="calc-cell-container">
+                                                <div class="calc-cell calculator">
+                                                    <div class="custom-qty-btn btn-minus"><span>-</span></div>
+                                                    <input
+                                                        data-mage-init='{
+                                                            "custom.plusMinus":{
+                                                                "buttons": false,
+                                                                "limit": 1000,
+                                                                "productId" : "<?php echo $_product->getId(); ?>",
+                                                                "updateQtyUrl" : "<?php echo $block->getUrl("checkout/sidebar/updateItemQty"); ?>",
+                                                                "removeItemUrl" : "<?php echo $block->getUrl("checkout/sidebar/removeItem"); ?>"
+                                                            }}'
+                                                        type="number"
+                                                        name="qty"
+                                                        min="1"
+                                                        value="1" class="product-quantity input-text qty custom">
+                                                    <div class="custom-qty-btn btn-plus"><span>+</span></div>
+                                                </div>
+                                                <div class="add-to-calc calc-cell">
+                                                    <button type="submit"
+                                                            title="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
+                                                            class="action tocart primary add-to-calc__button"
+                                                            disabled>
+                                                        <span><?= $escaper->escapeHtml(__('Add to Cart')) ?></span>
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div class="add-to-calc calc-cell">
-                                                <button class="add-to-calc__button"><span>Add to</span></button>
-                                            </div>
-                                        </div>
+                                        </form>
+
                                     <?php else: ?>
                                         <?php if ($_product->isAvailable()): ?>
                                             <div class="stock available">
@@ -144,6 +209,7 @@ $_helper = $block->getData('outputHelper');
                     <?= ($pos && strpos($pos, $viewMode . '-actions')) ? /* @noEscape */
                             $secureRenderer->renderStyleAsTag($position, 'product-item-info_' . $_product->getId() . ' div.product-item-actions') : '' ?>
                 </li>
+                <?php endif; ?>
             <?php endforeach; ?>
         </ol>
     </div>
@@ -155,9 +221,6 @@ $_helper = $block->getData('outputHelper');
                 "catalogAddToCart": {
                     "product_sku": "<?= $escaper->escapeJs($_product->getSku()) ?>"
                 }
-            },
-            "*": {
-                "js/category-scripts": {}
             }
         }
     </script>

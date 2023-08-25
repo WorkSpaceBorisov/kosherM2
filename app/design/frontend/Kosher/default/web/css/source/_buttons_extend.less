@@ -3,7 +3,41 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
-    //button,
-    //.action {
-    //}
+    button,
+    .action {
+        .lib-font-size(16);
+        font-weight: @font-weight__semibold;
+        transition: @button_transition;
+
+        &.disabled,
+        &[disabled] {
+            opacity: .6;
+        }
+    }
+
+    a {
+        transition: @link_transition;
+    }
+
+    button,
+    .action {
+        letter-spacing: .0125em;
+    }
+
+    .action.secondary {
+        .lib-button(
+            @_button-color: @kosher-color__04,
+            @_button-background: @color-white,
+            @_button-border: 2px solid @kosher-color__04,
+            @_button-color-hover: @color-white,
+            @_button-background-hover: @kosher-color__04,
+            @_button-border-hover: 2px solid @kosher-color__04,
+            @_button-background-active: @kosher-color__04,
+            @_button-border-active: 2px solid @kosher-color__04,
+            @_button-color-active: @color-white
+        );
+
+        border-radius: 8px;
+        text-decoration: none;
+    }
 }

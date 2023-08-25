@@ -1,10 +1,3 @@
-<!--
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
--->
-
 <div class="block-content" data-bind="css: { 'empty-cart' : !getCartParam('summary_count') }">
 
     <button type="button"
@@ -23,21 +16,16 @@
     <if args="getCartParam('summary_count')">
 
         <div class="minicart-header">
-            <h3 class="minicart-header__title">
+            <div class="minicart-header__title">
                 <span translate="'Cart'"></span>
-                <a href="#" class="minicart-header-delete" id="minicart-header-delete"  translate="'All delete'"></a>
-            </h3>
-            <div class="items-total">
-                <span translate="'Products of'"></span>
-                <span class="count" text="getCartParam('summary_count').toLocaleString(window.LOCALE)"></span>
-                <span class="weight">
-                    <span translate="'Weight'"></span>,
-                    <span class="kg">kg 1.6</span>
-                </span>
+                <div class="items-total">
+                    <span translate="'Products of'"></span>
+                    <span class="count" text="getCartParam('summary_count').toLocaleString(window.LOCALE)"></span>
+                </div>
             </div>
+            <a href="#" class="minicart-header-delete" id="minicart-header-delete" translate="'All delete'"></a>
         </div>
 
-        <strong class="subtitle" translate="'Recently added item(s)'"></strong>
         <div data-action="scroll" class="minicart-items-wrapper">
             <ol id="mini-cart" class="minicart-items" data-bind="foreach: { data: getCartItems(), as: 'item' }">
                 <each args="$parent.getRegion($parent.getItemRenderer(item.product_type))"
@@ -47,22 +35,7 @@
 
         <div class="minicart-footer">
 
-            <div class="minicart-footer__warning">
-                <div translate="'The minimal sum for an order is 40.00.'"></div>
-                <div translate="'Excluding VAT.'"></div>
-            </div>
-
-            <div class="minicart-footer__data weight">
-                <span class="label" translate="'Weight, kg'"></span>
-                <span class="data">4.75</span>
-            </div>
-
-            <div class="minicart-footer__data totals">
-                <span class="label" translate="'Total'"></span>
-                <span class="data">
-                    <each args="getRegion('subtotalContainer')" render=""></each>
-                </span>
-            </div>
+            <div class="minicart-footer__warning" data-bind="html: getFooterStaticBlock()"></div>
 
             <each args="getRegion('extraInfo')" render=""></each>
 
@@ -75,13 +48,19 @@
                         data-action="close"
                         data-bind="
                             attr: {
-                                title: $t('Pay')
+                                title: $t('Checkout')
                             },
                             click: closeMinicart()
-                        "
-                        translate="'Pay'">
+                        ">
+                            <span  translate="'Checkout'"></span>:
+                            <each args="getRegion('subtotalContainer')" render=""></each>
                     </button>
                     <div data-bind="html: getCartParamUnsanitizedHtml('extra_actions')"></div>
+                </div>
+                <div class="secondary">
+                    <a href="/checkout/cart/" data-bind="attr: {href: shoppingCartUrl}">
+                        <span  translate="'Cart'"></span>
+                    </a>
                 </div>
             </div>
 

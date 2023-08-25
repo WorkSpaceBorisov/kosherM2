@@ -1,0 +1,25 @@
+<?php
+/**
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+
+<?php
+/** @var \Magento\Catalog\Helper\Output $_helper */
+$_helper = $block->getData('outputHelper');
+$_product = $block->getProduct();
+?>
+
+<div class="product-label">
+    <?php if ($_product->getData('special_price')): ?>
+        <div class="product-label-item product-label-item--sale">
+            <span><?= $escaper->escapeHtml(__('Sale')) ?></span>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($_product->getData('news_from_date')): ?>
+        <div class="product-label-item product-label-item--new">
+            <span><?= $escaper->escapeHtml(__('New')) ?></span>
+        </div>
+    <?php endif; ?>
+</div>

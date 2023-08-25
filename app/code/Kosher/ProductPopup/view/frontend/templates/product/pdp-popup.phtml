@@ -25,93 +25,55 @@ $productSku = '043427181129';
 $storeUrl = $viewModel->getStoreUrl();
 $apiUrl = $viewModel->getProductBySkuRequest();
 $requestUrl = $storeUrl . $apiUrl;
+$searchUrl = $escaper->escapeUrl(__('/catalogsearch/result/?q='));
+$updateItemQtyUrl = $escaper->escapeUrl(__('checkout/sidebar/updateItemQty'));
+$removeItemUrl = $escaper->escapeUrl(__('checkout/sidebar/removeItem'));
 ?>
 <div class="k4u-popup">
-    <a href="#" class="k4u-popup__close" id="k4u_popup_close"><span><?= $escaper->escapeHtml(__('Close')) ?></span></a>
-    <div class="k4u-popup__product-container">
-        <div class="k4u-popup__inner">
-            <div class="k4u-popup__product-image-block">
-                <img src="<?= /** @noEscape */
-                $block->getViewFileUrl('images/pdp-popup/pdp-popup-image-01.png') ?>" class="popup-image" alt="Bagel Onion Frosen">
-            </div>
-            <div class="k4u-popup__product-info-block">
-                <h3 class="k4u-popup__title">Bagel Onion Frosen</h3>
-
-                <ul class="k4u-popup__attributies">
-                    <li class="barcode"><span class="label">Barcode</span> <span class="data">2291855006165</span></li>
-                    <li class="weight"><span class="label">Weight,gr</span> <span class="data">150</span></li>
-                </ul>
-
-                <div class="k4u-popup__out-of-stock _out-of-stock">
-                    <div class="stock">
-                        <span class="out-of-stock"><?= $escaper->escapeHtml(__('Out of Stock')) ?></span>
-                    </div>
-                </div>
-
-                <div class="k4u-popup-fin-block">
-
-                    <div class="k4u-popup__price-block">
-                        <span class="k4u-popup__old-price">
-                            <span class="k4u-popup__old-price-data">&euro;2.00</span>
-                            <span class="k4u-popup__discount">10%</span>
-                        </span>
-                        <span class="k4u-popup__final-price">&euro;5.75</span>
-                    </div>
-
-                    <div class="k4u-popup__notify-user">
-                        <div class="k4u-popup__notify-user__button">
-                            <span><?= $escaper->escapeHtml(__('Notify Availability')) ?></span>
-                        </div>
-                    </div>
-
-                    <div class="k4u-popup__add-to-cart">
-                        <!-- Add to cart -->
-                        <div class="calc-cell-container">
-                            <div class="calc-cell calculator">
-                                <div class="custom-qty-btn btn-minus"><span>-</span></div>
-                                <input type="text" value="1" class="input-text qty custom"
-                                       data-mage-init='{"custom.plusMinus":{"buttons": false, "limit": 10000}}'>
-                                <div class="custom-qty-btn btn-plus"><span>+</span></div>
-                            </div>
-                            <div class="add-to-calc calc-cell">
-                                <button class="add-to-calc__button"><span><?= $escaper->escapeHtml(__('Add to cart')) ?></span></button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="k4u-popup__additional-info">
-                    <div class="k4u-popup__description">
-                        <h4>Ingredients:</h4>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-                        </p>
-                    </div>
-                </div>
-
-                <div class="k4u-popup__details">
-                    <ul class="k4u-popup__details-list">
-                        <li class="product-attribute-class-manufacturer"><span>Kleinblatt</span></li>
-                        <li class="product-attribute-class-supervision"><span></span></li>
-                        <li class="product-attribute-class-weight"><span>1.20kg</span></li>
-                        <li class="product-attribute-class-singleweight"><span>0.20kg</span></li>
-                        <li class="product-attribute-class-type"><span>Parve</span></li>
-                    </ul>
-                </div>
+    <div class="k4u-popup__scrollable">
+        <a href="#" class="k4u-popup__close" id="k4u_popup_close"><span><?= $escaper->escapeHtml(__('Close')) ?></span></a>
+        <div class="k4u-popup__product-container">
+            <div class="k4u-popup__inner">
 
             </div>
         </div>
+        <div class="k4u-popup__slider-container">
+            <div class="k4u-popup__slider-container-header">
+                <h4><?= $escaper->escapeHtml(__('Other Products')) ?></h4>
+                <a href="#"><?= $escaper->escapeHtml(__('See All')) ?></a>
+            </div>
+
+            <?= $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('popup-slider')->toHtml(); ?>
+
+        </div>
     </div>
 </div>
-
 <script type="text/x-magento-init">
     {
-        ".products.product-items": {
+        ".catalog-category-view .page-main .product-items.products": {
             "pdp.popup": {
-                "apiURL": "<?= $requestUrl ?>"
+                "apiURL": "<?= $requestUrl ?>",
+                "searchUrl": "<?= $searchUrl ?>",
+                "updateItemQtyUrl": "<?= $updateItemQtyUrl ?>",
+                "removeItemUrl": "<?= $removeItemUrl ?>"
+            }
+        },
+        ".catalogsearch-result-index .page-main .product-items.products": {
+            "pdp.popup": {
+                "apiURL": "<?= $requestUrl ?>",
+                "searchUrl": "<?= $searchUrl ?>",
+                "updateItemQtyUrl": "<?= $updateItemQtyUrl ?>",
+                "removeItemUrl": "<?= $removeItemUrl ?>"
+            }
+        },
+        ".page-main .home-interactive.special .product-items.products": {
+            "pdp.popup": {
+                "apiURL": "<?= $requestUrl ?>",
+                "searchUrl": "<?= $searchUrl ?>",
+                "updateItemQtyUrl": "<?= $updateItemQtyUrl ?>",
+                "removeItemUrl": "<?= $removeItemUrl ?>"
             }
         }
     }
-</script>
 
+</script>

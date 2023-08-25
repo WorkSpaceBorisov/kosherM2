@@ -1,0 +1,195 @@
+//
+//  Common Login/Register
+//  _____________________________________________
+
+@login-line: 1px solid @kosher-color__15;
+
+& when (@media-common = true) {
+    .customer-account-login,
+    .customer-account-create,
+    .customer-account-forgotpassword,
+    .customer-account-logoutsuccess,
+    .customer-account-createpassword,
+    .customer-account-confirmation {
+        .page-title {
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .page-main {
+            padding-bottom: 25px;
+        }
+
+        .columns {
+            background: @kosher-color__01;
+            border-radius: 12px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .column.main {
+            margin: 0 auto;
+            max-width: 640px;
+            padding: 40px 20px;
+            width: 100%;
+
+            .field.note {
+                display: none;
+            }
+        }
+
+        .actions-toolbar > .primary, .actions-toolbar > .secondary {
+            float: none;
+            width: 100%;
+
+            .action {
+                width: 100%;
+            }
+        }
+    }
+
+    .customer-account-logoutsuccess .column.main p {
+        text-align: center;
+    }
+
+    .fieldset.create.info .field.choice {
+        display: none;
+    }
+
+    .fieldset.create.account .field.choice {
+        margin-bottom: 17px;
+    }
+
+    .customer-account-login {
+        .actions-toolbar {
+            & > .primary,
+            & > .secondary {
+                display: block;
+                float: unset !important;
+
+                .action {
+                    display: block;
+                    float: unset;
+                    width: 100%;
+                }
+            }
+
+            a.action {
+                display: block;
+            }
+        }
+    }
+
+    div.login-container {
+        .block-customer-login {
+            width: 100%;
+            float: none;
+            margin-bottom: 10px;
+
+            .block-title,
+            .field.note,
+            .field.choice {
+                display: none;
+            }
+
+            .actions-toolbar .secondary a.action {
+                margin-top: 32px;
+            }
+        }
+
+        .fieldset:after {
+            display: none;
+        }
+
+        .block-new-customer {
+            border-top: @login-line;
+            padding-top: 32px;
+            margin-top: 15px;
+            clear: both;
+            width: 100%;
+            float: none;
+
+            .block-title {
+                border-bottom: 0;
+                padding-bottom: 0;
+                margin-bottom: 10px;
+                text-align: center;
+                font-size: 16px;
+            }
+
+            .action.create {
+                &:extend(.action.secondary all);
+            }
+
+            .block-content p {
+                display: none;
+            }
+        }
+
+        .action.back {
+            color: @kosher-color__10;
+        }
+    }
+
+    .field-columns {
+        margin-bottom: 17px;
+    }
+
+    .agreements.checkout {
+        .lib-list-reset-styles();
+        margin: 11px 0 24px;
+
+        a {
+            color: @kosher-color__10;
+        }
+    }
+
+    .checkout-agreement-item-content {
+        display: none;
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .customer-account-create,
+    .customer-account-forgotpassword,
+    .customer-account-logoutsuccess,
+    .customer-account-createpassword,
+    .customer-account-confirmation {
+        .column.main {
+            padding: 50px 20px 40px;
+        }
+    }
+
+    .customer-account-login {
+        .columns {
+            padding: 0 48px;
+        }
+
+        .column.main {
+            padding: 80px 20px 40px;
+        }
+    }
+
+    .customer-account-login,
+    .customer-account-create {
+        .page-title {
+            margin-bottom: 50px;
+        }
+    }
+
+    .field-columns {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        margin-bottom: 0;
+
+        .field {
+            width: 50%;
+        }
+    }
+}

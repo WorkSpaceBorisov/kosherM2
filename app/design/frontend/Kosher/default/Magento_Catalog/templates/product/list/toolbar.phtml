@@ -22,9 +22,6 @@
                 <?= $block->getPagerHtml() ?>
                 <?= $block->fetchView($block->getTemplateFile('Magento_Catalog::product/list/toolbar/amount.phtml')) ?>
             <?php else: ?>
-                <div class="filter-buttons">
-                    <button class="show-filter-button" id="show_filters_button"><span><?= $block->escapeHtml(__('Filter')) ?></span></button>
-                </div>
                 <div class="center-cell">
                     <button class="show-toolbar-button" id="show_toolbar_button"><span><?= $block->escapeHtml(__('Toolbar')) ?></span></button>
                     <div class="center-cell__inner">

@@ -1,0 +1,46 @@
+<?php
+/** @var Magento\Customer\Block\Account\Customer $block */
+?>
+<?php if ($block->customerLoggedIn()) : ?>
+    <li class="customer-welcome" data-block="customer-menu">
+        <span class="customer-name"
+            data-trigger="customer-trigger"
+            data-bind="scope: 'customer'">
+            <!-- ko if: customer().fullname  -->
+                <span
+                    data-bind="text: new String('<?= $escaper->escapeHtml(__('%1', '%1')) ?>').
+                    replace('%1', customer().firstname)">
+                </span>
+            <!-- /ko -->
+            <button type="button"
+                    class="action switch"
+                    tabindex="-1"
+                    data-action="customer-menu-toggle">
+            </button>
+        </span>
+        <script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "customer": {
+                            "component": "Magento_Customer/js/view/customer"
+                        }
+                    }
+                }
+            }
+        }
+        </script>
+        <?php if ($block->getChildHtml()) :?>
+            <div class="customer-menu" data-role="dropdownDialog"
+             data-mage-init='{"dropdownDialog":{
+                "triggerTarget":"[data-trigger=customer-trigger]",
+                "appendTo":"[data-block=customer-menu]",
+                "closeOnMouseLeave": false,
+                "closeOnEscape": true,
+                "buttons":[]}}'>
+                <?= $block->getChildHtml() ?>
+            </div>
+        <?php endif; ?>
+    </li>
+<?php endif; ?>

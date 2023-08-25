@@ -8,16 +8,6 @@
     //  @font-face
     //  _____________________________________________
 
-    //.lib-font-face(
-    //    @family-name: @font-family-name__roboto,
-    //    @font-path: '@{baseDir}fonts/@{font-family-name__roboto}/@{font-family-name__roboto}-Regular',
-    //    @font-format: 'woff2',
-    //    @font-type: 'woff2',
-    //    @font-weight: normal,
-    //    @font-style: normal,
-    //    @font-display: swap
-    //);
-
     // Roboto: 400, 500
 
     .lib-font-face(
@@ -36,18 +26,6 @@
         @font-format: 'woff2',
         @font-type: 'woff2',
         @font-weight: 500,
-        @font-style: normal,
-        @font-display: swap
-    );
-
-    // Inter: 400, 500, 600, 700
-
-    .lib-font-face(
-        @family-name: inter,
-        @font-path: '@{baseDir}fonts/Inter/',
-        @font-format: 'woff2',
-        @font-type: 'woff2',
-        @font-weight: normal,
         @font-style: normal,
         @font-display: swap
     );
@@ -131,30 +109,15 @@
     h1 {
         .lib-font-size(32);
     }
-
-    h2 {
-    }
-
-    h3 {
-    }
-
-    h4 {
-    }
-
-    h5 {
-    }
-
-    h6 {
-    }
 }
 
 //
 //  Mobile 480
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs2) {
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
     h1 {
-        .lib-font-size(24);
+        .lib-font-size(20);
     }
 }
 

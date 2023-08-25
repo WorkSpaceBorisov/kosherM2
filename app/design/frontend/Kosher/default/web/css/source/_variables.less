@@ -1,6 +1,7 @@
 //  Fonts
 @font-family-name__base: 'inter';
 @font-family__base: @font-family-name__base, @font-family__sans-serif;
+@rob: 'roboto', @font-family__sans-serif;
 
 //
 //  Responsive variables
@@ -13,7 +14,13 @@
 @screen__xs: 641px;
 @screen__s: 769px;
 @screen__m: 981px; // To mobile layout -1
+@screen__1370: 1370px;
 @screen__l: 1441px;
 @screen__xl: 1681px;
 
 @filters-transition: .25s;
+@button_transition: all .2s;
+@transition__speed      : .2s;
+@transition__function   : ease-out;
+@transition__effect     : @transition__speed @transition__function;
+@link_transition        : color @transition__speed ease-out;

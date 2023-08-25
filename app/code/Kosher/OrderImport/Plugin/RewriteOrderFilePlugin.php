@@ -5,6 +5,7 @@ namespace Kosher\OrderImport\Plugin;
 
 use Kosher\OrderImport\Service\OrderFile\OrderXmlFileAdjustmentService;
 use Magento\Framework\App\RequestInterface;
+use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\File\Uploader;
 
 class RewriteOrderFilePlugin
@@ -34,9 +35,10 @@ class RewriteOrderFilePlugin
     /**
      * @param Uploader $subject
      * @param array $result
-     * @param string $destinationFolder
-     * @param string|null $newFileName
+     * @param $destinationFolder
+     * @param $newFileName
      * @return array
+     * @throws FileSystemException
      */
     public function afterSave(Uploader $subject, array $result, $destinationFolder, $newFileName = null): array
     {

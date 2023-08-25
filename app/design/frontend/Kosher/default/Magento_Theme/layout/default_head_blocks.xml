@@ -1,12 +1,10 @@
 <?xml version="1.0"?>
-<!--
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
--->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-        <css src="css/styles-l.css" media="screen and (min-width: 981px)"/>
+        <css src="css/styles-l.css" media="screen and (min-width: 768px)"/>
+        <remove  src="fonts/opensans/light/opensans-300.woff2"/>
+        <remove  src="fonts/opensans/regular/opensans-400.woff2"/>
+        <remove  src="fonts/opensans/semibold/opensans-600.woff2"/>
+        <remove  src="fonts/opensans/bold/opensans-700.woff2"/>
     </head>
 </page>

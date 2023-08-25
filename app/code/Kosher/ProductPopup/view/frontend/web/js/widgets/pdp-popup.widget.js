@@ -1,14 +1,12 @@
 define([
     'jquery',
-    'matchMedia',
-    'mousewheel',
-    'scrollbar',
+    'custom.plusMinus',
+    'slick',
+    'catalogAddToCart',
     'domReady!'
-], function ($, mediaCheck, scrollbar) {
+], function ($, plusMinus, slick, catalogAddToCart) {
 
     'use strict';
-
-    // console.log('kosher.pdpPopup');
 
     $.widget('kosher.pdpPopup', {
         options: {
@@ -20,183 +18,308 @@ define([
             _close: $('.k4u-popup #k4u_popup_close'),
             _overlay: $('.kosher-overlay-inner'),
             apiURL: null,
-            testSku: '043427181129'
+            searchUrl: '',
+            updateItemQtyUrl: '',
+            removeItemUrl: ''
         },
 
         _create: function () {
             this._open();
             this._close();
-            this._resizing();
-            this._scrollbar();
         },
 
-        _calcHeight: function () {
-            let innerHeight = $('.k4u-popup__product-container').height();
-            this.options._popup.height(innerHeight + 5)
-        },
-
-        _resizing: function () {
-            let self = this;
-            $(window).resize(function () {
-                self._calcHeight();
-            });
-        },
-
-        _build: function (responce) {
-            let data = $.parseJSON(responce).productData;
+        _build: function (responce, formHtml) {
+            let container = document.querySelector('.k4u-popup .k4u-popup__inner');
+            let data = responce[0];
+            const urlForSearch = this.options.searchUrl;
 
             let euro = new Intl.NumberFormat('en-DE', {
                 style: 'currency',
                 currency: 'EUR',
             });
 
-            document.querySelector('.k4u-popup__title').innerHTML = data.name;
-            document.querySelector('.popup-image').setAttribute('title', data.name);
+            let newTag = (tag, name, content) => {
+                let elem = document.createElement(tag);
+                name ? elem.className = name : null;
+                content ? elem.innerHTML = content : null;
+                return elem;
+            }
 
             // Image
 
+            let imageContainer = newTag('div', 'k4u-popup__product-image-block')
             if (data.image) {
-                let path = '/media/catalog/product/' + data.image;
-                let image = document.querySelector('.popup-image').setAttribute('src', path);
+                let img = newTag('img', 'popup-image');
+                let path = data.image;
+                img.setAttribute('title', data.name);
+                img.setAttribute('src', path);
+                imageContainer.appendChild(img);
             }
+            container.appendChild(imageContainer);
+
+            // InfoBlock
+
+            let infoBlock = newTag('div', 'k4u-popup__product-info-block');
+
+            let link = `<a href="${data.url_key}.html">${data.name}</a>`
+
+            infoBlock.append(newTag('h3', 'k4u-popup__title', link));
+
+            // Main attributies
+
+            let mainAttrsBlock = newTag('ul', 'k4u-popup__attributies');
 
             if (data.barcode) {
-                document.querySelector('.k4u-popup__attributies .barcode').classList.add('exists');
-                document.querySelector('.k4u-popup__attributies .barcode .data').textContent = data.barcode;
+                let content = '<span class="label">Barcode</span> <span class="data">' + data.barcode + '</span></li>';
+                mainAttrsBlock.appendChild(newTag('li', 'barcode', content))
             }
 
-            let addAttribute = (tag, attr, val) => {
-                return document.querySelector(tag).setAttribute('data-product-attribute-' + attr, val)
-            }
-
-            // Netto
+            var kgWeight;
 
             if (data.singleweight) {
-                let val = parseFloat(data.singleweight);
-                document.querySelector('.k4u-popup__attributies .weight').classList.add('exists');
-                document.querySelector('.k4u-popup__attributies .weight .data').textContent = parseFloat(data.singleweight).toFixed(2) * 1000;
-                document.querySelector('.k4u-popup__details .product-attribute-class-singleweight').classList.add('exists')
-                document.querySelector('.k4u-popup__details .product-attribute-class-singleweight span').textContent = val + 'kg';
-                addAttribute('.k4u-popup__details .product-attribute-class-singleweight span', 'singleweight', val)
+                let val = parseFloat(data.singleweight).toFixed(2) * 1000;
+                let content = '<span class="label">Weight,gr</span> <span class="data">' + val + '</span></li>';
+                kgWeight = data.singleweight + 'kg';
+                let weight = newTag('li', 'weight', content);
+                mainAttrsBlock.appendChild(weight);
             }
 
-            // Brutto
+            infoBlock.appendChild(mainAttrsBlock);
 
-            if (data.weight) {
-                let val = parseFloat(data.weight);
-                document.querySelector('.k4u-popup__details .product-attribute-class-weight').classList.add('exists')
-                document.querySelector('.k4u-popup__details .product-attribute-class-weight span').textContent = val + 'kg';
-                addAttribute('.k4u-popup__details .product-attribute-class-weight span', 'weight', val)
+            // description
+
+            let descriptionBlock = newTag('div', 'k4u-popup__description');
+
+            const description = data.description;
+
+            if (description) {
+                descriptionBlock.append(newTag('div', null, description));
             }
 
-            // Manufacturer
-
-            if (data.manufacturer) {
-                let val = data.manufacturer;
-                document.querySelector('.k4u-popup__details .product-attribute-class-manufacturer').classList.add('exists')
-                document.querySelector('.k4u-popup__details .product-attribute-class-manufacturer span').textContent = val;
-                addAttribute('.k4u-popup__details .product-attribute-class-manufacturer span', 'manufacturer', val);
-            }
-
-            // Type
-
-            if (data.halavi) {
-                let val = data.halavi;
-                document.querySelector('.k4u-popup__details .product-attribute-class-type').classList.add('exists')
-                document.querySelector('.k4u-popup__details .product-attribute-class-type span').textContent = val;
-                addAttribute('.k4u-popup__details .product-attribute-class-type span', 'halavi', val);
-            }
-
-            // Supervision
-
-            if (data.supervision) {
-                let container = document.querySelector('.k4u-popup__details .product-attribute-class-supervision span');
-                let reg = /,/; // true if commas exists
-
-                if (reg.test(data.supervision)) {
-                    container.classList.add('supervisions-list');
-                    let arr = data.supervision.split(',');
-                    let list = document.createDocumentFragment();
-
-                    arr.forEach(elem => {
-                        let tag = document.createElement('span');
-                        tag.innerHTML = elem;
-                        list.appendChild(tag)
-                    });
-
-                    container.appendChild(list)
-                } else {
-                    container.innerHTML = data.supervision
-                }
-
-                document.querySelector('.k4u-popup__details .product-attribute-class-supervision').classList.add('exists')
-            }
+            infoBlock.appendChild(descriptionBlock);
 
             if (!data.quantity_and_stock_status.is_in_stock) {
                 document.querySelector('.k4u-popup').classList.add('out-of-stock');
+                let content = '<div class="stock">\n' +
+                    '                        <span class="out-of-stock">Out of Stock</span>\n' +
+                    '                    </div>';
+                infoBlock.appendChild(newTag('div', 'k4u-popup__out-of-stock', content));
             }
 
-            // Price
+            // Wine attributes
 
-            if (data.special_price) {
-                let discount = Math.ceil(100 - (data.special_price * 100) / data.price);
-                document.querySelector('.k4u-popup__final-price').textContent = euro.format(data.special_price);
-                document.querySelector('.k4u-popup__old-price-data').textContent = euro.format(data.price);
-                document.querySelector('.k4u-popup__discount').textContent = discount + '%';
-                document.querySelector('.k4u-popup__price-block').classList.add('special');
-            }
+            let wineDetails = newTag('div', 'k4u-popup__wine');
 
-            if (data.price && !data.special_price) {
-                document.querySelector('.k4u-popup__final-price').textContent = euro.format(data.price);
-            }
+            let wineObjAttr = (name, attrs) => {
+                let value = '';
 
-            if (data.description || data.short_description) {
-                document.querySelector('.k4u-popup__description').classList.add('exists');
-                if (data.description) {
-                    document.querySelector('.k4u-popup__description p').innerHTML = data.description;
-                } else {
-                    document.querySelector('.k4u-popup__description p').innerHTML = data.short_description;
+                for (let item in attrs) {
+                    if(attrs[item] !== null) {
+                        let innerElement;
+                        if (name === 'alcvol') {
+                            innerElement = `ABV: ${attrs[item]}%`;
+                        } else if (name === 'size') {
+                            innerElement = `Volume: ${attrs[item]}`;
+                        } else {
+                            innerElement = `${attrs[item]}`;
+                        }
+    
+                        value += innerElement;
+                    }
+                }
+
+                if(value) {
+                    wineDetails.appendChild(newTag('span', 'product-attribute-class-' + name, value));
                 }
             }
 
-            // Image right attributies
+            infoBlock.appendChild(wineDetails);
 
-            if (data.bio_attribute || data.sugar_free || data.gluten_free) {
+            // Finblock start
+
+            let finBlock = newTag('div', 'k4u-popup-fin-block');
+
+            // Build price
+
+            let priceBlock = newTag('div', 'k4u-popup__price-block');
+
+            if (data.special_price) {
+
+                let oldPriceBlock = newTag('span', 'k4u-popup__old-price');
+                let discount = Math.ceil(100 - (data.special_price * 100) / data.price);
+                let oldPriceData = newTag('span', 'k4u-popup__old-price-data', euro.format(data.price));
+                let discountData = newTag('span', 'k4u-popup__discount', discount + '%');
+                oldPriceBlock.append(oldPriceData, discountData);
+
+                let finalPriceBlock = newTag('span', 'k4u-popup__final-price', euro.format(data.special_price));
+
+                priceBlock.append(oldPriceBlock, finalPriceBlock)
+
+            }
+
+            if (data.price && !data.special_price) {
+                priceBlock.appendChild(newTag('div', 'k4u-popup__final-price', euro.format(data.price)));
+            }
+
+            finBlock.appendChild(priceBlock);
+
+            if (!data.quantity_and_stock_status.is_in_stock) {
+                let content = '<div class="k4u-popup__notify-user__button">\n' +
+                    '                            <span>Notify Availability</span>\n' +
+                    '                        </div>';
+                finBlock.appendChild(newTag('div', 'k4u-popup__notify-user', content));
+            } else {
+                let calcBlock = newTag('div', 'k4u-popup__add-to-cart', formHtml);
+
+                let calcCell = newTag('div', 'calc-cell calculator');
+                let minus = newTag('div', 'custom-qty-btn btn-minus', '<span>-</span>');
+                let plus = newTag('div', 'custom-qty-btn btn-plus', '<span>+</span>')
+                let input = newTag('input', 'input-text qty custom in-popup');
+                input.setAttribute('value', 1);
+                input.setAttribute('type', 'number');
+                calcCell.append(minus, input, plus);
+
+                let addToCartCell = newTag('div', 'add-to-calc calc-cell');
+                let btn = newTag('button', 'add-to-calc__button', '<span>Add to cart</span>')
+                addToCartCell.appendChild(btn);
+
+
+                finBlock.appendChild(calcBlock);
+            }
+
+            infoBlock.appendChild(finBlock);
+
+            // Finblock end
+
+            // Short description
+
+            let addInfoBlock = newTag('div', 'k4u-popup__additional-info');
+
+            const shortDescription = data.short_description;
+
+            if (shortDescription) {
+                let content = shortDescription;
+                addInfoBlock.append(newTag('h4', null, 'Ingredients:'), newTag('p', null, content));
+                addInfoBlock.addEventListener('copy', function (e) {
+                    e.preventDefault();
+                    e.clipboardData.setData("text/plain", "Do not copy this block content!");
+                })
+            }
+
+            infoBlock.appendChild(addInfoBlock);
+
+            // Attributies
+
+            let popupDetails = newTag('div', 'k4u-popup__details')
+            let attrList = newTag('ul', 'k4u-popup__details-list');
+
+            let attributies = {
+                'manufacturer': data.manufacturer,
+                'supervision': data.supervision,
+                'weight': data.weight,
+                'singleweight': data.singleweight,
+                'halavi': data.halavi, // Type
+                'alcvol': data.alcvol,
+                'size': data.size,
+                'color': data.color
+            }
+
+            let simpleAttr = (name, content, attr) => {
+                let liClass = 'product-attribute-class-' + name;
+                let dataAttr = 'data-product-attribute-' + name;
+
+                let li = newTag('li', liClass);
+                let span = newTag('span', null, content);
+                span.setAttribute(dataAttr, attr || content)
+                li.appendChild(span)
+                attrList.appendChild(li)
+            }
+
+            let objAttr = (name, attrs) => {
+                let val = '';
+                if (name == 'halavi') name = 'type';
+
+                for (let item in attrs) {
+                    if(attrs[item] !== null) {
+                        let innerElement;
+                        if (name === 'manufacturer' || name === 'supervision') {
+                            innerElement = `<a href="${urlForSearch}${attrs[item]}" target="_blank"><span>${attrs[item]}</span></a>`;
+                        } else {
+                            innerElement = `<span data-attrib-id="${item}">${attrs[item]}</span>`;
+                        }
+    
+                        val += innerElement;
+                    }
+                }
+
+                if (Object.keys(attrs).length > 1) {
+                    val = `<span  class="attrs-list">${val}</span>`;
+                    name += ' attrs-list-item';
+                };
+
+                if(val) {
+                    attrList.appendChild(newTag('li', 'product-attribute-class-' + name, val));
+                }
+            }
+
+            for (let item in attributies) {
+                let val = attributies[item];
+
+                if(val) {
+                    switch (item) {
+                        case 'weight':
+                            let weight = parseFloat(data.weight);
+                            simpleAttr(item, weight + 'kg', weight);
+                            break;
+                        case 'singleweight':
+                            let singleweight = parseFloat(data.singleweight);
+                            simpleAttr(item, singleweight + 'kg', singleweight);
+                            break;
+                        case 'manufacturer':
+                        case 'halavi':
+                            if (data[item]) objAttr(item, data[item])
+                            break;
+                        case 'supervision':
+                            if (data[item] && typeof data[item] === 'object') objAttr(item, data[item])
+                            break;
+                        case 'color':
+                            if (data[item]) wineObjAttr(item, data[item])
+                            break;
+                        case 'size':
+                            if (data[item]) wineObjAttr(item, data[item])
+                            break;
+                        case 'alcvol':
+                            if (data[item]) wineObjAttr(item, data[item])
+                            break;
+                        default:
+                            simpleAttr(item, val)
+                    }
+                }
+            }
+
+            popupDetails.appendChild(attrList);
+            infoBlock.appendChild(popupDetails);
+
+            // Image right attributies
+            if (data.categoryLabels.size !== 0) {
 
                 let labelsContainer = document.createElement('div');
                 labelsContainer.classList.add('product-image-right-labels');
                 document.querySelector('.k4u-popup__product-image-block').appendChild(labelsContainer);
 
-                if (data.sugar_free) {
+                $.each(data.categoryLabels, function( key, value ) {
                     let sf_image = document.createElement('img');
-                    sf_image.setAttribute('title', 'Sugar free');
-                    sf_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/sf-label-big-01.png');
-                    sf_image.classList.add('bio');
+                    sf_image.setAttribute('src', value);
                     labelsContainer.appendChild(sf_image);
-                }
-
-
-                if (data.bio_attribute) {
-                    let bio_image = document.createElement('img');
-                    bio_image.setAttribute('title', 'Bio');
-                    bio_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/bio-label-big-01.png');
-                    bio_image.classList.add('bio');
-                    labelsContainer.appendChild(bio_image);
-                }
-
-                if (data.gluten_free) {
-                    let gluten_free_image = document.createElement('img');
-                    gluten_free_image.setAttribute('title', 'Gluten free');
-                    gluten_free_image.setAttribute('src', '/static/frontend/Kosher/default/en_US/images/labels/gf-label-big-01.png');
-                    gluten_free_image.classList.add('gf');
-                    labelsContainer.appendChild(gluten_free_image);
-                }
+                });
             }
 
-            this._openMe();
+            container.appendChild(infoBlock);
+
+            this._openMe(responce[0]);
         },
 
-        _askAPI: function (sku) {
+        _askAPI: function (sku, formHtml) {
             let self = this;
             $.ajax({
                 url: this.options.apiURL,
@@ -206,28 +329,39 @@ define([
                     sku: sku
                 },
             }).done(function (response) {
-                self._build(response);
+                self._build(response, formHtml);
             });
         },
 
-        _openMe: function () {
-            $('body').addClass('k4u-popup-on');
+        _openMe: function (productData) {
+            const self = this;
+
+            $('body').addClass('k4u-popup-on scroll-lock');
             setTimeout(() => {
                 $('body').addClass('fadeOn-popup');
             }, 50)
-            this._calcHeight();
-            setTimeout(() => {
-                $('.k4u-popup__product-container').addClass('active');
-            }, 150)
+            $('.k4u-popup__product-container [data-role="tocart-form"]').catalogAddToCart({});
+            $('.k4u-popup__product-container [name="qty"]').plusMinus(
+                {
+                    'buttons': false,
+                    'limit': 10000,
+                    "productId": productData.entity_id,
+                    "updateQtyUrl": self.options.updateItemQtyUrl,
+                    "removeItemUrl": self.options.removeItemUrl
+                });
         },
 
         _open: function () {
             let self = this;
-                        $('.product-items .product-image-wrapper, .product-items .product-item-link').on('click', function (e) {
-                let sku = $(this).closest('.product-item-info').find('.hidden-sku').data('sku');
-                console.log('Open');
-                self._askAPI(sku);
-                e.preventDefault()
+            $('[data-container="popup-init"] .product-image-wrapper, [data-container="popup-init"] .product-item-link').on('click', function (e) {
+                const sku = $(this).closest('.product-item-info').find('.hidden-sku').data('sku');
+                const addToCart = $(e.target).parents('.product-item-info').find('[data-role="tocart-form"]');
+                let addToCartForm = '';
+                if (addToCart.length) {
+                    addToCartForm = addToCart[0].outerHTML;
+                }
+                self._askAPI(sku, addToCartForm);
+                self._slider();
             });
         },
 
@@ -236,7 +370,7 @@ define([
             let close = this.options.close;
 
             let closeMe = (e) => {
-                $('body').removeClass('fadeOn-popup');
+                $('body').removeClass('fadeOn-popup scroll-lock');
                 setTimeout(() => {
                     $('body').removeClass('k4u-popup-on');
                 }, 500);
@@ -244,33 +378,33 @@ define([
 
             $(overlay + ', ' + close).on('click', (e) => {
                 closeMe();
-                setTimeout(() => {
-                    $('.calc-cell-container').removeClass('show-calc');
-                    $('.k4u-popup *').removeClass('exists');
-                    $('.k4u-popup').removeClass('out-of-stock');
-                    $('.k4u-popup__price-block').removeClass('special');
-                    $('.k4u-popup__product-container').removeClass('active');
-                    $('.product-image-right-labels').remove();
-                }, 500)
+                document.querySelector('.k4u-popup .k4u-popup__inner').innerHTML = '';
+                document.querySelector('.k4u-popup').classList.remove('out-of-stock');
                 e.preventDefault();
             });
         },
 
-        _scrollbar: function () {
-            $('.k4u-popup').mCustomScrollbar({
-                axis: 'y',
-                theme: 'popup',
-                scrollInertia: 160,
-                mouseWheel: {
-                    enable: true,
-                    axis: 'y'
-                },
-                scrollButtons: {
-                    enable: true
-                }
+        _slider: function () {
+
+            let isSlider = $('.k4u-popup__slider-container .widget-product-grid');
+
+            isSlider.on('init', function () {
+                let width = $('.k4u-popup').width();
+                isSlider.find('.slick-list').width(width - 40);
+            });
+
+            isSlider.not('.slick-initialized').slick({
+                arrows: true,
+                dots: false,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                lazyLoad: 'ondemand',
+                pauseOnFocus: true,
+                pauseOnHover: true
             });
         }
-
     });
 
     return $.kosher.pdpPopup;

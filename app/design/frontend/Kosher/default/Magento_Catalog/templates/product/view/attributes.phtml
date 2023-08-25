@@ -1,0 +1,64 @@
+<?php
+
+use Magento\Catalog\Block\Product\View\Attributes;
+use Magento\Framework\Escaper;
+use Kosher\ProductAdjustment\ViewModel\CategoriesDataFromProductViewModel;
+
+?>
+
+<?php
+
+/**
+ * Product additional attributes template
+ *
+ * @var Attributes $block
+ * @var Escaper $escaper
+ * @var CategoriesDataFromProductViewModel $viewModel
+ */
+?>
+<?php
+    $viewModel = $block->getData('view_model');
+    $_helper = $this->helper(Magento\Catalog\Helper\Output::class);
+    $_product = $block->getProduct();
+?>
+
+<div class="review-hardcode">
+    <svg width="120" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#a)"><path d="M11.484 17.582a1 1 0 0 1 1.033 0l3.634 2.193c.758.458 1.692-.221 1.491-1.083l-.964-4.134a1 1 0 0 1 .319-.983l3.212-2.783c.669-.58.311-1.678-.57-1.752L15.41 8.68a1 1 0 0 1-.836-.606l-1.654-3.903c-.344-.813-1.497-.813-1.841 0L9.426 8.075a1 1 0 0 1-.836.606l-4.228.359c-.881.074-1.239 1.173-.57 1.752l3.212 2.783a1 1 0 0 1 .32.983l-.965 4.134c-.201.861.733 1.54 1.49 1.083l3.635-2.193Z" fill="#BE0E0B"/><path d="M11.484 17.582a1 1 0 0 1 1.033 0l3.634 2.193c.758.458 1.692-.221 1.491-1.083l-.964-4.134a1 1 0 0 1 .319-.983l3.212-2.783c.669-.58.311-1.678-.57-1.752L15.41 8.68a1 1 0 0 1-.836-.606l-1.654-3.903c-.344-.813-1.497-.813-1.841 0L9.426 8.075a1 1 0 0 1-.836.606l-4.228.359c-.881.074-1.239 1.173-.57 1.752l3.212 2.783a1 1 0 0 1 .32.983l-.965 4.134c-.201.861.733 1.54 1.49 1.083l3.635-2.193Z" fill="#fff" fill-opacity=".12"/></g><g clip-path="url(#b)"><path d="M35.484 17.582a1 1 0 0 1 1.033 0l3.634 2.193c.758.458 1.692-.221 1.491-1.083l-.964-4.134a1 1 0 0 1 .319-.983l3.212-2.783c.669-.58.311-1.678-.57-1.752L39.41 8.68a1 1 0 0 1-.836-.606l-1.654-3.903c-.344-.813-1.497-.813-1.841 0l-1.654 3.903a1 1 0 0 1-.836.606l-4.228.359c-.881.074-1.239 1.173-.57 1.752l3.212 2.783a1 1 0 0 1 .32.983l-.965 4.134c-.201.861.733 1.54 1.49 1.083l3.635-2.193Z" fill="#BE0E0B"/><path d="M35.484 17.582a1 1 0 0 1 1.033 0l3.634 2.193c.758.458 1.692-.221 1.491-1.083l-.964-4.134a1 1 0 0 1 .319-.983l3.212-2.783c.669-.58.311-1.678-.57-1.752L39.41 8.68a1 1 0 0 1-.836-.606l-1.654-3.903c-.344-.813-1.497-.813-1.841 0l-1.654 3.903a1 1 0 0 1-.836.606l-4.228.359c-.881.074-1.239 1.173-.57 1.752l3.212 2.783a1 1 0 0 1 .32.983l-.965 4.134c-.201.861.733 1.54 1.49 1.083l3.635-2.193Z" fill="#fff" fill-opacity=".12"/></g><g clip-path="url(#c)"><path d="M59.484 17.582a1 1 0 0 1 1.033 0l3.634 2.193c.758.458 1.692-.221 1.491-1.083l-.964-4.134a1 1 0 0 1 .319-.983l3.212-2.783c.669-.58.311-1.678-.57-1.752L63.41 8.68a1 1 0 0 1-.836-.606l-1.654-3.903c-.344-.813-1.497-.813-1.841 0l-1.654 3.903a1 1 0 0 1-.836.606l-4.228.359c-.881.074-1.239 1.173-.57 1.752l3.212 2.783a1 1 0 0 1 .32.983l-.965 4.134c-.201.861.733 1.54 1.49 1.083l3.635-2.193Z" fill="#BE0E0B"/><path d="M59.484 17.582a1 1 0 0 1 1.033 0l3.634 2.193c.758.458 1.692-.221 1.491-1.083l-.964-4.134a1 1 0 0 1 .319-.983l3.212-2.783c.669-.58.311-1.678-.57-1.752L63.41 8.68a1 1 0 0 1-.836-.606l-1.654-3.903c-.344-.813-1.497-.813-1.841 0l-1.654 3.903a1 1 0 0 1-.836.606l-4.228.359c-.881.074-1.239 1.173-.57 1.752l3.212 2.783a1 1 0 0 1 .32.983l-.965 4.134c-.201.861.733 1.54 1.49 1.083l3.635-2.193Z" fill="#fff" fill-opacity=".12"/></g><g clip-path="url(#d)"><path d="M83.484 17.582a1 1 0 0 1 1.033 0l3.635 2.193c.757.458 1.691-.221 1.49-1.083l-.964-4.134a1 1 0 0 1 .319-.983l3.212-2.783c.669-.58.311-1.678-.57-1.752L87.41 8.68a1 1 0 0 1-.836-.606l-1.654-3.903c-.344-.813-1.497-.813-1.841 0l-1.654 3.903a1 1 0 0 1-.836.606l-4.228.359c-.881.074-1.239 1.173-.57 1.752l3.212 2.783a1 1 0 0 1 .32.983l-.965 4.134c-.201.861.733 1.54 1.49 1.083l3.635-2.193Z" fill="#BE0E0B"/><path d="M83.484 17.582a1 1 0 0 1 1.033 0l3.635 2.193c.757.458 1.691-.221 1.49-1.083l-.964-4.134a1 1 0 0 1 .319-.983l3.212-2.783c.669-.58.311-1.678-.57-1.752L87.41 8.68a1 1 0 0 1-.836-.606l-1.654-3.903c-.344-.813-1.497-.813-1.841 0l-1.654 3.903a1 1 0 0 1-.836.606l-4.228.359c-.881.074-1.239 1.173-.57 1.752l3.212 2.783a1 1 0 0 1 .32.983l-.965 4.134c-.201.861.733 1.54 1.49 1.083l3.635-2.193Z" fill="#fff" fill-opacity=".12"/></g><g clip-path="url(#e)"><path d="M107.484 17.582a1 1 0 0 1 1.033 0l3.635 2.193c.757.458 1.691-.221 1.49-1.083l-.964-4.134a.998.998 0 0 1 .319-.983l3.212-2.783c.669-.58.311-1.678-.57-1.752l-4.228-.359a1 1 0 0 1-.836-.606l-1.654-3.903c-.344-.813-1.497-.813-1.841 0l-1.654 3.903a1 1 0 0 1-.836.606l-4.228.359c-.881.074-1.239 1.173-.57 1.752l3.212 2.783a.998.998 0 0 1 .319.983l-.964 4.134c-.201.861.733 1.54 1.491 1.083l3.634-2.193Z" fill="#C9C9C9"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h24v24H0z"/></clipPath><clipPath id="b"><path fill="#fff" transform="translate(24)" d="M0 0h24v24H0z"/></clipPath><clipPath id="c"><path fill="#fff" transform="translate(48)" d="M0 0h24v24H0z"/></clipPath><clipPath id="d"><path fill="#fff" transform="translate(72)" d="M0 0h24v24H0z"/></clipPath><clipPath id="e"><path fill="#fff" transform="translate(96)" d="M0 0h24v24H0z"/></clipPath></defs></svg>
+    <span>(142)</span>
+</div>
+
+<?php $_product = $viewModel->getCategoryLabels($_product) ?>
+<?php if (!empty($_product['categoryLabels'])): ?>
+    <div class="product-image-right-labels">
+<?php foreach ($_product['categoryLabels'] as $labels): ?>
+    <img src="<?= $labels ?>" alt="">
+<?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
+<?php if ($_additional = $block->getAdditionalData()) :?>
+    <div class="attributes-top">
+        <?php foreach ($_additional as $_data) :?>
+            <?php if($_data['code'] === 'singleweight'): ?>
+                <span class="weight-attribute">
+                    <?= $escaper->escapeHtml(__('Weight, gr.')) ?>
+                    <?= /* @noEscape */ (
+                        $_helper->productAttribute($_product, $_data['value'], $_data['code']) * 1000
+                        ) ?>
+                </span>
+            <?php endif; ?>
+            <?php if($_data['code'] === 'weight'): ?>
+                <span class="weight-attribute--shipping">
+                    <?= $escaper->escapeHtml(__('Shipping weight')) ?>
+                    <?php if(($_helper->productAttribute($_product, $_data['value'], $_data['code']) * 1000) < 1000): ?>
+                        <?= /* @noEscape */ ($_helper->productAttribute($_product, $_data['value'], $_data['code']) * 1000) ?> g)
+                    <?php else: ?>
+                        <?= /* @noEscape */ ($_helper->productAttribute($_product, $_data['value'], $_data['code']) / 1000) ?> kg
+                    <?php endif; ?>
+                </span>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+<?php endif;?>
+
+<?= $block->getChildHtml('') ?>

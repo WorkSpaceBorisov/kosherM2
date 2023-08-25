@@ -9,10 +9,11 @@
     }
 
     .page-wrapper {
-        align-items: space-between;
         background: @kosher-color__12;
         display: flex;
         flex-direction: column;
+        margin: 0 auto;
+        max-width: 1920px;
         height: 100%;
         position: relative;
 
@@ -61,19 +62,16 @@
 
             &:after {
                 .icomoon(@icon-arrow-right-small, 8px, @kosher-color__17);
-                margin: 1px 9px 0 9px;
+                margin: 1px 7px 0 9px;
             }
 
-            &:last-child {
-                &:after {
-                    display: none;
-                }
+            &:last-child:after {
+                display: none;
             }
 
             a {
                 .lib-font-size(14);
                 color: @kosher-color__19;
-                font-weight: 400;
                 display: block;
                 line-height: inherit;
 
@@ -82,17 +80,15 @@
                 }
             }
 
-            &.home {
-                a {
-                    .size(14);
-                    position: relative;
-                    text-indent: -1000px;
+            &.home a {
+                .size(14);
+                position: relative;
+                text-indent: -10000px;
 
-                    &:after{
-                        .icomoon(@icon-home, 14px, @kosher-color__19);
-                        .to-center();
-                        text-indent: 0;
-                    }
+                &:after {
+                    .icomoon(@icon-home-02, 14px, @kosher-color__19);
+                    .to-center();
+                    text-indent: 0;
                 }
             }
 
@@ -102,7 +98,36 @@
         }
     }
 
-    .quick_view_div{
+    .quick_view_div {
         display: none;
+    }
+
+    [data-lastpass-icon-root="true"] {
+        display: none;
+    }
+
+    .custom-validation-message{
+        .lib-font-size(12);
+        display: none;
+        position: absolute;
+        background: rgba(255, 255, 255, .8);
+        color: @kosher-color__03;
+        padding: 2px;
+        font-weight: 600;
+        bottom: 1px;
+        left: 50%;
+        text-align: center;
+        transform: translate(-50%, 0);
+        width: 90%;
+
+        [data-show-notify="true"] &{
+            display: block;
+        }
+    }
+
+    [data-href]{
+        &:hover{
+            cursor: pointer;
+        }
     }
 }

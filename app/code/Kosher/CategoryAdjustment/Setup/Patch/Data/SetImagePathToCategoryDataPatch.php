@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kosher\CategoryAdjustment\Setup\Patch\Data;
 
@@ -42,23 +43,41 @@ class SetImagePathToCategoryDataPatch implements DataPatchInterface
             'Groceries' => '/media/catalog/category/Groceries.png',
             'Health' => '/media/catalog/category/Health.png',
             'Household' => '/media/catalog/category/Household.png',
-            'Judaica ' => '/media/catalog/category/Judaica.png',
+            'Judaica' => '/media/catalog/category/Judaica.png',
             'Snacks' => '/media/catalog/category/Snacks.png',
             'Wine & Spirits' => '/media/catalog/category/Wine.png',
+        ];
+        $imagePath = [
+            'Bakery' => 'media/catalog/category/category_bakery.png',
+            'Fresh' => '/media/catalog/category/category_fresh.png',
+            'Groceries' => '/media/catalog/category/category_groceries.png',
+            'Health' => '/media/catalog/category/category_health.png',
+            'Household' => '/media/catalog/category/category_household.png',
+            'Judaica' => '/media/catalog/category/category_judaica.png',
+            'Snacks' => '/media/catalog/category/category_snacks.png',
+            'Wine & Spirits' => '/media/catalog/category/category_wine.png',
         ];
         $categoriesEntityId = $this->getCategoryEntityId();
         if ($categoriesEntityId) {
             $categoryIconAttributeId = $this->getCategoryIconAttributeId();
-            foreach ($categoriesEntityId as $categoryEntityId)
-            {
+            $categoryImageAttributeId = $this->getCategoryImageAttributeId();
+            foreach ($categoriesEntityId as $categoryEntityId) {
+
                 $iconData = [
                     'attribute_id' => $categoryIconAttributeId,
                     'store_id' => 0,
                     'entity_id' => $categoryEntityId['entity_id'],
-                    'value' => $iconPath[$categoryEntityId['value']],
+                    'value' => $iconPath[trim($categoryEntityId['value'])],
+                ];
+                $ImageData = [
+                    'attribute_id' => $categoryImageAttributeId,
+                    'store_id' => 1,
+                    'entity_id' => $categoryEntityId['entity_id'],
+                    'value' => $imagePath[trim($categoryEntityId['value'])],
                 ];
 
                 $this->setCategoryIconPath($iconData);
+                $this->setCategoryImagePath($ImageData);
             }
         }
 
@@ -92,6 +111,16 @@ class SetImagePathToCategoryDataPatch implements DataPatchInterface
 
         $select->from('eav_attribute', 'attribute_id')
             ->where('attribute_code = ?', 'category_icon');
+
+        return (int)$connection->fetchOne($select);
+    }
+    private function getCategoryImageAttributeId(): int
+    {
+        $connection = $this->resourceConnection->getConnection();
+        $select = $connection->select();
+
+        $select->from('eav_attribute', 'attribute_id')
+            ->where('attribute_code = ?', 'image');
 
         return (int)$connection->fetchOne($select);
     }
@@ -131,6 +160,16 @@ class SetImagePathToCategoryDataPatch implements DataPatchInterface
      * @return void
      */
     private function setCategoryIconPath(array $data): void
+    {
+        $connection = $this->resourceConnection->getConnection();
+        $connection->insertOnDuplicate('catalog_category_entity_varchar', $data, ['attribute_id','store_id', 'entity_id', 'value',]);
+    }
+
+    /**
+     * @param array $data
+     * @return void
+     */
+    private function setCategoryImagePath(array $data): void
     {
         $connection = $this->resourceConnection->getConnection();
         $connection->insertOnDuplicate('catalog_category_entity_varchar', $data, ['attribute_id','store_id', 'entity_id', 'value',]);

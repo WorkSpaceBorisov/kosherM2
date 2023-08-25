@@ -62,16 +62,6 @@
         display: flex;
     }
 
-    .show-filter-button {
-        .filter-button-mix();
-        margin-right: 12px;
-
-        &:before {
-            .icomoon(@icon-filter, 17px, @kosher-color__04);
-            margin-right: 12px;
-        }
-    }
-
     .show-toolbar-button {
         .filter-button-mix();
 
@@ -87,19 +77,9 @@
         align-items: center;
         display: flex;
         height: 56px;
-        justify-content: space-between;
         margin-bottom: 48px;
         position: relative;
         z-index: 11;
-
-        .center-cell {
-            left: 50%;
-            position: absolute;
-            top: 0;
-            transform: translate(-50%, 0);
-            transition: left @filters-transition, transform @filters-transition;
-            z-index: 10;
-        }
 
         .center-cell__inner {
             align-items: center;
@@ -123,6 +103,7 @@
         .modes {
             display: flex;
             padding-right: 16px;
+            margin-left: 15px;
 
             .modes-label {
                 display: none;
@@ -202,6 +183,7 @@
             border-radius: 8px;
             display: block;
             position: relative;
+            border: 1px solid transparent;
 
             span {
                 display: none;
@@ -214,7 +196,7 @@
 
             &:not(.active) {
                 &:hover {
-                    border: 1px solid @kosher-color__26;
+                    border-color: @kosher-color__26;
                     cursor: pointer;
                 }
             }
@@ -280,6 +262,7 @@
             height: 56px;
             padding: 16px;
             width: 100%;
+            transition: border-color .2s;
 
             &.active {
                 .select-arrow-up();
@@ -336,8 +319,11 @@
                 margin: 0;
                 padding: 15px 15px;
                 white-space: nowrap;
+                border-radius: 0;
 
-                &:last-child {
+                &:last-child,
+                &:nth-child(3) {
+                    border-radius: 0 0 8px 8px;
                     border-right: 0;
                     border-left: 0;
                 }
@@ -380,15 +366,15 @@
 
         }
 
-        .toolbar-sorter  {
-            select{
+        .toolbar-sorter {
+            select {
                 .lib-font-size(16);
                 width: 165px;
             }
         }
 
-        .field.limiter{
-            select{
+        .field.limiter {
+            select {
                 .lib-font-size(16);
             }
         }
@@ -402,6 +388,7 @@
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .toolbar-products {
         margin-bottom: 20px;
+        padding-left: 150px;
 
         .center-cell {
             left: unset;
@@ -497,6 +484,19 @@
 }
 
 //
+//  Middle 640
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+    .toolbar-products {
+        .modes {
+            display: none;
+        }
+    }
+}
+
+
+//
 //  Mobile 480
 //  _____________________________________________
 
@@ -534,39 +534,6 @@
             &.mode-list {
                 margin-right: 0;
             }
-        }
-
-        .filter-mobile-button-mix(@size: 115px) {
-            .size(@size, 48);
-            align-items: center;
-            background: @kosher-color__01;
-            border-radius: 8px;
-            border: 2px solid @kosher-color__04;
-            display: flex;
-            justify-content: center;
-
-            span {
-                .lib-font-size(16);
-                color: @kosher-color__04;
-                display: block;
-                font-weight: 600;
-                line-height: 1;
-            }
-
-            &:hover,
-            &:focus {
-                background: @kosher-color__27;
-                border: 2px solid @kosher-color__04;
-            }
-        }
-
-        .show-filter-button {
-            .filter-mobile-button-mix();
-            margin-right: 6px;
-        }
-
-        .show-toolbar-button {
-            .filter-mobile-button-mix(120px);
         }
     }
 }

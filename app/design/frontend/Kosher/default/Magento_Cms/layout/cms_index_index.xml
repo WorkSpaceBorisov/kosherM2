@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+
+        <!-- REMOVE -->
+        <referenceBlock name="page.main.title" remove="true"/>
+
+        <!-- Main content block -->
+        <referenceContainer name="content" htmlTag="section" htmlClass="column main home-main">
+
+            <container name="main.home.slider" htmlTag="section" htmlClass="home-main-slider" before="-">
+                <block class="Magento\Cms\Block\Block" name="home-main-slider">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">home-main-slider</argument>
+                    </arguments>
+                </block>
+            </container>
+
+            <container name="home.updates.container" htmlTag="section" htmlClass="home-updates">
+                <block class="Magento\Cms\Block\Block" name="home-upadates">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">home-upadates</argument>
+                    </arguments>
+                </block>
+            </container>
+
+            <container name="main.home.adv.block1" htmlTag="section" htmlClass="home-adv-block special">
+                <container name="home.title.special.container" htmlTag="div" htmlClass="home-adv-block__container">
+                    <container name="home.title.special.container.inner1" htmlTag="div" htmlClass="home-adv-block__container-inner">
+                        <block class="Magento\Cms\Block\Block" name="holidays-special-dial-title">
+                            <arguments>
+                                <argument name="block_id" xsi:type="string">holidays-special-dial-title</argument>
+                            </arguments>
+                        </block>
+                    </container>
+                </container>
+                <container name="home.interactive1" htmlTag="div" htmlClass="home-interactive special" after="-">
+                    <container name="horizonlal.menu.container1" htmlTag="div" htmlClass="kosher-horizontal-menu" before="-">
+                        <block name="horizonlal.menu1" template="Magento_Cms::homepage/products-navigation.phtml">
+                            <arguments>
+                                <argument name="url_parameter" xsi:type="string">holidays</argument>
+                                <argument name="view_model" xsi:type="object">Kosher\CategoryAdjustment\ViewModel\ProductNavigationViewModel</argument>
+                            </arguments>
+                        </block>
+                    </container>
+                    <container name="home.products.slider.01" htmlTag="div" htmlClass="home-products-slider" after="-">
+                        <block class="Magento\Cms\Block\Block" name="products.slider.01">
+                            <arguments>
+                                <argument name="block_id" xsi:type="string">slider-holidays-special-dial</argument>
+                            </arguments>
+                        </block>
+                    </container>
+                    <container name="home.interactive1.blur.area" htmlTag="div" htmlClass="home-interactive__blur">
+                        <block class="Magento\Framework\View\Element\Text" name="cbzxb" before="-">
+                            <arguments>
+                                <argument name="text" xsi:type="string">
+                                    <![CDATA[&nbsp;]]>
+                                </argument>
+                            </arguments>
+                        </block>
+                    </container>
+                </container>
+            </container>
+
+            <container name="main.home.adv.block3" htmlTag="section" htmlClass="home-adv-block new">
+                <container name="home.titled.container.new" htmlTag="div" htmlClass="home-adv-block__container">
+                    <container name="home.title.new.container.inner3" htmlTag="div" htmlClass="home-adv-block__container-inner">
+                        <block class="Magento\Cms\Block\Block" name="new-products-title">
+                            <arguments>
+                                <argument name="block_id" xsi:type="string">new-products-title</argument>
+                            </arguments>
+                        </block>
+                    </container>
+                </container>
+                <container name="home.interactive3" htmlTag="div" htmlClass="home-interactive new" after="-">
+                    <container name="horizonlal.menu.container3" htmlTag="div" htmlClass="kosher-horizontal-menu" before="-">
+                        <block name="horizonlal.menu3" template="Magento_Cms::homepage/products-navigation.phtml">
+                            <arguments>
+                                <argument name="url_parameter" xsi:type="string">new</argument>
+                                <argument name="view_model" xsi:type="object">Kosher\CategoryAdjustment\ViewModel\ProductNavigationViewModel</argument>
+                            </arguments>
+                        </block>
+                    </container>
+                    <container name="home.products.slider.03" htmlTag="div" htmlClass="home-products-slider" after="-">
+                        <block class="Magento\Cms\Block\Block" name="slider.products.03">
+                            <arguments>
+                                <argument name="block_id" xsi:type="string">slider-new-products</argument>
+                            </arguments>
+                        </block>
+                    </container>
+                    <container name="home.interactive3.blur.area" htmlTag="div" htmlClass="home-interactive__blur">
+                        <block class="Magento\Framework\View\Element\Text" name="cbzxb" before="-">
+                            <arguments>
+                                <argument name="text" xsi:type="string">
+                                    <![CDATA[&nbsp;]]>
+                                </argument>
+                            </arguments>
+                        </block>
+                    </container>
+                </container>
+            </container>
+
+            <container name="main.home.adv.block2" htmlTag="section" htmlClass="home-adv-block sale">
+                <container name="home.title.container.sale" htmlTag="div" htmlClass="home-adv-block__container">
+                    <container name="home.title.sale.container.inner2" htmlTag="div" htmlClass="home-adv-block__container-inner">
+                        <block class="Magento\Cms\Block\Block" name="products-on-sale-title">
+                            <arguments>
+                                <argument name="block_id" xsi:type="string">products-on-sale-title</argument>
+                            </arguments>
+                        </block>
+                    </container>
+                </container>
+                <container name="home.interactive2" htmlTag="div" htmlClass="home-interactive sale" after="-">
+                    <container name="horizonlal.menu.container2" htmlTag="div" htmlClass="kosher-horizontal-menu" before="-">
+                        <block name="horizonlal.menu2" template="Magento_Cms::homepage/products-navigation.phtml">
+                            <arguments>
+                                <argument name="url_parameter" xsi:type="string">sale</argument>
+                                <argument name="view_model" xsi:type="object">Kosher\CategoryAdjustment\ViewModel\ProductNavigationViewModel</argument>
+                            </arguments>
+                        </block>
+                    </container>
+                    <container name="home.products.slider.02" htmlTag="div" htmlClass="home-products-slider" after="-">
+                        <block class="Magento\Cms\Block\Block" name="slider.products.02">
+                            <arguments>
+                                <argument name="block_id" xsi:type="string">slider-products-on-sale</argument>
+                            </arguments>
+                        </block>
+                    </container>
+                    <container name="home.interactive2.blur.area" htmlTag="div" htmlClass="home-interactive__blur">
+                        <block class="Magento\Framework\View\Element\Text" name="cbzxb" before="-">
+                            <arguments>
+                                <argument name="text" xsi:type="string">
+                                    <![CDATA[&nbsp;]]>
+                                </argument>
+                            </arguments>
+                        </block>
+                    </container>
+                </container>
+            </container>
+
+        </referenceContainer>
+    </body>
+</page>

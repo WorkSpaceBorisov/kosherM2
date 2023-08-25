@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kosher\ProductPopup\Api;
 
@@ -9,7 +10,7 @@ interface PopupProductDataInterface
 
     /**
      * @param string $sku
-     * @return string
+     * @return array
      */
-    public function get(string $sku): string;
+    public function get(string $sku): array;
 }

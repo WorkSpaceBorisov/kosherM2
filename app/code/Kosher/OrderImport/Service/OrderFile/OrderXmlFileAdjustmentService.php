@@ -71,6 +71,9 @@ class OrderXmlFileAdjustmentService
     {
         $path = $dataFile['path'] . $dataFile['file'];
         $arrayData = $this->parser->load($path)->xmlToArray();
+        if (empty($arrayData['records']['order'])) {
+            return;
+        }
         $this->getCompleteOrders($arrayData);
         $this->getLastOrderId();
         $this->getLastAddressId();
